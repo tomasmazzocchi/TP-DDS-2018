@@ -1,11 +1,12 @@
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Cuenta {
 	private String nombre;
 	private double valor;
-	private LocalDateTime fechaDesde;
-	private LocalDateTime fechaHasta;
+	private LocalDate fechaDesde;
+	private LocalDate fechaHasta;
 	
+	// Getters and Setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -18,17 +19,25 @@ public class Cuenta {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public LocalDateTime getFechaDesde() {
+	public LocalDate getFechaDesde() {
 		return fechaDesde;
 	}
-	public void setFechaDesde(LocalDateTime fechaDesde) {
+	public void setFechaDesde(LocalDate fechaDesde) {
 		this.fechaDesde = fechaDesde;
 	}
-	public LocalDateTime getFechaHasta() {
+	public LocalDate getFechaHasta() {
 		return fechaHasta;
 	}
-	public void setFechaHasta(LocalDateTime fechaHasta) {
+	public void setFechaHasta(LocalDate fechaHasta) {
 		this.fechaHasta = fechaHasta;
+	}
+	// Constructors
+	public Cuenta(String nombre,double valor,LocalDate fechaDesde,LocalDate fechaHasta)
+	{
+		this.setNombre(nombre);
+		this.setValor(valor);
+		this.setFechaDesde(fechaDesde);
+		this.setFechaHasta(fechaHasta);
 	}
 
 }

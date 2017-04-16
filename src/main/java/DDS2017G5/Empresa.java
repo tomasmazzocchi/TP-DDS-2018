@@ -1,8 +1,7 @@
+package DDS2017G5;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import pruebadds2017.Cuenta;
-import pruebadds2017.Indicador;
 
 public class Empresa {
 	private String nombre;
@@ -21,7 +20,6 @@ public class Empresa {
 	}
 	public List<Indicador> getListaIndicadores(){
 		return this.listaIndicadores;
-				;
 	}
 	// Constructors
 	

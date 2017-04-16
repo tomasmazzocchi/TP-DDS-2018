@@ -1,7 +1,7 @@
+package DDS2017G5;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import pruebadds2017.Empresa;
 
 public class RepoEmpresas {
 	private String nombre;

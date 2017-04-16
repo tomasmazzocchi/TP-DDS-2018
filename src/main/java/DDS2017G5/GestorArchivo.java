@@ -13,6 +13,7 @@ public class GestorArchivo {
 	public void cargarArchivo(RepoEmpresas repoEmpresas, String rutaArchivo) {
 
         Gson gson = new Gson();
+        Empresa empresaJson;
          
         try (Reader reader = new FileReader(rutaArchivo)) 
         {
@@ -27,7 +28,7 @@ public class GestorArchivo {
             Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
             //While Iterator has a next element
               while( iterador.hasNext() ) {
-                     Empresa empresaJson = (Empresa) iterador.next();
+                     empresaJson = (Empresa) iterador.next();
                      repoEmpresas.agregarEmpresa(empresaJson);
                      // Manejar EXCEPCION si la empresa existe
               }

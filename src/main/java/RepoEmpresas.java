@@ -1,8 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import pruebadds2017.Empresa;
+
 public class RepoEmpresas {
 	private String nombre;
+	private List<Empresa> listaEmpresas = new ArrayList<>();
+	
+	// Getters and Setters
 	
 	public String getNombre() {
 		return nombre;
@@ -10,7 +15,12 @@ public class RepoEmpresas {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	private List<Empresa> listaEmpresas = new ArrayList<>();
+
+	public List<Empresa> getListaEmpresa(){
+		return this.listaEmpresas;
+	}
+
+	// Functions and Procedures
 	
 	public void agregarEmpresa(Empresa unaEmpresa){
 		if(!listaEmpresas.contains(unaEmpresa)){

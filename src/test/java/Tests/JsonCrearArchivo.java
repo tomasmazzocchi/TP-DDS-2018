@@ -1,6 +1,12 @@
-package DDS2017G5;
+package Tests;
 
 import com.google.gson.Gson;
+
+import DDS2017G5.Cuenta;
+import DDS2017G5.Empresa;
+import DDS2017G5.Indicador;
+import DDS2017G5.RepoEmpresas;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -41,7 +47,7 @@ public class JsonCrearArchivo {
         System.out.println(json);
 
         //2. Convert object to JSON string and save into a file directly
-        try (FileWriter writer = new FileWriter("C:\\Users\\rcent_000\\Desktop\\RepoEmpresasJson.json")) {
+        try (FileWriter writer = new FileWriter("C:\\Users\\Tomás\\Desktop\\RepoEmpresasJson.json")) {
 
             gson.toJson(repoEmpresasJson, writer);
 

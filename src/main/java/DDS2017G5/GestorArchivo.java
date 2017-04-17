@@ -46,7 +46,7 @@ public class GestorArchivo {
               
         }
         catch (JsonSyntaxException f){
-        	throw new RuntimeException("Archivo inválido");
+        	throw new RuntimeException("Archivo invalido");
         }
         catch (IOException e) {
         	throw new RuntimeException("Ruta inexistente");

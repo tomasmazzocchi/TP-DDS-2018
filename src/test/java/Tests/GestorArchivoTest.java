@@ -1,24 +1,33 @@
-package DDS2017G5;
+package Tests;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
+import DDS2017G5.GestorArchivo;
+import DDS2017G5.RepoEmpresas;
+
 public class GestorArchivoTest {
 	
-	RepoEmpresas repositorio;
-	GestorArchivo gestor;
-	String rutaValida;
-	String rutaInvalida;
-	String rutaConJsonInvalido;
+	private RepoEmpresas repositorio;
+	private GestorArchivo gestor;
+	private String rutaValida;
+	private String rutaInvalida;
+	private String rutaConJsonInvalido;
 	
 	@Before
 	public void init(){
 		repositorio = new RepoEmpresas("Bancos");
 		gestor = GestorArchivo.getInstance();
-		rutaConJsonInvalido = "C:\\Users\\Julian\\Desktop\\Archivo Invalido.json";
-		rutaValida = "C:\\Users\\Julian\\Desktop\\Archivo Valido.json";
-	    rutaInvalida = "C:\\Users\\Julian\\Desktop\\Hola.json";
+		rutaConJsonInvalido = "\\GitHub\\2017-mn-group-05\\src\\test\\resources\\Archivo Invalido.json";
+		rutaValida = "\\GitHub\\2017-mn-group-05\\src\\test\\resources\\Archivo Valido.json";
+	    rutaInvalida = "C:\\Users\\Tom√°s\\Desktop\\Hola.json";
 	}
+	
+	@After
+	public void limpiarRepo(){
+		repositorio.reset();
+	}
+	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
@@ -37,7 +46,7 @@ public class GestorArchivoTest {
 	@Test
 	public void siColocoUnaRutaValidaConUnJsonInvalidoEntoncesNoSeCarganEmpresasAlRepositorio(){
 		thrown.expect(RuntimeException.class);
-		thrown.expectMessage("Archivo inv·lido");
+		thrown.expectMessage("Archivo invalido");
 		gestor.cargarArchivo(repositorio, rutaConJsonInvalido);
 		Assert.assertTrue(repositorio.getListaEmpresa().size()==0);
 	}

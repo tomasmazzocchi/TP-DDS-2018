@@ -60,7 +60,7 @@ public class RepoEmpresasTest {
 	}
 	
 	@Test
-	public void siAgregoUnaEmpresExistenteNoSeAgregaEnRepo() {
+	public void agregoUnaEmpresExistenteLanzaExcepcion() {
 		thrown.expect(RuntimeException.class);
 		thrown.expectMessage("Empresa ya existente");
 		repoEmpresas.agregarEmpresa(empresa1);
@@ -79,7 +79,7 @@ public class RepoEmpresasTest {
 	}
 	
 	@Test
-	public void eliminoUnaEmpresaInexistente() {
+	public void eliminoUnaEmpresaInexistenteLanzaExcepcion() {
 		thrown.expect(RuntimeException.class);
 		thrown.expectMessage("No existe la empresa");
 		repoEmpresas.agregarEmpresa(empresa1);

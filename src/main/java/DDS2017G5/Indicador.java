@@ -16,6 +16,11 @@ public class Indicador {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+	//Constructor 
+	public Indicador(String nombre,double valor){
+		this.setNombre(nombre);
+		this.setValor(valor);
+	}
 	
 	
 }

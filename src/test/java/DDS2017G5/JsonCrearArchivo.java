@@ -30,8 +30,7 @@ public class JsonCrearArchivo {
     	listaEmpresas.add(empresa2);
     	/** creo un repo aux **/
     	
-    	RepoEmpresas repoEmpresasJson = new RepoEmpresas();
-    	repoEmpresasJson.setNombre("RepoEmpresasJson");
+    	RepoEmpresas repoEmpresasJson = new RepoEmpresas("Repositorio Empresas");
     	repoEmpresasJson.agregarEmpresa(empresa1);
     	repoEmpresasJson.agregarEmpresa(empresa2);
     		  	

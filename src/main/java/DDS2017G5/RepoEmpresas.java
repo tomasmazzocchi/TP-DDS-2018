@@ -21,14 +21,20 @@ public class RepoEmpresas {
 	}
 
 	// Functions and Procedures
+    
 	
 	public void agregarEmpresa(Empresa unaEmpresa){
 		if(!listaEmpresas.contains(unaEmpresa)){
 			listaEmpresas.add(unaEmpresa);
-		} else{
+		} 
+		/*else{
 			throw new RuntimeException ("Empresa ya existente");
-		}
+		}*/
 	}
+	public RepoEmpresas(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public void quitarEmpresa(Empresa unaEmpresa){
 		if(listaEmpresas.contains(unaEmpresa)){
 			listaEmpresas.remove(unaEmpresa);

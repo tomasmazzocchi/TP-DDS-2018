@@ -28,18 +28,13 @@ public class Indicador {
 	}
 	//Calcular Indicador   /* Cambio 08 */
 	
-	public double CalcularFormula(Empresa empresa){
-		double valor;
-		ExpressionParser _parser;
-		_parser = new ExpressionParser();
-		valor= _parser.parse(this.getFormula(),empresa.getListaCuentas());
-		return valor;
-		
+	public int CalcularFormula(Empresa empresa,ExpressionParser _parser){
+		return (_parser.parse(this.getFormula(),empresa.getListaCuentas(),empresa.getListaIndicadores()));
 	}
 	
 	//Buscar si existe un indicador
 	
-	public Boolean NoExisteIndicador(List<Indicador> listaIndicadores,String indicadorNombre) {
+	public Boolean NoExisteNombreIndicador(List<Indicador> listaIndicadores,String indicadorNombre) {
 		
         List<Indicador> lista = listaIndicadores.stream()               
                 .filter(indicador -> indicadorNombre.equals(indicador.getNombre()))
@@ -48,23 +43,4 @@ public class Indicador {
         return lista.isEmpty();
 		
 	}
-	
-	//Generar indicador por medio de un string.
-	
-	public void GenerarIndicador(Empresa empresa,String indicadorNombre,String indicadorFormula){
-		
-		Indicador indicador;
-				
-        if (NoExisteIndicador(empresa.getListaIndicadores(),indicadorNombre))
-        	//Seguir con la generación
-        {
-        	indicador= new Indicador(indicadorNombre,indicadorFormula);
-        	indicador.CalcularFormula(empresa);  
-        	//SUPONGO QUE SI DA EXCEPTION NO SE CARGA
-        	empresa.getListaIndicadores().add(indicador);
-        }
-        else
-        	//MENSAJE YA EXISTE UN INDICADOR CON ESE NOMBRE
-        	throw new RuntimeException ("Indicador ya existente");
-		}
 }

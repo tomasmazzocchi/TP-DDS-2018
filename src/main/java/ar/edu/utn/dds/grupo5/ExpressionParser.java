@@ -25,7 +25,7 @@ public class ExpressionParser {
      * @param expression the expression to part
      * @return and integer result
      */
-    public int parse(final String expression,List<Cuenta> listaCuentas) {
+    public int parse(final String expression,List<Cuenta> listaCuentas,List<Indicador> listaIndicadores) {
         /*
          * Create a lexer that reads from our expression string
          */
@@ -58,14 +58,14 @@ public class ExpressionParser {
         /*
          * 'Visit' all the branches of the tree to get our expression result.
          */
-        return visit(context,listaCuentas);
+        return visit(context,listaCuentas,listaIndicadores);
     }
 
     /*
      * Visits the branches in the expression tree recursively until we hit a
      * leaf.
      */
-    private int visit(final ExprContext context, List<Cuenta> listaCuentas) {
+    private int visit(final ExprContext context, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
     	Cuenta cuenta;
     	String id;
     	String nombre;
@@ -87,19 +87,19 @@ public class ExpressionParser {
 			else{return(999);}// en esta parte va el indicador
 		}
         else if (context.BR_CLOSE() != null) { //Expression between brackets
-            return visit(context.expr(0), listaCuentas);
+            return visit(context.expr(0), listaCuentas, listaIndicadores);
         }
         else if (context.MULTIPLICAR() != null) { //Expression * expression
-            return visit(context.expr(0), listaCuentas) * visit(context.expr(1), listaCuentas);
+            return visit(context.expr(0), listaCuentas, listaIndicadores) * visit(context.expr(1), listaCuentas, listaIndicadores);
         }
         else if (context.DIVIDIR() != null) { //Expression / expression
-            return visit(context.expr(0),listaCuentas) / visit(context.expr(1),listaCuentas);
+            return visit(context.expr(0),listaCuentas, listaIndicadores) / visit(context.expr(1),listaCuentas, listaIndicadores);
         }
         else if (context.SUMAR() != null) { //Expression + expression
-            return visit(context.expr(0),listaCuentas) + visit(context.expr(1),listaCuentas);
+            return visit(context.expr(0),listaCuentas, listaIndicadores) + visit(context.expr(1),listaCuentas, listaIndicadores);
         }
         else if (context.RESTAR() != null) { //Expression - expression
-            return visit(context.expr(0),listaCuentas) - visit(context.expr(1),listaCuentas);
+            return visit(context.expr(0),listaCuentas, listaIndicadores) - visit(context.expr(1),listaCuentas, listaIndicadores);
         }
         else {
             throw new IllegalStateException();

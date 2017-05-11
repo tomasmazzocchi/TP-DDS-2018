@@ -46,17 +46,17 @@ public class ExpressionParserTest {
 
     @Test
     public void ingresoUnaFormulaConUnaCuentaExistente() {
-        assertThat(_parser.parse("(cu.EBIDTA+1)*2",listaCuentas), equalTo(402));
+        assertThat(_parser.parse("(cu.EBIDTA+1)*2",listaCuentas, listaIndicadores), equalTo(402));
     }
     
     @Test
     public void ingresonumero() {
-        assertThat(_parser.parse("42",listaCuentas), equalTo(42));
+        assertThat(_parser.parse("42",listaCuentas, listaIndicadores), equalTo(42));
     }
 
     @Test
     public void ingresoFormulaConDosCuentasExistentes() {
-        assertThat(_parser.parse("(cu.EBIDTA+cu.fds)",listaCuentas), equalTo(400));
+        assertThat(_parser.parse("(cu.EBIDTA+cu.fds)",listaCuentas, listaIndicadores), equalTo(400));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ExpressionParserTest {
         _expected.expect(IllegalArgumentException.class);
         _expected.expectMessage(containsString("token recognition error at: '#'"));
 
-        assertThat(_parser.parse("(21 # 2)",listaCuentas), equalTo(42));
+        assertThat(_parser.parse("(21 # 2)",listaCuentas, listaIndicadores), equalTo(42));
     }
 
 }

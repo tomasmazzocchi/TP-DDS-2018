@@ -5,6 +5,7 @@ hs_err_pid*
 
 # Compiled class file
 *.class
+*.classpath
 
 # Log file
 *.log
@@ -28,6 +29,7 @@ hs_err_pid*
 
 # Maven --------------------------------------------------------------------------------
 
+*.project
 target/
 pom.xml.tag
 pom.xml.releaseBackup

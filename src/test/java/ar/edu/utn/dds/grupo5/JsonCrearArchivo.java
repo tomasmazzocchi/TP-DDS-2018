@@ -1,11 +1,11 @@
-package Tests;
+package ar.edu.utn.dds.grupo5;
 
 import com.google.gson.Gson;
 
-import dds2017g5.Cuenta;
-import dds2017g5.Empresa;
-import dds2017g5.Indicador;
-import dds2017g5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.Cuenta;
+import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 import java.io.FileWriter;
 import java.io.IOException;

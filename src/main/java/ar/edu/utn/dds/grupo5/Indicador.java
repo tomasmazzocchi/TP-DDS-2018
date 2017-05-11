@@ -1,4 +1,4 @@
-package dds2017g5;
+package ar.edu.utn.dds.grupo5;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,10 +1,10 @@
-package Tests;
+package ar.edu.utn.dds.grupo5;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
-import dds2017g5.GestorArchivo;
-import dds2017g5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.GestorArchivo;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 public class GestorArchivoTest {
 	

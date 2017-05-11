@@ -1,4 +1,4 @@
-package Tests;
+package ar.edu.utn.dds.grupo5;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import dds2017g5.Cuenta;
-import dds2017g5.Empresa;
-import dds2017g5.Indicador;
-import dds2017g5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.Cuenta;
+import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 
 public class RepoEmpresasTest {

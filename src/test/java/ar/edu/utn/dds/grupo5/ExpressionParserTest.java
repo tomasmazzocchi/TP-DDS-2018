@@ -1,4 +1,4 @@
-package Tests;
+package ar.edu.utn.dds.grupo5;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,9 +13,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import dds2017g5.Cuenta;
-import dds2017g5.ExpressionParser;
-import dds2017g5.Indicador;
+import ar.edu.utn.dds.grupo5.Cuenta;
+import ar.edu.utn.dds.grupo5.ExpressionParser;
+import ar.edu.utn.dds.grupo5.Indicador;
 
 /*
  * Test set that tests different expressions against their expected results.

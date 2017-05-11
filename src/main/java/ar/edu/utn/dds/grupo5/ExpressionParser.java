@@ -1,4 +1,4 @@
-package dds2017g5;
+package ar.edu.utn.dds.grupo5;
 
 import java.util.BitSet;
 import java.util.List;
@@ -13,7 +13,9 @@ import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 
-import dds2017g5.SimpleParser.ExprContext;
+import ar.edu.utn.dds.grupo5.SimpleLexer;
+import ar.edu.utn.dds.grupo5.SimpleParser;
+import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 
 public class ExpressionParser {
     private final ANTLRErrorListener _listener = createErrorListener();

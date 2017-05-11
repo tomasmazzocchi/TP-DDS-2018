@@ -28,8 +28,8 @@ public class Indicador {
 	}
 	//Calcular Indicador   /* Cambio 08 */
 	
-	public int CalcularFormula(Empresa empresa,ExpressionParser _parser){
-		return (_parser.parse(this.getFormula(),empresa.getListaCuentas(),empresa.getListaIndicadores()));
+	public int CalcularFormula(List<Cuenta> listaCuentas,List<Indicador> listaIndicadores,ExpressionParser _parser){
+		return (_parser.parse(this.getFormula(),listaCuentas,listaIndicadores));
 	}
 	
 	//Buscar si existe un indicador

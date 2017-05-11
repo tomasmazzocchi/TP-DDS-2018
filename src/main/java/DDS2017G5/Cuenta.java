@@ -1,6 +1,8 @@
-package DDS2017G5;
+package dds2017g5;
 
 import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.List;
 
 public class Cuenta {
 	private String nombre;
@@ -41,6 +43,19 @@ public class Cuenta {
 		this.setFechaDesde(fechaDesde);
 		this.setFechaHasta(fechaHasta);
 	}
+	//metodo buscar cuenta
+	public static Cuenta BuscaCuenta(String nombre , List<Cuenta> listaCuentas) {
+	Iterator<Cuenta> i = listaCuentas.iterator();
+	while (i.hasNext())
+	  {
+		Cuenta cuenta = (Cuenta) i.next();
+		if (nombre.equals(cuenta.getNombre()))
+		{
+			return cuenta;
+		}
 
+	}
+	return null;
+}
 }
 

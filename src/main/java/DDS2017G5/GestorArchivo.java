@@ -1,4 +1,4 @@
-package DDS2017G5;
+package dds2017g5;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;

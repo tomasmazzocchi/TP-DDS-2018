@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import DDS2017G5.Cuenta;
-import DDS2017G5.Empresa;
-import DDS2017G5.Indicador;
-import DDS2017G5.RepoEmpresas;
+import dds2017g5.Cuenta;
+import dds2017g5.Empresa;
+import dds2017g5.Indicador;
+import dds2017g5.RepoEmpresas;
 
 
 public class RepoEmpresasTest {
@@ -34,7 +34,7 @@ public class RepoEmpresasTest {
 	public void init(){
 		cuentaEBIDTA = new Cuenta("EBIDTA",200,LocalDate.now(),LocalDate.now());
 		cuentaFDS = new Cuenta("FDS",500,LocalDate.now(),LocalDate.now());
-		indicadorMayorQue = new Indicador("MayorQue",200);
+		indicadorMayorQue = new Indicador("MayorQue","200");  /* Cambio 08 */
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);

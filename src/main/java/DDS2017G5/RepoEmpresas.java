@@ -1,4 +1,4 @@
-package DDS2017G5;
+package dds2017g5;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,9 @@
-package DDS2017G5;
+package dds2017g5;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Empresa {
 	private String nombre;
@@ -28,6 +30,22 @@ public class Empresa {
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
 		this.listaIndicadores = listaIndicadores;
+	}
+	
+	//List Cuentas Validas entre dos Fechas
+	
+	public static List<Cuenta> ListaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
+		// TODO Auto-generated method stub
+
+        List<Cuenta> listaCuentas = empresa.getListaCuentas();
+
+        List<Cuenta> listaCuentasValidas = listaCuentas.stream()                // convert list to stream
+                .filter(cuenta -> fechaDesde.equals(cuenta.getFechaDesde())&&fechaHasta.equals(cuenta.getFechaHasta()))   
+                .collect(Collectors.toList());              // collect the output and convert streams to a List
+
+        listaCuentasValidas.forEach(System.out::println);                //output : spring, node
+		
+		return listaCuentasValidas;
 	}
 
 	

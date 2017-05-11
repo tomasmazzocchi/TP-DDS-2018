@@ -2,10 +2,10 @@ package Tests;
 
 import com.google.gson.Gson;
 
-import DDS2017G5.Cuenta;
-import DDS2017G5.Empresa;
-import DDS2017G5.Indicador;
-import DDS2017G5.RepoEmpresas;
+import dds2017g5.Cuenta;
+import dds2017g5.Empresa;
+import dds2017g5.Indicador;
+import dds2017g5.RepoEmpresas;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -3,8 +3,8 @@ package Tests;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
-import DDS2017G5.GestorArchivo;
-import DDS2017G5.RepoEmpresas;
+import dds2017g5.GestorArchivo;
+import dds2017g5.RepoEmpresas;
 
 public class GestorArchivoTest {
 	

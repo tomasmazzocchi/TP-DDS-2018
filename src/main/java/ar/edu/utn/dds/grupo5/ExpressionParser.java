@@ -67,9 +67,11 @@ public class ExpressionParser {
      */
     private int visit(final ExprContext context, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
     	Cuenta cuenta;
+    	Indicador indicador;
     	String id;
     	String nombre;
     	String cadena;
+    	ExpressionParser _parser;
         if (context.number() != null) { //Just a number
             return Integer.parseInt(context.number().getText());
         }
@@ -84,7 +86,11 @@ public class ExpressionParser {
 				//System.out.println("valor " + cuenta.getValor());
 				return (int) (cuenta.getValor()); // convert Double to Integer
 			}
-			else{return(999);}// en esta parte va el indicador
+			else{
+				_parser=new ExpressionParser();
+				indicador = Indicador.BuscaIndicador(nombre,listaIndicadores);
+				return(indicador.CalcularFormula(listaCuentas, listaIndicadores, _parser));
+			}// en esta parte va el indicador
 		}
         else if (context.BR_CLOSE() != null) { //Expression between brackets
             return visit(context.expr(0), listaCuentas, listaIndicadores);

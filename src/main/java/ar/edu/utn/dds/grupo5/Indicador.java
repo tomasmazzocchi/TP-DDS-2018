@@ -1,5 +1,6 @@
 package ar.edu.utn.dds.grupo5;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,5 +43,19 @@ public class Indicador {
 
         return lista.isEmpty();
 		
+	}
+	//metodo buscar indicador
+		public static Indicador BuscaIndicador(String nombre , List<Indicador> listaIndicadores) {
+		Iterator<Indicador> i = listaIndicadores.iterator();
+		while (i.hasNext())
+		  {
+			Indicador indicador = (Indicador) i.next();
+			if (nombre.equals(indicador.getNombre()))
+			{
+				return indicador;
+			}
+
+		}
+		return null;
 	}
 }

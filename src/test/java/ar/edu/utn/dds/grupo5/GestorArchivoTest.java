@@ -3,8 +3,6 @@ package ar.edu.utn.dds.grupo5;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import java.io.*;
-import org.apache.commons.io.IOUtils;
-
 import ar.edu.utn.dds.grupo5.GestorArchivo;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
@@ -49,4 +47,5 @@ public class GestorArchivoTest {
 		thrown.expectMessage("Archivo invalido");
 		gestor.cargarArchivo(repositorio, archivojsonInvalido);
 	}
+	
 }

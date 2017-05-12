@@ -50,7 +50,7 @@ public class GestorArchivo {
         	throw new RuntimeException("Archivo invalido");
         }
         catch (IOException e) {
-        	throw new RuntimeException("Ruta inexistente");
+        	throw new RuntimeException("Ups, hubo un problema al abrir el archivo");
         }
         
     }

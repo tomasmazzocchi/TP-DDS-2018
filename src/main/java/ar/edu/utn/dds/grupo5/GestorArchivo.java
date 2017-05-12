@@ -3,6 +3,7 @@ package ar.edu.utn.dds.grupo5;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -24,12 +25,12 @@ public class GestorArchivo {
 		return instance;
 	}
 
-	public void cargarArchivo(RepoEmpresas repoEmpresas, String rutaArchivo) {
+	public void cargarArchivo(RepoEmpresas repoEmpresas, File archivo) {
 
         Gson gson = new Gson();
         Empresa empresaJson;
         
-        try (Reader reader = new FileReader(rutaArchivo))
+        try (Reader reader = new FileReader(archivo))
         {
             List<Empresa> listaEmpresasJson = new ArrayList<Empresa>();	
             

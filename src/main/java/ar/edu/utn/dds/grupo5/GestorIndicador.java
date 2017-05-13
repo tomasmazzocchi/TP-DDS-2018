@@ -3,6 +3,8 @@ package ar.edu.utn.dds.grupo5;
 import java.time.LocalDate;
 import java.util.List;
 
+import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
+
 public class GestorIndicador {
 	
 	private static GestorIndicador instance = null;
@@ -21,10 +23,7 @@ public class GestorIndicador {
 	public void GenerarIndicador(Empresa empresa,String indicadorNombre,String indicadorFormula) {
 
         {
-            Indicador indicador;
-                       
-
-            indicador = new Indicador(indicadorNombre,indicadorFormula);
+            Indicador indicador = new Indicador(indicadorNombre,indicadorFormula);
             _parser = new ExpressionParser();
             
         	// verificar si existe nombre Indicador
@@ -37,12 +36,11 @@ public class GestorIndicador {
             }
             else
             	//MENSAJE YA EXISTE UN INDICADOR CON ESE NOMBRE
-            	throw new RuntimeException ("Nombre Indicador Duplicado");
+            	throw new IndicadorExistenteException ("Indicador ya existente");
     		}
 	}
 	public int CalcularIndicador(Empresa empresa,LocalDate fechaDesde,LocalDate fechaHasta,Indicador indicador){
-		List<Cuenta> listaCuentasPorFecha;
-		listaCuentasPorFecha = Cuenta.CuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
+		List<Cuenta> listaCuentasPorFecha = Cuenta.CuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
 		return(indicador.CalcularFormula(listaCuentasPorFecha,empresa.getListaIndicadores(), _parser));		
 	}
 }

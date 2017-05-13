@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import ar.edu.utn.dds.ExceptionHandler.EmpresaExistenteException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
@@ -61,7 +62,7 @@ public class RepoEmpresasTest {
 	
 	@Test
 	public void agregoUnaEmpresExistenteLanzaExcepcion() {
-		thrown.expect(RuntimeException.class);
+		thrown.expect(EmpresaExistenteException.class);
 		thrown.expectMessage("Empresa ya existente");
 		repoEmpresas.agregarEmpresa(empresa1);
 		repoEmpresas.agregarEmpresa(empresa2);

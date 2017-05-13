@@ -3,6 +3,8 @@ package ar.edu.utn.dds.grupo5;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import ar.edu.utn.dds.ExceptionHandler.ArchivoException;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,10 +49,10 @@ public class GestorArchivo {
               
         }
         catch (JsonSyntaxException f){
-        	throw new RuntimeException("Archivo invalido");
+        	throw new ArchivoException("Archivo invalido");
         }
         catch (IOException e) {
-        	throw new RuntimeException("Ups, hubo un problema al abrir el archivo");
+        	throw new ArchivoException("Ups, hubo un problema al abrir el archivo");
         }
         
     }

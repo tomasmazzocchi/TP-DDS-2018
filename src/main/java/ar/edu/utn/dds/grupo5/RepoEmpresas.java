@@ -3,6 +3,8 @@ package ar.edu.utn.dds.grupo5;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.edu.utn.dds.ExceptionHandler.EmpresaExistenteException;
+
 public class RepoEmpresas {
 	private String nombre;
 	private List<Empresa> listaEmpresas = new ArrayList<>();
@@ -31,7 +33,7 @@ public class RepoEmpresas {
 			listaEmpresas.add(unaEmpresa);
 		} 
 		else{
-			throw new RuntimeException ("Empresa ya existente");
+			throw new EmpresaExistenteException ("Empresa ya existente");
 		}
 	}
 	public RepoEmpresas(String nombre) {
@@ -42,7 +44,7 @@ public class RepoEmpresas {
 		if(listaEmpresas.contains(unaEmpresa)){
 			listaEmpresas.remove(unaEmpresa);
 		} else{
-			throw new RuntimeException ("No existe la empresa");
+			throw new EmpresaExistenteException ("No existe la empresa");
 		}
 	}
 }

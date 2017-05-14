@@ -25,14 +25,9 @@ public class Indicador {
 	//Constructor 
 	public Indicador(String nombre,String formula){
 		this.setNombre(nombre);
-		this.setFormula(nombre);
+		this.setFormula(formula);
 	}
-	//Calcular Indicador   /* Cambio 08 */
-	
-	public int CalcularFormula(List<Cuenta> listaCuentas,List<Indicador> listaIndicadores,ExpressionParser _parser){
-		return (_parser.parse(this.getFormula(),listaCuentas,listaIndicadores));
-	}
-	
+
 	//Buscar si existe un indicador
 	
 	public Boolean NoExisteNombreIndicador(List<Indicador> listaIndicadores,String indicadorNombre) {

@@ -19,6 +19,7 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 
 public class ExpressionParser {
     private final ANTLRErrorListener _listener = createErrorListener();
+    
 
     /**
      * Parses an expression into an integer result.
@@ -72,25 +73,23 @@ public class ExpressionParser {
     	String nombre;
     	String cadena;
     	ExpressionParser _parser;
+
         if (context.number() != null) { //Just a number
             return Integer.parseInt(context.number().getText());
         }
         else if (context.string() != null){
-        	//System.out.println(context.string().getText());
            	cadena = context.string().getText();
         	id=cadena.substring(0,2);  //    cu o in
            	nombre=cadena.substring(3,cadena.length()); // Nombre cuenta o indicador
-           	//System.out.println("id: "+ id + "  nombre: " + nombre);
 			if (id.equalsIgnoreCase("cu")){
 				cuenta = Cuenta.BuscaCuenta(nombre,listaCuentas);
-				//System.out.println("valor " + cuenta.getValor());
 				return (int) (cuenta.getValor()); // convert Double to Integer
 			}
-			else{
-				_parser=new ExpressionParser();
+			else{// en esta parte va el indicador
+				_parser = new ExpressionParser();
 				indicador = Indicador.BuscaIndicador(nombre,listaIndicadores);
-				return(indicador.CalcularFormula(listaCuentas, listaIndicadores, _parser));
-			}// en esta parte va el indicador
+				return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
+			}
 		}
         else if (context.BR_CLOSE() != null) { //Expression between brackets
             return visit(context.expr(0), listaCuentas, listaIndicadores);

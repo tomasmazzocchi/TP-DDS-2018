@@ -23,7 +23,7 @@ DIVIDIR:    '/';
 NUMBER: '-'? [0-9]+;
 STRING: [a-zA-Z]+;
 IDCU:'cu.';   //identificar de cuenta
-IDIN:'in';    //idendificador de indicador
+IDIN:'in.';    //idendificador de indicador
 BR_OPEN: '(';
 BR_CLOSE: ')';
 

@@ -66,5 +66,10 @@ public class ExpressionParserTest {
 
         assertThat(_parser.parse("(21 # 2)",listaCuentas, listaIndicadores), equalTo(42));
     }
+    
+    @Test
+    public void ingresoUnaFormulaConUnIndicador() {
+        assertThat(_parser.parse("(in.ROE+1)*2",listaCuentas, listaIndicadores), equalTo(402));
+    }
 
 }

@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 
+import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
 import ar.edu.utn.dds.grupo5.SimpleLexer;
 import ar.edu.utn.dds.grupo5.SimpleParser;
 import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
@@ -83,7 +84,14 @@ public class ExpressionParser {
            	nombre=cadena.substring(3,cadena.length()); // Nombre cuenta o indicador
 			if (id.equalsIgnoreCase("cu")){
 				cuenta = Cuenta.BuscaCuenta(nombre,listaCuentas);
-				return (int) (cuenta.getValor()); // convert Double to Integer
+				if  (cuenta.getNombre().equals(nombre)) {
+					return (int) (cuenta.getValor()); // convert Double to Integer
+			    }
+				else{
+					throw new SintaxisException("No existe el nombre de Cuenta");
+				}
+				
+				
 			}
 			else{// en esta parte va el indicador
 				_parser = new ExpressionParser();
@@ -107,7 +115,7 @@ public class ExpressionParser {
             return visit(context.expr(0),listaCuentas, listaIndicadores) - visit(context.expr(1),listaCuentas, listaIndicadores);
         }
         else {
-            throw new IllegalStateException();
+        	throw new IllegalArgumentException();
         }
     }
 

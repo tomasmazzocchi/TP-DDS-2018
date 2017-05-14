@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
@@ -53,11 +54,6 @@ public class ExpressionParserTest {
     }
     
     @Test
-    public void ingresonumero() {
-        assertThat(_parser.parse("42",listaCuentas, listaIndicadores), equalTo(42));
-    }
-
-    @Test
     public void ingresoFormulaConDosCuentasExistentes() {
         assertThat(_parser.parse("(cu.EBIDTA+cu.fds)",listaCuentas, listaIndicadores), equalTo(400));
     }
@@ -67,7 +63,7 @@ public class ExpressionParserTest {
         _expected.expect(IllegalArgumentException.class);
         _expected.expectMessage(containsString("token recognition error at: '#'"));
 
-        assertThat(_parser.parse("(21 # 2)",listaCuentas, listaIndicadores), equalTo(42));
+        assertThat(_parser.parse("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores), equalTo(42));
     }
     
     @Test
@@ -78,6 +74,12 @@ public class ExpressionParserTest {
     @Test
     public void ingresoUnaFormulaConUnIndicadoryCuentas() {
         assertThat(_parser.parse("(in.DIV+cu.EBIDTA)/2",listaCuentas, listaIndicadores), equalTo(200));
+    }
+    @Test
+    public void ingresoUnaFormulaConCuentaInexistente() {
+    	_expected.expect(SintaxisException.class);
+    	_expected.expectMessage("No existe el nombre de Cuenta");
+        assertThat(_parser.parse("cu.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
     }
 
 }

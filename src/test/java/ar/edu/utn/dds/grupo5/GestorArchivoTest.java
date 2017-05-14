@@ -19,6 +19,7 @@ public class GestorArchivoTest {
 	private ClassLoader classLoader;
 	private File archivojsonInvalido;
 	private File archivojsonValido;
+	private java.net.URL resource;
 	
 	@Before
 	public void init() throws IOException{
@@ -27,7 +28,7 @@ public class GestorArchivoTest {
 		jsonValido = "ArchivoValido.json";
 		jsonInvalido = "ArchivoInvalido.json";
 		classLoader = GestorArchivo.class.getClassLoader();
-		java.net.URL resource = classLoader.getResource(jsonValido);
+		resource = classLoader.getResource(jsonValido);
 		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 		resource = classLoader.getResource(jsonInvalido);
 		archivojsonInvalido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));

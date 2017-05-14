@@ -25,6 +25,7 @@ public class ExpressionParserTest {
     private Cuenta cuentaEBIDTA;
 	private Cuenta cuentafds;
 	private Indicador indicadorROE;
+	private Indicador indicadorDIV;
 	private List<Cuenta> listaCuentas;
 	private List<Indicador> listaIndicadores;
     @Rule
@@ -37,11 +38,13 @@ public class ExpressionParserTest {
         cuentaEBIDTA = new Cuenta("EBIDTA",200,LocalDate.now(),LocalDate.now());
         cuentafds = new Cuenta("fds",200,LocalDate.now(),LocalDate.now());
 		indicadorROE = new Indicador("ROE","20");  /* Cambio 08 */
+		indicadorDIV= new Indicador("DIV","cu.EBIDTA");  /* Cambio 08 */
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);
 		listaCuentas.add(cuentafds);
 		listaIndicadores.add(indicadorROE);
+		listaIndicadores.add(indicadorDIV);
     }
 
     @Test
@@ -70,6 +73,11 @@ public class ExpressionParserTest {
     @Test
     public void ingresoUnaFormulaConUnIndicador() {
         assertThat(_parser.parse("(in.ROE+1)*2",listaCuentas, listaIndicadores), equalTo(42));
+    }
+    
+    @Test
+    public void ingresoUnaFormulaConUnIndicadoryCuentas() {
+        assertThat(_parser.parse("(in.DIV+cu.EBIDTA)/2",listaCuentas, listaIndicadores), equalTo(200));
     }
 
 }

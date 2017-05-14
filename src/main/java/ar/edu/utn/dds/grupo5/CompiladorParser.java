@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GestorArchivo {
+public class CompiladorParser {
 	
-	private static GestorArchivo instance = null;
+	private static CompiladorParser instance = null;
 	
-	private GestorArchivo(){		
+	private CompiladorParser(){		
 	}
 	
-	public static GestorArchivo getInstance(){
+	public static CompiladorParser getInstance(){
 		if(instance == null){
-			instance = new GestorArchivo();
+			instance = new CompiladorParser();
 		}
 		return instance;
 	}

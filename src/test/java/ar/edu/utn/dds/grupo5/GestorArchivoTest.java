@@ -7,13 +7,13 @@ import java.net.URLDecoder;
 
 import javax.print.DocFlavor.URL;
 
-import ar.edu.utn.dds.grupo5.GestorArchivo;
+import ar.edu.utn.dds.grupo5.CompiladorParser;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 public class GestorArchivoTest {
 	
 	private RepoEmpresas repositorio;
-	private GestorArchivo gestor;
+	private CompiladorParser gestor;
 	private String jsonValido;
 	private String jsonInvalido;
 	private ClassLoader classLoader;
@@ -24,10 +24,10 @@ public class GestorArchivoTest {
 	@Before
 	public void init() throws IOException{
 		repositorio = new RepoEmpresas("Bancos");
-		gestor = GestorArchivo.getInstance();
+		gestor = CompiladorParser.getInstance();
 		jsonValido = "ArchivoValido.json";
 		jsonInvalido = "ArchivoInvalido.json";
-		classLoader = GestorArchivo.class.getClassLoader();
+		classLoader = CompiladorParser.class.getClassLoader();
 		resource = classLoader.getResource(jsonValido);
 		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 		resource = classLoader.getResource(jsonInvalido);

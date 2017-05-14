@@ -3,6 +3,10 @@ package ar.edu.utn.dds.grupo5;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import java.io.*;
+import java.net.URLDecoder;
+
+import javax.print.DocFlavor.URL;
+
 import ar.edu.utn.dds.grupo5.GestorArchivo;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
@@ -23,8 +27,10 @@ public class GestorArchivoTest {
 		jsonValido = "ArchivoValido.json";
 		jsonInvalido = "ArchivoInvalido.json";
 		classLoader = GestorArchivo.class.getClassLoader();
-		archivojsonInvalido = new File(classLoader.getResource(jsonInvalido).getFile());
-		archivojsonValido = new File(classLoader.getResource(jsonValido).getFile());
+		java.net.URL resource = classLoader.getResource(jsonValido);
+		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
+		resource = classLoader.getResource(jsonInvalido);
+		archivojsonInvalido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 	}
 	
 	@After

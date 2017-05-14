@@ -5,13 +5,13 @@ import org.junit.rules.ExpectedException;
 import java.io.*;
 import java.net.URLDecoder;
 
-import ar.edu.utn.dds.grupo5.CompiladorParser;
+import ar.edu.utn.dds.grupo5.GestorArchivo;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 public class GestorArchivoTest {
 	
 	private RepoEmpresas repositorio;
-	private CompiladorParser gestor;
+	private GestorArchivo gestor;
 	private String jsonValido;
 	private String jsonInvalido;
 	private ClassLoader classLoader;
@@ -22,10 +22,10 @@ public class GestorArchivoTest {
 	@Before
 	public void init() throws IOException{
 		repositorio = new RepoEmpresas("Bancos");
-		gestor = CompiladorParser.getInstance();
+		gestor = GestorArchivo.getInstance();
 		jsonValido = "ArchivoValido.json";
 		jsonInvalido = "ArchivoInvalido.json";
-		classLoader = CompiladorParser.class.getClassLoader();
+		classLoader = GestorArchivo.class.getClassLoader();
 		resource = classLoader.getResource(jsonValido);
 		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 		resource = classLoader.getResource(jsonInvalido);

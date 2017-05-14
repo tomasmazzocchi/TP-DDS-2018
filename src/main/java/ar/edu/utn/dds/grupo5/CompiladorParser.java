@@ -1,21 +1,14 @@
 package ar.edu.utn.dds.grupo5;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-
-import ar.edu.utn.dds.ExceptionHandler.ArchivoException;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.time.LocalDate;
 import java.util.List;
+
+import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
 
 public class CompiladorParser {
 	
 	private static CompiladorParser instance = null;
+	private ExpressionParser _parser;
 	
 	private CompiladorParser(){		
 	}
@@ -27,33 +20,29 @@ public class CompiladorParser {
 		return instance;
 	}
 
-	public void cargarArchivo(RepoEmpresas repoEmpresas, File archivo) {
+	public void GenerarIndicador(Empresa empresa,String indicadorNombre,String indicadorFormula) {
 
-        Gson gson = new Gson();
-        Empresa empresaJson;
-        
-        try (Reader reader = new FileReader(archivo))
         {
-            List<Empresa> listaEmpresasJson = new ArrayList<Empresa>();	
-            
-            RepoEmpresas repoEmpresasJson = gson.fromJson(reader, RepoEmpresas.class);
-            listaEmpresasJson = repoEmpresasJson.getListaEmpresa();
-            
-
-            Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
-            
-              while( iterador.hasNext() ) {
-                     empresaJson = (Empresa) iterador.next();
-                     repoEmpresas.agregarEmpresa(empresaJson);
-              }    
-              
-        }
-        catch (JsonSyntaxException f){
-        	throw new ArchivoException("Archivo invalido");
-        }
-        catch (IOException e) {
-        	throw new ArchivoException("Ups, hubo un problema al abrir el archivo");
-        }
-        
-    }
+            Indicador indicador = new Indicador(indicadorNombre,indicadorFormula);
+         
+        	// verificar si existe nombre Indicador
+            if (indicador.NoExisteNombreIndicador(empresa.getListaIndicadores(),indicadorNombre))
+            {
+            	//Verifico si la formula funciona
+            	_parser.parse(indicador.getFormula(),empresa.getListaCuentas(),empresa.getListaIndicadores()); 
+            	//SUPONGO QUE SI DA EXCEPTION NO SE CARGA
+            	empresa.getListaIndicadores().add(indicador);
+            }
+            else
+            	//MENSAJE YA EXISTE UN INDICADOR CON ESE NOMBRE
+            	throw new IndicadorExistenteException ("Indicador ya existente");
+    		}
+	}
+	public int CalcularIndicador(Empresa empresa,LocalDate fechaDesde,LocalDate fechaHasta,Indicador indicador){
+		//Lo que hago aca es generar una lista de cuentas para calcular el indicador en un rango de fechas		
+		List<Cuenta> listaCuentasPorFecha = Cuenta.CuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
+		return(_parser.parse(indicador.getFormula(),listaCuentasPorFecha,empresa.getListaIndicadores()));		
+	}
 }
+        		
+		

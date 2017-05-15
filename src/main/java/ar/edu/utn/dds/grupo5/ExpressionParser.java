@@ -88,7 +88,6 @@ public class ExpressionParser {
 					return (int) (cuenta.getValor()); // convert Double to Integer
 			    }
 				else{
-					System.out.println("Entre en la exepcion");
 					throw new SintaxisException("No existe el nombre de Cuenta");
 				}
 				
@@ -101,7 +100,6 @@ public class ExpressionParser {
 					return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
 			    }
 				else{
-					System.out.println("Entre en la exepcion");
 					throw new SintaxisException("No existe el nombre del Indicador");
 				}
 				

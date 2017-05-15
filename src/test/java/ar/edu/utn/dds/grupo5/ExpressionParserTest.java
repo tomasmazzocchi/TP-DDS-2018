@@ -81,5 +81,12 @@ public class ExpressionParserTest {
     	_expected.expectMessage("No existe el nombre de Cuenta");
         assertThat(_parser.parse("cu.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
     }
+    
+    @Test
+    public void ingresoUnaFormulaConIndicadorInexistente() {
+    	_expected.expect(SintaxisException.class);
+    	_expected.expectMessage("No existe el nombre del Indicador");
+        assertThat(_parser.parse("in.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
+    }
 
 }

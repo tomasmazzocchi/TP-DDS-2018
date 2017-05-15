@@ -84,10 +84,11 @@ public class ExpressionParser {
            	nombre=cadena.substring(3,cadena.length()); // Nombre cuenta o indicador
 			if (id.equalsIgnoreCase("cu")){
 				cuenta = Cuenta.BuscaCuenta(nombre,listaCuentas);
-				if  (cuenta.getNombre().equals(nombre)) {
+				if  (cuenta != null) {
 					return (int) (cuenta.getValor()); // convert Double to Integer
 			    }
 				else{
+					System.out.println("Entre en la exepcion");
 					throw new SintaxisException("No existe el nombre de Cuenta");
 				}
 				
@@ -96,7 +97,14 @@ public class ExpressionParser {
 			else{// en esta parte va el indicador
 				_parser = new ExpressionParser();
 				indicador = Indicador.BuscaIndicador(nombre,listaIndicadores);
-				return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
+				if  (indicador != null) {
+					return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
+			    }
+				else{
+					System.out.println("Entre en la exepcion");
+					throw new SintaxisException("No existe el nombre del Indicador");
+				}
+				
 			}
 		}
         else if (context.BR_CLOSE() != null) { //Expression between brackets

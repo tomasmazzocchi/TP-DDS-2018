@@ -95,7 +95,7 @@ public class ExpressionParser {
 			}
 			else{// en esta parte va el indicador
 				_parser = new ExpressionParser();
-				indicador = Indicador.BuscaIndicador(nombre,listaIndicadores);
+				indicador = Indicador.buscaIndicador(nombre,listaIndicadores);
 				if  (indicador != null) {
 					return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
 			    }

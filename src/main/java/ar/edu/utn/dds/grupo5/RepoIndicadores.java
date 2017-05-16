@@ -18,7 +18,7 @@ public class RepoIndicadores {
 		this.nombre = nombre;
 	}
 
-	public List<Indicador> getListaIndicador(){
+	public List<Indicador> getListaIndicadores(){
 		return this.listaIndicadores;
 	}
 

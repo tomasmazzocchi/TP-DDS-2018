@@ -1,0 +1,23 @@
+body{
+	background-color: #658a19;
+}
+
+span{
+	color: white;
+}
+
+a{
+	text-decoration: none;
+}
+a:hover{
+	font-weight: bold;
+}
+
+input[type="file"]{
+	width: 135px;
+}
+
+.container{
+	width: 100%;
+	text-align: center;
+}

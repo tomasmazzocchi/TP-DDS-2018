@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Consultar Datos</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<form action="" method="POST">
+				<span>Seleccione empresa:</span>
+				<select id="empresa">
+					<option id="0" value="">-Seleccione-</option>
+					<option id="1" value="Facebook">Facebook</option>
+					<option id="2" value="Apple">Apple</option>
+				</select><br><br>
+				<span>Fecha desde:</span>
+				<input type="text" id="fechaDesde" value="aaaa-mm-dd" onfocus="
+				document.getElementById('fechaDesde').value='';"
+				onblur="if(document.getElementById('fechaDesde').value==''){
+					document.getElementById('fechaDesde').value='aaaa-mm-dd';
+				}" /><br><br>
+				<span>Fecha hasta:</span>
+				<input type="text" id="fechaHasta" value="aaaa-mm-dd" onfocus="
+				document.getElementById('fechaHasta').value='';"
+				onblur="if(document.getElementById('fechaHasta').value==''){
+					document.getElementById('fechaHasta').value='aaaa-mm-dd';
+				}" /><br><br>
+				<input type="submit" value="Buscar" />
+			</form>
+			<br>
+			<a href="cargar.html" alt="" title="Cargar Cuentas">Cargar Cuentas</a><br>
+			<a href="index.html" alt="" title="Volver">Volver al Inicio</a><br>
+		</div>
+	</body>
+</html>

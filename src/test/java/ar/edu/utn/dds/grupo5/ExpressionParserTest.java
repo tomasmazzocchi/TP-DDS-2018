@@ -50,12 +50,12 @@ public class ExpressionParserTest {
 
     @Test
     public void ingresoUnaFormulaConUnaCuentaExistente() {
-        assertThat(_parser.parse("(cu.EBIDTA+1)*2",listaCuentas, listaIndicadores), equalTo(402));
+        assertThat(_parser.resolverFormula("(cu.EBIDTA+1)*2",listaCuentas, listaIndicadores), equalTo(402));
     }
     
     @Test
     public void ingresoFormulaConDosCuentasExistentes() {
-        assertThat(_parser.parse("(cu.EBIDTA+cu.fds)",listaCuentas, listaIndicadores), equalTo(400));
+        assertThat(_parser.resolverFormula("(cu.EBIDTA+cu.fds)",listaCuentas, listaIndicadores), equalTo(400));
     }
 
     @Test
@@ -63,30 +63,30 @@ public class ExpressionParserTest {
         _expected.expect(IllegalArgumentException.class);
         _expected.expectMessage(containsString("Formula no Valida"));
 
-        assertThat(_parser.parse("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores), equalTo(42));
+        assertThat(_parser.resolverFormula("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores), equalTo(42));
     }
     
     @Test
     public void ingresoUnaFormulaConUnIndicador() {
-        assertThat(_parser.parse("(in.ROE+1)*2",listaCuentas, listaIndicadores), equalTo(42));
+        assertThat(_parser.resolverFormula("(in.ROE+1)*2",listaCuentas, listaIndicadores), equalTo(42));
     }
     
     @Test
     public void ingresoUnaFormulaConUnIndicadoryCuentas() {
-        assertThat(_parser.parse("(in.DIV+cu.EBIDTA)/2",listaCuentas, listaIndicadores), equalTo(200));
+        assertThat(_parser.resolverFormula("(in.DIV+cu.EBIDTA)/2",listaCuentas, listaIndicadores), equalTo(200));
     }
     @Test
     public void ingresoUnaFormulaConCuentaInexistente() {
     	_expected.expect(SintaxisException.class);
     	_expected.expectMessage("No existe el nombre de Cuenta");
-        assertThat(_parser.parse("cu.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
+        assertThat(_parser.resolverFormula("cu.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
     }
     
     @Test
     public void ingresoUnaFormulaConIndicadorInexistente() {
     	_expected.expect(SintaxisException.class);
     	_expected.expectMessage("No existe el nombre del Indicador");
-        assertThat(_parser.parse("in.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
+        assertThat(_parser.resolverFormula("in.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
     }
 
 }

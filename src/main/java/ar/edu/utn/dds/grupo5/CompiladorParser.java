@@ -29,7 +29,7 @@ public class CompiladorParser {
             if (indicador.NoExisteNombreIndicador(empresa.getListaIndicadores(),indicadorNombre))
             {
             	//Verifico si la formula funciona
-            	_parser.parse(indicador.getFormula(),empresa.getListaCuentas(),empresa.getListaIndicadores()); 
+            	_parser.resolverFormula(indicador.getFormula(),empresa.getListaCuentas(),empresa.getListaIndicadores()); 
             	//SUPONGO QUE SI DA EXCEPTION NO SE CARGA
             	empresa.getListaIndicadores().add(indicador);
             }
@@ -41,7 +41,7 @@ public class CompiladorParser {
 	public int CalcularIndicador(Empresa empresa,LocalDate fechaDesde,LocalDate fechaHasta,Indicador indicador){
 		//Lo que hago aca es generar una lista de cuentas para calcular el indicador en un rango de fechas		
 		List<Cuenta> listaCuentasPorFecha = Cuenta.CuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
-		return(_parser.parse(indicador.getFormula(),listaCuentasPorFecha,empresa.getListaIndicadores()));		
+		return(_parser.resolverFormula(indicador.getFormula(),listaCuentasPorFecha,empresa.getListaIndicadores()));		
 	}
 }
         		

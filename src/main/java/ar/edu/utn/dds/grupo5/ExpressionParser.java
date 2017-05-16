@@ -27,7 +27,7 @@ public class ExpressionParser {
      * @param expression the expression to part
      * @return and integer result
      */
-    public int parse(final String expression,List<Cuenta> listaCuentas,List<Indicador> listaIndicadores) {
+    public int resolverFormula(final String expression,List<Cuenta> listaCuentas,List<Indicador> listaIndicadores) {
         /*
          * Create a lexer that reads from our expression string
          */
@@ -97,7 +97,7 @@ public class ExpressionParser {
 				_parser = new ExpressionParser();
 				indicador = Indicador.buscaIndicador(nombre,listaIndicadores);
 				if  (indicador != null) {
-					return (_parser.parse(indicador.getFormula(),listaCuentas,listaIndicadores));
+					return (_parser.resolverFormula(indicador.getFormula(),listaCuentas,listaIndicadores));
 			    }
 				else{
 					throw new SintaxisException("No existe el nombre del Indicador");
@@ -131,7 +131,7 @@ public class ExpressionParser {
      * @param expression the expression to part
      * @return and integer result
      */
-    public boolean validarExpresion(final String expression) {
+    public boolean validarFormula(final String expression) {
         /*
          * Create a lexer that reads from our expression string
          */

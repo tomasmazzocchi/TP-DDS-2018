@@ -40,6 +40,12 @@ public class ManejadorIndicadores {
 		
 	}
 	
+	public int calcularIndicadorEntreFechas(Empresa empresa,LocalDate fechaDesde,LocalDate fechaHasta,Indicador indicador){
+		//Lo que hago aca es generar una lista de cuentas para calcular el indicador en un rango de fechas		
+		List<Cuenta> listaCuentasPorFecha = ManejadorIndicadores.getInstance().cuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
+		return(_parser.resolverFormula(indicador.getFormula(),listaCuentasPorFecha,empresa.getListaIndicadores()));		
+	}
+	
 	//metodo buscar cuenta
 	public Cuenta buscaCuenta(String nombre , List<Cuenta> listaCuentas) {
 		List<Cuenta> lista = listaCuentas.stream()

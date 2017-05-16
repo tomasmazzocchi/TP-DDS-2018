@@ -40,7 +40,7 @@ public class Indicador {
 		
 	}
 	//metodo buscar indicador
-		public static Indicador BuscaIndicador(String nombre , List<Indicador> listaIndicadores) {
+		public static Indicador buscaIndicador(String nombre , List<Indicador> listaIndicadores) {
 		Iterator<Indicador> i = listaIndicadores.iterator();
 		while (i.hasNext())
 		  {

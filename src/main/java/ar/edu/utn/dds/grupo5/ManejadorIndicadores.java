@@ -17,6 +17,7 @@ public class ManejadorIndicadores {
 	}
 	
 	public void guardarIndicadorEnEmpresa(Empresa empresa,String indicadorNombre,String indicadorFormula){
+		_parser = new ExpressionParser();
 		_parser.parse(indicadorFormula,empresa.getListaCuentas(),empresa.getListaIndicadores());
 		indicador = new Indicador(indicadorNombre,indicadorFormula);
 		empresa.getListaIndicadores().add(indicador);		
@@ -24,7 +25,7 @@ public class ManejadorIndicadores {
 	}
 	
 	public void guardarIndicadorEnRepo(RepoIndicadores repoIndicadores,String indicadorNombre,String indicadorFormula){
-		
+		_parser = new ExpressionParser();
 		if (_parser.validarExpresion(indicadorFormula))
 		{
 			indicador = new Indicador(indicadorNombre,indicadorFormula);

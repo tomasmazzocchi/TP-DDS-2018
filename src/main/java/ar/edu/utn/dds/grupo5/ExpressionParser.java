@@ -183,16 +183,16 @@ public class ExpressionParser {
             return visitValidador(context.expr(0));
         }
         else if (context.MULTIPLICAR() != null) { //Expression * expression
-            return visitValidador(context.expr(1));
+            return visitValidador(context.expr(0))&&visitValidador(context.expr(1));
         }
         else if (context.DIVIDIR() != null) { //Expression / expression
-            return visitValidador(context.expr(1));
+            return visitValidador(context.expr(0))&&visitValidador(context.expr(1));
         }
         else if (context.SUMAR() != null) { //Expression + expression
-            return visitValidador(context.expr(1));
+            return visitValidador(context.expr(0))&&visitValidador(context.expr(1));
         }
         else if (context.RESTAR() != null) { //Expression - expression
-            return visitValidador(context.expr(1));
+            return visitValidador(context.expr(0))&&visitValidador(context.expr(1));
         }
         else {
         	throw new IllegalArgumentException();
@@ -206,7 +206,8 @@ public class ExpressionParser {
     private static ANTLRErrorListener createErrorListener() {
         return new ANTLRErrorListener() {
             public void syntaxError(final Recognizer<?, ?> arg0, final Object obj, final int line, final int position, final String message, final RecognitionException ex) {
-                throw new IllegalArgumentException(String.format(Locale.ROOT, "Exception parsing expression: '%s' on line %s, position %s", message, line, position));
+                throw new IllegalArgumentException(String.format(Locale.ROOT, "Formula no Valida"));
+            	//throw new IllegalArgumentException(String.format(Locale.ROOT, "Exception parsing expression: '%s' on line %s, position %s", message, line, position));
             }
 
             public void reportContextSensitivity(final Parser arg0, final DFA arg1, final int arg2, final int arg3, final int arg4, final ATNConfigSet arg5) {

@@ -61,7 +61,7 @@ public class ExpressionParserTest {
     @Test
     public void ingresoFormulaConCaracterInvalido() {
         _expected.expect(IllegalArgumentException.class);
-        _expected.expectMessage(containsString("token recognition error at: '#'"));
+        _expected.expectMessage(containsString("Formula no Valida"));
 
         assertThat(_parser.parse("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores), equalTo(42));
     }

@@ -1,5 +1,11 @@
 package ar.edu.utn.dds.grupo5;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
+
 public class ManejadorIndicadores {
 	
 	private static ManejadorIndicadores instance = null;
@@ -33,5 +39,55 @@ public class ManejadorIndicadores {
 		}
 		
 	}
+	
+	//metodo buscar cuenta
+	public Cuenta buscaCuenta(String nombre , List<Cuenta> listaCuentas) {
+		List<Cuenta> lista = listaCuentas.stream()
+			    .filter(p -> p.getNombre().equals(nombre)) .collect(Collectors.toList());
+		if (lista.isEmpty())
+		{
+			throw new SintaxisException("No existe el nombre de Cuenta");
+		}
+		else {
+			return (lista.get(0));
+		}
+	}
+	
+	//Busca cuentas entre dos fechas
+	public List<Cuenta> cuentasValidasPorFecha(List<Cuenta> listaCuentas,LocalDate fechaDesde,LocalDate fechaHasta){
+		
+		List<Cuenta> listaCuentasValidasPorFecha = listaCuentas.stream()
+			    .filter(p -> p.getFechaDesde().compareTo(fechaDesde)>=0 && p.getFechaHasta().compareTo(fechaHasta)<=0) .collect(Collectors.toList());
+		if (listaCuentasValidasPorFecha.isEmpty())
+		{
+			throw new SintaxisException("No existen Cuentas para ese Rango de Fechas");
+		}
+		else {
+			return (listaCuentasValidasPorFecha);
+		}
+	}
+	
+	//Buscar si existe un indicador
+	
+	public Boolean noExisteNombreIndicador(List<Indicador> listaIndicadores,String indicadorNombre) {
+		
+        List<Indicador> lista = listaIndicadores.stream()               
+                .filter(indicador -> indicadorNombre.equals(indicador.getNombre()))
+                .collect(Collectors.toList());              
 
+        return lista.isEmpty();
+		
+	}
+	//metodo buscar indicador
+	public Indicador buscaIndicador(String nombre , List<Indicador> listaIndicadores){
+		List<Indicador> lista = listaIndicadores.stream()
+			    .filter(p -> p.getNombre().equals(nombre)) .collect(Collectors.toList());
+		if (lista.isEmpty())
+		{
+			throw new SintaxisException("No existe el nombre del Indicador");
+		}
+		else {
+			return (lista.get(0));
+		}
+	}
 }

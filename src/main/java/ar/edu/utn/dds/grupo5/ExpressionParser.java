@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 
-import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
 import ar.edu.utn.dds.grupo5.SimpleLexer;
 import ar.edu.utn.dds.grupo5.SimpleParser;
 import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
@@ -83,26 +82,13 @@ public class ExpressionParser {
         	id=cadena.substring(0,2);  //    cu o in
            	nombre=cadena.substring(3,cadena.length()); // Nombre cuenta o indicador
 			if (id.equalsIgnoreCase("cu")){
-				cuenta = Cuenta.BuscaCuenta(nombre,listaCuentas);
-				if  (cuenta != null) {
-					return (int) (cuenta.getValor()); // convert Double to Integer
-			    }
-				else{
-					throw new SintaxisException("No existe el nombre de Cuenta");
-				}
-				
-				
+				cuenta = ManejadorIndicadores.getInstance().buscaCuenta(nombre,listaCuentas);
+				return (int) (cuenta.getValor()); // convert Double to Integer
 			}
 			else{// en esta parte va el indicador
 				_parser = new ExpressionParser();
-				indicador = Indicador.buscaIndicador(nombre,listaIndicadores);
-				if  (indicador != null) {
-					return (_parser.resolverFormula(indicador.getFormula(),listaCuentas,listaIndicadores));
-			    }
-				else{
-					throw new SintaxisException("No existe el nombre del Indicador");
-				}
-				
+				indicador = ManejadorIndicadores.getInstance().buscaIndicador(nombre,listaIndicadores);
+				return (_parser.resolverFormula(indicador.getFormula(),listaCuentas,listaIndicadores));
 			}
 		}
         else if (context.BR_CLOSE() != null) { //Expression between brackets

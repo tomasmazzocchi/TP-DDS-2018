@@ -1,9 +1,6 @@
 package ar.edu.utn.dds.grupo5;
 
 import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Cuenta {
 	private String nombre;
@@ -44,26 +41,5 @@ public class Cuenta {
 		this.setFechaDesde(fechaDesde);
 		this.setFechaHasta(fechaHasta);
 	}
-	//Busca cuentas entre dos fechas
-	public static List<Cuenta> CuentasValidasPorFecha(List<Cuenta> listaCuentas,LocalDate fechaDesde,LocalDate fechaHasta){
-		
-		List<Cuenta> listaCuentasValidasPorFecha = listaCuentas.stream()
-			    .filter(p -> p.getFechaDesde().compareTo(fechaDesde)>=0 && p.fechaHasta.compareTo(fechaHasta)<=0) .collect(Collectors.toList());
-		return(listaCuentasValidasPorFecha);
-	}
-	//metodo buscar cuenta
-	public static Cuenta BuscaCuenta(String nombre , List<Cuenta> listaCuentas) {
-	Iterator<Cuenta> i = listaCuentas.iterator();
-	while (i.hasNext())
-	  {
-		Cuenta cuenta = (Cuenta) i.next();
-		if (nombre.equals(cuenta.getNombre()))
-		{
-			return cuenta;
-		}
-
-	}
-	return null;
-}
 }
 

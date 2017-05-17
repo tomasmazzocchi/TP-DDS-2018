@@ -49,7 +49,7 @@ public class ManejadorIndicadores {
 	}
 
 	// metodo buscar cuenta
-	public Cuenta buscaCuenta(String nombre, List<Cuenta> listaCuentas) {
+	public Cuenta buscarCuenta(String nombre, List<Cuenta> listaCuentas) {
 		List<Cuenta> lista = listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {
@@ -74,17 +74,17 @@ public class ManejadorIndicadores {
 
 	// Buscar si existe un indicador
 
-	public Boolean noExisteNombreIndicador(List<Indicador> listaIndicadores, String indicadorNombre) {
+	public Boolean indicadorExistente(List<Indicador> listaIndicadores, String indicadorNombre) {
 
 		List<Indicador> lista = listaIndicadores.stream()
 				.filter(indicador -> indicadorNombre.equals(indicador.getNombre())).collect(Collectors.toList());
 
-		return lista.isEmpty();
+		return !lista.isEmpty();
 
 	}
 
 	// metodo buscar indicador
-	public Indicador buscaIndicador(String nombre, List<Indicador> listaIndicadores) {
+	public Indicador buscarIndicador(String nombre, List<Indicador> listaIndicadores) {
 		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {

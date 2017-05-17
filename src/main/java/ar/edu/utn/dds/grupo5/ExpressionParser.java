@@ -82,11 +82,11 @@ public class ExpressionParser {
 			id = cadena.substring(0, 2); // cu o in
 			nombre = cadena.substring(3, cadena.length()); // Nombre cuenta o indicador
 			if (id.equalsIgnoreCase("cu")) {
-				cuenta = ManejadorIndicadores.getInstance().buscaCuenta(nombre, listaCuentas);
+				cuenta = ManejadorIndicadores.getInstance().buscarCuenta(nombre, listaCuentas);
 				return (int) (cuenta.getValor()); // convert Double to Integer
 			} else {// en esta parte va el indicador
 				_parser = new ExpressionParser();
-				indicador = ManejadorIndicadores.getInstance().buscaIndicador(nombre, listaIndicadores);
+				indicador = ManejadorIndicadores.getInstance().buscarIndicador(nombre, listaIndicadores);
 				return (_parser.resolverFormula(indicador.getFormula(), listaCuentas, listaIndicadores));
 			}
 		} else if (context.BR_CLOSE() != null) { // Expression between brackets

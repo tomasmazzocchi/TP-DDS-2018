@@ -42,13 +42,10 @@ public class ManejadorIndicadores {
 
 	public int calcularIndicadorEntreFechas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta,
 			Indicador indicador) {
-		// Lo que hago aca es generar una lista de cuentas para calcular el indicador en un rango de fechas
-		List<Cuenta> listaCuentasPorFecha = ManejadorIndicadores.getInstance()
-				.cuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
+		List<Cuenta> listaCuentasPorFecha = this.cuentasValidasPorFecha(empresa.getListaCuentas(), fechaDesde, fechaHasta);
 		return (_parser.resolverFormula(indicador.getFormula(), listaCuentasPorFecha, empresa.getListaIndicadores()));
 	}
 
-	// metodo buscar cuenta
 	public Cuenta buscarCuenta(String nombre, List<Cuenta> listaCuentas) {
 		List<Cuenta> lista = listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
@@ -59,7 +56,6 @@ public class ManejadorIndicadores {
 		}
 	}
 
-	// Busca cuentas entre dos fechas
 	public List<Cuenta> cuentasValidasPorFecha(List<Cuenta> listaCuentas, LocalDate fechaDesde, LocalDate fechaHasta) {
 
 		List<Cuenta> listaCuentasValidasPorFecha = listaCuentas.stream().filter(
@@ -72,7 +68,6 @@ public class ManejadorIndicadores {
 		}
 	}
 
-	// Buscar si existe un indicador
 
 	public Boolean indicadorExistente(List<Indicador> listaIndicadores, String indicadorNombre) {
 
@@ -83,7 +78,6 @@ public class ManejadorIndicadores {
 
 	}
 
-	// metodo buscar indicador
 	public Indicador buscarIndicador(String nombre, List<Indicador> listaIndicadores) {
 		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());

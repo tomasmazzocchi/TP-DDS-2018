@@ -10,13 +10,12 @@ public class RepoIndicadores {
 	private String nombre;
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
+	public RepoIndicadores(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public List<Indicador> getListaIndicadores() {
@@ -33,10 +32,6 @@ public class RepoIndicadores {
 		} else {
 			throw new IndicadorExistenteException("Indicador ya existente");
 		}
-	}
-
-	public RepoIndicadores(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public void quitarIndicador(Indicador unaIndicador) {

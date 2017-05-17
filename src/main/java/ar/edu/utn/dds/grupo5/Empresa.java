@@ -10,6 +10,12 @@ public class Empresa {
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
+	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
+		this.nombre = nombre;
+		this.listaCuentas = listaCuentas;
+		this.listaIndicadores = listaIndicadores;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -24,12 +30,6 @@ public class Empresa {
 
 	public List<Indicador> getListaIndicadores() {
 		return this.listaIndicadores;
-	}
-
-	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
-		this.nombre = nombre;
-		this.listaCuentas = listaCuentas;
-		this.listaIndicadores = listaIndicadores;
 	}
 
 

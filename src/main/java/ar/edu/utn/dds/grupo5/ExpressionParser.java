@@ -75,32 +75,32 @@ public class ExpressionParser {
 		String cadena;
 		ExpressionParser _parser;
 
-		if (context.number() != null) { // Just a number
+		if (context.number() != null) { 
 			return Integer.parseInt(context.number().getText());
 		} else if (context.string() != null) {
 			cadena = context.string().getText();
-			id = cadena.substring(0, 2); // cu o in
-			nombre = cadena.substring(3, cadena.length()); // Nombre cuenta o indicador
+			id = cadena.substring(0, 2); 
+			nombre = cadena.substring(3, cadena.length()); 
 			if (id.equalsIgnoreCase("cu")) {
 				cuenta = ManejadorIndicadores.getInstance().buscarCuenta(nombre, listaCuentas);
-				return (int) (cuenta.getValor()); // convert Double to Integer
-			} else {// en esta parte va el indicador
+				return (int) (cuenta.getValor()); 
+			} else {
 				_parser = new ExpressionParser();
 				indicador = ManejadorIndicadores.getInstance().buscarIndicador(nombre, listaIndicadores);
 				return (_parser.resolverFormula(indicador.getFormula(), listaCuentas, listaIndicadores));
 			}
-		} else if (context.BR_CLOSE() != null) { // Expression between brackets
+		} else if (context.BR_CLOSE() != null) { 
 			return visit(context.expr(0), listaCuentas, listaIndicadores);
-		} else if (context.MULTIPLICAR() != null) { // Expression * expression
+		} else if (context.MULTIPLICAR() != null) { 
 			return visit(context.expr(0), listaCuentas, listaIndicadores)
 					* visit(context.expr(1), listaCuentas, listaIndicadores);
-		} else if (context.DIVIDIR() != null) { // Expression / expression
+		} else if (context.DIVIDIR() != null) { 
 			return visit(context.expr(0), listaCuentas, listaIndicadores)
 					/ visit(context.expr(1), listaCuentas, listaIndicadores);
-		} else if (context.SUMAR() != null) { // Expression + expression
+		} else if (context.SUMAR() != null) { 
 			return visit(context.expr(0), listaCuentas, listaIndicadores)
 					+ visit(context.expr(1), listaCuentas, listaIndicadores);
-		} else if (context.RESTAR() != null) { // Expression - expression
+		} else if (context.RESTAR() != null) { 
 			return visit(context.expr(0), listaCuentas, listaIndicadores)
 					- visit(context.expr(1), listaCuentas, listaIndicadores);
 		} else {

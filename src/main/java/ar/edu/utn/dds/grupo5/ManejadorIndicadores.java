@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
+import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 
 public class ManejadorIndicadores {
 	
@@ -52,7 +52,7 @@ public class ManejadorIndicadores {
 			    .filter(p -> p.getNombre().equals(nombre)) .collect(Collectors.toList());
 		if (lista.isEmpty())
 		{
-			throw new SintaxisException("No existe el nombre de Cuenta");
+			throw new ManejadorIndicadoresException("No existe el nombre de Cuenta");
 		}
 		else {
 			return (lista.get(0));
@@ -66,7 +66,7 @@ public class ManejadorIndicadores {
 			    .filter(p -> p.getFechaDesde().compareTo(fechaDesde)>=0 && p.getFechaHasta().compareTo(fechaHasta)<=0) .collect(Collectors.toList());
 		if (listaCuentasValidasPorFecha.isEmpty())
 		{
-			throw new SintaxisException("No existen Cuentas para ese Rango de Fechas");
+			throw new ManejadorIndicadoresException("No existen Cuentas para ese Rango de Fechas");
 		}
 		else {
 			return (listaCuentasValidasPorFecha);
@@ -90,7 +90,7 @@ public class ManejadorIndicadores {
 			    .filter(p -> p.getNombre().equals(nombre)) .collect(Collectors.toList());
 		if (lista.isEmpty())
 		{
-			throw new SintaxisException("No existe el nombre del Indicador");
+			throw new ManejadorIndicadoresException("No existe el nombre del Indicador");
 		}
 		else {
 			return (lista.get(0));

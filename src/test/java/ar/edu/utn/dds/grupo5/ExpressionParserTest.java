@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import ar.edu.utn.dds.ExceptionHandler.SintaxisException;
+import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
@@ -76,14 +76,14 @@ public class ExpressionParserTest {
     }
     @Test
     public void ingresoUnaFormulaConCuentaInexistente() {
-    	_expected.expect(SintaxisException.class);
+    	_expected.expect(ManejadorIndicadoresException.class);
     	_expected.expectMessage("No existe el nombre de Cuenta");
         _parser.resolverFormula("cu.pepe/2",listaCuentas, listaIndicadores);
     }
     
     @Test
     public void ingresoUnaFormulaConIndicadorInexistente() {
-    	_expected.expect(SintaxisException.class);
+    	_expected.expect(ManejadorIndicadoresException.class);
     	_expected.expectMessage("No existe el nombre del Indicador");
         _parser.resolverFormula("in.pepe/2",listaCuentas, listaIndicadores);
     }

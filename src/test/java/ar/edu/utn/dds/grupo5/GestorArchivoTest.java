@@ -9,7 +9,7 @@ import ar.edu.utn.dds.grupo5.GestorArchivo;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 public class GestorArchivoTest {
-	
+
 	private RepoEmpresas repositorio;
 	private GestorArchivo gestor;
 	private String jsonValido;
@@ -18,9 +18,9 @@ public class GestorArchivoTest {
 	private File archivojsonInvalido;
 	private File archivojsonValido;
 	private java.net.URL resource;
-	
+
 	@Before
-	public void init() throws IOException{
+	public void init() throws IOException {
 		repositorio = new RepoEmpresas("Bancos");
 		gestor = GestorArchivo.getInstance();
 		jsonValido = "ArchivoValido.json";
@@ -31,26 +31,26 @@ public class GestorArchivoTest {
 		resource = classLoader.getResource(jsonInvalido);
 		archivojsonInvalido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 	}
-	
+
 	@After
-	public void limpiarRepo(){
+	public void limpiarRepo() {
 		repositorio.reset();
 	}
-	
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void siColocoUnArchivoConJsonValidoEntoncesSeCarganAlRepositorio(){
+	public void siColocoUnArchivoConJsonValidoEntoncesSeCarganAlRepositorio() {
 		gestor.cargarArchivo(repositorio, archivojsonValido);
 		Assert.assertTrue(repositorio.getListaEmpresa().size() > 0);
 	}
 
 	@Test
-	public void siColocoUnArchivoConJsonInvalidoEntoncesNoSeCarganEmpresasAlRepositorio(){
+	public void siColocoUnArchivoConJsonInvalidoEntoncesNoSeCarganEmpresasAlRepositorio() {
 		thrown.expect(RuntimeException.class);
 		thrown.expectMessage("Archivo invalido");
 		gestor.cargarArchivo(repositorio, archivojsonInvalido);
 	}
-	
+
 }

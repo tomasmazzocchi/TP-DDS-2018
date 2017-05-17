@@ -14,14 +14,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class GestorArchivo {
-	
+
 	private static GestorArchivo instance = null;
-	
-	private GestorArchivo(){		
+
+	private GestorArchivo() {
 	}
-	
-	public static GestorArchivo getInstance(){
-		if(instance == null){
+
+	public static GestorArchivo getInstance() {
+		if (instance == null) {
 			instance = new GestorArchivo();
 		}
 		return instance;
@@ -29,31 +29,27 @@ public class GestorArchivo {
 
 	public void cargarArchivo(RepoEmpresas repoEmpresas, File archivo) {
 
-        Gson gson = new Gson();
-        Empresa empresaJson;
-        
-        try (Reader reader = new FileReader(archivo))
-        {
-            List<Empresa> listaEmpresasJson = new ArrayList<Empresa>();	
-            
-            RepoEmpresas repoEmpresasJson = gson.fromJson(reader, RepoEmpresas.class);
-            listaEmpresasJson = repoEmpresasJson.getListaEmpresa();
-            
+		Gson gson = new Gson();
+		Empresa empresaJson;
 
-            Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
-            
-              while( iterador.hasNext() ) {
-                     empresaJson = (Empresa) iterador.next();
-                     repoEmpresas.agregarEmpresa(empresaJson);
-              }    
-              
-        }
-        catch (JsonSyntaxException f){
-        	throw new ArchivoException("Archivo invalido");
-        }
-        catch (IOException e) {
-        	throw new ArchivoException("Ups, hubo un problema al abrir el archivo");
-        }
-        
-    }
+		try (Reader reader = new FileReader(archivo)) {
+			List<Empresa> listaEmpresasJson = new ArrayList<Empresa>();
+
+			RepoEmpresas repoEmpresasJson = gson.fromJson(reader, RepoEmpresas.class);
+			listaEmpresasJson = repoEmpresasJson.getListaEmpresa();
+
+			Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
+
+			while (iterador.hasNext()) {
+				empresaJson = (Empresa) iterador.next();
+				repoEmpresas.agregarEmpresa(empresaJson);
+			}
+
+		} catch (JsonSyntaxException f) {
+			throw new ArchivoException("Archivo invalido");
+		} catch (IOException e) {
+			throw new ArchivoException("Ups, hubo un problema al abrir el archivo");
+		}
+
+	}
 }

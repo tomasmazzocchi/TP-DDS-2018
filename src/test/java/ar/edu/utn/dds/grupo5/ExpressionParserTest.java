@@ -62,8 +62,7 @@ public class ExpressionParserTest {
     public void ingresoFormulaConCaracterInvalido() {
         _expected.expect(IllegalArgumentException.class);
         _expected.expectMessage(containsString("Formula no Valida"));
-
-        assertThat(_parser.resolverFormula("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores), equalTo(42));
+       _parser.resolverFormula("(cu.EBIDTA # 2)",listaCuentas, listaIndicadores);
     }
     
     @Test
@@ -79,14 +78,14 @@ public class ExpressionParserTest {
     public void ingresoUnaFormulaConCuentaInexistente() {
     	_expected.expect(SintaxisException.class);
     	_expected.expectMessage("No existe el nombre de Cuenta");
-        assertThat(_parser.resolverFormula("cu.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
+        _parser.resolverFormula("cu.pepe/2",listaCuentas, listaIndicadores);
     }
     
     @Test
     public void ingresoUnaFormulaConIndicadorInexistente() {
     	_expected.expect(SintaxisException.class);
     	_expected.expectMessage("No existe el nombre del Indicador");
-        assertThat(_parser.resolverFormula("in.pepe/2",listaCuentas, listaIndicadores), equalTo(200));
+        _parser.resolverFormula("in.pepe/2",listaCuentas, listaIndicadores);
     }
 
 }

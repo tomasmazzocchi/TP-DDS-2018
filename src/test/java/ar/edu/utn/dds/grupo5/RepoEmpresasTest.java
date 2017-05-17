@@ -32,7 +32,7 @@ public class RepoEmpresasTest {
 	public void init() {
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentaFDS = new Cuenta("FDS", 500, LocalDate.now(), LocalDate.now());
-		indicadorMayorQue = new Indicador("MayorQue", "200"); /* Cambio 08 */
+		indicadorMayorQue = new Indicador("MayorQue", "200"); 
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);

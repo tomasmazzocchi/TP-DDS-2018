@@ -20,53 +20,23 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 public class ExpressionParser {
 	private final ANTLRErrorListener _listener = createErrorListener();
 
-	/**
-	 * Parses an expression into an integer result.
-	 * 
-	 * @param expression
-	 *            the expression to part
-	 * @return and integer result
-	 */
 	public int resolverFormula(final String expression, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
-		/*
-		 * Create a lexer that reads from our expression string
-		 */
+		
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 
-		/*
-		 * By default Antlr4 lexers / parsers have an attached error listener
-		 * that prints errors to stderr. I prefer them to throw an exception
-		 * instead so I implemented my own error listener which is attached
-		 * here. I also remove any existing error listeners.
-		 */
 		lexer.removeErrorListeners();
 		lexer.addErrorListener(_listener);
 
-		/*
-		 * The lexer reads characters and lexes them into token stream. The
-		 * tokens are consumed by the parser that then builds an Abstract Syntax
-		 * Tree.
-		 */
 		final CommonTokenStream tokens = new CommonTokenStream(lexer);
 		final SimpleParser parser = new SimpleParser(tokens);
 		parser.removeErrorListeners();
 		parser.addErrorListener(_listener);
 
-		/*
-		 * The ExprContext is the root of our Abstract Syntax Tree
-		 */
 		final ExprContext context = parser.expr();
 
-		/*
-		 * 'Visit' all the branches of the tree to get our expression result.
-		 */
 		return visit(context, listaCuentas, listaIndicadores);
 	}
 
-	/*
-	 * Visits the branches in the expression tree recursively until we hit a
-	 * leaf.
-	 */
 	private int visit(final ExprContext context, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
 		Cuenta cuenta;
 		Indicador indicador;
@@ -108,79 +78,43 @@ public class ExpressionParser {
 		}
 	}
 
-	// **validador
-	/**
-	 * Parses an expression into an integer result.
-	 * 
-	 * @param expression
-	 *            the expression to part
-	 * @return and integer result
-	 */
 	public boolean validarFormula(final String expression) {
-		/*
-		 * Create a lexer that reads from our expression string
-		 */
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 
-		/*
-		 * By default Antlr4 lexers / parsers have an attached error listener
-		 * that prints errors to stderr. I prefer them to throw an exception
-		 * instead so I implemented my own error listener which is attached
-		 * here. I also remove any existing error listeners.
-		 */
 		lexer.removeErrorListeners();
 		lexer.addErrorListener(_listener);
 
-		/*
-		 * The lexer reads characters and lexes them into token stream. The
-		 * tokens are consumed by the parser that then builds an Abstract Syntax
-		 * Tree.
-		 */
 		final CommonTokenStream tokens = new CommonTokenStream(lexer);
 		final SimpleParser parser = new SimpleParser(tokens);
 		parser.removeErrorListeners();
 		parser.addErrorListener(_listener);
 
-		/*
-		 * The ExprContext is the root of our Abstract Syntax Tree
-		 */
 		final ExprContext context = parser.expr();
 
-		/*
-		 * 'Visit' all the branches of the tree to get our expression result.
-		 */
 		return visitValidador(context);
 	}
 
-	/*
-	 * Visits the branches in the expression tree recursively until we hit a
-	 * leaf.
-	 */
 	private boolean visitValidador(final ExprContext context) {
 
-		if (context.number() != null) { // Just a number
+		if (context.number() != null) { 
 			return true;
 		} else if (context.string() != null) {
 			return true;
-		} else if (context.BR_CLOSE() != null) { // Expression between brackets
+		} else if (context.BR_CLOSE() != null) { 
 			return visitValidador(context.expr(0));
-		} else if (context.MULTIPLICAR() != null) { // Expression * expression
+		} else if (context.MULTIPLICAR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
-		} else if (context.DIVIDIR() != null) { // Expression / expression
+		} else if (context.DIVIDIR() != null) { 
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
-		} else if (context.SUMAR() != null) { // Expression + expression
+		} else if (context.SUMAR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
-		} else if (context.RESTAR() != null) { // Expression - expression
+		} else if (context.RESTAR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
 		} else {
 			throw new ArgumentoIlegalException();
 		}
 	}
 
-	/*
-	 * Helper method to create an ANTLRErrorListener. We're only interested in
-	 * the syntaxError method.
-	 */
 	private static ANTLRErrorListener createErrorListener() {
 		return new ANTLRErrorListener() {
 			public void syntaxError(final Recognizer<?, ?> arg0, final Object obj, final int line, final int position,

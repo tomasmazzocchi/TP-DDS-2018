@@ -10,7 +10,6 @@ public class Empresa {
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
-	// Getters and Setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -26,7 +25,6 @@ public class Empresa {
 	public List<Indicador> getListaIndicadores() {
 		return this.listaIndicadores;
 	}
-	// Constructors
 
 	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
 		this.nombre = nombre;
@@ -34,11 +32,9 @@ public class Empresa {
 		this.listaIndicadores = listaIndicadores;
 	}
 
-	// List Cuentas Validas entre dos Fechas
 
 	public static List<Cuenta> ListaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
-		// TODO Auto-generated method stub
-
+	
 		List<Cuenta> listaCuentas = empresa.getListaCuentas();
 
 		List<Cuenta> listaCuentasValidas = listaCuentas.stream() // convert list to stream

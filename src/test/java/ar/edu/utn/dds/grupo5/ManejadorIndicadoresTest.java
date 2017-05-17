@@ -1,6 +1,5 @@
 package ar.edu.utn.dds.grupo5;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,6 @@ import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
 
-/*
- * Test set that tests different expressions against their expected results.
- */
 public class ManejadorIndicadoresTest {
 	ExpressionParser _parser;
 	private RepoIndicadores repoIndicadores;

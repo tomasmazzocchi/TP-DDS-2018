@@ -10,7 +10,6 @@ public class RepoEmpresas {
 	private String nombre;
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	// Getters and Setters
 
 	public String getNombre() {
 		return nombre;
@@ -23,8 +22,6 @@ public class RepoEmpresas {
 	public List<Empresa> getListaEmpresa() {
 		return this.listaEmpresas;
 	}
-
-	// Functions and Procedures
 
 	public void reset() {
 		listaEmpresas.clear();

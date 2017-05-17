@@ -8,7 +8,6 @@ public class Cuenta {
 	private LocalDate fechaDesde;
 	private LocalDate fechaHasta;
 
-	// Getters and Setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,7 +40,6 @@ public class Cuenta {
 		this.fechaHasta = fechaHasta;
 	}
 
-	// Constructors
 	public Cuenta(String nombre, double valor, LocalDate fechaDesde, LocalDate fechaHasta) {
 		this.setNombre(nombre);
 		this.setValor(valor);

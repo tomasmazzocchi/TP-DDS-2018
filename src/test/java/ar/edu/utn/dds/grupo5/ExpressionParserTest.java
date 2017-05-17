@@ -19,9 +19,6 @@ import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
 
-/*
- * Test set that tests different expressions against their expected results.
- */
 public class ExpressionParserTest {
 	private ExpressionParser _parser;
 	private Cuenta cuentaEBIDTA;
@@ -36,8 +33,8 @@ public class ExpressionParserTest {
 		_parser = new ExpressionParser();
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentafds = new Cuenta("fds", 200, LocalDate.now(), LocalDate.now());
-		indicadorROE = new Indicador("ROE", "20"); /* Cambio 08 */
-		indicadorDIV = new Indicador("DIV", "cu.EBIDTA"); /* Cambio 08 */
+		indicadorROE = new Indicador("ROE", "20");
+		indicadorDIV = new Indicador("DIV", "cu.EBIDTA"); 
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);

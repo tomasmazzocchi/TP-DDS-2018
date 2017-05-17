@@ -10,7 +10,6 @@ public class RepoIndicadores {
 	private String nombre;
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
-	// Getters and Setters
 
 	public String getNombre() {
 		return nombre;
@@ -23,8 +22,6 @@ public class RepoIndicadores {
 	public List<Indicador> getListaIndicadores() {
 		return this.listaIndicadores;
 	}
-
-	// Functions and Procedures
 
 	public void reset() {
 		listaIndicadores.clear();

@@ -1,7 +1,9 @@
 package ar.edu.utn.dds.GUI;
 
 import javafx.scene.control.Button;
+
 import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseDragEvent;
-import java.awt.*;
 
 public class PantallaPrincipalController {	
 	
 	@FXML private Button btnCreacion;
 	@FXML private Button btnExistente;
+	@FXML private Button btnSalir;
 	
 	@FXML public void salir() {
 		Platform.exit();

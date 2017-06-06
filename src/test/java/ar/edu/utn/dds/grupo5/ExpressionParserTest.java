@@ -25,6 +25,7 @@ public class ExpressionParserTest {
 	private Cuenta cuentafds;
 	private Indicador indicadorROE;
 	private Indicador indicadorDIV;
+	private Indicador indicadorPOR;
 	private List<Cuenta> listaCuentas;
 	private List<Indicador> listaIndicadores;
 
@@ -34,13 +35,15 @@ public class ExpressionParserTest {
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentafds = new Cuenta("fds", 200, LocalDate.now(), LocalDate.now());
 		indicadorROE = new Indicador("ROE", "20");
-		indicadorDIV = new Indicador("DIV", "cu.EBIDTA"); 
+		indicadorDIV = new Indicador("DIV", "cu.EBIDTA");
+		indicadorPOR = new Indicador("POR", "in.DIV");
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);
 		listaCuentas.add(cuentafds);
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
+		listaIndicadores.add(indicadorPOR);
 	}
 
 	@Rule
@@ -85,6 +88,10 @@ public class ExpressionParserTest {
 		thrown.expect(ManejadorIndicadoresException.class);
 		thrown.expectMessage("No existe el nombre del Indicador");
 		_parser.resolverFormula("in.pepe/2", listaCuentas, listaIndicadores);
+	}
+	@Test
+	public void ingresoUnaFormulaConIndicadorExistenteQueTieneComoFormulaOtroIndicador() {
+		assertThat(_parser.resolverFormula("in.POR*2", listaCuentas, listaIndicadores), equalTo(400));
 	}
 
 }

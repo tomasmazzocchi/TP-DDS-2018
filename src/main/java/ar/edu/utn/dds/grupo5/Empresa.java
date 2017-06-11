@@ -62,7 +62,7 @@ public class Empresa {
 		}
 	}
 	
-	public Cuenta buscarCuenta(String nombre/*, List<Cuenta> listaCuentas*/) {
+	public Cuenta buscarCuenta(String nombre) {
 		List<Cuenta> lista = this.listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {

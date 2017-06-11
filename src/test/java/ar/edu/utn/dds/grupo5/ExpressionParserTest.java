@@ -24,6 +24,7 @@ public class ExpressionParserTest {
 	private ExpressionParser _parser;
 	private Cuenta cuentaEBIDTA;
 	private Cuenta cuentafds;
+	private Empresa empresa;
 	private Indicador indicadorROE;
 	private Indicador indicadorDIV;
 	private Indicador indicadorPOR;
@@ -45,6 +46,7 @@ public class ExpressionParserTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		listaIndicadores.add(indicadorPOR);
+		empresa = new Empresa("Facebook",listaCuentas,listaIndicadores);
 
 	}
 
@@ -53,47 +55,47 @@ public class ExpressionParserTest {
 
 	@Test
 	public void ingresoUnaFormulaConUnaCuentaExistente() {
-		assertThat(_parser.resolverFormula("(cu.EBIDTA+1)*2", listaCuentas, listaIndicadores), equalTo(402));
+		assertThat(_parser.resolverFormula("(cu.EBIDTA+1)*2", empresa), equalTo(402));
 	}
 
 	@Test
 	public void ingresoFormulaConDosCuentasExistentes() {
-		assertThat(_parser.resolverFormula("(cu.EBIDTA+cu.fds)", listaCuentas, listaIndicadores), equalTo(400));
+		assertThat(_parser.resolverFormula("(cu.EBIDTA+cu.fds)", empresa), equalTo(400));
 	}
 
 	@Test
 	public void ingresoFormulaConCaracterInvalido() {
 		thrown.expect(ArgumentoIlegalException.class);
 		thrown.expectMessage(containsString("Formula no Valida"));
-		_parser.resolverFormula("(cu.EBIDTA # 2)", listaCuentas, listaIndicadores);
+		_parser.resolverFormula("(cu.EBIDTA # 2)", empresa);
 	}
 
 	@Test
 	public void ingresoUnaFormulaConUnIndicador() {
-		assertThat(_parser.resolverFormula("(in.ROE+1)*2", listaCuentas, listaIndicadores), equalTo(42));
+		assertThat(_parser.resolverFormula("(in.ROE+1)*2", empresa), equalTo(42));
 	}
 
 	@Test
 	public void ingresoUnaFormulaConUnIndicadoryCuentas() {
-		assertThat(_parser.resolverFormula("(in.DIV+cu.EBIDTA)/2", listaCuentas, listaIndicadores), equalTo(200));
+		assertThat(_parser.resolverFormula("(in.DIV+cu.EBIDTA)/2", empresa), equalTo(200));
 	}
 
 	@Test
 	public void ingresoUnaFormulaConCuentaInexistente() {
 		thrown.expect(ExpressionParserException.class);
 		thrown.expectMessage("No existe el nombre de Cuenta");
-		_parser.resolverFormula("cu.pepe/2", listaCuentas, listaIndicadores);
+		_parser.resolverFormula("cu.pepe/2", empresa);
 	}
 
 	@Test
 	public void ingresoUnaFormulaConIndicadorInexistente() {
 		thrown.expect(ManejadorIndicadoresException.class);
 		thrown.expectMessage("No existe el nombre del Indicador");
-		_parser.resolverFormula("in.pepe/2", listaCuentas, listaIndicadores);
+		_parser.resolverFormula("in.pepe/2", empresa);
 	}
 	@Test
 	public void ingresoUnaFormulaConIndicadorExistenteQueTieneComoFormulaOtroIndicador() {
-		assertThat(_parser.resolverFormula("in.POR*2", listaCuentas, listaIndicadores), equalTo(400));
+		assertThat(_parser.resolverFormula("in.POR*2", empresa), equalTo(400));
 	}
 
 }

@@ -1,8 +1,5 @@
 package ar.edu.utn.dds.grupo5;
 
-import java.time.LocalDate;
-import java.util.List;
-
 public class ManejadorIndicadores {
 
 	private static ManejadorIndicadores instance = null;
@@ -22,7 +19,7 @@ public class ManejadorIndicadores {
 
 	public void guardarIndicadorEnEmpresa(Empresa empresa, String indicadorNombre, String indicadorFormula) {
 		
-		parser.resolverFormula(indicadorFormula, empresa.getListaCuentas(), empresa.getListaIndicadores());
+		parser.resolverFormula(indicadorFormula, empresa);
 		indicador = new Indicador(indicadorNombre, indicadorFormula);
 		empresa.getListaIndicadores().add(indicador);
 
@@ -36,15 +33,4 @@ public class ManejadorIndicadores {
 		}
 
 	}
-
-	public int calcularIndicadorEntreFechas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta,Indicador indicador) {
-		
-		List<Cuenta> listaCuentasPorFecha = empresa.cuentasValidasPorFecha(fechaDesde, fechaHasta);
-		return (parser.resolverFormula(indicador.getFormula(), listaCuentasPorFecha, empresa.getListaIndicadores()));
-	}
-
-	
-
-
-
 }

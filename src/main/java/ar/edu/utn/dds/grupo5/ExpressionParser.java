@@ -1,8 +1,6 @@
 package ar.edu.utn.dds.grupo5;
 
 import java.util.BitSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -14,7 +12,6 @@ import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 
 import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
-import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
 import ar.edu.utn.dds.grupo5.SimpleLexer;
 import ar.edu.utn.dds.grupo5.SimpleParser;
 import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
@@ -22,7 +19,7 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 public class ExpressionParser {
 	private final ANTLRErrorListener _listener = createErrorListener();
 
-	public int resolverFormula(final String expression, /*Empresa empresa*/ List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
+	public int resolverFormula(final String expression,Empresa empresa) {
 		
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 
@@ -36,10 +33,10 @@ public class ExpressionParser {
 
 		final ExprContext context = parser.expr();
 
-		return visit(context, /*empresa*/ listaCuentas, listaIndicadores);
+		return visit(context,empresa);
 	}
 
-	private int visit(final ExprContext context, /*Empresa empresa*/ List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
+	private int visit(final ExprContext context,Empresa empresa) {
 		Cuenta cuenta;
 		Indicador indicador;
 		String id;
@@ -54,41 +51,33 @@ public class ExpressionParser {
 			id = cadena.substring(0, 2); 
 			nombre = cadena.substring(3, cadena.length()); 
 			if (id.equalsIgnoreCase("cu")) {
-				cuenta = buscarCuenta(nombre,listaCuentas);
+				cuenta = empresa.buscarCuenta(nombre);
 				return (int) (cuenta.getValor()); 
 			} else {
 				_parser = new ExpressionParser();
-				indicador = RepoIndicadores.buscarIndicador(nombre,listaIndicadores);
-				return (_parser.resolverFormula(indicador.getFormula(), listaCuentas, listaIndicadores));
+				indicador = RepoIndicadores.buscarIndicador(nombre,empresa.getListaIndicadores());
+				return (_parser.resolverFormula(indicador.getFormula(),empresa));
 			}
 		} else if (context.BR_CLOSE() != null) { 
-			return visit(context.expr(0), listaCuentas, listaIndicadores);
+			return visit(context.expr(0), empresa);
 		} else if (context.MULTIPLICAR() != null) { 
-			return visit(context.expr(0), listaCuentas, listaIndicadores)
-					* visit(context.expr(1), listaCuentas, listaIndicadores);
+			return visit(context.expr(0), empresa)
+					* visit(context.expr(1), empresa);
 		} else if (context.DIVIDIR() != null) { 
-			return visit(context.expr(0),listaCuentas, listaIndicadores)
-					/ visit(context.expr(1), listaCuentas, listaIndicadores);
+			return visit(context.expr(0),empresa)
+					/ visit(context.expr(1), empresa);
 		} else if (context.SUMAR() != null) { 
-			return visit(context.expr(0), listaCuentas, listaIndicadores)
-					+ visit(context.expr(1), listaCuentas, listaIndicadores);
+			return visit(context.expr(0), empresa)
+					+ visit(context.expr(1), empresa);
 		} else if (context.RESTAR() != null) { 
-			return visit(context.expr(0), listaCuentas, listaIndicadores)
-					- visit(context.expr(1), listaCuentas, listaIndicadores);
+			return visit(context.expr(0), empresa)
+					- visit(context.expr(1), empresa);
 		} else {
 			throw new ArgumentoIlegalException();
 		}
 	}
 	
-	public Cuenta buscarCuenta(String nombre, List<Cuenta> listaCuentas) {
-		List<Cuenta> lista = listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
-				.collect(Collectors.toList());
-		if (lista.isEmpty()) {
-			throw new ExpressionParserException("No existe el nombre de Cuenta");
-		} else {
-			return (lista.get(0));
-		}
-	}
+
 
 	public boolean validarFormula(final String expression) {
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));

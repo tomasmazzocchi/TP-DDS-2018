@@ -22,7 +22,6 @@ import ar.edu.utn.dds.grupo5.Indicador;
 
 public class ExpressionParserTest {
 	private ExpressionParser _parser;
-	private Empresa empresa;
 	private Cuenta cuentaEBIDTA;
 	private Cuenta cuentafds;
 	private Indicador indicadorROE;
@@ -46,7 +45,7 @@ public class ExpressionParserTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		listaIndicadores.add(indicadorPOR);
-		empresa = new Empresa("empresa1", listaCuentas, listaIndicadores);
+
 	}
 
 	@Rule

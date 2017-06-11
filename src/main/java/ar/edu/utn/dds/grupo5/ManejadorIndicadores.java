@@ -2,9 +2,6 @@ package ar.edu.utn.dds.grupo5;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 
 public class ManejadorIndicadores {
 
@@ -47,23 +44,7 @@ public class ManejadorIndicadores {
 	}
 
 	
-	public Boolean indicadorExistente(List<Indicador> listaIndicadores, String indicadorNombre) {
 
-		List<Indicador> lista = listaIndicadores.stream()
-				.filter(indicador -> indicadorNombre.equals(indicador.getNombre())).collect(Collectors.toList());
 
-		return !lista.isEmpty();
 
-	}
-
-	public Indicador buscarIndicador(String nombre,List<Indicador> listaIndicadores) {
-		
-		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
-				.collect(Collectors.toList());
-		if (lista.isEmpty()) {
-			throw new ManejadorIndicadoresException("No existe el nombre del Indicador");
-		} else {
-			return (lista.get(0));
-		}
-	}
 }

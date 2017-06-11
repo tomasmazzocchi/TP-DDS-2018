@@ -63,7 +63,7 @@ public class ManejadorIndicadoresTest {
 	@Test
 	public void siGuardoIndicadorEnUnaEmpresaConFormulaCorrectaEntoncesSeGuarda(){
 		manejadorIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(cu.EBIDTA+1)*2");
-		Indicador ind = manejadorIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
+		Indicador ind = RepoIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
 		Assert.assertEquals(ind.getNombre(),"indicador1");
 	}
 	@Test

@@ -15,7 +15,6 @@ import org.antlr.v4.runtime.dfa.DFA;
 
 import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
-import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 import ar.edu.utn.dds.grupo5.SimpleLexer;
 import ar.edu.utn.dds.grupo5.SimpleParser;
 import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
@@ -59,7 +58,7 @@ public class ExpressionParser {
 				return (int) (cuenta.getValor()); 
 			} else {
 				_parser = new ExpressionParser();
-				indicador = ManejadorIndicadores.getInstance().buscarIndicador(nombre,listaIndicadores);
+				indicador = RepoIndicadores.buscarIndicador(nombre,listaIndicadores);
 				return (_parser.resolverFormula(indicador.getFormula(), listaCuentas, listaIndicadores));
 			}
 		} else if (context.BR_CLOSE() != null) { 

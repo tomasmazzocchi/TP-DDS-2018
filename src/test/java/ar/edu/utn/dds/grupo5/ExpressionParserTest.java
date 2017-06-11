@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
+import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
 import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
@@ -21,6 +22,7 @@ import ar.edu.utn.dds.grupo5.Indicador;
 
 public class ExpressionParserTest {
 	private ExpressionParser _parser;
+	private Empresa empresa;
 	private Cuenta cuentaEBIDTA;
 	private Cuenta cuentafds;
 	private Indicador indicadorROE;
@@ -44,6 +46,7 @@ public class ExpressionParserTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		listaIndicadores.add(indicadorPOR);
+		empresa = new Empresa("empresa1", listaCuentas, listaIndicadores);
 	}
 
 	@Rule
@@ -78,7 +81,7 @@ public class ExpressionParserTest {
 
 	@Test
 	public void ingresoUnaFormulaConCuentaInexistente() {
-		thrown.expect(ManejadorIndicadoresException.class);
+		thrown.expect(ExpressionParserException.class);
 		thrown.expectMessage("No existe el nombre de Cuenta");
 		_parser.resolverFormula("cu.pepe/2", listaCuentas, listaIndicadores);
 	}

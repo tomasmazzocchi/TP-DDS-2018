@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
+import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
+
 public class Empresa {
 	private String nombre;
 	private List<Cuenta> listaCuentas = new ArrayList<>();
@@ -33,7 +36,7 @@ public class Empresa {
 	}
 
 
-	public static List<Cuenta> ListaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
+	public static List<Cuenta> listaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
 	
 		List<Cuenta> listaCuentas = empresa.getListaCuentas();
 
@@ -47,4 +50,25 @@ public class Empresa {
 		return listaCuentasValidas;
 	}
 
+	public List<Cuenta> cuentasValidasPorFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+
+		List<Cuenta> listaCuentasValidasPorFecha = this.listaCuentas.stream().filter(
+				p -> p.getFechaDesde().compareTo(fechaDesde) >= 0 && p.getFechaHasta().compareTo(fechaHasta) <= 0)
+				.collect(Collectors.toList());
+		if (listaCuentasValidasPorFecha.isEmpty()) {
+			throw new ManejadorIndicadoresException("No existen Cuentas para ese Rango de Fechas");
+		} else {
+			return (listaCuentasValidasPorFecha);
+		}
+	}
+	
+	public Cuenta buscarCuenta(String nombre/*, List<Cuenta> listaCuentas*/) {
+		List<Cuenta> lista = this.listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
+				.collect(Collectors.toList());
+		if (lista.isEmpty()) {
+			throw new ExpressionParserException("No existe el nombre de Cuenta");
+		} else {
+			return (lista.get(0));
+		}
+	}
 }

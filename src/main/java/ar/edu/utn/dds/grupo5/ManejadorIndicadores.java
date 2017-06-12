@@ -1,6 +1,6 @@
 package ar.edu.utn.dds.grupo5;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class ManejadorIndicadores {

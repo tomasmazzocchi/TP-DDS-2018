@@ -1,5 +1,8 @@
 package ar.edu.utn.dds.grupo5;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManejadorIndicadores {
 
 	private static ManejadorIndicadores instance = null;
@@ -29,8 +32,14 @@ public class ManejadorIndicadores {
 		
 		if (parser.validarFormula(indicadorFormula)) {
 			indicador = new Indicador(indicadorNombre, indicadorFormula);
-			repoIndicadores.getListaIndicadores().add(indicador);
+			repoIndicadores.agregarIndicador(indicador);
 		}
 
+	}
+	public void guardarIndicadores(RepoIndicadores repoIndicadores,List<String> nombres, List<String> formulas){
+		int count  = nombres.size();
+		for (int i=0; i<count ; i++) {
+		     this.guardarIndicadorEnRepo(repoIndicadores, nombres.get(i),formulas.get(i)); 
+		}
 	}
 }

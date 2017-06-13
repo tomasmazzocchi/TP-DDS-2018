@@ -29,11 +29,11 @@ public class Empresa {
 		this.nombre = nombre;
 	}
 	
-	public LocalDate getAnioCreacion() {
+	public LocalDate getAnioFundacion() {
 		return anioFundacion;
 	}
 
-	public void setAnioCreacion(LocalDate anioFundacion) {
+	public void setAnioFundacion(LocalDate anioFundacion) {
 		this.anioFundacion = anioFundacion;
 	}
 

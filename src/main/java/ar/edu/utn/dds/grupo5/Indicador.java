@@ -24,5 +24,16 @@ public class Indicador {
 	public void setFormula(String formula) {
 		this.formula = formula;
 	}
+	
+	public int calcularIndicador(Empresa unaEmpresa) {
+	
+		ExpressionParser parser;
+		parser = new ExpressionParser();
+		
+		//Hay QUE VER QUE PASARIA SI LA EMPRESA NO TIENE ESE INDICADOR
+		
+		return   parser.resolverFormula(this.formula, unaEmpresa);
+
+	}
 
 }

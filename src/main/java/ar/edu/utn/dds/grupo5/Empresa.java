@@ -12,11 +12,13 @@ public class Empresa {
 	private String nombre;
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	private List<Indicador> listaIndicadores = new ArrayList<>();
+	private LocalDate anioCreacion;
 
-	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores) {
+	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores, LocalDate anioCreacion) {
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
 		this.listaIndicadores = listaIndicadores;
+		this.anioCreacion = anioCreacion;
 	}
 	
 	public String getNombre() {
@@ -25,6 +27,14 @@ public class Empresa {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public LocalDate getAnioCreacion() {
+		return anioCreacion;
+	}
+
+	public void setAnioCreacion(LocalDate anioCreacion) {
+		this.anioCreacion = anioCreacion;
 	}
 
 	public List<Cuenta> getListaCuentas() {

@@ -42,7 +42,7 @@ public class ManejadorIndicadoresTest {
 		listaCuentas.add(cuentafds);
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
-		empresaTest = new Empresa("HSBC",listaCuentas,listaIndicadores);
+		empresaTest = new Empresa("HSBC",listaCuentas,listaIndicadores,LocalDate.now());
 	}
 
 	@Rule

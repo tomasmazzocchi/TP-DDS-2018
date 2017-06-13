@@ -38,9 +38,9 @@ public class RepoEmpresasTest {
 		listaCuentas.add(cuentaEBIDTA);
 		listaCuentas.add(cuentaFDS);
 		listaIndicadores.add(indicadorMayorQue);
-		empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores);
-		empresa2 = new Empresa("Google", listaCuentas, listaIndicadores);
-		empresa3 = new Empresa("Apple", listaCuentas, listaIndicadores);
+		empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores,LocalDate.now());
+		empresa2 = new Empresa("Google", listaCuentas, listaIndicadores,LocalDate.now());
+		empresa3 = new Empresa("Apple", listaCuentas, listaIndicadores,LocalDate.now());
 		repoEmpresas = new RepoEmpresas("repoG5");
 	}
 

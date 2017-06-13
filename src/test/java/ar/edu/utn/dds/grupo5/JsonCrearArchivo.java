@@ -27,8 +27,8 @@ public class JsonCrearArchivo {
 		Cuenta cuenta2 = new Cuenta(nombre_cuenta2, 100, LocalDate.parse("2017-01-01"), LocalDate.parse("2017-02-01"));
 		listaCuentas.add(cuenta1);
 		listaCuentas.add(cuenta2);
-		Empresa empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores);
-		Empresa empresa2 = new Empresa("Google", listaCuentas, listaIndicadores);
+		Empresa empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores, LocalDate.now());
+		Empresa empresa2 = new Empresa("Google", listaCuentas, listaIndicadores, LocalDate.now());
 		listaEmpresas.add(empresa1);
 		listaEmpresas.add(empresa2);
 

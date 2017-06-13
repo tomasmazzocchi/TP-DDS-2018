@@ -46,7 +46,7 @@ public class ExpressionParserTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		listaIndicadores.add(indicadorPOR);
-		empresa = new Empresa("Facebook",listaCuentas,listaIndicadores);
+		empresa = new Empresa("Facebook",listaCuentas,listaIndicadores, LocalDate.now());
 
 	}
 

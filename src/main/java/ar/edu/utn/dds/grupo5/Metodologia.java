@@ -10,7 +10,8 @@ public class Metodologia {
 	public Metodologia(List <Condicion> condiciones){
 		this.condiciones = condiciones;
 	}
-	public void aplicarCondiciones(List<Empresa> empresas){
+	public HashMap<String,List<Empresa>> aplicarCondiciones(List<Empresa> empresas){
 		condiciones.stream().forEach(condicion-> resultados.put(condicion.getNombre() ,condicion.aplicarCondicion(empresas)));
+		return resultados;
 	}
 }

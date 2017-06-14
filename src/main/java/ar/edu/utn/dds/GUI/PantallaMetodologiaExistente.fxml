@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Button fx:id="btnVolver" layoutX="253.0" layoutY="342.0" mnemonicParsing="false" onAction="#volver" prefHeight="38.0" prefWidth="95.0" text="Volver" />
-      <ComboBox fx:id="comboBox" layoutX="187.0" layoutY="78.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBox" layoutX="187.0" layoutY="78.0" prefWidth="150.0" />  
       <TableView layoutX="59.0" layoutY="124.0" prefHeight="198.0" prefWidth="484.0">
         <columns>
           <TableColumn prefWidth="55.0" text="Ranking" />
@@ -25,7 +25,7 @@
           <TableColumn prefWidth="107.0" text="MinimizarDeuda" />
           <TableColumn minWidth="8.0" prefWidth="107.0" text="MargenesConsist." />
         </columns>
-      </TableView>
-      <Button fx:id="btnAplicar" layoutX="354.0" layoutY="78.0" mnemonicParsing="false" text="Aplicar" />
+      </TableView>   
+      <Button fx:id="btnAplicar" layoutX="354.0" layoutY="78.0" mnemonicParsing="false" text="Aplicar" onAction="#aplicarMetodologia" />
    </children>
 </Pane>

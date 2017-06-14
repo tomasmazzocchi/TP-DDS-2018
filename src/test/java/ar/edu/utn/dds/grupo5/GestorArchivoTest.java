@@ -5,6 +5,7 @@ import org.junit.rules.ExpectedException;
 import java.io.*;
 import java.net.URLDecoder;
 
+import ar.edu.utn.dds.ExceptionHandler.ArchivoException;
 import ar.edu.utn.dds.grupo5.GestorArchivo;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
@@ -48,7 +49,7 @@ public class GestorArchivoTest {
 
 	@Test
 	public void siColocoUnArchivoConJsonInvalidoEntoncesNoSeCarganEmpresasAlRepositorio() {
-		thrown.expect(RuntimeException.class);
+		thrown.expect(ArchivoException.class);
 		thrown.expectMessage("Archivo invalido");
 		gestor.cargarArchivo(repositorio, archivojsonInvalido);
 	}

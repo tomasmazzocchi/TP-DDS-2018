@@ -44,6 +44,10 @@ public class Empresa {
 	public List<Indicador> getListaIndicadores() {
 		return this.listaIndicadores;
 	}
+	
+	public boolean esLongeva(LocalDate fechaDesde){
+		return this.anioFundacion.compareTo(fechaDesde) <= 0;
+	}
 
 
 	public static List<Cuenta> listaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {

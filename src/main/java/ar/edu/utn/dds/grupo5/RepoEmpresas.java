@@ -11,6 +11,10 @@ public class RepoEmpresas {
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 
+	public RepoEmpresas(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -35,9 +39,6 @@ public class RepoEmpresas {
 		}
 	}
 
-	public RepoEmpresas(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public void quitarEmpresa(Empresa unaEmpresa) {
 		if (listaEmpresas.contains(unaEmpresa)) {

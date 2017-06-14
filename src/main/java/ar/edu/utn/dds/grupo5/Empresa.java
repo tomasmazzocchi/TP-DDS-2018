@@ -45,6 +45,10 @@ public class Empresa {
 		return this.listaIndicadores;
 	}
 	
+	public void setCuenta(Cuenta unaCuenta){
+		this.listaCuentas.add(unaCuenta);
+	}
+	
 	public boolean esLongeva(LocalDate fechaDesde){
 		return this.anioFundacion.compareTo(fechaDesde) <= 0;
 	}

@@ -15,32 +15,35 @@ import ar.edu.utn.dds.grupo5.Indicador;
 
 
 public class MetodologiasTest {
-	private List<Cuenta> listaCuentas;
+	private List<Cuenta> listaCuentas1;
+	private List<Cuenta> listaCuentas2;
 	private List<Indicador> listaIndicadores;
 	private Empresa empresa1;
 	private Empresa empresa2;
-	private Empresa empresa3;
-	private Empresa empresa4;
-	private Empresa empresa5;
 	private RepoEmpresas repoEmpresas;
 	private Longevidad unaLongevidad;
+	private Indicador indicadorROE;
+	private MaximizarIndicador maxIndicador;
+	private Cuenta cuentaEBIDTA1;
+	private Cuenta cuentaEBIDTA2;
 
 	@Before
 	public void setup() {
-		listaCuentas = new ArrayList<>();
+		listaCuentas1 = new ArrayList<>();
+		listaCuentas2 = new ArrayList<>();
+		cuentaEBIDTA1 = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
+		cuentaEBIDTA2 = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
+		listaCuentas1.add(cuentaEBIDTA1);
+		listaCuentas2.add(cuentaEBIDTA2);
 		listaIndicadores = new ArrayList<>();
-		empresa1 = new Empresa("Facebook",listaCuentas,listaIndicadores, LocalDate.now().minusYears(11));
-		empresa2 = new Empresa("Google",listaCuentas,listaIndicadores, LocalDate.now().minusYears(8));
-		empresa3 = new Empresa("Microsoft",listaCuentas,listaIndicadores, LocalDate.now().minusYears(10));
-		empresa4 = new Empresa("Samsung",listaCuentas,listaIndicadores, LocalDate.now().minusYears(9));
-		empresa5 = new Empresa("Philco",listaCuentas,listaIndicadores, LocalDate.now().minusYears(12));
+		empresa1 = new Empresa("Facebook",listaCuentas1,listaIndicadores, LocalDate.now().minusYears(11));
+		empresa2 = new Empresa("Google",listaCuentas2,listaIndicadores, LocalDate.now().minusYears(8));		
+		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
+		unaLongevidad = new Longevidad(10);
+		maxIndicador = new MaximizarIndicador(indicadorROE);
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(empresa1);
 		repoEmpresas.agregarEmpresa(empresa2);
-		repoEmpresas.agregarEmpresa(empresa3);
-		repoEmpresas.agregarEmpresa(empresa4);
-		repoEmpresas.agregarEmpresa(empresa5);
-		unaLongevidad = new Longevidad(10);
 	}
 
 	@Rule
@@ -49,9 +52,12 @@ public class MetodologiasTest {
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorLongevidad() {
 		unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa());
-		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0),empresa5);
+		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0),empresa1);
 	}
-
-	
+	@Test
+	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorROE(){
+		maxIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
+		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa2);
+	}	
 
 }

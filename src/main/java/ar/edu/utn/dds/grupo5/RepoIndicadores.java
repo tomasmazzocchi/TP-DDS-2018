@@ -11,9 +11,11 @@ import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
 public class RepoIndicadores {
 	private String nombre;
 	private List<Indicador> listaIndicadores = new ArrayList<>();
+	private ExpressionParser parser;
 
 	public RepoIndicadores(String nombre) {
 		this.nombre = nombre;
+		this.parser = new ExpressionParser();
 	}
 
 	public String getNombre() {
@@ -64,4 +66,26 @@ public class RepoIndicadores {
 		}
 	}
 	
+	
+	public void guardarIndicadorEnEmpresa(Empresa empresa, String indicadorNombre, String indicadorFormula) {
+		parser.resolverFormula(indicadorFormula, empresa);
+		Indicador indicador = new Indicador(indicadorNombre, indicadorFormula);
+		empresa.agregarIndicadorAEmpresa(indicador);
+
+	}
+
+	public void guardarIndicadorEnRepo(String indicadorNombre,String indicadorFormula) {
+		
+		if (parser.validarFormula(indicadorFormula)) {
+			Indicador indicador = new Indicador(indicadorNombre, indicadorFormula);
+			agregarIndicador(indicador);
+		}
+
+	}
+	public void guardarIndicadores(List<String> nombres, List<String> formulas){
+		int count  = nombres.size();
+		for (int i=0; i<count ; i++) {
+		     this.guardarIndicadorEnRepo(nombres.get(i),formulas.get(i)); 
+		}
+	}
 }

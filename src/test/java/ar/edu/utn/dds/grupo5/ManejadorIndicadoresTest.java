@@ -16,9 +16,8 @@ import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
 
 public class ManejadorIndicadoresTest {
-	ExpressionParser _parser;
+	ExpressionParser parser;
 	private RepoIndicadores repoIndicadores;
-	private ManejadorIndicadores manejadorIndicadores;
 	private Cuenta cuentaEBIDTA;
 	private Cuenta cuentafds;
 	private Indicador indicadorROE;
@@ -30,8 +29,7 @@ public class ManejadorIndicadoresTest {
 	@Before
 	public void setup() {
 		repoIndicadores = new RepoIndicadores("repoIndiG5");
-		manejadorIndicadores = ManejadorIndicadores.getInstance();
-		_parser = new ExpressionParser();
+		parser = new ExpressionParser();
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentafds = new Cuenta("fds", 200, LocalDate.now(), LocalDate.now());
 		indicadorROE = new Indicador("ROE", "20"); 
@@ -50,7 +48,7 @@ public class ManejadorIndicadoresTest {
 
 	@Test
 	public void siGuardoIndicadorEnRepoConFormulaCorrecta() {
-		manejadorIndicadores.guardarIndicadorEnRepo(repoIndicadores, "indicador1", "(cu.EBIDTA+1)*2");
+		repoIndicadores.guardarIndicadorEnRepo("indicador1", "(cu.EBIDTA+1)*2");
 		Assert.assertEquals(1, (repoIndicadores.getListaIndicadores().size()));
 	}
 
@@ -58,11 +56,11 @@ public class ManejadorIndicadoresTest {
 	public void siGuardoIndicadorEnRepoConFormulaIncorrecta() {
 		thrown.expect(ArgumentoIlegalException.class);
 		thrown.expectMessage("Formula no Valida");
-		manejadorIndicadores.guardarIndicadorEnRepo(repoIndicadores, "indicador1", "(pepe+1)*2");
+		repoIndicadores.guardarIndicadorEnRepo("indicador1", "(pepe+1)*2");
 	}
 	@Test
 	public void siGuardoIndicadorEnUnaEmpresaConFormulaCorrectaEntoncesSeGuarda(){
-		manejadorIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(cu.EBIDTA+1)*2");
+		repoIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(cu.EBIDTA+1)*2");
 		Indicador ind = RepoIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
 		Assert.assertEquals(ind.getNombre(),"indicador1");
 	}
@@ -70,6 +68,6 @@ public class ManejadorIndicadoresTest {
 	public void siGuardoIndicadorEnUnaEmpresaConFormulaIncorrectaEntoncesNoSeGuarda(){
 		thrown.expect(ArgumentoIlegalException.class);
 		thrown.expectMessage("Formula no Valida");
-		manejadorIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(pepe+1)*2");
+		repoIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(pepe+1)*2");
 	}
 }

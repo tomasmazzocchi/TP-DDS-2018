@@ -89,4 +89,9 @@ public class Empresa {
 			return (lista.get(0));
 		}
 	}
+
+	public void agregarIndicadorAEmpresa(Indicador indicador) {
+		this.getListaIndicadores().add(indicador);
+		
+	}
 }

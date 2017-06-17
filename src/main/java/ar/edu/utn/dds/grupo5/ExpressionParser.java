@@ -42,7 +42,7 @@ public class ExpressionParser {
 		String id;
 		String nombre;
 		String cadena;
-		ExpressionParser _parser;
+		ExpressionParser parser;
 
 		if (context.number() != null) { 
 			return Integer.parseInt(context.number().getText());
@@ -54,9 +54,9 @@ public class ExpressionParser {
 				cuenta = empresa.buscarCuenta(nombre);
 				return (int) (cuenta.getValor()); 
 			} else {
-				_parser = new ExpressionParser();
+				parser = new ExpressionParser();
 				indicador = RepoIndicadores.buscarIndicador(nombre,empresa.getListaIndicadores());
-				return (_parser.resolverFormula(indicador.getFormula(),empresa));
+				return (parser.resolverFormula(indicador.getFormula(),empresa));
 			}
 		} else if (context.BR_CLOSE() != null) { 
 			return visit(context.expr(0), empresa);

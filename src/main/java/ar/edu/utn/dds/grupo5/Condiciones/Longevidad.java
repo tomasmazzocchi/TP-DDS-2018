@@ -1,10 +1,13 @@
-package ar.edu.utn.dds.grupo5;
+package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ar.edu.utn.dds.grupo5.Condicion;
+import ar.edu.utn.dds.grupo5.Empresa;
 
 public class Longevidad implements Condicion {
 	

@@ -1,11 +1,14 @@
-package ar.edu.utn.dds.grupo5;
+package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IndicadorCreciente implements Condicion {
+import ar.edu.utn.dds.grupo5.Condicion;
+import ar.edu.utn.dds.grupo5.Empresa;
+
+public class MargenCreciente implements Condicion {
 
 	private String nombre;
 	List<Empresa> listaEmpresa;
@@ -14,7 +17,7 @@ public class IndicadorCreciente implements Condicion {
 		 return this.nombre;
 	 }
 	
-	public IndicadorCreciente() {
+	public MargenCreciente() {
 	}
 
 	@Override

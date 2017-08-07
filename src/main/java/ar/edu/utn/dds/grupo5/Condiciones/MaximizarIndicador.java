@@ -1,19 +1,23 @@
-package ar.edu.utn.dds.grupo5;
+package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MinimizarIndicador {
+import ar.edu.utn.dds.grupo5.Condicion;
+import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
+
+public class MaximizarIndicador implements Condicion {
 
 	private Indicador indicador;
 	List<Empresa> listaEmpresa;
 	
-	private String nombre;
+	private String nombre; 
 
-	public MinimizarIndicador(Indicador indicador) {
+	public MaximizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
-		nombre = "Minimizar indicador " + indicador.getNombre();
+		nombre = "Maximizar indicador " + indicador.getNombre();
 	}
 	
 	public String getNombre(){
@@ -25,7 +29,7 @@ public class MinimizarIndicador {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				if (indicador.calcularIndicador(empresa1) < (indicador.calcularIndicador(empresa2))) {
+				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
 					return -1;
 				} else {
 					return 1;

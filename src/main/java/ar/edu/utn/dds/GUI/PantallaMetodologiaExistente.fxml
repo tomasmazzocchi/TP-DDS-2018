@@ -26,6 +26,6 @@
           <TableColumn minWidth="8.0" prefWidth="107.0" text="MargenesConsist." />
         </columns>
       </TableView>   
-      <Button fx:id="btnAplicar" layoutX="354.0" layoutY="78.0" mnemonicParsing="false" text="Aplicar" onAction="#aplicarMetodologia" />
+      <Button fx:id="btnAplicar" layoutX="354.0" layoutY="78.0" mnemonicParsing="false" onAction="#aplicarMetodologia" text="Aplicar" />
    </children>
 </Pane>

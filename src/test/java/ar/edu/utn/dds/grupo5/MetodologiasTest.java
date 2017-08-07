@@ -21,6 +21,7 @@ public class MetodologiasTest {
 	private Empresa empresa1;
 	private Empresa empresa2;
 	private RepoEmpresas repoEmpresas;
+	private Metodologia metodologiaBuffet;
 	private Longevidad unaLongevidad;
 	private Indicador indicadorROE;
 	private MaximizarIndicador maxIndicador;
@@ -36,14 +37,18 @@ public class MetodologiasTest {
 		listaCuentas1.add(cuentaEBIDTA1);
 		listaCuentas2.add(cuentaEBIDTA2);
 		listaIndicadores = new ArrayList<>();
-		empresa1 = new Empresa("Facebook",listaCuentas1,listaIndicadores, LocalDate.now().minusYears(11));
-		empresa2 = new Empresa("Google",listaCuentas2,listaIndicadores, LocalDate.now().minusYears(8));		
+		empresa1 = new Empresa("Facebook",listaCuentas1,listaIndicadores, LocalDate.now());
+		empresa2 = new Empresa("Google",listaCuentas2,listaIndicadores, LocalDate.now().minusYears(50));		
 		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
 		unaLongevidad = new Longevidad(10);
 		maxIndicador = new MaximizarIndicador(indicadorROE);
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(empresa1);
 		repoEmpresas.agregarEmpresa(empresa2);
+		List<Condicion> condiciones = new ArrayList<>();
+		condiciones.add(unaLongevidad);
+		condiciones.add(maxIndicador);
+		metodologiaBuffet = new Metodologia(condiciones);
 	}
 
 	@Rule
@@ -52,12 +57,19 @@ public class MetodologiasTest {
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorLongevidad() {
 		unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa());
-		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0),empresa1);
+		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0),empresa2);
 	}
+	
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorROE(){
 		maxIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa2);
 	}	
 
+	@Test
+	public void aplicarMetodologiaBuffet() {
+		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),empresa2);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0),empresa2);
+	}
 }

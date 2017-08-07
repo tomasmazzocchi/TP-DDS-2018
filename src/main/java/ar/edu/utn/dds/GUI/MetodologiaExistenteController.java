@@ -1,7 +1,6 @@
 package ar.edu.utn.dds.GUI;
 
 import java.util.List;
-import java.util.Observable;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ import ar.edu.utn.dds.grupo5.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.*;
 import javafx.stage.Stage;
 
 public class MetodologiaExistenteController implements Initializable {
@@ -36,13 +34,13 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML private Button btnAplicar;
 	@FXML private ComboBox<String> comboBox;
 	@FXML private TableView<Empresa> tblListado;
-	HashMap<String,List<Empresa>> resultados = new HashMap<String,List<Empresa>>();
 	RepoEmpresas repoEmpresas = new RepoEmpresas("Empresas");
 	List<Cuenta> listaCuentas1 = new ArrayList<Cuenta>();
 	List<Cuenta> listaCuentas2 = new ArrayList<Cuenta>();
 	List<Indicador> listaIndicadores = new ArrayList<Indicador>();
 	List<Condicion> condiciones = new ArrayList<Condicion>();
 	Metodologia metodologiaBuffet;
+	Longevidad unaLongevidad;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -56,7 +54,7 @@ public class MetodologiaExistenteController implements Initializable {
 		Empresa empresa1 = new Empresa("Facebook",listaCuentas1,listaIndicadores, LocalDate.now().minusYears(11));
 		Empresa empresa2 = new Empresa("Google",listaCuentas2,listaIndicadores, LocalDate.now().minusYears(8));		
 		Indicador indicadorROE = new Indicador("ROE", "cu.EBIDTA");
-		Longevidad unaLongevidad = new Longevidad(10);
+		unaLongevidad = new Longevidad(10);
 		MaximizarIndicador maxIndicador = new MaximizarIndicador(indicadorROE);
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(empresa1);
@@ -68,8 +66,8 @@ public class MetodologiaExistenteController implements Initializable {
 	
 	@FXML public void aplicarMetodologia(ActionEvent event) throws IOException{
 		if(event.getSource()==btnAplicar){
-			resultados = metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
-			
+			metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
+			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
 		}
 	}
 	

@@ -15,7 +15,7 @@ import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
 
-public class ManejadorIndicadoresTest {
+public class RepoIndicadoresTest {
 	ExpressionParser parser;
 	private RepoIndicadores repoIndicadores;
 	private Cuenta cuentaEBIDTA;

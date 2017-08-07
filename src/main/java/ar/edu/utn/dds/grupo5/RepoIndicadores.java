@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
 import ar.edu.utn.dds.ExceptionHandler.IndicadorInexistenteException;
-import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
+import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 
 public class RepoIndicadores {
 	private String nombre;
@@ -60,7 +60,7 @@ public class RepoIndicadores {
 		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {
-			throw new ManejadorIndicadoresException("No existe el nombre del Indicador");
+			throw new RepoIndicadoresException("No existe el nombre del Indicador");
 		} else {
 			return (lista.get(0));
 		}

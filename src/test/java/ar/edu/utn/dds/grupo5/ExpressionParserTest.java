@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
-import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
+import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
@@ -89,7 +89,7 @@ public class ExpressionParserTest {
 
 	@Test
 	public void ingresoUnaFormulaConIndicadorInexistente() {
-		thrown.expect(ManejadorIndicadoresException.class);
+		thrown.expect(RepoIndicadoresException.class);
 		thrown.expectMessage("No existe el nombre del Indicador");
 		_parser.resolverFormula("in.pepe/2", empresa);
 	}

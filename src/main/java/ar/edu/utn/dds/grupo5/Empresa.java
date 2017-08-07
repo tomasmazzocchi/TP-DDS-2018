@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
-import ar.edu.utn.dds.ExceptionHandler.ManejadorIndicadoresException;
+import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 
 public class Empresa {
 	private String nombre;
@@ -74,7 +74,7 @@ public class Empresa {
 				p -> p.getFechaDesde().compareTo(fechaDesde) >= 0 && p.getFechaHasta().compareTo(fechaHasta) <= 0)
 				.collect(Collectors.toList());
 		if (listaCuentasValidasPorFecha.isEmpty()) {
-			throw new ManejadorIndicadoresException("No existen Cuentas para ese Rango de Fechas");
+			throw new RepoIndicadoresException("No existen Cuentas para ese Rango de Fechas");
 		} else {
 			return (listaCuentasValidasPorFecha);
 		}

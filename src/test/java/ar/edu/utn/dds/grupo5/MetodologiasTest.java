@@ -90,6 +90,18 @@ public class MetodologiasTest {
 		maxIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa2);
 	}	
+	
+	@Test
+	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMenorROE(){
+		minIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
+		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa1);
+	}	
+	
+	@Test
+	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMargenCreciente(){
+		minIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
+		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa1);
+	}	
 
 	@Test
 	public void aplicarMetodologiaBuffet() {

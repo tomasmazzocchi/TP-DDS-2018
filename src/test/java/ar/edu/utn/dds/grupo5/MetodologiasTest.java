@@ -83,25 +83,42 @@ public class MetodologiasTest {
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorLongevidad() {
 		unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0),empresa2);
+		System.out.println("Longevidad");
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).size());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(0).getNombre());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(1).getNombre());
+		
 	}
 	
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMayorROE(){
 		maxIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa2);
-	}	
+		System.out.println("MayorRoe");
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).size());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(0).getNombre());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(1).getNombre());
+			}	
 	
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMenorROE(){
 		minIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa1);
+		System.out.println("MenorRoe");
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).size());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(0).getNombre());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(1).getNombre());
 	}	
 	
 	@Test
 	public void ingresoUnRepoConEmpresasYDevuelvoLaDeMargenCreciente(){
 		minIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
 		Assert.assertEquals(repoEmpresas.getListaEmpresa().get(0), empresa1);
-	}	
+		System.out.println("MargenCreciente");
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).size());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(0).getNombre());
+		System.out.println(unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa()).get(1).getNombre());
+			}	
 
 	@Test
 	public void aplicarMetodologiaBuffet() {

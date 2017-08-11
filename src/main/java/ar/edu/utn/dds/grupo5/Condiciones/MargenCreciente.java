@@ -10,7 +10,7 @@ import ar.edu.utn.dds.grupo5.Empresa;
 
 public class MargenCreciente implements Condicion {
 
-	private String nombre;
+	private String nombre="Margen creciente";
 	List<Empresa> listaEmpresa;
 	
 	 public String getNombre() {

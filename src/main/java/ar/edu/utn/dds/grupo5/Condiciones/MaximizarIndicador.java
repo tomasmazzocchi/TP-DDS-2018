@@ -17,7 +17,7 @@ public class MaximizarIndicador implements Condicion {
 
 	public MaximizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
-		nombre = "Maximizar indicador " + indicador.getNombre();
+		nombre = "Maximizar " + indicador.getNombre();
 	}
 	
 	public String getNombre(){

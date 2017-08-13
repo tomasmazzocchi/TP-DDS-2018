@@ -11,8 +11,6 @@ import ar.edu.utn.dds.grupo5.Indicador;
 public class MaximizarIndicador implements Condicion {
 
 	private Indicador indicador;
-	List<Empresa> listaEmpresa;
-	
 	private String nombre; 
 
 	public MaximizarIndicador(Indicador indicador) {
@@ -36,7 +34,6 @@ public class MaximizarIndicador implements Condicion {
 				}
 			}
 		});
-		listaEmpresa = listaEmpresas;
-		return listaEmpresa;
+		return listaEmpresas;
 	}
 }

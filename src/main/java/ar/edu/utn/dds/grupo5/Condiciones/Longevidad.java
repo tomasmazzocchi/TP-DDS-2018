@@ -25,9 +25,9 @@ public class Longevidad implements Condicion {
 	public List<Empresa> aplicarCondicion(List<Empresa> lista) {
 		LocalDate fechaDesde;
 		fechaDesde = LocalDate.now().minusYears(aniosAntiguedad);
-		List<Empresa> listaEmpresas=lista;
+		List<Empresa> listaEmpresas;
 
-		listaEmpresas.stream().filter(empresa -> empresa.esLongeva(fechaDesde));
+		listaEmpresas = lista.stream().filter(empresa -> empresa.esLongeva(fechaDesde)).collect(Collectors.toList());
 		
 		Collections.sort(listaEmpresas, new Comparator<Empresa>(){
 			@Override

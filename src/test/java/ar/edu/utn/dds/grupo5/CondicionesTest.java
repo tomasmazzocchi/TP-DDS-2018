@@ -19,7 +19,7 @@ import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 
 
-public class MetodologiasTest {
+public class CondicionesTest {
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
 	private List<Cuenta> listaCuentasTwitter = new ArrayList<>();

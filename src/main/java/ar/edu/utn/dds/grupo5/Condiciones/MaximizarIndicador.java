@@ -12,6 +12,7 @@ public class MaximizarIndicador implements Condicion {
 
 	private Indicador indicador;
 	private String nombre; 
+	List<Empresa> listaEmpresa;
 
 	public MaximizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
@@ -34,6 +35,7 @@ public class MaximizarIndicador implements Condicion {
 				}
 			}
 		});
-		return listaEmpresas;
-	}
+		listaEmpresa = listaEmpresas;
+		return listaEmpresa;
+}
 }

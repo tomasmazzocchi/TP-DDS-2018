@@ -2,10 +2,11 @@ package ar.edu.utn.dds.grupo5;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Metodologia {
 	private List<Condicion> condiciones;
-	private HashMap<String,List<Empresa>> resultados = new HashMap<>();
+	private Map<String,List<Empresa>> resultados = new HashMap<>();
 	
 	public Metodologia(List <Condicion> condiciones){
 		this.condiciones = condiciones;
@@ -17,7 +18,7 @@ public class Metodologia {
 	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}
-	public HashMap<String, List<Empresa>> getResultados() {
+	public Map<String, List<Empresa>> getResultados() {
 		return resultados;
 	}
 	public void setResultados(HashMap<String, List<Empresa>> resultados) {
@@ -27,6 +28,11 @@ public class Metodologia {
 
 
 	public void aplicarCondiciones(List<Empresa> empresas){
-		condiciones.stream().forEach(condicion-> resultados.put(condicion.getNombre() ,condicion.aplicarCondicion(empresas)));
+		condiciones.stream().forEach(condicion->{
+		System.out.println(condicion.getNombre());
+		System.out.println(condicion.aplicarCondicion(empresas).get(0));	
+		System.out.println(condicion.aplicarCondicion(empresas).get(0).getNombre());	
+		resultados.put(condicion.getNombre(),condicion.aplicarCondicion(empresas));
+		});
 	}
 }

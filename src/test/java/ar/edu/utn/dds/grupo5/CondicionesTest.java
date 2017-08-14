@@ -149,8 +149,8 @@ public class CondicionesTest {
 		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
 		
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0),google);
-		//System.out.println("assert=" + maxIndicador.getNombre());
-		//System.out.println("assert=" + metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0));
+		System.out.println("assert=" + maxIndicador.getNombre());
+		System.out.println("assert=" + metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0));
 		//Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),twitter);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), facebook);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(margenCreciente.getNombre()).get(0), facebook);

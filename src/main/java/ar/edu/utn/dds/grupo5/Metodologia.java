@@ -1,12 +1,13 @@
 package ar.edu.utn.dds.grupo5;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Metodologia {
 	private List<Condicion> condiciones;
-	private Map<String,List<Empresa>> resultados = new HashMap<>();
+	private Map<String,List<Empresa>> resultados = new LinkedHashMap<>();
 	
 	public Metodologia(List <Condicion> condiciones){
 		this.condiciones = condiciones;
@@ -21,7 +22,7 @@ public class Metodologia {
 	public Map<String, List<Empresa>> getResultados() {
 		return resultados;
 	}
-	public void setResultados(HashMap<String, List<Empresa>> resultados) {
+	public void setResultados(LinkedHashMap<String, List<Empresa>> resultados) {
 		this.resultados = resultados;
 	}
 

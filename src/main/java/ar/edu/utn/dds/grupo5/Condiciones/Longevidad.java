@@ -1,6 +1,7 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Longevidad implements Condicion {
 	
 	private int aniosAntiguedad;
 	private String nombre = "Longevidad";
+	private List<Empresa> listaEmpresas = new ArrayList<>();
 	
 	public Longevidad(int aniosAntiguedad) {
 		this.aniosAntiguedad = aniosAntiguedad;
@@ -22,12 +24,11 @@ public class Longevidad implements Condicion {
 		return this.nombre;
 	}
 
-	public List<Empresa> aplicarCondicion(List<Empresa> lista) {
+	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		LocalDate fechaDesde;
 		fechaDesde = LocalDate.now().minusYears(aniosAntiguedad);
-		List<Empresa> listaEmpresas;
 
-		listaEmpresas = lista.stream().filter(empresa -> empresa.esLongeva(fechaDesde)).collect(Collectors.toList());
+		listaEmpresas = empresas.stream().filter(empresa -> empresa.esLongeva(fechaDesde)).collect(Collectors.toList());
 		
 		Collections.sort(listaEmpresas, new Comparator<Empresa>(){
 			@Override

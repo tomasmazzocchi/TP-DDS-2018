@@ -1,6 +1,6 @@
 package ar.edu.utn.dds.grupo5;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +30,9 @@ public class Metodologia {
 
 	public void aplicarCondiciones(List<Empresa> empresas){
 		condiciones.stream().forEach(condicion->{
-		System.out.println(condicion.getNombre());
-		System.out.println(condicion.aplicarCondicion(empresas).get(0));	
-		System.out.println(condicion.aplicarCondicion(empresas).get(0).getNombre());	
-		resultados.put(condicion.getNombre(),condicion.aplicarCondicion(empresas));
+			List<Empresa> resultado = new ArrayList<Empresa>();
+			resultado=condicion.aplicarCondicion(empresas);
+		resultados.put(condicion.getNombre(),resultado);
 		});
 	}
 }

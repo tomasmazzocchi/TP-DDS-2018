@@ -1,5 +1,6 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +13,7 @@ public class MaximizarIndicador implements Condicion {
 
 	private Indicador indicador;
 	private String nombre; 
-	List<Empresa> listaEmpresa;
+	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MaximizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
@@ -23,8 +24,9 @@ public class MaximizarIndicador implements Condicion {
 		return this.nombre;
 	}
 
-	public List<Empresa> aplicarCondicion(List<Empresa> listaEmpresas) {
-
+	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
+		listaEmpresas.addAll(empresas);
+		
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
@@ -35,7 +37,6 @@ public class MaximizarIndicador implements Condicion {
 				}
 			}
 		});
-		listaEmpresa = listaEmpresas;
-		return listaEmpresa;
+		return listaEmpresas;
 }
 }

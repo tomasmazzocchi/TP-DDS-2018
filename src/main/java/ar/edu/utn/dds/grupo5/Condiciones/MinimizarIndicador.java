@@ -1,5 +1,6 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +12,7 @@ import ar.edu.utn.dds.grupo5.Indicador;
 public class MinimizarIndicador implements Condicion {
 
 	private Indicador indicador;
-	List<Empresa> listaEmpresa;
+	private List<Empresa> listaEmpresa = new ArrayList<>();;
 	
 	private String nombre;
 
@@ -24,9 +25,10 @@ public class MinimizarIndicador implements Condicion {
 		return this.nombre;
 	}
 
-	public List<Empresa> aplicarCondicion(List<Empresa> listaEmpresas) {
+	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
+		listaEmpresa.addAll(empresas);
 
-		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
+		Collections.sort(listaEmpresa, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
 				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
@@ -36,7 +38,6 @@ public class MinimizarIndicador implements Condicion {
 				}
 			}
 		});
-		listaEmpresa = listaEmpresas;
 		return listaEmpresa;
 	}
 }

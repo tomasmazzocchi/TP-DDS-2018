@@ -1,5 +1,6 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +12,7 @@ import ar.edu.utn.dds.grupo5.Empresa;
 public class MargenCreciente implements Condicion {
 
 	private String nombre="Margen creciente";
-	List<Empresa> listaEmpresa;
+	List<Empresa> listaEmpresa = new ArrayList<>();
 	
 	 public String getNombre() {
 		 return this.nombre;
@@ -22,7 +23,8 @@ public class MargenCreciente implements Condicion {
 
 	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
-		Collections.sort(empresas, new Comparator<Empresa>() {
+		listaEmpresa.addAll(empresas);
+		Collections.sort(listaEmpresa, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
 				if ( empresa1.getListaCuentas().stream().filter(cuenta->cuenta.getNombre().equals("Margen")).collect(Collectors.toList()).get(0).getValor() > 
@@ -33,7 +35,6 @@ public class MargenCreciente implements Condicion {
 				}
 			}
 		});
-		listaEmpresa = empresas;
 		return listaEmpresa;
 	}
 

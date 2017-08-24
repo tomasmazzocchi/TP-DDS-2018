@@ -13,7 +13,6 @@ public class MinimizarIndicador implements Condicion {
 
 	private Indicador indicador;
 	private List<Empresa> listaEmpresa = new ArrayList<>();;
-	
 	private String nombre;
 
 	public MinimizarIndicador(Indicador indicador) {

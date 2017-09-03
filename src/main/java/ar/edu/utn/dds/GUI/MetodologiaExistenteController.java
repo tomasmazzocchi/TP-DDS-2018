@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import ar.edu.utn.dds.grupo5.Condicion;
@@ -15,7 +14,9 @@ import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
+import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
 import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
+import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +26,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.*;
 import javafx.stage.Stage;
 
 public class MetodologiaExistenteController implements Initializable {
@@ -34,40 +34,105 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML private Button btnAplicar;
 	@FXML private ComboBox<String> comboBox;
 	@FXML private TableView<Empresa> tblListado;
-	RepoEmpresas repoEmpresas = new RepoEmpresas("Empresas");
-	List<Cuenta> listaCuentas1 = new ArrayList<Cuenta>();
-	List<Cuenta> listaCuentas2 = new ArrayList<Cuenta>();
-	List<Indicador> listaIndicadores = new ArrayList<Indicador>();
-	List<Condicion> condiciones = new ArrayList<Condicion>();
-	Metodologia metodologiaBuffet;
-	Longevidad unaLongevidad;
+
+	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
+	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
+	private List<Cuenta> listaCuentasTwitter = new ArrayList<>();
+	private List<Indicador> listaIndicadoresFacebook;
+	private List<Indicador> listaIndicadoresGoogle;
+	private List<Indicador> listaIndicadoresTwitter;
+	private Empresa facebook;
+	private Empresa google;
+	private Empresa twitter;
+	private RepoEmpresas repoEmpresas;
+	private Metodologia metodologiaBuffet;
+	private Longevidad unaLongevidad;
+	private Indicador indicadorROE;
+	private Indicador indicadorROA;
+	private Indicador indicadorDeudaFacebook;
+	private Indicador indicadorDeudaGoogle;
+	private Indicador indicadorDeudaTwitter;
+	private MaximizarIndicador maxIndicador;
+	private MinimizarIndicador minIndicador;
+	private MargenCreciente margenCreciente;
+	private Cuenta cuentaEBIDTAFacebook;
+	private Cuenta cuentaMargenFacebook;
+	private Cuenta cuentaEBIDTAGoogle;
+	private Cuenta cuentaMARGENGooge;
+	private Cuenta cuentaEBIDTATwitter;
+	private Cuenta cuentaMARGENTwitter;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBox.getItems().removeAll(comboBox.getItems());
 	    comboBox.getItems().addAll("Metodologia Buffet");
 	    comboBox.getSelectionModel().select("Metodologia Buffet");
-		Cuenta cuentaEBIDTA1 = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
-		Cuenta cuentaEBIDTA2 = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
-		listaCuentas1.add(cuentaEBIDTA1);
-		listaCuentas2.add(cuentaEBIDTA2);
-		Empresa empresa1 = new Empresa("Facebook",listaCuentas1,listaIndicadores, LocalDate.now().minusYears(11));
-		Empresa empresa2 = new Empresa("Google",listaCuentas2,listaIndicadores, LocalDate.now().minusYears(8));		
-		Indicador indicadorROE = new Indicador("ROE", "cu.EBIDTA");
+	    
+	    cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
+		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
+		cuentaEBIDTAGoogle = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
+		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
+		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300, LocalDate.now(), LocalDate.now());
+		cuentaMARGENTwitter = new Cuenta("Margen", 400, LocalDate.now(), LocalDate.now());
+		
+		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
+		listaCuentasFacebook.add(cuentaMargenFacebook);
+		listaCuentasGoogle.add(cuentaEBIDTAGoogle);
+		listaCuentasGoogle.add(cuentaMARGENGooge);
+		listaCuentasTwitter.add(cuentaEBIDTATwitter);
+		listaCuentasTwitter.add(cuentaMARGENTwitter);
+		
+		listaIndicadoresFacebook = new ArrayList<>();
+		listaIndicadoresGoogle = new ArrayList<>();
+		listaIndicadoresTwitter = new ArrayList<>();
+		
+		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
+		indicadorROA = new Indicador("ROA", "cu.Margen");
+		indicadorDeudaFacebook = new Indicador("DEUDA","300");
+		indicadorDeudaGoogle = new Indicador("DEUDA","400");
+		indicadorDeudaTwitter = new Indicador("DEUDA","1000");
+		
+		listaIndicadoresFacebook.add(indicadorROE);
+		listaIndicadoresFacebook.add(indicadorROA);
+		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
+		listaIndicadoresGoogle.add(indicadorROE);
+		listaIndicadoresGoogle.add(indicadorROA);
+		listaIndicadoresGoogle.add(indicadorDeudaGoogle);
+		listaIndicadoresTwitter.add(indicadorROE);
+		listaIndicadoresTwitter.add(indicadorROA);
+		listaIndicadoresTwitter.add(indicadorDeudaTwitter);
+		
+		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
+		google = new Empresa("Google",listaCuentasGoogle,listaIndicadoresGoogle, LocalDate.now().minusYears(50));
+		twitter = new Empresa("Twitter",listaCuentasTwitter,listaIndicadoresTwitter, LocalDate.now().minusYears(20));
+		
+		//Condiciones
 		unaLongevidad = new Longevidad(10);
-		MaximizarIndicador maxIndicador = new MaximizarIndicador(indicadorROE);
+		maxIndicador = new MaximizarIndicador(indicadorROE);
+		margenCreciente = new MargenCreciente();
+		minIndicador = new MinimizarIndicador(indicadorROA);
+		
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
-		repoEmpresas.agregarEmpresa(empresa1);
-		repoEmpresas.agregarEmpresa(empresa2);
+		repoEmpresas.agregarEmpresa(facebook);
+		repoEmpresas.agregarEmpresa(google);
+		repoEmpresas.agregarEmpresa(twitter);
+		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
+		condiciones.add(minIndicador);
+		condiciones.add(margenCreciente);
 		metodologiaBuffet = new Metodologia(condiciones);
+		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
+	    
 	}
 	
 	@FXML public void aplicarMetodologia(ActionEvent event) throws IOException{
 		if(event.getSource()==btnAplicar){
-			metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
+
 			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
+			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(maxIndicador.getNombre())));
+			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(minIndicador.getNombre())));
+			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(margenCreciente.getNombre())));
 		}
 	}
 	

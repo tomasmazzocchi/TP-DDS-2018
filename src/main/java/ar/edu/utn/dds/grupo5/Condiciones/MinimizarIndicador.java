@@ -17,7 +17,7 @@ public class MinimizarIndicador implements Condicion {
 
 	public MinimizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
-		nombre = "Minimizar indicador " + indicador.getNombre();
+		nombre = "Minimizar " + indicador.getNombre();
 	}
 	
 	public String getNombre(){

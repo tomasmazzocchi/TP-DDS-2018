@@ -9,19 +9,14 @@ import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 
-public class MaximizarIndicador implements Condicion {
+public class MaximizarIndicador extends Condicion {
 
 	private Indicador indicador;
-	private String nombre; 
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MaximizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
-		nombre = "Maximizar " + indicador.getNombre();
-	}
-	
-	public String getNombre(){
-		return this.nombre;
+		this.nombre = "Maximizar " + indicador.getNombre();
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
@@ -37,6 +32,7 @@ public class MaximizarIndicador implements Condicion {
 				}
 			}
 		});
-		return listaEmpresas;
-}
+		//List<String> listaNombreEmpresas = new ArrayList<>();
+		//listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
+		return listaEmpresas;}
 }

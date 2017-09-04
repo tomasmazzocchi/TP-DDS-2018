@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class MetodologiaExistenteController implements Initializable {
@@ -34,6 +35,8 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML private Button btnAplicar;
 	@FXML private ComboBox<String> comboBox;
 	@FXML private TableView<Empresa> tblListado;
+	@FXML private TableColumn<String,Empresa> longevidad = new TableColumn<String,Empresa>("listaEmpresas");
+	
 
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
@@ -67,6 +70,9 @@ public class MetodologiaExistenteController implements Initializable {
 		comboBox.getItems().removeAll(comboBox.getItems());
 	    comboBox.getItems().addAll("Metodologia Buffet");
 	    comboBox.getSelectionModel().select("Metodologia Buffet");
+	    
+	    longevidad.setCellValueFactory(new PropertyValueFactory<String,Empresa>("listaEmpresas"));
+	    //tblListado.getColumns().add(longevidad);
 	    
 	    cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());

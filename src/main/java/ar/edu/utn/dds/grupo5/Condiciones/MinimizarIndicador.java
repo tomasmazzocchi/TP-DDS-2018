@@ -9,25 +9,20 @@ import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 
-public class MinimizarIndicador implements Condicion {
+public class MinimizarIndicador extends Condicion {
 
 	private Indicador indicador;
-	private List<Empresa> listaEmpresa = new ArrayList<>();;
-	private String nombre;
+	private List<Empresa> listaEmpresas = new ArrayList<>();;
 
 	public MinimizarIndicador(Indicador indicador) {
 		this.indicador = indicador;
-		nombre = "Minimizar " + indicador.getNombre();
-	}
-	
-	public String getNombre(){
-		return this.nombre;
+		this.nombre = "Minimizar " + indicador.getNombre();
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
-		listaEmpresa.addAll(empresas);
+		listaEmpresas.addAll(empresas);
 
-		Collections.sort(listaEmpresa, new Comparator<Empresa>() {
+		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
 				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
@@ -37,6 +32,7 @@ public class MinimizarIndicador implements Condicion {
 				}
 			}
 		});
-		return listaEmpresa;
-	}
+		//List<String> listaNombreEmpresas = new ArrayList<>();
+		//listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
+		return listaEmpresas;	}
 }

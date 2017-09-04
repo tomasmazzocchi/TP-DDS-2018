@@ -30,7 +30,7 @@ public class Metodologia {
 
 	public void aplicarCondiciones(List<Empresa> empresas){
 		condiciones.stream().forEach(condicion->{
-			List<Empresa> resultado = new ArrayList<Empresa>();
+			List<Empresa> resultado = new ArrayList<>();
 			resultado=condicion.aplicarCondicion(empresas);
 		resultados.put(condicion.getNombre(),resultado);
 		});

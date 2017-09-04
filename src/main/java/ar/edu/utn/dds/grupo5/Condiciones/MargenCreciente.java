@@ -6,25 +6,28 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
-public class MargenCreciente implements Condicion {
+@Entity
+public class MargenCreciente extends Condicion {
 
-	private String nombre="Margen creciente";
-	List<Empresa> listaEmpresa = new ArrayList<>();
-	
-	 public String getNombre() {
-		 return this.nombre;
-	 }
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCondicion")
+	private List<Empresa> listaEmpresas = new ArrayList<>();
 	
 	public MargenCreciente() {
+		this.nombre = "Margen creciente";
 	}
 
-	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
-		listaEmpresa.addAll(empresas);
-		Collections.sort(listaEmpresa, new Comparator<Empresa>() {
+		listaEmpresas.addAll(empresas);
+		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
 				if ( empresa1.getListaCuentas().stream().filter(cuenta->cuenta.getNombre().equals("Margen")).collect(Collectors.toList()).get(0).getValor() > 
@@ -35,7 +38,9 @@ public class MargenCreciente implements Condicion {
 				}
 			}
 		});
-		return listaEmpresa;
+		//List<String> listaNombreEmpresas = new ArrayList<>();
+		//listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
+		return listaEmpresas;
 	}
 
 	

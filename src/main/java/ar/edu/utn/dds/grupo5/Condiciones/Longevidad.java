@@ -1,29 +1,34 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
-public class Longevidad implements Condicion {
+@Entity
+public class Longevidad extends Condicion {
 	
 	private int aniosAntiguedad;
-	private String nombre = "Longevidad";
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCondicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 	
 	public Longevidad(int aniosAntiguedad) {
 		this.aniosAntiguedad = aniosAntiguedad;
+		this.nombre = "Longevidad";
 	}
 	
-	public String getNombre(){
-		return this.nombre;
-	}
-
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		LocalDate fechaDesde;
 		fechaDesde = LocalDate.now().minusYears(aniosAntiguedad);
@@ -36,6 +41,9 @@ public class Longevidad implements Condicion {
 				return empresa1.getAnioFundacion().compareTo(empresa2.getAnioFundacion());
 			}			
 		});
+		
+		//List<String> listaLongevidad = new ArrayList<>();
+		//listaEmpresas.stream().forEach(x -> listaLongevidad.add(x.getNombre()));
 		return listaEmpresas;
 	}
 }

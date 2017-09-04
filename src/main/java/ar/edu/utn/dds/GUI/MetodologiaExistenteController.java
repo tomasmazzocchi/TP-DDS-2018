@@ -31,12 +31,16 @@ import javafx.stage.Stage;
 
 public class MetodologiaExistenteController implements Initializable {
 
-	@FXML private Button btnVolver;
-	@FXML private Button btnAplicar;
-	@FXML private ComboBox<String> comboBox;
-	@FXML private TableView<Empresa> tblListado;
-	@FXML private TableColumn<String,Empresa> longevidad = new TableColumn<String,Empresa>("listaEmpresas");
-	
+	@FXML
+	private Button btnVolver;
+	@FXML
+	private Button btnAplicar;
+	@FXML
+	private ComboBox<String> comboBox;
+	@FXML
+	private TableView<Empresa> tblListado;
+	@FXML
+	private TableColumn<String, Empresa> longevidad = new TableColumn<String, Empresa>("listaEmpresas");
 
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
@@ -64,40 +68,40 @@ public class MetodologiaExistenteController implements Initializable {
 	private Cuenta cuentaMARGENGooge;
 	private Cuenta cuentaEBIDTATwitter;
 	private Cuenta cuentaMARGENTwitter;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBox.getItems().removeAll(comboBox.getItems());
-	    comboBox.getItems().addAll("Metodologia Buffet");
-	    comboBox.getSelectionModel().select("Metodologia Buffet");
-	    
-	    longevidad.setCellValueFactory(new PropertyValueFactory<String,Empresa>("listaEmpresas"));
-	    //tblListado.getColumns().add(longevidad);
-	    
-	    cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
+		comboBox.getItems().addAll("Metodologia Buffet");
+		comboBox.getSelectionModel().select("Metodologia Buffet");
+
+		longevidad.setCellValueFactory(new PropertyValueFactory<String, Empresa>("listaEmpresas"));
+		// tblListado.getColumns().add(longevidad);
+
+		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTAGoogle = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300, LocalDate.now(), LocalDate.now());
 		cuentaMARGENTwitter = new Cuenta("Margen", 400, LocalDate.now(), LocalDate.now());
-		
+
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaCuentasFacebook.add(cuentaMargenFacebook);
 		listaCuentasGoogle.add(cuentaEBIDTAGoogle);
 		listaCuentasGoogle.add(cuentaMARGENGooge);
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
-		
+
 		listaIndicadoresFacebook = new ArrayList<>();
 		listaIndicadoresGoogle = new ArrayList<>();
 		listaIndicadoresTwitter = new ArrayList<>();
-		
+
 		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
 		indicadorROA = new Indicador("ROA", "cu.Margen");
-		indicadorDeudaFacebook = new Indicador("DEUDA","300");
-		indicadorDeudaGoogle = new Indicador("DEUDA","400");
-		indicadorDeudaTwitter = new Indicador("DEUDA","1000");
-		
+		indicadorDeudaFacebook = new Indicador("DEUDA", "300");
+		indicadorDeudaGoogle = new Indicador("DEUDA", "400");
+		indicadorDeudaTwitter = new Indicador("DEUDA", "1000");
+
 		listaIndicadoresFacebook.add(indicadorROE);
 		listaIndicadoresFacebook.add(indicadorROA);
 		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
@@ -107,17 +111,17 @@ public class MetodologiaExistenteController implements Initializable {
 		listaIndicadoresTwitter.add(indicadorROE);
 		listaIndicadoresTwitter.add(indicadorROA);
 		listaIndicadoresTwitter.add(indicadorDeudaTwitter);
-		
-		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
-		google = new Empresa("Google",listaCuentasGoogle,listaIndicadoresGoogle, LocalDate.now().minusYears(50));
-		twitter = new Empresa("Twitter",listaCuentasTwitter,listaIndicadoresTwitter, LocalDate.now().minusYears(20));
-		
-		//Condiciones
+
+		facebook = new Empresa("Facebook", listaCuentasFacebook, listaIndicadoresFacebook, LocalDate.now());
+		google = new Empresa("Google", listaCuentasGoogle, listaIndicadoresGoogle, LocalDate.now().minusYears(50));
+		twitter = new Empresa("Twitter", listaCuentasTwitter, listaIndicadoresTwitter, LocalDate.now().minusYears(20));
+
+		// Condiciones
 		unaLongevidad = new Longevidad(10);
 		maxIndicador = new MaximizarIndicador(indicadorROE);
 		margenCreciente = new MargenCreciente();
 		minIndicador = new MinimizarIndicador(indicadorROA);
-		
+
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(facebook);
 		repoEmpresas.agregarEmpresa(google);
@@ -129,29 +133,35 @@ public class MetodologiaExistenteController implements Initializable {
 		condiciones.add(margenCreciente);
 		metodologiaBuffet = new Metodologia(condiciones);
 		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
-	    
-	}
-	
-	@FXML public void aplicarMetodologia(ActionEvent event) throws IOException{
-		if(event.getSource()==btnAplicar){
 
-			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
-			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(maxIndicador.getNombre())));
-			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(minIndicador.getNombre())));
-			tblListado.setItems( FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(margenCreciente.getNombre())));
+	}
+
+	@FXML
+	public void aplicarMetodologia(ActionEvent event) throws IOException {
+		if (event.getSource() == btnAplicar) {
+
+			tblListado.setItems(FXCollections
+					.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
+			tblListado.setItems(
+					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(maxIndicador.getNombre())));
+			tblListado.setItems(
+					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(minIndicador.getNombre())));
+			tblListado.setItems(FXCollections
+					.observableArrayList(metodologiaBuffet.getResultados().get(margenCreciente.getNombre())));
 		}
 	}
-	
-	@FXML public void volver(ActionEvent event) throws IOException{
+
+	@FXML
+	public void volver(ActionEvent event) throws IOException {
 		Parent home_page_parent = null;
-		if(event.getSource()==btnVolver){
+		if (event.getSource() == btnVolver) {
 			home_page_parent = FXMLLoader.load(getClass().getResource("PantallaPrincipal.fxml"));
-		} 
-	  Scene home_page_scene = new Scene(home_page_parent);
-      Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
-      app_stage.close();
-      app_stage.setScene(home_page_scene);
-      app_stage.show();
+		}
+		Scene home_page_scene = new Scene(home_page_parent);
+		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		app_stage.close();
+		app_stage.setScene(home_page_scene);
+		app_stage.show();
 	}
 }

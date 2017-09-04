@@ -1,7 +1,7 @@
 package ar.edu.utn.dds.ExceptionHandler;
 
 public class RepoIndicadoresException extends RuntimeException {
-	
+
 	public RepoIndicadoresException() {
 		super();
 	}

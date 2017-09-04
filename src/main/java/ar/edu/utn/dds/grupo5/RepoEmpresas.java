@@ -10,11 +10,10 @@ public class RepoEmpresas {
 	private String nombre;
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-
 	public RepoEmpresas(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -38,7 +37,6 @@ public class RepoEmpresas {
 			throw new EmpresaExistenteException("Empresa ya existente");
 		}
 	}
-
 
 	public void quitarEmpresa(Empresa unaEmpresa) {
 		if (listaEmpresas.contains(unaEmpresa)) {

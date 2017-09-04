@@ -20,7 +20,7 @@ public class MargenCreciente extends Condicion {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCondicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
-	
+
 	public MargenCreciente() {
 		this.nombre = "Margen creciente";
 	}
@@ -30,19 +30,20 @@ public class MargenCreciente extends Condicion {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				if ( empresa1.getListaCuentas().stream().filter(cuenta->cuenta.getNombre().equals("Margen")).collect(Collectors.toList()).get(0).getValor() > 
-				(empresa2.getListaCuentas().stream().filter(cuenta->cuenta.getNombre().equals("Margen")).collect(Collectors.toList()).get(0).getValor())) {
+				if (empresa1.getListaCuentas().stream().filter(cuenta -> cuenta.getNombre().equals("Margen"))
+						.collect(Collectors.toList()).get(0)
+						.getValor() > (empresa2.getListaCuentas().stream()
+								.filter(cuenta -> cuenta.getNombre().equals("Margen")).collect(Collectors.toList())
+								.get(0).getValor())) {
 					return 1;
 				} else {
 					return -1;
 				}
 			}
 		});
-		//List<String> listaNombreEmpresas = new ArrayList<>();
-		//listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
+		// List<String> listaNombreEmpresas = new ArrayList<>();
+		// listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
 		return listaEmpresas;
 	}
 
-	
-	
 }

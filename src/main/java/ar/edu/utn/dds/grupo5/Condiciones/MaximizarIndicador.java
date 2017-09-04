@@ -5,13 +5,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 
+@Entity
 public class MaximizarIndicador extends Condicion {
 
 	private Indicador indicador;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idCondicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MaximizarIndicador(Indicador indicador) {
@@ -21,7 +29,7 @@ public class MaximizarIndicador extends Condicion {
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		listaEmpresas.addAll(empresas);
-		
+
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
@@ -32,7 +40,8 @@ public class MaximizarIndicador extends Condicion {
 				}
 			}
 		});
-		//List<String> listaNombreEmpresas = new ArrayList<>();
-		//listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
-		return listaEmpresas;}
+		// List<String> listaNombreEmpresas = new ArrayList<>();
+		// listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
+		return listaEmpresas;
+	}
 }

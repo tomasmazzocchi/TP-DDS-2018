@@ -1,7 +1,7 @@
 package ar.edu.utn.dds.ExceptionHandler;
 
 public class CondicionExistenteException extends RuntimeException {
-	
+
 	public CondicionExistenteException() {
 		super();
 	}

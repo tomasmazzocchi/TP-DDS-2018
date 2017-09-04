@@ -19,8 +19,8 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 public class ExpressionParser {
 	private final ANTLRErrorListener _listener = createErrorListener();
 
-	public int resolverFormula(final String expression,Empresa empresa) {
-		
+	public int resolverFormula(final String expression, Empresa empresa) {
+
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 
 		lexer.removeErrorListeners();
@@ -33,10 +33,10 @@ public class ExpressionParser {
 
 		final ExprContext context = parser.expr();
 
-		return visit(context,empresa);
+		return visit(context, empresa);
 	}
 
-	private int visit(final ExprContext context,Empresa empresa) {
+	private int visit(final ExprContext context, Empresa empresa) {
 		Cuenta cuenta;
 		Indicador indicador;
 		String id;
@@ -44,40 +44,34 @@ public class ExpressionParser {
 		String cadena;
 		ExpressionParser parser;
 
-		if (context.number() != null) { 
+		if (context.number() != null) {
 			return Integer.parseInt(context.number().getText());
 		} else if (context.string() != null) {
 			cadena = context.string().getText();
-			id = cadena.substring(0, 2); 
-			nombre = cadena.substring(3, cadena.length()); 
+			id = cadena.substring(0, 2);
+			nombre = cadena.substring(3, cadena.length());
 			if (id.equalsIgnoreCase("cu")) {
 				cuenta = empresa.buscarCuenta(nombre);
-				return (int) (cuenta.getValor()); 
+				return (int) (cuenta.getValor());
 			} else {
 				parser = new ExpressionParser();
-				indicador = RepoIndicadores.buscarIndicador(nombre,empresa.getListaIndicadores());
-				return (parser.resolverFormula(indicador.getFormula(),empresa));
+				indicador = RepoIndicadores.buscarIndicador(nombre, empresa.getListaIndicadores());
+				return (parser.resolverFormula(indicador.getFormula(), empresa));
 			}
-		} else if (context.BR_CLOSE() != null) { 
+		} else if (context.BR_CLOSE() != null) {
 			return visit(context.expr(0), empresa);
-		} else if (context.MULTIPLICAR() != null) { 
-			return visit(context.expr(0), empresa)
-					* visit(context.expr(1), empresa);
-		} else if (context.DIVIDIR() != null) { 
-			return visit(context.expr(0),empresa)
-					/ visit(context.expr(1), empresa);
-		} else if (context.SUMAR() != null) { 
-			return visit(context.expr(0), empresa)
-					+ visit(context.expr(1), empresa);
-		} else if (context.RESTAR() != null) { 
-			return visit(context.expr(0), empresa)
-					- visit(context.expr(1), empresa);
+		} else if (context.MULTIPLICAR() != null) {
+			return visit(context.expr(0), empresa) * visit(context.expr(1), empresa);
+		} else if (context.DIVIDIR() != null) {
+			return visit(context.expr(0), empresa) / visit(context.expr(1), empresa);
+		} else if (context.SUMAR() != null) {
+			return visit(context.expr(0), empresa) + visit(context.expr(1), empresa);
+		} else if (context.RESTAR() != null) {
+			return visit(context.expr(0), empresa) - visit(context.expr(1), empresa);
 		} else {
 			throw new ArgumentoIlegalException();
 		}
 	}
-	
-
 
 	public boolean validarFormula(final String expression) {
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
@@ -97,15 +91,15 @@ public class ExpressionParser {
 
 	private boolean visitValidador(final ExprContext context) {
 
-		if (context.number() != null) { 
+		if (context.number() != null) {
 			return true;
 		} else if (context.string() != null) {
 			return true;
-		} else if (context.BR_CLOSE() != null) { 
+		} else if (context.BR_CLOSE() != null) {
 			return visitValidador(context.expr(0));
 		} else if (context.MULTIPLICAR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
-		} else if (context.DIVIDIR() != null) { 
+		} else if (context.DIVIDIR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));
 		} else if (context.SUMAR() != null) {
 			return visitValidador(context.expr(0)) && visitValidador(context.expr(1));

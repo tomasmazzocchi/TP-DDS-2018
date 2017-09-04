@@ -45,7 +45,7 @@ public class RepoIndicadores {
 			throw new IndicadorInexistenteException("No existe el Indicador");
 		}
 	}
-	
+
 	public Boolean indicadorExistente(List<Indicador> listaIndicadores, String indicadorNombre) {
 
 		List<Indicador> lista = listaIndicadores.stream()
@@ -54,9 +54,9 @@ public class RepoIndicadores {
 		return !lista.isEmpty();
 
 	}
-	
-	public static Indicador buscarIndicador(String nombre,List<Indicador> listaIndicadores) {
-		
+
+	public static Indicador buscarIndicador(String nombre, List<Indicador> listaIndicadores) {
+
 		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {
@@ -65,8 +65,7 @@ public class RepoIndicadores {
 			return (lista.get(0));
 		}
 	}
-	
-	
+
 	public void guardarIndicadorEnEmpresa(Empresa empresa, String indicadorNombre, String indicadorFormula) {
 		parser.resolverFormula(indicadorFormula, empresa);
 		Indicador indicador = new Indicador(indicadorNombre, indicadorFormula);
@@ -74,18 +73,19 @@ public class RepoIndicadores {
 
 	}
 
-	public void guardarIndicadorEnRepo(String indicadorNombre,String indicadorFormula) {
-		
+	public void guardarIndicadorEnRepo(String indicadorNombre, String indicadorFormula) {
+
 		if (parser.validarFormula(indicadorFormula)) {
 			Indicador indicador = new Indicador(indicadorNombre, indicadorFormula);
 			agregarIndicador(indicador);
 		}
 
 	}
-	public void guardarIndicadores(List<String> nombres, List<String> formulas){
-		int count  = nombres.size();
-		for (int i=0; i<count ; i++) {
-		     this.guardarIndicadorEnRepo(nombres.get(i),formulas.get(i)); 
+
+	public void guardarIndicadores(List<String> nombres, List<String> formulas) {
+		int count = nombres.size();
+		for (int i = 0; i < count; i++) {
+			this.guardarIndicadorEnRepo(nombres.get(i), formulas.get(i));
 		}
 	}
 }

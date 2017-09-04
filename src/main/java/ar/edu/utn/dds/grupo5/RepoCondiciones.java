@@ -6,11 +6,9 @@ import java.util.List;
 import ar.edu.utn.dds.ExceptionHandler.CondicionExistenteException;
 import ar.edu.utn.dds.ExceptionHandler.CondicionInexistenteException;
 
-
 public class RepoCondiciones {
 	private String nombre;
 	private List<Condicion> listaCondiciones = new ArrayList<>();
-
 
 	public String getNombre() {
 		return nombre;

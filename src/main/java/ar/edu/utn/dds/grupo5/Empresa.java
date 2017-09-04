@@ -14,13 +14,14 @@ public class Empresa {
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 	private LocalDate anioFundacion;
 
-	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores, LocalDate anioFundacion) {
+	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores,
+			LocalDate anioFundacion) {
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
 		this.listaIndicadores = listaIndicadores;
 		this.anioFundacion = anioFundacion;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -28,7 +29,7 @@ public class Empresa {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public LocalDate getAnioFundacion() {
 		return anioFundacion;
 	}
@@ -44,18 +45,17 @@ public class Empresa {
 	public List<Indicador> getListaIndicadores() {
 		return this.listaIndicadores;
 	}
-	
-	public void setCuenta(Cuenta unaCuenta){
+
+	public void setCuenta(Cuenta unaCuenta) {
 		this.listaCuentas.add(unaCuenta);
 	}
-	
-	public boolean esLongeva(LocalDate fechaDesde){
+
+	public boolean esLongeva(LocalDate fechaDesde) {
 		return this.anioFundacion.compareTo(fechaDesde) <= 0;
 	}
 
-
 	public static List<Cuenta> listaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
-	
+
 		List<Cuenta> listaCuentas = empresa.getListaCuentas();
 
 		List<Cuenta> listaCuentasValidas = listaCuentas.stream() // convert list to stream
@@ -79,7 +79,7 @@ public class Empresa {
 			return (listaCuentasValidasPorFecha);
 		}
 	}
-	
+
 	public Cuenta buscarCuenta(String nombre) {
 		List<Cuenta> lista = this.listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
@@ -92,6 +92,6 @@ public class Empresa {
 
 	public void agregarIndicadorAEmpresa(Indicador indicador) {
 		this.getListaIndicadores().add(indicador);
-		
+
 	}
 }

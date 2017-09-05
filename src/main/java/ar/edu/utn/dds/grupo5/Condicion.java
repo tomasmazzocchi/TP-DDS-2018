@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Condicion")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-
 public abstract class Condicion {
 	protected String nombre;
 	@Id

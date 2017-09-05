@@ -5,8 +5,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table( name="Metodologia")
 public class Metodologia {
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
+	@OneToMany
+	@MapKeyColumn(name="empresas")
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
 
 	public Metodologia(List<Condicion> condiciones) {

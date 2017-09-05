@@ -5,14 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
 import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 
+@Entity
+@Table(name = "Empresa")
 public class Empresa {
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idEmpresa")
+	private int idEmpresa;
+	@Column(name = "nombre")
 	private String nombre;
-	private List<Cuenta> listaCuentas = new ArrayList<>();
-	private List<Indicador> listaIndicadores = new ArrayList<>();
+	@Column(name = "anioFundacion")
 	private LocalDate anioFundacion;
+	@OneToMany
+	@JoinColumn(name = "idCuenta")
+	private List<Cuenta> listaCuentas = new ArrayList<>();
+	@OneToMany
+	@Column(name = "idIndicador")
+	private List<Indicador> listaIndicadores = new ArrayList<>();
+	
 
 	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores,
 			LocalDate anioFundacion) {

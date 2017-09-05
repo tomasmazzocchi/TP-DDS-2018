@@ -2,10 +2,25 @@ package ar.edu.utn.dds.grupo5;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Cuenta")
 public class Cuenta {
+	@Id	@GeneratedValue
+	@Column(name = "idCuenta")
+	private int idCuenta;
+	@Column(name = "nombre")
 	private String nombre;
+	@Column(name = "valor")
 	private double valor;
+	@Column(name = "fechaDesde")
 	private LocalDate fechaDesde;
+	@Column(name = "fechaHasta")
 	private LocalDate fechaHasta;
 
 	public String getNombre() {

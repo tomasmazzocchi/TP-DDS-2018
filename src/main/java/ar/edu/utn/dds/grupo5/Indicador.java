@@ -1,7 +1,21 @@
 package ar.edu.utn.dds.grupo5;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Indicador")
 public class Indicador {
+	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idIndicador")
+	private int idIndicador;
+	@Column(name = "nombre")
 	private String nombre;
+	@Column(name = "formula")
 	private String formula;
 
 	public Indicador(String nombre, String formula) {

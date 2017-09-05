@@ -28,10 +28,10 @@ public class Empresa {
 	@Column(name = "anioFundacion")
 	private LocalDate anioFundacion;
 	@OneToMany
-	@JoinColumn(name = "idCuenta")
+	@JoinColumn(name = "idEmpresa")
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	@OneToMany
-	@Column(name = "idIndicador")
+	@Column(name = "idEmpresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 	
 

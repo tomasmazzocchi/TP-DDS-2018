@@ -17,6 +17,7 @@ import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
 import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
 import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,9 +39,21 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML
 	private ComboBox<String> comboBox;
 	@FXML
-	private TableView<Empresa> tblListado;
+	private TableView<Empresa> tblLongevidad;
 	@FXML
-	private TableColumn<String, Empresa> longevidad = new TableColumn<String, Empresa>("listaEmpresas");
+	private TableView<Empresa> tblMaxROE;
+	@FXML
+	private TableView<Empresa> tblMinROA;
+	@FXML
+	private TableView<Empresa> tblMargenCreciente;
+	@FXML
+	private TableColumn<Empresa, String> columnaLongevidad = new TableColumn<Empresa, String>();
+	@FXML
+	private TableColumn<Empresa, String> columnaMaxROE = new TableColumn<Empresa, String>();
+	@FXML
+	private TableColumn<Empresa, String> columnaMinROA = new TableColumn<Empresa, String>();
+	@FXML
+	private TableColumn<Empresa, String> columnaMargenCreciente = new TableColumn<Empresa, String>();
 
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
@@ -74,9 +87,6 @@ public class MetodologiaExistenteController implements Initializable {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("Metodologia Buffet");
 		comboBox.getSelectionModel().select("Metodologia Buffet");
-
-		longevidad.setCellValueFactory(new PropertyValueFactory<String, Empresa>("listaEmpresas"));
-		// tblListado.getColumns().add(longevidad);
 
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
@@ -139,15 +149,23 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML
 	public void aplicarMetodologia(ActionEvent event) throws IOException {
 		if (event.getSource() == btnAplicar) {
-
-			tblListado.setItems(FXCollections
+			tblLongevidad.setItems(FXCollections
 					.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
-			tblListado.setItems(
+			columnaLongevidad
+					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+
+			tblMaxROE.setItems(
 					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(maxIndicador.getNombre())));
-			tblListado.setItems(
+			columnaMaxROE.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+
+			tblMinROA.setItems(
 					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(minIndicador.getNombre())));
-			tblListado.setItems(FXCollections
+			columnaMinROA.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+
+			tblMargenCreciente.setItems(FXCollections
 					.observableArrayList(metodologiaBuffet.getResultados().get(margenCreciente.getNombre())));
+			columnaMargenCreciente
+					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 		}
 	}
 

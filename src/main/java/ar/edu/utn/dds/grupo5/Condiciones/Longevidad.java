@@ -10,8 +10,11 @@ import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
@@ -21,7 +24,7 @@ public class Longevidad extends Condicion {
 
 	private int aniosAntiguedad;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCondicion")
+	@JoinColumn(name = "id_condicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public Longevidad(int aniosAntiguedad) {
@@ -42,8 +45,6 @@ public class Longevidad extends Condicion {
 			}
 		});
 
-		// List<String> listaLongevidad = new ArrayList<>();
-		// listaEmpresas.stream().forEach(x -> listaLongevidad.add(x.getNombre()));
 		return listaEmpresas;
 	}
 }

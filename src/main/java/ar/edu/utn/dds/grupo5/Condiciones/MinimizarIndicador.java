@@ -19,7 +19,7 @@ public class MinimizarIndicador extends Condicion {
 
 	private Indicador indicador;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCondicion")
+	@JoinColumn(name = "id_condicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();;
 
 	public MinimizarIndicador(Indicador indicador) {
@@ -40,8 +40,6 @@ public class MinimizarIndicador extends Condicion {
 				}
 			}
 		});
-		// List<String> listaNombreEmpresas = new ArrayList<>();
-		// listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
 		return listaEmpresas;
 	}
 }

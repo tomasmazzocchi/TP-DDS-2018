@@ -18,7 +18,7 @@ import ar.edu.utn.dds.grupo5.Empresa;
 public class MargenCreciente extends Condicion {
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCondicion")
+	@JoinColumn(name = "id_condicion")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MargenCreciente() {
@@ -41,8 +41,6 @@ public class MargenCreciente extends Condicion {
 				}
 			}
 		});
-		// List<String> listaNombreEmpresas = new ArrayList<>();
-		// listaEmpresas.stream().forEach(x -> listaNombreEmpresas.add(x.getNombre()));
 		return listaEmpresas;
 	}
 

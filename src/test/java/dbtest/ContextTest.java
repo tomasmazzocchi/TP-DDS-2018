@@ -1,4 +1,4 @@
-package db;
+package dbtest;
 
 import static org.junit.Assert.*;
 

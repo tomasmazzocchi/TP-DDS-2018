@@ -12,15 +12,15 @@ import javax.persistence.Table;
 @Table(name = "Cuenta")
 public class Cuenta {
 	@Id	@GeneratedValue
-	@Column(name = "idCuenta")
+	@Column(name = "id_cuenta")
 	private int idCuenta;
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name = "valor")
 	private double valor;
-	@Column(name = "fechaDesde")
+	@Column(name = "fecha_desde")
 	private LocalDate fechaDesde;
-	@Column(name = "fechaHasta")
+	@Column(name = "fecha_hasta")
 	private LocalDate fechaHasta;
 
 	public String getNombre() {

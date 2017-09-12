@@ -17,7 +17,7 @@ public class Metodologia {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
 	@OneToMany
-	@MapKeyColumn(name="empresas")
+	@MapKeyColumn(name="id_empresa")
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
 
 	public Metodologia(List<Condicion> condiciones) {

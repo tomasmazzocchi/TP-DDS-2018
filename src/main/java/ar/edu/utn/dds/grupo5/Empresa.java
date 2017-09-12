@@ -21,17 +21,17 @@ import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 @Table(name = "Empresa")
 public class Empresa {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEmpresa")
+	@Column(name = "id_empresa")
 	private int idEmpresa;
 	@Column(name = "nombre")
 	private String nombre;
-	@Column(name = "anioFundacion")
+	@Column(name = "anio_fundacion")
 	private LocalDate anioFundacion;
 	@OneToMany
-	@JoinColumn(name = "idEmpresa")
+	@JoinColumn(name = "id_empresa")
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	@OneToMany
-	@Column(name = "idEmpresa")
+	@Column(name = "id_empresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 	
 

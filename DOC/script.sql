@@ -1,7 +1,11 @@
 CREATE SCHEMA dds2017;
 
-DROP table Metodologia;
-DROP table Condicion;
+DROP TABLE IF EXISTS Cuenta;
+DROP TABLE IF EXISTS Condicion;
+DROP TABLE IF EXISTS Indicador;
+DROP TABLE IF EXISTS Empresa;
+DROP TABLE IF EXISTS Metodologia;
+
 
 CREATE TABLE Metodologia (
 	id_metodologia 			int,

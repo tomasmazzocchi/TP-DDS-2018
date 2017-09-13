@@ -4,7 +4,8 @@ DROP table Metodologia;
 DROP table Condicion;
 
 CREATE TABLE Metodologia (
-	id_metodologia int,
+	id_metodologia 			int,
+    nombre 					varchar(50),
     PRIMARY KEY(id_metodologia)
 );
 

@@ -102,7 +102,7 @@ public class CondicionesTest {
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
 		condiciones.add(margenCreciente);
-		metodologiaBuffet = new Metodologia(condiciones);
+		metodologiaBuffet = new Metodologia("Metodologia Buffet",condiciones);
 	}
 
 	@After

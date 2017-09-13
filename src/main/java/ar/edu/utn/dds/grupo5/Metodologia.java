@@ -6,20 +6,31 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table( name="Metodologia")
 public class Metodologia {
+	@Id @GeneratedValue
+	@Column(name="id_metodologia")
+	private int idMetodologia;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
-	@OneToMany
-	@MapKeyColumn(name="id_metodologia")
+	
+    @Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
-
+	
 	public Metodologia(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}

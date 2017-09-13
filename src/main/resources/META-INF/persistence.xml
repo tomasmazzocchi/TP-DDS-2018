@@ -5,14 +5,14 @@
     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
     version="2.0"> 
   
-    <persistence-unit name="dds2017" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
-    	 <class>ar.edu.utn.dds.grupo5.Condicion</class>  
-    	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>  
+    	 <class>ar.edu.utn.dds.grupo5.Condicion</class> 
+    	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>
     	 <class>ar.edu.utn.dds.grupo5.Empresa</class>  
     	 <class>ar.edu.utn.dds.grupo5.Indicador</class>  
-    	 <class>ar.edu.utn.dds.grupo5.Metodologia</class>      	
+    	 <class>ar.edu.utn.dds.grupo5.Metodologia</class>    	
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>               

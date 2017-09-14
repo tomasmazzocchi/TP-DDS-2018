@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Indicador")
+@Table(name="indicador")
 public class Indicador {
 	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_indicador")
@@ -21,6 +21,10 @@ public class Indicador {
 	public Indicador(String nombre, String formula) {
 		this.setNombre(nombre);
 		this.setFormula(formula);
+	}
+	
+	protected Indicador() {
+		
 	}
 
 	public String getNombre() {

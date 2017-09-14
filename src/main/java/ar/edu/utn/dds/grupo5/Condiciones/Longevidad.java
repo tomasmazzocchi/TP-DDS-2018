@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -17,6 +18,7 @@ import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
 @Entity
+@DiscriminatorValue(value = "longevidad")
 public class Longevidad extends Condicion {
 
 	private int aniosAntiguedad;
@@ -27,6 +29,10 @@ public class Longevidad extends Condicion {
 	public Longevidad(int aniosAntiguedad) {
 		this.aniosAntiguedad = aniosAntiguedad;
 		this.nombre = "Longevidad";
+	}
+	
+	protected Longevidad() {
+		
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {

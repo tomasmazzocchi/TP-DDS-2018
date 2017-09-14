@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Cuenta")
+@Table(name="cuenta")
 public class Cuenta {
 	@Id	@GeneratedValue
 	@Column(name = "id_cuenta")
@@ -60,5 +60,9 @@ public class Cuenta {
 		this.setValor(valor);
 		this.setFechaDesde(fechaDesde);
 		this.setFechaHasta(fechaHasta);
+	}
+	
+	protected Cuenta() {
+		
 	}
 }

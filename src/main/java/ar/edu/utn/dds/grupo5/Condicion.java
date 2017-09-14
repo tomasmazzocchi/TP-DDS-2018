@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Condicion")
+@Table(name="condicion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_condicion")
 public abstract class Condicion {
@@ -21,6 +21,10 @@ public abstract class Condicion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idCondicion;
 
+	protected Condicion() {
+		
+	}
+	
 	public abstract List<Empresa> aplicarCondicion(List<Empresa> empresas);
 
 	public void setNombre(String nombre) {

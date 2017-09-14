@@ -30,6 +30,10 @@ public class MinimizarIndicador extends Condicion {
 		this.indicador = indicador;
 		this.nombre = "Minimizar " + indicador.getNombre();
 	}
+	
+	protected MinimizarIndicador() {
+		
+	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		listaEmpresas.addAll(empresas);

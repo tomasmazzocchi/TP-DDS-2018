@@ -18,7 +18,7 @@ import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
 import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 
 @Entity
-@Table(name = "Empresa")
+@Table(name="empresa")
 public class Empresa {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
@@ -41,6 +41,10 @@ public class Empresa {
 		this.listaCuentas = listaCuentas;
 		this.listaIndicadores = listaIndicadores;
 		this.anioFundacion = anioFundacion;
+	}
+	
+	protected Empresa() {
+		
 	}
 
 	public String getNombre() {

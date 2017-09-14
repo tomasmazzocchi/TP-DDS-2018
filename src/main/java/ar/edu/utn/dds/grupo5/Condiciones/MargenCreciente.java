@@ -26,7 +26,7 @@ public class MargenCreciente extends Condicion {
 	public MargenCreciente() {
 		this.nombre = "Margen creciente";
 	}
-
+	
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		listaEmpresas.addAll(empresas);
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {

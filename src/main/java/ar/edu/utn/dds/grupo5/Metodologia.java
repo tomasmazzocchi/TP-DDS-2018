@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Metodologia")
+@Table(name="metodologia")
 public class Metodologia {
 	@Id
 	@GeneratedValue
@@ -30,6 +30,10 @@ public class Metodologia {
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
+	}
+	
+	protected Metodologia() {
+		
 	}
 
 	// ----------------------GETTERS AND SETTERS-----------------------------------

@@ -27,6 +27,7 @@
             <property name="hibernate.format_sql" value="true" /> 
             <property name="use_sql_comments" value="true" /> 
             <property name="hibernate.hbm2ddl.auto" value="update" /> 
+            <property name="schema" value="dds2017"/>
             
         </properties>
           

@@ -13,10 +13,10 @@ public class Indicador {
 	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_indicador")
 	private int idIndicador;
-	@Column(name = "nombre")
-	private String nombre;
 	@Column(name = "formula")
 	private String formula;
+	@Column(name = "nombre")
+	private String nombre;
 
 	public Indicador(String nombre, String formula) {
 		this.setNombre(nombre);

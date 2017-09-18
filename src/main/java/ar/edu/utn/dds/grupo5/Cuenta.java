@@ -14,14 +14,14 @@ public class Cuenta {
 	@Id	@GeneratedValue
 	@Column(name = "id_cuenta")
 	private int idCuenta;
-	@Column(name = "nombre")
-	private String nombre;
-	@Column(name = "valor")
-	private double valor;
 	@Column(name = "fecha_desde")
 	private LocalDate fechaDesde;
 	@Column(name = "fecha_hasta")
 	private LocalDate fechaHasta;
+	@Column(name = "nombre")
+	private String nombre;
+	@Column(name = "valor")
+	private double valor;
 
 	public String getNombre() {
 		return nombre;

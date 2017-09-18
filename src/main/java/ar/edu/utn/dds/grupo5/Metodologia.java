@@ -21,9 +21,10 @@ public class Metodologia {
 	@GeneratedValue
 	@Column(name = "id_metodologia")
 	private int idMetodologia;
+	@Column(name = "nombre")
+	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Condicion> condiciones;
-	private String nombre;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
 

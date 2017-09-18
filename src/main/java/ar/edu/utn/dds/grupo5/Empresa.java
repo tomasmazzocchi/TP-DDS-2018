@@ -23,10 +23,10 @@ public class Empresa {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
 	private int idEmpresa;
-	@Column(name = "nombre")
-	private String nombre;
 	@Column(name = "anio_fundacion")
 	private LocalDate anioFundacion;
+	@Column(name = "nombre")
+	private String nombre;
 	@OneToMany
 	@JoinColumn(name = "id_empresa")
 	private List<Cuenta> listaCuentas = new ArrayList<>();

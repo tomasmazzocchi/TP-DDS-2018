@@ -2,6 +2,7 @@ package ar.edu.utn.dds.grupo5;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +17,11 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_condicion")
 public abstract class Condicion {
-	protected String nombre;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idCondicion;
+	@Column(name = "nombre")
+	protected String nombre;
 
 	protected Condicion() {
 

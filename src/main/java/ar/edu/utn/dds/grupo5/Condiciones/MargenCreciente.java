@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
-@Entity
-@DiscriminatorValue(value = "margen_creciente")
+@Entity 
+@DiscriminatorValue(value = "margen_creciente ")
 public class MargenCreciente extends Condicion {
 
 	@OneToMany(cascade = CascadeType.ALL)

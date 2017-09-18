@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="indicador")
+@Table(name = "indicador", schema = "dds2017")
 public class Indicador {
 	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_indicador")
@@ -22,9 +22,9 @@ public class Indicador {
 		this.setNombre(nombre);
 		this.setFormula(formula);
 	}
-	
+
 	protected Indicador() {
-		
+
 	}
 
 	public String getNombre() {

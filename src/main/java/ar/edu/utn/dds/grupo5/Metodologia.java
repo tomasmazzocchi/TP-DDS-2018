@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="metodologia")
+@Table(name = "metodologia", schema = "dds2017")
 public class Metodologia {
 	@Id
 	@GeneratedValue
@@ -31,9 +31,9 @@ public class Metodologia {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
 	}
-	
+
 	protected Metodologia() {
-		
+
 	}
 
 	// ----------------------GETTERS AND SETTERS-----------------------------------

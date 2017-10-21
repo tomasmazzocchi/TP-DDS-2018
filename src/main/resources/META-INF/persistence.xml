@@ -6,6 +6,8 @@
     version="2.0"> 
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+    	<!---<provider>org.hibernate.ejb.HibernatePersistence</provider>  -->
+    	<!---<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	 <class>ar.edu.utn.dds.grupo5.Metodologia</class>    	
@@ -24,12 +26,14 @@
             <property name="hibernate.connection.password" value="1234" /> 
    <!--           <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" /> -->
 
-            <property name="hibernate.show_sql" value="false" /> 
+            <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
             <property name="use_sql_comments" value="true" /> 
             <property name="hibernate.hbm2ddl.auto" value="update" /> 
             
         </properties>
+        
+       
           
     </persistence-unit> 
   

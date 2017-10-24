@@ -105,10 +105,13 @@ public class MainApp3 {
 		metodologiaBuffet = new Metodologia("Metodologia Buffet",condiciones);
 		
 		//Persist
-			EntityManager em = EMFactorySingleton.instance();
+			EntityManager em = EMFactorySingleton.instance().createEntityManager();
+			em.getTransaction().begin();
 		  try {
 		      // TODO: Use the EntityManager to access the database
-			  em.persist(metodologiaBuffet);
+			  //em.persist(cuentaMARGENTwitter);
+			 em.persist(metodologiaBuffet);
+			 em.getTransaction().commit();
 		  }
 		  finally {
 		      em.close();

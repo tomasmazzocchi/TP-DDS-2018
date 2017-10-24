@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS metodologia;
 
 
 CREATE TABLE metodologia (
-	id_metodologia 			int,
+	id_metodologia 			int AUTO_INCREMENT,
     nombre 					varchar(50),
     PRIMARY KEY(id_metodologia)
 );

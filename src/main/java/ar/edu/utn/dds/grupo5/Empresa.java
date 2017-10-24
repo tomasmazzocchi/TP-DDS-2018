@@ -22,7 +22,7 @@ import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 public class Empresa {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
-	private int idEmpresa;
+	private int id_empresa;
 	@Column(name = "anio_fundacion")
 	private LocalDate anioFundacion;
 	@Column(name = "nombre")

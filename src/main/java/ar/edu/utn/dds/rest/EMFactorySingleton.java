@@ -7,8 +7,8 @@ import javax.persistence.Persistence;
 
 public class EMFactorySingleton {
 
-	private static EntityManager instance;
-	public static EntityManager instance(){
+	private static EntityManagerFactory instance;
+	public static EntityManagerFactory instance(){
 		if(instance == null){
 			createEMFactory();
 		}
@@ -16,8 +16,8 @@ public class EMFactorySingleton {
 	}
 	
 	private static void createEMFactory() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
-	    instance = emf.createEntityManager();
+		instance = Persistence.createEntityManagerFactory("db");
+	    
 	}
 	
 }

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public abstract class Condicion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int idCondicion;
+	private int id_condicion;
 	@Column(name = "nombre")
 	protected String nombre;
 

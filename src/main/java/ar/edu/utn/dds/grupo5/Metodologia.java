@@ -33,10 +33,6 @@ public class Metodologia {
 		this.condiciones = condiciones;
 	}
 
-	protected Metodologia() {
-
-	}
-
 	// ----------------------GETTERS AND SETTERS-----------------------------------
 	public List<Condicion> getCondiciones() {
 		return condiciones;

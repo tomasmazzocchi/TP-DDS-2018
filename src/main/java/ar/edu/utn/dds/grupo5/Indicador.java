@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "indicador", schema = "dds2017")
 public class Indicador {
-	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_indicador")
+	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idIndicador;
 	@Column(name = "formula")
 	private String formula;

@@ -8,12 +8,20 @@ DROP TABLE IF EXISTS condicion;
 DROP TABLE IF EXISTS indicador;
 DROP TABLE IF EXISTS empresa;
 DROP TABLE IF EXISTS metodologia;
+DROP TABLE IF EXISTS usuario;
 
+CREATE TABLE usuario (
+	id_usuario int AUTO_INCREMENT,
+    nombre varchar(50),
+    pass varchar(50),
+    PRIMARY KEY (id_usuario)
+    );
 
 CREATE TABLE metodologia (
 	id_metodologia 			int AUTO_INCREMENT,
     nombre 					varchar(50),
-    PRIMARY KEY(id_metodologia)
+    PRIMARY KEY(id_metodologia),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE empresa (
@@ -31,7 +39,8 @@ CREATE TABLE indicador (
 	formula      varchar(50),
     id_empresa   int,
     PRIMARY KEY (id_indicador),
-    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE condicion (
@@ -56,5 +65,4 @@ CREATE TABLE cuenta (
     PRIMARY KEY (id_cuenta),
 	FOREIGN KEY(id_empresa) REFERENCES empresa(id_empresa)
 );
-
 

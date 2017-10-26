@@ -20,6 +20,7 @@ CREATE TABLE usuario (
 CREATE TABLE metodologia (
 	id_metodologia 			int AUTO_INCREMENT,
     nombre 					varchar(50),
+    id_usuario              int,
     PRIMARY KEY(id_metodologia),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
@@ -37,10 +38,11 @@ CREATE TABLE indicador (
 	id_indicador int AUTO_INCREMENT,
 	nombre       varchar(50),
 	formula      varchar(50),
+    id_usuario 	 int,
     id_empresa   int,
     PRIMARY KEY (id_indicador),
-    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE condicion (

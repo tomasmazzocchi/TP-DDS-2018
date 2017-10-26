@@ -23,7 +23,7 @@ public class Longevidad extends Condicion {
 
 	private int aniosAntiguedad;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_condicion")
+	@JoinColumn(name = "id_empresa")
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public Longevidad(int aniosAntiguedad) {

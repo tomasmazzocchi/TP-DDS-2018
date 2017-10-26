@@ -24,7 +24,7 @@ public class Empresa {
 	@Column(name = "id_empresa")
 	private int id_empresa;
 	@Column(name = "anio_fundacion")
-	private LocalDate anioFundacion;
+	private LocalDate anio_fundacion;
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToMany
@@ -40,7 +40,7 @@ public class Empresa {
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
 		this.listaIndicadores = listaIndicadores;
-		this.anioFundacion = anioFundacion;
+		this.anio_fundacion = anioFundacion;
 	}
 
 	protected Empresa() {
@@ -56,11 +56,11 @@ public class Empresa {
 	}
 
 	public LocalDate getAnioFundacion() {
-		return anioFundacion;
+		return anio_fundacion;
 	}
 
 	public void setAnioFundacion(LocalDate anioFundacion) {
-		this.anioFundacion = anioFundacion;
+		this.anio_fundacion = anioFundacion;
 	}
 
 	public List<Cuenta> getListaCuentas() {
@@ -76,7 +76,7 @@ public class Empresa {
 	}
 
 	public boolean esLongeva(LocalDate fechaDesde) {
-		return this.anioFundacion.compareTo(fechaDesde) <= 0;
+		return this.anio_fundacion.compareTo(fechaDesde) <= 0;
 	}
 
 	public static List<Cuenta> listaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {

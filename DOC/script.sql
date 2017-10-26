@@ -27,8 +27,8 @@ CREATE TABLE metodologia (
 
 CREATE TABLE empresa (
 	id_empresa	   int AUTO_INCREMENT,
-	nombre    	   varchar(50),
-	anio_fundacion date,
+	 anio_fundacion datetime,
+    nombre    	   varchar(50),
 	id_metodologia int,
     PRIMARY KEY (id_empresa),
     FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia)

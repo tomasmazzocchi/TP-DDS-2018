@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -27,6 +28,8 @@ public class Metodologia {
 	private List<Condicion> condiciones;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Usuario usuarioAsociado;
 
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;

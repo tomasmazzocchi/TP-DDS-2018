@@ -1,0 +1,7 @@
+Como instalar Redis:
+	- Crear directorio en C:\redis\bin
+	- Extraer 'Redis.zip'
+	- Listo
+
+ANTES DE HACER CORRER LAS CLASES DE JAVA HAY QUE ABRIR "redis-server.exe" QUE SE UBICA EN EL DIRECTORIO CREADO ANTERIORMENTE. 
+LUEGO YA SE PUEDE USAR

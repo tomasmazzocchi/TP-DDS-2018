@@ -16,40 +16,41 @@ public class RedisTest {
 	private Indicador indicadorROE;
 	private Cuenta cuentaEBIDTAFacebook;
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
-	private List<Indicador> listaIndicadoresFacebook=  new ArrayList<>();
+	private List<Indicador> listaIndicadoresFacebook = new ArrayList<>();
 	private Empresa facebook;
 
 	@Before
 	public void init() {
 		Cache.getInstancia().activarCache();
-		
+
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
-		
+
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaIndicadoresFacebook.add(indicadorROE);
-		
-		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
 
+		facebook = new Empresa("Facebook", listaCuentasFacebook, listaIndicadoresFacebook, LocalDate.now());
 
 	}
-	
+
 	@Test
 	public void redisTest() {
 		Cache.getInstancia().agregarIndicador("Hola", "Mundo");
 		Assert.assertTrue(Cache.getInstancia().criterioEstaEnCache("Hola"));
 	}
-	
+
 	@Test
 	public void desactivoCche() {
 		Cache.getInstancia().agregarIndicador("River", "Plate");
 		Cache.getInstancia().desactivarCache();
 		Assert.assertFalse(Cache.getInstancia().criterioEstaEnCache("River"));
 	}
-	
+
 	@Test
 	public void funcionamientoCache() {
-		Cache.getInstancia().agregarIndicador(facebook.getListaIndicadores().get(0).getNombre(), Integer.toString(indicadorROE.calcularIndicador(facebook)));
-		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook)), Cache.getInstancia().obtenerIndicador(facebook.getListaIndicadores().get(0).getNombre()));
+		Cache.getInstancia().agregarIndicador(facebook.getListaIndicadores().get(0).getNombre(),
+				Integer.toString(indicadorROE.calcularIndicador(facebook)));
+		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook)),
+				Cache.getInstancia().obtenerIndicador(facebook.getListaIndicadores().get(0).getNombre()));
 	}
 }

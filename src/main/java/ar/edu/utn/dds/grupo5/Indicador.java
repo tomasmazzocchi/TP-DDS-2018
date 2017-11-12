@@ -14,7 +14,8 @@ import javax.persistence.Transient;
 @Table(name = "indicador", schema = "dds2017")
 public class Indicador {
 	@Column(name = "id_indicador")
-	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idIndicador;
 	@Column(name = "formula")
 	private String formula;
@@ -24,12 +25,12 @@ public class Indicador {
 	private Usuario usuarioAsociado;
 	@Transient
 	private int valor;
-	
+
 	public Indicador(String nombre, String formula) {
 		this.setNombre(nombre);
 		this.setFormula(formula);
 	}
-	
+
 	public int getValor() {
 		return valor;
 	}
@@ -37,7 +38,6 @@ public class Indicador {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-
 
 	protected Indicador() {
 
@@ -65,7 +65,7 @@ public class Indicador {
 		parser = new ExpressionParser();
 
 		// Hay QUE VER QUE PASARIA SI LA EMPRESA NO TIENE ESE INDICADOR
-		
+
 		setValor(parser.resolverFormula(this.formula, unaEmpresa));
 		return getValor();
 	}

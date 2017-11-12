@@ -2,9 +2,6 @@ package ar.edu.utn.dds.HerramientasExternas;
 
 import redis.clients.jedis.Jedis;
 
-import java.util.List;
-
-import ar.edu.utn.dds.grupo5.Indicador;
 
 public class Cache {
 	
@@ -45,8 +42,8 @@ public class Cache {
 		}
 	}
 	
-	public List<Indicador> obtenerIndicadores(String criterio){
-		return null;
+	public String obtenerIndicador(String key){
+		return jedis.get(key);
 	}
 	/*
 	public static void main(String[] args) {

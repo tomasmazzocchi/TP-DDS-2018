@@ -34,7 +34,7 @@ public class Cache {
 		jedis = null;
 	}
 	
-	public boolean indicadorEstaEnCache(String criterio) {
+	public boolean criterioEstaEnCache(String criterio) {
 		return jedis != null && jedis.exists(criterio);
 	}
 	

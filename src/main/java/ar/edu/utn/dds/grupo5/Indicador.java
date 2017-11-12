@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "indicador", schema = "dds2017")
@@ -21,11 +22,22 @@ public class Indicador {
 	private String nombre;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Usuario usuarioAsociado;
-
+	@Transient
+	private int valor;
+	
 	public Indicador(String nombre, String formula) {
 		this.setNombre(nombre);
 		this.setFormula(formula);
 	}
+	
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
+
 
 	protected Indicador() {
 
@@ -53,9 +65,9 @@ public class Indicador {
 		parser = new ExpressionParser();
 
 		// Hay QUE VER QUE PASARIA SI LA EMPRESA NO TIENE ESE INDICADOR
-
-		return parser.resolverFormula(this.formula, unaEmpresa);
-
+		
+		setValor(parser.resolverFormula(this.formula, unaEmpresa));
+		return getValor();
 	}
 
 }

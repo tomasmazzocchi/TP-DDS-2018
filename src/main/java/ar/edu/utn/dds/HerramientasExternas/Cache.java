@@ -1,5 +1,8 @@
 package ar.edu.utn.dds.HerramientasExternas;
 
+import java.util.List;
+
+import ar.edu.utn.dds.grupo5.Indicador;
 import redis.clients.jedis.Jedis;
 
 
@@ -36,11 +39,17 @@ public class Cache {
 	}
 	
 	//Ingreso indicadores a la cache
-	public void actualizarCache(String key, String value) {
+	public void agregarIndicador(String key, String value) {
 		if(jedis!=null && value !=null) {
 			jedis.setex(key, durationXKey, value);
 		}
 	}
+	
+	/*public void agregarListaIndicadoresAEmpresa(String empresa,List<Indicador> lista) {
+		if(jedis!=null && lista != null) {
+			lista.stream().forEach(x -> jedis.sadd(empresa, Integer.toString(x.getValor()))); 
+		}
+	}*/
 	
 	public String obtenerIndicador(String key){
 		return jedis.get(key);

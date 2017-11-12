@@ -36,20 +36,20 @@ public class RedisTest {
 	
 	@Test
 	public void redisTest() {
-		Cache.getInstancia().actualizarCache("Hola", "Mundo");
+		Cache.getInstancia().agregarIndicador("Hola", "Mundo");
 		Assert.assertTrue(Cache.getInstancia().criterioEstaEnCache("Hola"));
 	}
 	
 	@Test
 	public void desactivoCche() {
-		Cache.getInstancia().actualizarCache("River", "Plate");
+		Cache.getInstancia().agregarIndicador("River", "Plate");
 		Cache.getInstancia().desactivarCache();
 		Assert.assertFalse(Cache.getInstancia().criterioEstaEnCache("River"));
 	}
 	
 	@Test
 	public void funcionamientoCache() {
-		Cache.getInstancia().actualizarCache(facebook.getListaIndicadores().get(0).getNombre(), Integer.toString(indicadorROE.calcularIndicador(facebook)));
+		Cache.getInstancia().agregarIndicador(facebook.getListaIndicadores().get(0).getNombre(), Integer.toString(indicadorROE.calcularIndicador(facebook)));
 		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook)), Cache.getInstancia().obtenerIndicador(facebook.getListaIndicadores().get(0).getNombre()));
 	}
 }

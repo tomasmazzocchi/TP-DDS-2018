@@ -4,6 +4,7 @@
 .app-body {
   margin:0;
   width:100%;
+  margin-top: 2%;
 }
 body {
   background: #eeeeee;
@@ -13,21 +14,37 @@ body {
   height:100%!important;
 }
 .center {
-  text-align:center;
+  text-align:-webkit-center;
+}
+.float-left{
+  float:left;
 }
 .tarjeta {
-  margin-top:10%;
   font-size:11px!important;
   text-align: center;
   font-weight: bolder;
-  width:20%;
+  width:350px!important;
+  height:300px;
   padding:10px;
 }
-
-img {
-  height:150px;
+.tarjeta .card-image{
+  height:85%;
 }
-
+.card .card-action {
+  padding: 13px 24px;
+}
+.card img {
+    height:100%;
+}
+.absolte {
+  position:absolute!important;
+}
+.noTop {
+  top:0px;
+}
+.float-right{
+  float:right;
+}
 html{
   height:100vh;
 }
@@ -37,4 +54,7 @@ footer {
   height:55px;
   position:absolute;
   bottom:0;
+}
+.no-pad {
+  padding:0;
 }

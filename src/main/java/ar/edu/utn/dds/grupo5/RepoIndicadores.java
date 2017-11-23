@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
 import ar.edu.utn.dds.ExceptionHandler.IndicadorInexistenteException;
 import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
+
 
 public class RepoIndicadores {
 	private String nombre;
@@ -87,5 +93,28 @@ public class RepoIndicadores {
 		for (int i = 0; i < count; i++) {
 			this.guardarIndicadorEnRepo(nombres.get(i), formulas.get(i));
 		}
+	}
+	
+	public List<Indicador> obtenerIndicadores(EntityManager em) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
+		Root<Indicador> rootEntry = criteria.from(Indicador.class);
+		CriteriaQuery<Indicador> all = criteria.select(rootEntry);
+		List<Indicador> resultList = em.createQuery(all).getResultList();
+		return resultList;
+	}
+	public List<Indicador> obtenerIndicadores(EntityManager em, String nombre) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
+		Root<Indicador> root = criteria.from(Indicador.class);
+		criteria.where(criteriaBuilder.equal(root.get("nombre"), nombre));
+		List<Indicador> resultList = em.createQuery(criteria).getResultList();
+		return resultList;
+	}
+	public void save(EntityManager em, Indicador indicador) {
+		em.persist(indicador);
+	}
+	public Indicador obtenerIndicador(EntityManager em, int id) {		
+		return em.find(Indicador.class, id);
 	}
 }

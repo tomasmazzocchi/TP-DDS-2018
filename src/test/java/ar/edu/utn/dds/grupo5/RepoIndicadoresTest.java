@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -14,6 +18,7 @@ import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class RepoIndicadoresTest {
 	ExpressionParser parser;
@@ -65,9 +70,27 @@ public class RepoIndicadoresTest {
 		Assert.assertEquals(ind.getNombre(),"indicador1");
 	}
 	@Test
-	public void siGuardoIndicadorEnUnaEmpresaConFormulaIncorrectaEntoncesNoSeGuarda(){
-		thrown.expect(ArgumentoIlegalException.class);
-		thrown.expectMessage("Formula no Valida");
-		repoIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(pepe+1)*2");
+	public void pruebaemindicadores(){
+		EntityManagerFactory emf = EMFactorySingleton.instance();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Assert.assertEquals(repoIndicadores.obtenerIndicador(em, 2).getNombre(),"ROE2");
+		tx.commit();
+		em.close();
 	}
+	@Test
+	public void pruebaemindicadores2(){
+		EntityManagerFactory emf = EMFactorySingleton.instance();
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		List<Indicador> lista = repoIndicadores.obtenerIndicadores(em);
+		System.out.println("la papa");
+		System.out.println(lista.get(0).getNombre());
+		System.out.println(lista.get(1).getNombre());
+		tx.commit();
+		em.close();
+	}
+
 }

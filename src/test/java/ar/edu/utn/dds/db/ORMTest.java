@@ -1,32 +1,22 @@
 package ar.edu.utn.dds.db;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.grupo5.Usuario;
+
 
 
 public class ORMTest {
@@ -39,7 +29,7 @@ public class ORMTest {
 	private List<Indicador> listaIndicadores;
 
 	private static EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager = null;
+	private static EntityManager entityManager = null;
 
 	@BeforeClass
 	public static void setUpClass() {

@@ -11,12 +11,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cuenta", schema = "dds2017")
 public class Cuenta {
-	@Id	@GeneratedValue
 	@Column(name = "id_cuenta")
+	@Id	@GeneratedValue
 	private int idCuenta;
-	@Column(name = "fecha_desde")
+	@Column(name = "fecha_desde" )
 	private LocalDate fechaDesde;
-	@Column(name = "fecha_hasta")
+	@Column(name = "fecha_hasta" )
 	private LocalDate fechaHasta;
 	@Column(name = "nombre")
 	private String nombre;

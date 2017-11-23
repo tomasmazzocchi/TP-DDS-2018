@@ -1,8 +1,5 @@
 package ar.edu.utn.dds.HerramientasExternas;
 
-import java.util.List;
-
-import ar.edu.utn.dds.grupo5.Indicador;
 import redis.clients.jedis.Jedis;
 
 public class Cache {

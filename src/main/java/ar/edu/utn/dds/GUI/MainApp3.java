@@ -112,7 +112,7 @@ public class MainApp3 {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-			em.persist(facebook);
+			em.persist(usuario1);
 					
 		em.getTransaction().commit();
 			

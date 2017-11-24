@@ -18,7 +18,8 @@ import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.rest.EMFactorySingleton;
+import ar.edu.utn.dds.hibernate.EMFactorySingleton;
+
 
 public class RepoIndicadoresTest {
 	ExpressionParser parser;

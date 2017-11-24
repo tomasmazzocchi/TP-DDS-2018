@@ -58,7 +58,7 @@ public class UsuarioTest {
 		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();
 		this.entityManager.persist(usuario);
-		this.entityManager.persist(metodologiaBuffet);
+		//this.entityManager.persist(metodologiaBuffet);
 		tx.commit();
 		Usuario user = (Usuario) this.entityManager
 				.createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = 'Tomi'")

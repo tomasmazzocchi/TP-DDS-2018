@@ -18,7 +18,8 @@ import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.hibernate.EMFactorySingleton;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
+
 
 
 public class RepoIndicadoresTest {
@@ -70,28 +71,7 @@ public class RepoIndicadoresTest {
 		Indicador ind = RepoIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
 		Assert.assertEquals(ind.getNombre(),"indicador1");
 	}
-	@Test
-	public void pruebaemindicadores(){
-		EntityManagerFactory emf = EMFactorySingleton.instance();
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		Assert.assertEquals(repoIndicadores.obtenerIndicador(em, 2).getNombre(),"ROE2");
-		tx.commit();
-		em.close();
-	}
-	@Test
-	public void pruebaemindicadores2(){
-		EntityManagerFactory emf = EMFactorySingleton.instance();
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		List<Indicador> lista = repoIndicadores.obtenerIndicadores(em);
-		System.out.println("la papa");
-		System.out.println(lista.get(0).getNombre());
-		System.out.println(lista.get(1).getNombre());
-		tx.commit();
-		em.close();
-	}
-
 }
+
+
+

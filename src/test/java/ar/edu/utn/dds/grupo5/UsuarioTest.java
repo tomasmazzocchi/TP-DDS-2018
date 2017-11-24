@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class UsuarioTest {
 	private Usuario usuario;
@@ -27,7 +28,7 @@ public class UsuarioTest {
 
 	@BeforeClass
 	public static void setUpClass() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("db");
+		entityManagerFactory = EMFactorySingleton.instance();
 
 	}
 
@@ -53,12 +54,12 @@ public class UsuarioTest {
 
 	@Test
 	public void siPersistoUnUsuarioLuegoLoObtengo() {
-		borrarObjetosDeClase(Usuario.class);
+		//borrarObjetosDeClase(Usuario.class);
 		this.entityManager = entityManagerFactory.createEntityManager();
 		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();
 		this.entityManager.persist(usuario);
-		//this.entityManager.persist(metodologiaBuffet);
+		this.entityManager.persist(metodologiaBuffet);
 		tx.commit();
 		Usuario user = (Usuario) this.entityManager
 				.createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = 'Tomi'")

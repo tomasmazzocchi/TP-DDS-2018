@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
@@ -22,8 +23,7 @@ public class MaximizarIndicador extends Condicion {
 
 	@OneToOne()
 	private Indicador indicador;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_condicion")
+	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MaximizarIndicador(Indicador indicador) {

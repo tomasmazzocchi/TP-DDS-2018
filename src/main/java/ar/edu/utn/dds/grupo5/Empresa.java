@@ -31,7 +31,7 @@ public class Empresa {
 	@JoinColumn(name = "id_empresa")
 	private List<Cuenta> listaCuentas = new ArrayList<>();
 	@OneToMany
-	@Column(name = "id_empresa")
+	@JoinColumn(name = "id_empresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
 

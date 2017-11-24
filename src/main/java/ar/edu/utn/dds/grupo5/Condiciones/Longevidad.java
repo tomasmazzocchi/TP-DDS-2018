@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
@@ -21,9 +23,9 @@ import ar.edu.utn.dds.grupo5.Empresa;
 @DiscriminatorValue(value = "longevidad")
 public class Longevidad extends Condicion {
 
+	@Column(name = "aniosAntiguedad")
 	private int aniosAntiguedad;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_empresa")
+	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public Longevidad(int aniosAntiguedad) {

@@ -50,6 +50,14 @@ public class Indicador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuarioAsociado = usuario;
+	}
+	
+	public Usuario getUsuario() {
+		return usuarioAsociado;
+	}
 
 	public String getFormula() {
 		return formula;

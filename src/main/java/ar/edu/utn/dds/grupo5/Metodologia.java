@@ -48,6 +48,14 @@ public class Metodologia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuarioAsociado = usuario;
+	}
+	
+	public Usuario getUsuario() {
+		return usuarioAsociado;
+	}
 
 	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;

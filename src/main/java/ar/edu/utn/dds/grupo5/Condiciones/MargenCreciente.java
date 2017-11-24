@@ -11,6 +11,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
@@ -19,8 +20,7 @@ import ar.edu.utn.dds.grupo5.Empresa;
 @DiscriminatorValue(value = "margen_creciente ")
 public class MargenCreciente extends Condicion {
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_condicion")
+	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MargenCreciente() {

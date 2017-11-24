@@ -1,4 +1,4 @@
-package ar.edu.utn.dds.hibernate;
+package ar.edu.utn.dds.rest;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

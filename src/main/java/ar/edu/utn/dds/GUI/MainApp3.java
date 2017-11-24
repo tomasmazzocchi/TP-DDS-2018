@@ -16,31 +16,26 @@ import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
 import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
 import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
-import ar.edu.utn.dds.hibernate.EMFactorySingleton;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class MainApp3 {
 	private static EntityManagerFactory emf = EMFactorySingleton.instance();
 	private static EntityManager em = null;
 	private static Usuario usuario1;
-	private static Usuario usuario2;
 	private static List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private static List<Cuenta> listaCuentasGoogle = new ArrayList<>();
 	private static List<Cuenta> listaCuentasTwitter = new ArrayList<>();
-	private static List<Indicador> listaIndicadoresFacebook = new ArrayList<>();
-	private static List<Indicador> listaIndicadoresGoogle = new ArrayList<>();
-	private static List<Indicador> listaIndicadoresTwitter = new ArrayList<>();
+	private static List<Indicador> listaIndicadoresFacebook;
+	private static List<Indicador> listaIndicadoresGoogle;
+	private static List<Indicador> listaIndicadoresTwitter;
 	private static Empresa facebook;
 	private static Empresa google;
 	private static Empresa twitter;
 	private static RepoEmpresas repoEmpresas;
-	private static Metodologia metodologiaBuffetTwitter;
+	private static Metodologia metodologiaBuffet;
 	private static Longevidad unaLongevidad;
-	private static Indicador indicadorROEFacebook;
-	private static Indicador indicadorROAFacebook;
-	private static Indicador indicadorROEGoogle;
-	private static Indicador indicadorROAGoogle;
-	private static Indicador indicadorROETwitter;
-	private static Indicador indicadorROATwitter;
+	private static Indicador indicadorROE;
+	private static Indicador indicadorROA;
 	private static Indicador indicadorDeudaFacebook;
 	private static Indicador indicadorDeudaGoogle;
 	private static Indicador indicadorDeudaTwitter;
@@ -58,8 +53,6 @@ public class MainApp3 {
 			//Definiciones
 		
 		usuario1 = new Usuario("pablo","1234");
-		usuario2 = new Usuario("pedro","1234");
-		
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTAGoogle = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
@@ -74,24 +67,24 @@ public class MainApp3 {
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
 		
-		indicadorROEFacebook = new Indicador("ROE", "cu.EBIDTA");
-		indicadorROAFacebook = new Indicador("ROA", "cu.Margen");
+		listaIndicadoresFacebook = new ArrayList<>();
+		listaIndicadoresGoogle = new ArrayList<>();
+		listaIndicadoresTwitter = new ArrayList<>();
+		
+		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
+		indicadorROA = new Indicador("ROA", "cu.Margen");
 		indicadorDeudaFacebook = new Indicador("DEUDA","300");
-		indicadorROEGoogle = new Indicador("ROE", "cu.EBIDTA");
-		indicadorROAGoogle = new Indicador("ROA", "cu.Margen");
 		indicadorDeudaGoogle = new Indicador("DEUDA","400");
-		indicadorROETwitter = new Indicador("ROE", "cu.EBIDTA");
-		indicadorROATwitter= new Indicador("ROA", "cu.Margen");
 		indicadorDeudaTwitter = new Indicador("DEUDA","1000");
 		
-		listaIndicadoresFacebook.add(indicadorROEFacebook);
-		listaIndicadoresFacebook.add(indicadorROAFacebook);
+		listaIndicadoresFacebook.add(indicadorROE);
+		listaIndicadoresFacebook.add(indicadorROA);
 		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
-		listaIndicadoresGoogle.add(indicadorROEGoogle);
-		listaIndicadoresGoogle.add(indicadorROAGoogle);
+		listaIndicadoresGoogle.add(indicadorROE);
+		listaIndicadoresGoogle.add(indicadorROA);
 		listaIndicadoresGoogle.add(indicadorDeudaGoogle);
-		listaIndicadoresTwitter.add(indicadorROETwitter);
-		listaIndicadoresTwitter.add(indicadorROATwitter);
+		listaIndicadoresTwitter.add(indicadorROE);
+		listaIndicadoresTwitter.add(indicadorROA);
 		listaIndicadoresTwitter.add(indicadorDeudaTwitter);
 		
 		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
@@ -100,9 +93,9 @@ public class MainApp3 {
 		
 		//Condiciones
 		unaLongevidad = new Longevidad(10);
-		maxIndicador = new MaximizarIndicador(indicadorROETwitter);
+		maxIndicador = new MaximizarIndicador(indicadorROE);
 		margenCreciente = new MargenCreciente();
-		minIndicador = new MinimizarIndicador(indicadorROATwitter);
+		minIndicador = new MinimizarIndicador(indicadorROA);
 		
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(facebook);
@@ -113,62 +106,15 @@ public class MainApp3 {
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
 		condiciones.add(margenCreciente);
-
-		metodologiaBuffetTwitter = new Metodologia("Metodologia Buffet Twitter",condiciones);
-		
-		//agrego usuarios
-
-		metodologiaBuffetTwitter.setUsuario(usuario1);
-		indicadorROETwitter.setUsuario(usuario1);
-		indicadorROATwitter.setUsuario(usuario1);
-		indicadorDeudaTwitter.setUsuario(usuario1);
-		indicadorROEFacebook.setUsuario(usuario2);
-		indicadorROAFacebook.setUsuario(usuario2);
-		indicadorDeudaFacebook.setUsuario(usuario2);
-		indicadorROEGoogle.setUsuario(usuario1);
-		indicadorROAGoogle.setUsuario(usuario1);
-		indicadorDeudaGoogle.setUsuario(usuario1);
+		metodologiaBuffet = new Metodologia("Metodologia Buffet",condiciones);
+		metodologiaBuffet.setUsuario(usuario1);
 
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
-		//Metodologias
-		em.persist(metodologiaBuffetTwitter);
-		
-		//Condiciones
-		em.persist(unaLongevidad);
-		em.persist(maxIndicador); 
-		em.persist(margenCreciente); 
-		em.persist(minIndicador);
-		
-		// indicadores
-		em.persist(indicadorROEFacebook);
-		em.persist(indicadorROAFacebook);
-		em.persist(indicadorDeudaFacebook);
-		em.persist(indicadorROEGoogle);
-		em.persist(indicadorROAGoogle);
-		em.persist(indicadorDeudaGoogle);
-		em.persist(indicadorROETwitter);
-		em.persist(indicadorROATwitter);
-		em.persist(indicadorDeudaTwitter);
-		//* cuentas
-		em.persist(cuentaEBIDTAFacebook);
-		em.persist(cuentaMargenFacebook);
-		em.persist(cuentaEBIDTAGoogle);
-		em.persist(cuentaMARGENGooge);
-		em.persist(cuentaEBIDTATwitter);
-		em.persist(cuentaMARGENTwitter);
-		// empresas
-		em.persist(facebook);
-		em.persist(google);
-		em.persist(twitter);
-		//usuarios
-		em.persist(usuario1);
-		em.persist(usuario2);
-							
+			em.persist(usuario1);
+					
 		em.getTransaction().commit();
-		em.clear();
-		
 			
 	}
 }

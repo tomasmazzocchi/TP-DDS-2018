@@ -23,6 +23,10 @@ public class Usuario {
 		this.setNombreUsuario(nombre);
 		this.setPassword(pass);
 	}
+	
+	public Usuario() {
+		
+	}
 
 	public String getNombreUsuario() {
 		return nombreUsuario;

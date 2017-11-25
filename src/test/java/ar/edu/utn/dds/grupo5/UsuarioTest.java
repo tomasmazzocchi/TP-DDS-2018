@@ -54,7 +54,7 @@ public class UsuarioTest {
 
 	@Test
 	public void siPersistoUnUsuarioLuegoLoObtengo() {
-		//borrarObjetosDeClase(Usuario.class);
+		borrarObjetosDeClase(Usuario.class);
 		this.entityManager = entityManagerFactory.createEntityManager();
 		EntityTransaction tx = this.entityManager.getTransaction();
 		tx.begin();

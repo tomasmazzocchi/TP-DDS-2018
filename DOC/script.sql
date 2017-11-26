@@ -12,9 +12,10 @@ DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario (
 	id_usuario int AUTO_INCREMENT,
-    nombre varchar(50),
-    pass varchar(50),
-    PRIMARY KEY (id_usuario)
+    nombre varchar(50) NOT NULL,
+    pass varchar(50) NOT NULL,
+    PRIMARY KEY (id_usuario),
+	UNIQUE(nombre,pass)
     );
 
 CREATE TABLE metodologia (

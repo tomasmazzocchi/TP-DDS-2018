@@ -20,8 +20,7 @@ import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
 public class MainApp3 {
-	private static EntityManagerFactory emf = EMFactorySingleton.instance();
-	private static EntityManager em = null;
+	private static EntityManager em = EMFactorySingleton.entityManager();
 	private static Usuario usuario1;
 	private static Usuario usuario2;
 	private static List<Cuenta> listaCuentasFacebook = new ArrayList<>();
@@ -130,7 +129,6 @@ public class MainApp3 {
 		indicadorROAGoogle.setUsuario(usuario1);
 		indicadorDeudaGoogle.setUsuario(usuario1);
 
-		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
 		//Metodologias

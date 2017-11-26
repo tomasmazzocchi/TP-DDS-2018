@@ -18,12 +18,15 @@ public class EMFactorySingleton {
 	private static EntityManagerFactory instance;
 	private static ThreadLocal<EntityManager> threadLocal;
 	
-	public static EntityManagerFactory instance(){
-		if(instance == null){
-			createEMFactory();
+	static {
+		try {
+			instance = Persistence.createEntityManagerFactory("db");
+			threadLocal = new ThreadLocal<>();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return instance;
 	}
+	
 	public static EntityManager entityManager() {
 		return getEntityManager();
 	}
@@ -35,23 +38,66 @@ public class EMFactorySingleton {
 		}
 		return manager;
 	}
-	private static void createEMFactory() {
-		instance = Persistence.createEntityManagerFactory("db");
-		threadLocal = new ThreadLocal<>();
+	
+	public static void beginTransaction() {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		if (!tx.isActive()) {
+			tx.begin();
+		}
+	}
+
+	public static void commit() {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		if (tx.isActive()) {
+			tx.commit();
+		}
+
+	}
+	
+	public static void rollback() {
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		if (tx.isActive()) {
+			tx.rollback();
+		}
+	}
+	
+	public static void clear() {
+		entityManager().clear();
+	}
+	
+	public static void persistir(Object object) {
+		beginTransaction();
+		entityManager().persist(object);
+		commit();
+	}
+	
+	public static void remover(Object object) {
+		beginTransaction();
+		entityManager().remove(object);
+		commit();
+	}
+	public static void closeEntityManager() {
+		EntityManager em = threadLocal.get();
+		threadLocal.set(null);
+		em.close();
 	}
 	
 	public static Query createQuery(String query) {
 		return getEntityManager().createQuery(query);
 	}
 	
-	public static boolean existeUsuario(String username) {		
-		return !entityManager().createQuery("from usuario where username = :nombre").setParameter("nombre", username)
+	public static boolean existeUsuario(String username) {	
+		return !entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
 				.getResultList().isEmpty();
 
 	}
 
 	public static Usuario obtenerUsuario(String username) {
-		return (Usuario) entityManager().createQuery("from Usuario where username = :nombre").setParameter("nombre", username)
+		return (Usuario) entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
 				.getSingleResult();
 	}
 }

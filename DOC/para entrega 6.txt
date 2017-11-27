@@ -3,7 +3,7 @@ Punto 1.
 	+De redes sociales (cotizaciones de las divisas y merval por parte de las cuentas oficiales de los bancos)
 	+Obtencion de datos de BD publicas por medio de Json (Polygon y las comunas de caba por parte de la pagina del gobierno)
 
-
+	
 Punto 4. https://blog.openshift.com/best-practices-for-horizontal-application-scaling/
 	+Division de la aplicacion en modulos de servicios funcionalmente relacionados que puedan ser 
 mantenidos y escalados conjuntamente. La idea es tener varios componentes independientes que se comuniquen entre si

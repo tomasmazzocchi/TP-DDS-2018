@@ -1,16 +1,14 @@
 package ar.edu.utn.dds.rest;
 
-import java.sql.ResultSet;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import org.junit.Assert;
-
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import ar.edu.utn.dds.grupo5.*;
 
 public class EMFactorySingleton {
@@ -99,5 +97,26 @@ public class EMFactorySingleton {
 	public static Usuario obtenerUsuario(String username) {
 		return (Usuario) entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
 				.getSingleResult();
+	}
+	
+	public static int obtenerIdUsuario(String username) {
+		return (int) entityManager().createQuery("SELECT id_usuario " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
+				.getSingleResult();
+	}
+	
+	public static List<Cuenta> obtenerCuentasDeUnUsuario(String username) {
+		int pkUsuario = obtenerIdUsuario(username);
+		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
+		CriteriaQuery<Cuenta> criteria = criteriaBuilder.createQuery(Cuenta.class);
+		Root<Cuenta> rootEntry = criteria.from(Cuenta.class);
+		CriteriaQuery<Cuenta> all = criteria.select(rootEntry).where(
+				criteriaBuilder.equal(rootEntry.get("id_usuario"), pkUsuario));
+		
+		List<Cuenta> listaCuenta = entityManager().createQuery(all).getResultList();
+		return listaCuenta;
+		
+		//List<Cuenta> listaCuenta = (List<Cuenta>) entityManager().createQuery("SELECT * " + "FROM cuentas k WHERE k.id_usuario = :pkUsuario").setParameter("pkUsuario", pkUsuario)
+			//	.getSingleResult();
+		
 	}
 }

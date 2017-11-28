@@ -28,6 +28,7 @@ public class Routes {
 		Spark.get("/menuPrincipal/", LoginController::homeView,engine);		
 		Spark.get("/loginerror/:mensaje", LoginController::loginError, engine);
 		
+		Spark.get("/visualizarCuentas/", CuentasController::viewCuentas,engine);
 	}
 
 	public static Usuario getUsuarioDeSesion(String idSesion) {

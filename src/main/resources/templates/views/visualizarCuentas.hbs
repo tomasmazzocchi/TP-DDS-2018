@@ -1,0 +1,28 @@
+{{#partial "contenido"}}
+    <meta charset="UTF-8">
+
+	  <div class="col-sm-12 visualizar-cuentas-styles" action="/visualizarCuentas/">
+      	 <div class="card">
+         		 <table class="tabla table striped no-marg">
+        				<tr>
+        					<th>Nombre</th>
+        					<th>Fecha Desde</th>
+        					<th>Fecha Hasta</th>
+        					<th>Valor</th>
+        				</tr>
+
+        				{{#each cuentas}}
+        					<tr>
+        						<td>{{this.nombre}}</td>
+        						<td>{{this.fechaDesde}}</td>
+        						<td>{{this.fechaHasta}}</td>
+        						<td>$ {{this.valor}}</td>
+        					</tr>
+        				{{/each}}
+    		     </table>
+    		</div>
+		</div>
+
+  {{/partial}}
+
+{{>index.hbs}}

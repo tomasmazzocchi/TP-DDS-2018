@@ -58,6 +58,9 @@ footer {
 .no-pad {
   padding:0;
 }
+.no-marg {
+  margin:0;
+}
 .loginMainClass {
 	position:absolute;
 	top:50%;
@@ -83,4 +86,28 @@ footer {
 .error-form input {
   height:44px;
   width:105px;
+}
+.visualizar-cuentas-styles .tabla th {
+    background-color:#212121;
+    color:white;
+    text-align:center;
+}
+.visualizar-cuentas-styles td {
+    text-align:center;
+    height:25px;
+}
+.visualizar-cuentas-styles h6 {
+    text-align:left;
+    color:white;
+}
+.nav-usuario {
+    position:absolute;
+    right: 30px;
+    display:flex;
+}
+.nav-usuario a {
+    margin-left:10px;
+}
+nav .brand-logo {
+  font-size:1.6rem!important;
 }

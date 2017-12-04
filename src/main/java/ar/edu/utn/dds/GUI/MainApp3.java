@@ -58,7 +58,7 @@ public class MainApp3 {
 			//Definiciones
 		
 		usuario1 = new Usuario("pablo","1234");
-		usuario2 = new Usuario("pedro","1234");
+		usuario2 = new Usuario("Juli","1234");
 		
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
@@ -66,6 +66,13 @@ public class MainApp3 {
 		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300, LocalDate.now(), LocalDate.now());
 		cuentaMARGENTwitter = new Cuenta("Margen", 400, LocalDate.now(), LocalDate.now());
+		
+		cuentaEBIDTAFacebook.setUsuarioAsociado(usuario1);
+		cuentaMargenFacebook.setUsuarioAsociado(usuario2);
+		cuentaEBIDTAGoogle.setUsuarioAsociado(usuario1);
+		cuentaMARGENGooge.setUsuarioAsociado(usuario1);
+		cuentaEBIDTATwitter.setUsuarioAsociado(usuario2);
+		cuentaMARGENTwitter.setUsuarioAsociado(usuario2);
 		
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaCuentasFacebook.add(cuentaMargenFacebook);

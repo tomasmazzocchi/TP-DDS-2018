@@ -99,24 +99,15 @@ public class EMFactorySingleton {
 				.getSingleResult();
 	}
 	
-	public static int obtenerIdUsuario(String username) {
-		return (int) entityManager().createQuery("SELECT id_usuario " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
-				.getSingleResult();
-	}
-	
 	public static List<Cuenta> obtenerCuentasDeUnUsuario(String username) {
-		int pkUsuario = obtenerIdUsuario(username);
+		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Cuenta> criteria = criteriaBuilder.createQuery(Cuenta.class);
 		Root<Cuenta> rootEntry = criteria.from(Cuenta.class);
 		CriteriaQuery<Cuenta> all = criteria.select(rootEntry).where(
-				criteriaBuilder.equal(rootEntry.get("id_usuario"), pkUsuario));
+				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
 		
 		List<Cuenta> listaCuenta = entityManager().createQuery(all).getResultList();
-		return listaCuenta;
-		
-		//List<Cuenta> listaCuenta = (List<Cuenta>) entityManager().createQuery("SELECT * " + "FROM cuentas k WHERE k.id_usuario = :pkUsuario").setParameter("pkUsuario", pkUsuario)
-			//	.getSingleResult();
-		
+		return listaCuenta;		
 	}
 }

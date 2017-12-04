@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,11 +25,20 @@ public class Cuenta {
 	private String nombre;
 	@Column(name = "valor")
 	private double valor;
+	@OneToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuarioAsociado;
 
 	public String getNombre() {
 		return nombre;
 	}
-
+	
+	public void setUsuarioAsociado(Usuario user){
+		this.usuarioAsociado = user;
+	}
+	public Usuario getUsuarioAsociado(){
+		return this.usuarioAsociado;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

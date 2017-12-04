@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS metodologia;
 DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario (
-	id_usuario int AUTO_INCREMENT,
+    id_usuario int AUTO_INCREMENT,
     nombre varchar(50) NOT NULL,
     pass varchar(50) NOT NULL,
     PRIMARY KEY (id_usuario),
@@ -64,8 +64,10 @@ CREATE TABLE cuenta (
 	valor       decimal(8,2),
 	fecha_desde date,
 	fecha_hasta date,
-    id_empresa  int,
-    PRIMARY KEY (id_cuenta),
-	FOREIGN KEY(id_empresa) REFERENCES empresa(id_empresa)
+    	id_empresa  int,
+	id_usuario  int,
+    	PRIMARY KEY (id_cuenta),
+	FOREIGN KEY(id_empresa) REFERENCES empresa(id_empresa),
+	FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario)
 );
 

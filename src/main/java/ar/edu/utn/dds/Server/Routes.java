@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.github.jknack.handlebars.Handlebars;
+
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
@@ -16,7 +18,7 @@ public class Routes {
 
 	public static void configure() {
 		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
-
+		
 		Spark.staticFiles.location("/public");
 		// controllers
 		LoginController loginCtlr = new LoginController();

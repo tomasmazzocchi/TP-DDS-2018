@@ -27,7 +27,9 @@ public class Usuario {
 	public Usuario() {
 		
 	}
-
+	public int getId(){
+		return this.id;
+	}
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}

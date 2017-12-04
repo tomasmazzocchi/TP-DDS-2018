@@ -13,7 +13,9 @@ import spark.Response;
 
 public class LoginController {
 	public static ModelAndView login(Request req, Response res) {
-		return new ModelAndView(null, "views/login.hbs");
+		Map<String, Object> map = new HashMap<>();
+		map.put("titulo", "Dónde Invierto");			
+		return new ModelAndView(map, "views/login.hbs");
 	}
 
 	public static Void loginUsuario(Request req, Response res) {
@@ -41,7 +43,7 @@ public class LoginController {
 			Routes.iniciarSesion(req.session().id(), usuario);
 
 
-			res.redirect("/menuPrincipal/");
+			res.redirect("/menuPrincipal/");				
 			
 		} catch (Exception e) {
 
@@ -54,12 +56,15 @@ public class LoginController {
 
 	public static ModelAndView homeView(Request req, Response res) {
 
-		Map<String, Usuario> model = new HashMap<>();
+		Map<String, String> model = new HashMap<>();
 
-		//Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
+		Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 		
-		//model.put("usuario", usuario);
-
+		model.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+		model.put("titulo", "Dónde Invierto - Menú Principal");	
+		model.put("exit", "exit_to_app");
+		model.put("salirTitulo", "Salir");
+		
 		return new ModelAndView(model, "views/menuPrincipal.hbs");
 	}
 

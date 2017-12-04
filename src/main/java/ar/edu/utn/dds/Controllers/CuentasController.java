@@ -19,7 +19,7 @@ import spark.Response;
 
 public class CuentasController {
 	public static ModelAndView view(Request req, Response res) {
-		return new ModelAndView(null, "views/appViews/visualizarCuentas.hbs");
+		return new ModelAndView(null, "views/visualizarCuentas.hbs");
 	}
 	
 	public static ModelAndView viewCuentas(Request request, Response response) {
@@ -27,6 +27,10 @@ public class CuentasController {
 		List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
 		Map<String, Object> map = new HashMap<>();
 		map.put("cuentas", listaCuentas);
-		return new ModelAndView(map, "cuentas");
+		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+		map.put("titulo", "Dónde Invierto - Visualización de Cuentas");	
+		map.put("exit", "exit_to_app");
+		map.put("salirTitulo", "Salir");
+		return new ModelAndView(map, "views/visualizarCuentas.hbs");
 	}
 }

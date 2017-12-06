@@ -110,4 +110,16 @@ public class EMFactorySingleton {
 		List<Cuenta> listaCuenta = entityManager().createQuery(all).getResultList();
 		return listaCuenta;		
 	}
+	
+	public static List<Indicador> obtenerIndicadoresDeUnUsuario(String username) {
+		int pkUsuario = obtenerUsuario(username).getId();
+		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
+		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
+		Root<Indicador> rootEntry = criteria.from(Indicador.class);
+		CriteriaQuery<Indicador> all = criteria.select(rootEntry).where(
+				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
+		
+		List<Indicador> listaIndicadores = entityManager().createQuery(all).getResultList();
+		return listaIndicadores;		
+	}
 }

@@ -4,27 +4,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import ar.edu.utn.dds.Server.Routes;
-import ar.edu.utn.dds.grupo5.Cuenta;
+import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class CuentasController {
+public class IndicadorController {
 	public static ModelAndView view(Request req, Response res) {
-		return new ModelAndView(null, "views/visualizarCuentas.hbs");
+		return new ModelAndView(null, "views/evaluacionIndicador.hbs");
 	}
 	
-	public static ModelAndView viewCuentas(Request request, Response response) {
+	public static ModelAndView viewIndicadores(Request request, Response response) {
 		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
-		List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
+		List<Indicador> listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
 		Map<String, Object> map = new HashMap<>();
-		map.put("cuentas", listaCuentas);
+		map.put("indicadores", listaIndicadores);
 		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
-		map.put("titulo", "Dónde Invierto - Visualización de Cuentas");	
+		map.put("titulo", "Dónde Invierto - Evaluación de Indicadores");	
 		map.put("exit", "exit_to_app");
 		map.put("salirTitulo", "Salir");
-		return new ModelAndView(map, "views/visualizarCuentas.hbs");
+		return new ModelAndView(map, "views/evaluacionIndicador.hbs");
 	}
 }

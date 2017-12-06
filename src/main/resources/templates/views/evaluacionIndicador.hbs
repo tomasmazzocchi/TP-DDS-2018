@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+    <meta charset="UTF-8">
+
+		  <label>
+		   Select the language(s) you know.
+		   (ctrl-click to select multiple lines)
+		  </label>
+		  <select id = "selLanguage"
+		    multiple = "multiple"
+		    size = "10">
+		    {{#each indicadores}}
+		   <option value = "nombre">nombre</option>
+		   <option value = "formula">formula</option>
+		    {{/each}}
+		  </select>
+  <button type = "button"
+    onclick = "showChoices()">
+   Calcular Indicador 
+  </button>	
+		
+
+  {{/partial}}
+
+{{>index.hbs}}
+

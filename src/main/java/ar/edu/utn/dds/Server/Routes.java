@@ -31,9 +31,8 @@ public class Routes {
 		Spark.get("/evaluacionIndicador/", IndicadorController::viewIndicadores,engine);
 	}
 
-	public static Usuario getUsuarioDeSesion(String idSesion) {
-		return sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0)
-				.getUsuario();
+	public static Usuario getUsuarioDeSesion(String idSesion) {	  
+		return sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0).getUsuario();
 	}
 
 	public static void iniciarSesion(String idSesion, Usuario usuario) {
@@ -43,5 +42,9 @@ public class Routes {
 		else
 			sesiones.add(new Sesion(idSesion, usuario));
 	}
-
+	public static void cerrarSesion(String idSesion) {
+		if (sesiones.stream().anyMatch(sesion -> sesion.getId().equals(idSesion)))
+			sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0)
+					.setUsuario(null);
+	}
 }

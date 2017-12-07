@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import ar.edu.utn.dds.Server.*;
 import ar.edu.utn.dds.grupo5.*;
@@ -14,7 +15,8 @@ import spark.Response;
 public class LoginController {
 	public static ModelAndView login(Request req, Response res) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("titulo", "Dónde Invierto");			
+		map.put("titulo", "Dónde Invierto");	
+		Routes.cerrarSesion(req.session().id());
 		return new ModelAndView(map, "views/login.hbs");
 	}
 
@@ -57,15 +59,22 @@ public class LoginController {
 	public static ModelAndView homeView(Request req, Response res) {
 
 		Map<String, String> model = new HashMap<>();
-
-		Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
+		String id = req.session().id();
 		
-		model.put("usuario", "Usuario: " + usuario.getNombreUsuario());
-		model.put("titulo", "Dónde Invierto - Menú Principal");	
-		model.put("exit", "exit_to_app");
-		model.put("salirTitulo", "Salir");
+		try {
+			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
+			
+			model.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+			model.put("titulo", "Dónde Invierto - Menú Principal");	
+			model.put("exit", "exit_to_app");
+			model.put("salirTitulo", "Salir");
+			
+			return new ModelAndView(model, "views/menuPrincipal.hbs");
+		} catch(Exception e){
+			res.redirect("/");
+			return null;
+		}
 		
-		return new ModelAndView(model, "views/menuPrincipal.hbs");
 	}
 
 	public static ModelAndView loginError(Request req, Response res) {

@@ -17,14 +17,19 @@ public class CuentasController {
 	}
 	
 	public static ModelAndView viewCuentas(Request request, Response response) {
-		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
-		List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
-		Map<String, Object> map = new HashMap<>();
-		map.put("cuentas", listaCuentas);
-		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
-		map.put("titulo", "Dónde Invierto - Visualización de Cuentas");	
-		map.put("exit", "exit_to_app");
-		map.put("salirTitulo", "Salir");
-		return new ModelAndView(map, "views/visualizarCuentas.hbs");
+		try	{
+			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
+			List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
+			Map<String, Object> map = new HashMap<>();		map.put("cuentas", listaCuentas);
+			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+			map.put("titulo", "Dónde Invierto - Visualización de Cuentas");	
+			map.put("exit", "exit_to_app");
+			map.put("salirTitulo", "Salir");
+			map.put("menu", "menu");
+			return new ModelAndView(map, "views/visualizarCuentas.hbs");			
+		} catch(Exception e){
+			response.redirect("/");
+			return null;
+		}
 	}
 }

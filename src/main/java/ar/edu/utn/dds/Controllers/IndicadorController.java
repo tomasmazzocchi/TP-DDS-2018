@@ -17,14 +17,20 @@ public class IndicadorController {
 	}
 	
 	public static ModelAndView viewIndicadores(Request request, Response response) {
-		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
-		List<Indicador> listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
-		Map<String, Object> map = new HashMap<>();
-		map.put("indicadores", listaIndicadores);
-		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
-		map.put("titulo", "Dónde Invierto - Evaluación de Indicadores");	
-		map.put("exit", "exit_to_app");
-		map.put("salirTitulo", "Salir");
-		return new ModelAndView(map, "views/evaluacionIndicador.hbs");
+		try {
+			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
+			List<Indicador> listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
+			Map<String, Object> map = new HashMap<>();
+			map.put("indicadores", listaIndicadores);
+			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+			map.put("titulo", "Dónde Invierto - Evaluación de Indicadores");	
+			map.put("exit", "exit_to_app");
+			map.put("salirTitulo", "Salir");
+			map.put("menu", "menu");
+			return new ModelAndView(map, "views/evaluacionIndicador.hbs");
+		} catch(Exception e){
+			response.redirect("/");
+			return null;
+		}
 	}
 }

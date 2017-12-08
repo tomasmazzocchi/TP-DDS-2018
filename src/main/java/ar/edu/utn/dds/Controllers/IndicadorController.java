@@ -21,7 +21,6 @@ public class IndicadorController {
 	}
 	
 	public static Void guardarIndicador(Request request, Response response) {
-			repoIndicadores = new RepoIndicadores("prueba");
 			// obtengo usuario de session
 			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 			// creo indicador

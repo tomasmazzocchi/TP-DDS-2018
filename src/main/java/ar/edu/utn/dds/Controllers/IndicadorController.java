@@ -22,7 +22,6 @@ public class IndicadorController {
 	
 	public static Void guardarIndicador(Request request, Response response) {
 
-		if (request.queryParams("id_indicador") == null) {
 			// obtengo usuario de session
 			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 			// creo indicador
@@ -33,14 +32,7 @@ public class IndicadorController {
 			em.getTransaction().begin();
 				repoIndicadores.save(em, indicador);
 			em.getTransaction().commit();
-		} else {
-			em.getTransaction().begin();
-				Indicador indicador = repoIndicadores.obtenerIndicador(em, Integer.parseInt(request.queryParams("id_indicador")));
-				indicador.setNombre(request.queryParams("nombre"));
-				indicador.setFormula(request.queryParams("formula"));
-			em.getTransaction().commit();
-		}
-
+		
 		return null;
 	}
 	

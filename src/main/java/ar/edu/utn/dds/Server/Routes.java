@@ -29,8 +29,10 @@ public class Routes {
 		
 		Spark.get("/visualizarCuentas/", CuentasController::viewCuentas,engine);
 		Spark.get("/evaluacionIndicador/", IndicadorController::viewIndicadores,engine);
+		Spark.get("/creacionIndicador/", IndicadorController::creacionIndicador, engine);
+		Spark.post("/creacionIndicador/", IndicadorController::guardarIndicador);
 	}
-
+	
 	public static Usuario getUsuarioDeSesion(String idSesion) {	  
 		return sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0).getUsuario();
 	}

@@ -4,8 +4,11 @@
     <div style="height:20%; padding:15px; height:auto" class="card evaluacionIndicador col l4  m6 s12 offset-l4 offset-m3">
        <div style="text-align:center;height:46px" class="input-field col l6 m6 s12">
          <select>
-           <option value = "" disabled selected>Seleccione un indicador</option>
-           <option value = "formula">Nombre</option>
+         	 {{#each indicadores}}
+         	 {{#select indicador}} 
+             <option value = "nombre">{{this.nombre}}</option>
+             {{/select }}
+             {{/each}}
          </select>
        </div>
        <div style="text-align:center;padding-top:25px;" class="col l6 m6 s12">
@@ -13,7 +16,7 @@
        </div>
        <div class="datos col l6 m6 s12">
          <span class="title col s12">Formula</span>
-         <span class="dato col s12">CU_EBDITA</span>
+         <span class="dato col s12">{{this.formula}}</span>
        </div>
        <div class="datos col l6 m6 s12">
          <span class="title col s12">Resultaado</span>

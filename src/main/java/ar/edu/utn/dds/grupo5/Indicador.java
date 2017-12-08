@@ -39,7 +39,7 @@ public class Indicador {
 		this.valor = valor;
 	}
 
-	protected Indicador() {
+	public Indicador() {
 
 	}
 

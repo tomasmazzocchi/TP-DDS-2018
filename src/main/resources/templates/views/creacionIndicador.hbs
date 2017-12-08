@@ -1,0 +1,27 @@
+{{#partial "contenido"}}
+    <meta charset="UTF-8">
+
+	  <div class="col s12 visualizar-cuentas-styles" action="/creacionIndicador/">
+      	 <div class="card">
+      	 	<form action="/creacionIndicador/" class="col s12" method="post">
+         		 <div class="form-group">
+					<label for="nombre">Nombre</label> <input type="text"
+						class="form-control" name="nombre" id="nombre"
+						th:value="${indicador.nombre}" 
+						placeholder="Nombre" />
+				</div>
+				<div class="form-group">
+					<label for="formula">Formula;o</label> <input type="text"
+						class="form-control" name="formula" id="formula"
+						th:value="${indicador.formula}" 
+						placeholder="Formula" />
+				</div>
+					<button type="submit" class="btn btn-default">Crear Indicador
+					</button>
+				</div>
+			</form>
+		</div>
+
+  {{/partial}}
+
+{{>index.hbs}}

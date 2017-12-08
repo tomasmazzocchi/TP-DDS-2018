@@ -20,7 +20,8 @@ public class CuentasController {
 		try	{
 			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 			List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
-			Map<String, Object> map = new HashMap<>();		map.put("cuentas", listaCuentas);
+			Map<String, Object> map = new HashMap<>();		
+			map.put("cuentas", listaCuentas);
 			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 			map.put("titulo", "Dónde Invierto - Visualización de Cuentas");	
 			map.put("exit", "exit_to_app");

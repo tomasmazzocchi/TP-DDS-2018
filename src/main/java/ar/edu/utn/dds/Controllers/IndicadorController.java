@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.grupo5.RepoIndicadores;
+//import ar.edu.utn.dds.grupo5.RepoIndicadores;
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
@@ -15,24 +15,22 @@ import spark.Response;
 
 public class IndicadorController {
 	private static EntityManager em = EMFactorySingleton.entityManager();
-	private static RepoIndicadores repoIndicadores;
+	//private static RepoIndicadores repoIndicadores;
 	public static ModelAndView view(Request req, Response res) {
 		return new ModelAndView(null, "views/evaluacionIndicador.hbs");
 	}
 	
-	public static Void guardarIndicador(Request request, Response response) {
+	public static ModelAndView guardarIndicador(Request request, Response response) {
 			// obtengo usuario de session
 			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 			// creo indicador
-			Indicador indicador = new Indicador();
-			indicador.setNombre(request.queryParams("nombre"));
-			indicador.setFormula(request.queryParams("formula"));
+			Indicador indicador = new Indicador(request.queryParams("nombre"),request.queryParams("formula"));
 			indicador.setUsuario(usuario);
 			em.getTransaction().begin();
-				repoIndicadores.save(em, indicador);
+				em.persist(indicador);
 			em.getTransaction().commit();
 		
-		return null;
+		return new ModelAndView(null,"views/menuPrincipal.hbs");
 	}
 	
 	public static ModelAndView creacionIndicador(Request req, Response res) {

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
@@ -23,6 +22,7 @@ public class MainApp3 {
 	private static EntityManager em = EMFactorySingleton.entityManager();
 	private static Usuario usuario1;
 	private static Usuario usuario2;
+	private static Usuario usuario3;
 	private static List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private static List<Cuenta> listaCuentasGoogle = new ArrayList<>();
 	private static List<Cuenta> listaCuentasTwitter = new ArrayList<>();
@@ -58,7 +58,8 @@ public class MainApp3 {
 			//Definiciones
 		
 		usuario1 = new Usuario("pablo","1234");
-		usuario2 = new Usuario("Juli","1234");
+		usuario2 = new Usuario("juli","1234");
+		usuario3 = new Usuario("tomi","1234");
 		
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
@@ -171,6 +172,7 @@ public class MainApp3 {
 		//usuarios
 		em.persist(usuario1);
 		em.persist(usuario2);
+		em.persist(usuario3);
 							
 		em.getTransaction().commit();
 		em.clear();

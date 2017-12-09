@@ -14,9 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import ar.edu.utn.dds.grupo5.Cuenta;
-import ar.edu.utn.dds.grupo5.Indicador;
-
 @Entity
 @Table(name = "empresa", schema = "dds2017")
 public class EmpresaDTO {
@@ -30,16 +27,16 @@ public class EmpresaDTO {
 	private String nombre;
 	@OneToMany
 	@JoinColumn(name = "id_empresa")
-	private List<Cuenta> listaCuentas = new ArrayList<>();
+	private List<CuentaDTO> listaCuentas = new ArrayList<>();
 	@OneToMany
 	@JoinColumn(name = "id_empresa")
-	private List<Indicador> listaIndicadores = new ArrayList<>();
+	private List<IndicadorDTO> listaIndicadores = new ArrayList<>();
 	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 
-	public EmpresaDTO(LocalDate anio_fundacion, String nombre, List<Cuenta> listaCuentas,
-			List<Indicador> listaIndicadores, UsuarioDTO usuarioAsociado) {
+	public EmpresaDTO(LocalDate anio_fundacion, String nombre, List<CuentaDTO> listaCuentas,
+			List<IndicadorDTO> listaIndicadores, UsuarioDTO usuarioAsociado) {
 		this.anio_fundacion = anio_fundacion;
 		this.nombre = nombre;
 		this.listaCuentas = listaCuentas;
@@ -51,6 +48,10 @@ public class EmpresaDTO {
 
 	}
 
+	public int getId_empresa() {
+		return id_empresa;
+	}
+
 	public LocalDate getAnio_fundacion() {
 		return anio_fundacion;
 	}
@@ -59,11 +60,11 @@ public class EmpresaDTO {
 		return nombre;
 	}
 
-	public List<Cuenta> getListaCuentas() {
+	public List<CuentaDTO> getListaCuentas() {
 		return listaCuentas;
 	}
 
-	public List<Indicador> getListaIndicadores() {
+	public List<IndicadorDTO> getListaIndicadores() {
 		return listaIndicadores;
 	}
 

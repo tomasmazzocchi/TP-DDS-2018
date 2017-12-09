@@ -7,26 +7,26 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import DTO.CondicionDTO;
-import ar.edu.utn.dds.grupo5.Empresa;
-import ar.edu.utn.dds.grupo5.Indicador;
+import DTO.EmpresaDTO;
+import DTO.IndicadorDTO;
 
 public class MinimizarIndicadorDTO extends CondicionDTO {
 	@OneToOne()
-	private Indicador indicador;
+	private IndicadorDTO indicador;
 	@Transient
-	private List<Empresa> listaEmpresas = new ArrayList<>();
-	
-	public MinimizarIndicadorDTO(Indicador indicador) {
+	private List<EmpresaDTO> listaEmpresas = new ArrayList<>();
+
+	public MinimizarIndicadorDTO(IndicadorDTO indicador) {
 		this.indicador = indicador;
 		this.nombre = "Minimizar " + indicador.getNombre();
 	}
-	
+
 	protected MinimizarIndicadorDTO() {
-		
+
 	}
 
-	public Indicador getIndicador() {
+	public IndicadorDTO getIndicador() {
 		return indicador;
 	}
-	
+
 }

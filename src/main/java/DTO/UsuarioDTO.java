@@ -20,7 +20,6 @@ public class UsuarioDTO {
 	private String password;
 
 	public UsuarioDTO(String nombreUsuario, String password) {
-		super();
 		this.nombreUsuario = nombreUsuario;
 		this.password = password;
 	}

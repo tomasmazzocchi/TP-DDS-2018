@@ -7,16 +7,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import DTO.CondicionDTO;
-import ar.edu.utn.dds.grupo5.Empresa;
-import ar.edu.utn.dds.grupo5.Indicador;
+import DTO.EmpresaDTO;
+import DTO.IndicadorDTO;
 
 public class MaximizarIndicadorDTO extends CondicionDTO {
 	@OneToOne()
-	private Indicador indicador;
+	private IndicadorDTO indicador;
 	@Transient
-	private List<Empresa> listaEmpresas = new ArrayList<>();
+	private List<EmpresaDTO> listaEmpresas = new ArrayList<>();
 
-	public MaximizarIndicadorDTO(Indicador indicador) {
+	public MaximizarIndicadorDTO(IndicadorDTO indicador) {
 		this.indicador = indicador;
 		this.nombre = "Maximizar " + indicador.getNombre();
 	}
@@ -25,7 +25,7 @@ public class MaximizarIndicadorDTO extends CondicionDTO {
 
 	}
 
-	public Indicador getIndicador() {
+	public IndicadorDTO getIndicador() {
 		return indicador;
 	}
 

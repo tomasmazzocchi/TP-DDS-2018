@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import DTO.IndicadorDTO;
+import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Usuario;
@@ -27,10 +28,11 @@ public class IndicadorController {
 
 	public static Void guardarIndicador(Request request, Response response) {
 		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
+		UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNombreUsuario(),usuario.getPassword());
 		Empresa empresaSeleccionada = empresas.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 		IndicadorDTO indicador = new IndicadorDTO(request.queryParams("nombre"), request.queryParams("formula"),
-				empresaSeleccionada.getId(), usuario);
+				empresaSeleccionada.getId(), usuarioDTO);
 		if (indicador.getNombre().isEmpty() || indicador.getFormula().isEmpty() || indicador.getNombre() == null
 				|| indicador.getFormula() == null) {
 			mensaje = "Rellene todos los campos";

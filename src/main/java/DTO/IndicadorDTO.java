@@ -40,6 +40,10 @@ public class IndicadorDTO {
 
 	}
 
+	public int getIdEmpresa() {
+		return idEmpresa;
+	}
+
 	public int getValor() {
 		return valor;
 	}

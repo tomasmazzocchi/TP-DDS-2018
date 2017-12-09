@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
+import DTO.CondicionDTO;
 import DTO.CuentaDTO;
 import DTO.EmpresaDTO;
 import DTO.IndicadorDTO;
@@ -14,17 +15,7 @@ import DTO.Condiciones.LongevidadDTO;
 import DTO.Condiciones.MargenCrecienteDTO;
 import DTO.Condiciones.MaximizarIndicadorDTO;
 import DTO.Condiciones.MinimizarIndicadorDTO;
-import ar.edu.utn.dds.grupo5.Condicion;
-import ar.edu.utn.dds.grupo5.Cuenta;
-import ar.edu.utn.dds.grupo5.Empresa;
-import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
-import ar.edu.utn.dds.grupo5.Usuario;
-import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
-import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
-import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
-import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
@@ -85,56 +76,48 @@ public class BDloader {
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
 		
-		facebook = new EmpresaDTO("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
-		google = new EmpresaDTO("Google",listaCuentasGoogle,listaIndicadoresGoogle, LocalDate.now().minusYears(50));
-		twitter = new EmpresaDTO("Twitter",listaCuentasTwitter,listaIndicadoresTwitter, LocalDate.now().minusYears(20));
+		facebook = new EmpresaDTO(LocalDate.now(),"Facebook",listaCuentasFacebook,listaIndicadoresFacebook,usuario1);
+		google = new EmpresaDTO(LocalDate.now().minusYears(50),"Google",listaCuentasGoogle,listaIndicadoresGoogle, usuario2);
+		twitter = new EmpresaDTO(LocalDate.now().minusYears(20),"Twitter",listaCuentasTwitter,listaIndicadoresTwitter, usuario2);
 		
-		indicadorROEFacebook = new IndicadorDTO("ROE", "cu.EBIDTA",usuario1);
-		indicadorROAFacebook = new IndicadorDTO("ROA", "cu.Margen",usuario1);
-		indicadorDeudaFacebook = new IndicadorDTO("DEUDA","300",usuario1);
-		indicadorROEGoogle = new IndicadorDTO("ROE", "cu.EBIDTA",usuario2);
-		indicadorROAGoogle = new IndicadorDTO("ROA", "cu.Margen",usuario2);
-		indicadorDeudaGoogle = new IndicadorDTO("DEUDA","400",usuario2);
-		indicadorROETwitter = new IndicadorDTO("ROE", "cu.EBIDTA",usuario2);
-		indicadorROATwitter= new IndicadorDTO("ROA", "cu.Margen",usuario2);
-		indicadorDeudaTwitter = new IndicadorDTO("DEUDA","1000",usuario2);
+		indicadorROEFacebook = new IndicadorDTO("ROE", "cu.EBIDTA",facebook.getId_empresa(),usuario1);
+		indicadorROAFacebook = new IndicadorDTO("ROA", "cu.Margen",facebook.getId_empresa(),usuario1);
+		indicadorDeudaFacebook = new IndicadorDTO("DEUDA","300",facebook.getId_empresa(),usuario1);
+		indicadorROEGoogle = new IndicadorDTO("ROE", "cu.EBIDTA",google.getId_empresa(),usuario2);
+		indicadorROAGoogle = new IndicadorDTO("ROA", "cu.Margen",google.getId_empresa(),usuario2);
+		indicadorDeudaGoogle = new IndicadorDTO("DEUDA","400",google.getId_empresa(),usuario2);
+		indicadorROETwitter = new IndicadorDTO("ROE", "cu.EBIDTA",twitter.getId_empresa(),usuario2);
+		indicadorROATwitter= new IndicadorDTO("ROA", "cu.Margen",twitter.getId_empresa(),usuario2);
+		indicadorDeudaTwitter = new IndicadorDTO("DEUDA","1000",twitter.getId_empresa(),usuario2);
 		
-		listaIndicadoresFacebook.add(indicadorROEFacebook);
-		listaIndicadoresFacebook.add(indicadorROAFacebook);
-		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
-		listaIndicadoresGoogle.add(indicadorROEGoogle);
-		listaIndicadoresGoogle.add(indicadorROAGoogle);
-		listaIndicadoresGoogle.add(indicadorDeudaGoogle);
-		listaIndicadoresTwitter.add(indicadorROETwitter);
-		listaIndicadoresTwitter.add(indicadorROATwitter);
-		listaIndicadoresTwitter.add(indicadorDeudaTwitter);
+		facebook.getListaIndicadores().add(indicadorROEFacebook);
+		facebook.getListaIndicadores().add(indicadorROAFacebook);
+		facebook.getListaIndicadores().add(indicadorDeudaFacebook);
+		google.getListaIndicadores().add(indicadorROEGoogle);
+		google.getListaIndicadores().add(indicadorROAGoogle);
+		google.getListaIndicadores().add(indicadorDeudaGoogle);
+		twitter.getListaIndicadores().add(indicadorROETwitter);
+		twitter.getListaIndicadores().add(indicadorROATwitter);
+		twitter.getListaIndicadores().add(indicadorDeudaTwitter);
 		
-		
-		facebook.setUsuarioAsociado(usuario1);
-		google.setUsuarioAsociado(usuario2);
-		twitter.setUsuarioAsociado(usuario2);
 		
 		//Condiciones
-		unaLongevidad = new Longevidad(10);
-		maxIndicador = new MaximizarIndicador(indicadorROETwitter);
-		margenCreciente = new MargenCreciente();
-		minIndicador = new MinimizarIndicador(indicadorROATwitter);
+		unaLongevidad = new LongevidadDTO(10);
+		maxIndicador = new MaximizarIndicadorDTO(indicadorROETwitter);
+		margenCreciente = new MargenCrecienteDTO();
+		minIndicador = new MinimizarIndicadorDTO(indicadorROATwitter);
 		
-		repoEmpresas = new RepoEmpresas("repoEmpresas");
-		repoEmpresas.agregarEmpresa(facebook);
-		repoEmpresas.agregarEmpresa(google);
-		repoEmpresas.agregarEmpresa(twitter);
-		List<Condicion> condiciones = new ArrayList<>();
+		//repoEmpresas = new RepoEmpresas("repoEmpresas");
+		//repoEmpresas.agregarEmpresa(facebook);
+		//repoEmpresas.agregarEmpresa(google);
+		//repoEmpresas.agregarEmpresa(twitter);
+		List<CondicionDTO> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
 		condiciones.add(margenCreciente);
 
-		metodologiaBuffetTwitter = new Metodologia("Metodologia Buffet Twitter",condiciones);
-		
-		//agrego usuarios
-
-		metodologiaBuffetTwitter.setUsuario(usuario1);
+		metodologiaBuffetTwitter = new MetodologiaDTO("Metodologia Buffet Twitter",condiciones,usuario1);
 		
 
 		em.getTransaction().begin();

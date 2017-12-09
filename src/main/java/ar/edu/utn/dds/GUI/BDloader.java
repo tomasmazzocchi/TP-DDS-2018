@@ -18,7 +18,7 @@ import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
-public class MainApp3 {
+public class BDloader {
 	private static EntityManager em = EMFactorySingleton.entityManager();
 	private static Usuario usuario1;
 	private static Usuario usuario2;
@@ -106,6 +106,10 @@ public class MainApp3 {
 		google = new Empresa("Google",listaCuentasGoogle,listaIndicadoresGoogle, LocalDate.now().minusYears(50));
 		twitter = new Empresa("Twitter",listaCuentasTwitter,listaIndicadoresTwitter, LocalDate.now().minusYears(20));
 		
+		facebook.setUsuarioAsociado(usuario1);
+		google.setUsuarioAsociado(usuario2);
+		twitter.setUsuarioAsociado(usuario2);
+		
 		//Condiciones
 		unaLongevidad = new Longevidad(10);
 		maxIndicador = new MaximizarIndicador(indicadorROETwitter);
@@ -127,15 +131,7 @@ public class MainApp3 {
 		//agrego usuarios
 
 		metodologiaBuffetTwitter.setUsuario(usuario1);
-		indicadorROETwitter.setUsuario(usuario1);
-		indicadorROATwitter.setUsuario(usuario1);
-		indicadorDeudaTwitter.setUsuario(usuario1);
-		indicadorROEFacebook.setUsuario(usuario2);
-		indicadorROAFacebook.setUsuario(usuario2);
-		indicadorDeudaFacebook.setUsuario(usuario2);
-		indicadorROEGoogle.setUsuario(usuario1);
-		indicadorROAGoogle.setUsuario(usuario1);
-		indicadorDeudaGoogle.setUsuario(usuario1);
+		
 
 		em.getTransaction().begin();
 		

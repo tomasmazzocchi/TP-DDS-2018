@@ -13,9 +13,12 @@ import spark.Request;
 import spark.Response;
 
 public class LoginController {
+	private static String mensaje = "";
 	public static ModelAndView login(Request req, Response res) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("titulo", "Dónde Invierto");	
+		map.put("titulo", "Ingreso a la aplicación");	
+		map.put("mensaje", mensaje);
+		mensaje = "";
 		Routes.cerrarSesion(req.session().id());
 		return new ModelAndView(map, "views/login.hbs");
 	}
@@ -48,8 +51,8 @@ public class LoginController {
 			res.redirect("/menuPrincipal/");				
 			
 		} catch (Exception e) {
-
-			res.redirect("/loginerror/"+e.getMessage());
+			mensaje = "Usuario/contraseña inválidos";
+			res.redirect("/");
 		}
 		
 		res.redirect("/menuPrincipal/");

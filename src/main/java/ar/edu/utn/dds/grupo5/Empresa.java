@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import ar.edu.utn.dds.ExceptionHandler.ExpressionParserException;
@@ -33,7 +34,21 @@ public class Empresa {
 	@OneToMany
 	@JoinColumn(name = "id_empresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
+	@OneToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuarioAsociado;
+	
+	public int getId(){
+		return this.id_empresa;
+	}
 
+	public Usuario getUsuarioAsociado() {
+		return usuarioAsociado;
+	}
+
+	public void setUsuarioAsociado(Usuario usuarioAsociado) {
+		this.usuarioAsociado = usuarioAsociado;
+	}
 
 	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores,
 			LocalDate anioFundacion) {

@@ -2,34 +2,89 @@
     <meta charset="UTF-8">
 
     <div style="height:20%; padding:15px; height:auto" class="card evaluacionIndicador col l4  m6 s12 offset-l4 offset-m3">
-       <div style="text-align:center;height:46px" class="input-field col l6 m6 s12">
-         <select>
-         	 {{#each indicadores}}
-
-             <option value = "nombre">{{this.nombre}}</option>
-
-             {{/each}}
-         </select>
-       </div>
-       <div style="text-align:center;padding-top:25px;" class="col l6 m6 s12">
-         <a class="waves-effect waves-light btn blue">Calcular Indicador</a>
-       </div>
-       <div class="datos col l6 m6 s12">
-         <span class="title col s12">Formula</span>
-         <span class="dato col s12">{{this.formula}}</span>
-       </div>
-       <div class="datos col l6 m6 s12">
-         <span class="title col s12">Resultaado</span>
-         <span class="dato col s12">200</span>
-       </div>
+        <form class="" action="/evaluacionIndicador/" method="post">
+            <div id="selectIndicadores" style="text-align:center;height:46px" class="input-field col l6 m6 s12">
+              <select onChange="cambiarEmpresas()">
+                <option value="nada" disabled selected>Seleccione un indicador</option>
+                 {{#each indicadores}}
+                  <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                 {{/each}}
+              </select>
+            </div>
+            <div id="selectEmpresasContainer" style="text-align:center;height:46px" class="input-field col l6 m6 s12">
+              <select id="selectEmpresas">
+                <option value="nada" disabled selected>Seleccione una empresa</option>
+                 {{#each empresas}}
+                  <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                 {{/each}}
+              </select>
+            </div>
+            <div style="text-align:center;padding-top:25px;" class="col l6 m6 s12">
+              <button type="submit" class="blue btn btn-default">Calcular Indicador</button>
+            </div>
+            <div class="datos col l6 m6 s12">
+              <span class="title col s12">Formula</span>
+              <span id="formula" class="dato col s12">{{formula}}</span>
+            </div>
+            <div style="float:right" class="datos col l6 m6 s12">
+              <span class="title col s12">Resultado</span>
+              <span id="resultado" class="dato col s12">{{resultado}}</span>
+            </div>
+        </form>
     </div>
 
 
 
      <script type="text/javascript">
-       $(document).ready(function() {
-           $('select').material_select();
-       });
+      var emp = [];
+      var ind = [];
+      var indicadores = [];
+      var empresas = [];
+      function cambiarEmpresas(){
+        var indicador = $($(".select-dropdown")[0]).val();
+        $('#selectEmpresas').children().remove();
+        var idInd;
+        for (var i in indicadores) {
+          if(indicador == indicadores[i].nombre){
+            idInd = indicadores[i].idEmpresa;
+            $("#formula")[0].innerHTML = indicadores[i].formula;
+          }
+        }
+        for(var el in empresas){
+           if(empresas[el].idEmpresa == idInd){
+              $($('select')[1]).append($('<option>', {
+                 value: empresas[el].idEmpresa,
+                 text: empresas[el].nombre
+              }));
+           }
+        }
+        $("#resultado")[0].innerHTML = "";
+        $('#selectEmpresas').material_select();
+        $("#selectEmpresasContainer").find('input').attr("name","selectedEmp");
+      }
+      $(document).ready(function() {
+        $('select').material_select();
+        $("#selectIndicadores").find('input').attr("name","selectedInd");
+        $("#selectEmpresasContainer").find('input').attr("name","selectedEmp");
+        $("#selectIndicadores").find('input').val("{{placeholderIndicador}}");
+        $("#selectEmpresasContainer").find('input').val("{{placeholderEmpresa}}")
+        var emp = "{{#each empresas}}{{this.nombre}}&{{this.id}};;{{/each}}".split(";;").slice(0,-1);
+        var ind = "{{#each empresas}}{{#each this.listaIndicadores}}{{this.nombre}}&{{../this.id}}&{{this.formula}};;{{/each}}{{/each}}".split(";;").slice(0,-1);
+        ind = (function(ind){ var m = {}, newarr = [];  for (var i=0; i<ind.length; i++) { var v = ind[i]; if (!m[v]) { newarr.push(v); m[v]=true; } } return newarr;})(ind);
+        for(var el in ind){
+          var aux1 = {};
+           aux1.nombre = ind[el].split("&")[0];
+           aux1.idEmpresa = ind[el].split("&")[1];
+           aux1.formula = ind[el].split("&")[2];
+           indicadores.push(aux1);
+        }
+        for(var el in emp){
+          var aux2 = {};
+          aux2.nombre = emp[el].split("&")[0];
+          aux2.idEmpresa = emp[el].split("&")[1];
+          empresas.push(aux2);
+        }
+     });
      </script>
 
   {{/partial}}

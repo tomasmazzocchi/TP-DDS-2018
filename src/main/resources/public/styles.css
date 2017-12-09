@@ -1,136 +1,168 @@
 .nav-bar {
-  background-color:#42a5f5;
+	background-color: #42a5f5;
 }
+
 .app-body {
-  margin:0;
-  width:100%;
-  height:95%;
-  margin-top: 2%;
+	margin: 0;
+	width: 100%;
+	height: 95%;
+	margin-top: 2%;
 }
+
 body {
-  background: #eeeeee;
-  height:calc(100vh - 64px);
+	background: #eeeeee;
+	height: calc(100vh - 64px);
 }
+
 .all-height {
-  height:100%!important;
+	height: 100% !important;
 }
+
 .center {
-  text-align:-webkit-center;
+	text-align: -webkit-center;
 }
-.float-left{
-  float:left;
+
+.float-left {
+	float: left;
 }
+
 .tarjeta {
-  font-size:11px!important;
-  text-align: center;
-  font-weight: bolder;
-  width:350px!important;
-  height:300px;
-  padding:10px;
+	font-size: 11px !important;
+	text-align: center;
+	font-weight: bolder;
+	width: 350px !important;
+	height: 300px;
+	padding: 10px;
 }
-.tarjeta .card-image{
-  height:85%;
+
+.tarjeta .card-image {
+	height: 85%;
 }
+
 .card .card-action {
-  padding: 13px 24px;
+	padding: 13px 24px;
 }
+
 .card img {
-    height:100%;
+	height: 100%;
 }
+
 .absolte {
-  position:absolute!important;
+	position: absolute !important;
 }
+
 .noTop {
-  top:0px;
+	top: 0px;
 }
-.float-right{
-  float:right;
+
+.float-right {
+	float: right;
 }
-html{
-  height:100vh;
+
+html {
+	height: 100vh;
 }
+
 footer {
-  background-color:#fafafa;
-  width:100%;
-  height:55px;
-  position:absolute;
-  bottom:0;
+	background-color: #fafafa;
+	width: 100%;
+	height: 55px;
+	position: absolute;
+	bottom: 0;
 }
+
 .no-pad {
-  padding:0;
+	padding: 0;
 }
+
 .no-marg {
-  margin:0;
+	margin: 0;
 }
+
 .loginMainClass {
-	position:absolute;
-	top:15%;
+	position: absolute;
+	top: 15%;
 	right: calc(50% - 260px);
-	width: 520px!important;
-	height: 467.5px!important;
+	width: 520px !important;
+	height: 467.5px !important;
 }
+
 .loginMainClass .grey {
-  width:400px;
-  display: inline-block;
-  padding: 32px 48px 0px 48px;
-  border: 1px solid #EEE;
+	width: 400px;
+	display: inline-block;
+	padding: 32px 48px 0px 48px;
+	border: 1px solid #EEE;
 }
+
 .blue {
-  background-color:#007bff!important;
+	background-color: #007bff !important;
 }
+
 .error-form {
-  position:absolute;
-  left:calc(50% - 171px);
-  text-align:center;
-  top:30px;
+	position: absolute;
+	left: calc(50% - 171px);
+	text-align: center;
+	top: 30px;
 }
+
 .error-form input {
-  height:44px;
-  width:105px;
+	height: 44px;
+	width: 105px;
 }
+
 .visualizar-cuentas-styles .tabla th {
-    background-color:#212121;
-    color:white;
-    text-align:center;
+	background-color: #212121;
+	color: white;
+	text-align: center;
 }
+
 .visualizar-cuentas-styles td {
-    text-align:center;
-    height:25px;
+	text-align: center;
+	height: 25px;
 }
+
 .visualizar-cuentas-styles h6 {
-    text-align:left;
-    color:white;
+	text-align: left;
+	color: white;
 }
+
 .nav-usuario {
-    position:absolute;
-    right: 30px;
-    display:flex;
+	position: absolute;
+	right: 30px;
+	display: flex;
 }
+
 .nav-usuario a {
-    margin-left:10px;
+	margin-left: 10px;
 }
+
 nav .brand-logo {
-  font-size:1.6rem!important;
+	font-size: 1.6rem !important;
 }
-.sidebarBtn{
-  position:absolute;
-  left: 25px;
+
+.sidebarBtn {
+	position: absolute;
+	left: 25px;
 }
+
 .select-wrapper input {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
+
 .evaluacionIndicador .datos span {
-  text-align:center;
+	text-align: center;
 }
+
 .evaluacionIndicador .datos .title {
-  font-size:14px;
-  font-weight: bolder;
-  margin-top:10%;
+	font-size: 14px;
+	font-weight: bolder;
+	margin-top: 10%;
 }
+
 .evaluacionIndicador .datos .dato {
-  font-size:18px;
-  font-weight: bolder;
-  color:green;
+	font-size: 18px;
+	font-weight: bolder;
+	color: green;
 }

@@ -111,9 +111,6 @@ public class RepoIndicadores {
 		List<Indicador> resultList = em.createQuery(criteria).getResultList();
 		return resultList;
 	}
-	public void save(EntityManager em, Indicador indicador) {
-		em.persist(indicador);
-	}
 	public Indicador obtenerIndicador(EntityManager em, int id) {		
 		return em.find(Indicador.class, id);
 	}

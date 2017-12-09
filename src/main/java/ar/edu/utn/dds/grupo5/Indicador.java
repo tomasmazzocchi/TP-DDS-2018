@@ -1,12 +1,12 @@
 package ar.edu.utn.dds.grupo5;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,8 +21,6 @@ public class Indicador {
 	private String formula;
 	@Column(name = "nombre")
 	private String nombre;
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Usuario usuarioAsociado;
 	@Transient
 	private int valor;
 
@@ -51,14 +49,6 @@ public class Indicador {
 		this.nombre = nombre;
 	}
 	
-	public void setUsuario(Usuario usuario) {
-		this.usuarioAsociado = usuario;
-	}
-	
-	public Usuario getUsuario() {
-		return usuarioAsociado;
-	}
-
 	public String getFormula() {
 		return formula;
 	}

@@ -1,27 +1,33 @@
 {{#partial "contenido"}}
     <meta charset="UTF-8">
 
-	  <div class="col s12 visualizar-cuentas-styles" action="/creacionIndicador/">
-      	 <div class="card">
-      	 	<form action="/creacionIndicador/" class="col s12" method="post">
-         		 <div class="form-group">
-					<label for="nombre">Nombre</label> <input type="text"
-						class="form-control" name="nombre" id="nombre"
-						th:value="${indicador.nombre}" 
-						placeholder="Nombre" />
-				</div>
-				<div class="form-group">
-					<label for="formula">Formula;o</label> <input type="text"
-						class="form-control" name="formula" id="formula"
-						th:value="${indicador.formula}" 
-						placeholder="Formula" />
-				</div>
-					<button type="submit" class="btn btn-default">Crear Indicador
-					</button>
-				</div>
+	  <div style="margin-top:2%" class="card col l4 m6 s12  offset-l4 offset-m3  visualizar-cuentas-styles" action="/creacionIndicador/">
+    	 	<form style="margin-bottom:20px;" action="/creacionIndicador/" class="col s12" method="post">
+       		 <div style="margin-top:10px;" class="form-group">
+              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre"/>
+  				</div>
+  				<div style="margin-top:10px;" class="form-group">
+            <input type="text" class="form-control" name="formula" id="formula" placeholder="Formula"/>
+  				</div>
+          <div style="margin-top:10px;" class="form-group">
+            <select>
+               <option value="" disabled selected>Seleccione una empresa</option>
+            	 {{#each empresas}}
+                  <option value = "{{this}}">{{this.nombre}}</option>
+               {{/each}}
+            </select>
+  				</div>
+  					<button type="submit" class="blue btn btn-default">Crear Indicador</button>
 			</form>
 		</div>
 
+    <script type="text/javascript">
+          $(document).ready(function() {
+              $('select').material_select();
+              $(".select-dropdown").attr("name","selected");
+          });
+          Materialize.toast("{{mensaje}}",3000,"{{color}}");
+    </script>
   {{/partial}}
 
 {{>index.hbs}}

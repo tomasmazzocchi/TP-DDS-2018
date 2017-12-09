@@ -3,6 +3,9 @@ package ar.edu.utn.dds.Server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.github.jknack.handlebars.Handlebars;
+
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
@@ -15,22 +18,19 @@ public class Routes {
 
 	public static void configure() {
 		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
-		
-		Spark.staticFiles.location("/public");
-		// controllers
-		LoginController loginCtlr = new LoginController();
-		
+		Spark.staticFiles.location("/public");		
+
 		// rutas
 
 		Spark.get("/", LoginController::login, engine);
 		Spark.post("/login/", LoginController::loginUsuario);
-		Spark.get("/menuPrincipal/", LoginController::homeView,engine);		
-		Spark.get("/loginerror/:mensaje", LoginController::loginError, engine);
-		
+		Spark.get("/menuPrincipal/", LoginController::homeView,engine);				
 		Spark.get("/visualizarCuentas/", CuentasController::viewCuentas,engine);
 		Spark.get("/evaluacionIndicador/", IndicadorController::viewIndicadores,engine);
+		Spark.post("/evaluacionIndicador/", IndicadorController::calcularIndicador,engine);
 		Spark.get("/creacionIndicador/", IndicadorController::creacionIndicador, engine);
 		Spark.post("/creacionIndicador/", IndicadorController::guardarIndicador);
+		
 	}
 	
 	public static Usuario getUsuarioDeSesion(String idSesion) {	  

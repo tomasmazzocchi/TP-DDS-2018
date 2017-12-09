@@ -6,17 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
-@Entity 
+@Entity
 @DiscriminatorValue(value = "margen_creciente ")
 public class MargenCreciente extends Condicion {
 
@@ -26,7 +23,7 @@ public class MargenCreciente extends Condicion {
 	public MargenCreciente() {
 		this.nombre = "Margen creciente";
 	}
-	
+
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		listaEmpresas.addAll(empresas);
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {

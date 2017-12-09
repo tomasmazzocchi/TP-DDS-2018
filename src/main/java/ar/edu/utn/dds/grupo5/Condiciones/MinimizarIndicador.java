@@ -19,7 +19,7 @@ public class MinimizarIndicador extends Condicion {
 	@OneToOne()
 	private Indicador indicador;
 	@Transient
-	private List<Empresa> listaEmpresas = new ArrayList<>();;
+	private List<Empresa> listaEmpresas = new ArrayList<>();
 
 	public MinimizarIndicador(Indicador indicador) {
 		this.indicador = indicador;

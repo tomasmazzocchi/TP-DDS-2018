@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,11 +14,12 @@ import javax.persistence.Table;
 @Table(name = "cuenta", schema = "dds2017")
 public class Cuenta {
 	@Column(name = "id_cuenta")
-	@Id	@GeneratedValue
+	@Id
+	@GeneratedValue
 	private int idCuenta;
-	@Column(name = "fecha_desde" )
+	@Column(name = "fecha_desde")
 	private LocalDate fechaDesde;
-	@Column(name = "fecha_hasta" )
+	@Column(name = "fecha_hasta")
 	private LocalDate fechaHasta;
 	@Column(name = "nombre")
 	private String nombre;
@@ -32,13 +32,15 @@ public class Cuenta {
 	public String getNombre() {
 		return nombre;
 	}
-	
-	public void setUsuarioAsociado(Usuario user){
+
+	public void setUsuarioAsociado(Usuario user) {
 		this.usuarioAsociado = user;
 	}
-	public Usuario getUsuarioAsociado(){
+
+	public Usuario getUsuarioAsociado() {
 		return this.usuarioAsociado;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

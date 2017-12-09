@@ -5,11 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -30,9 +27,9 @@ public class MaximizarIndicador extends Condicion {
 		this.indicador = indicador;
 		this.nombre = "Maximizar " + indicador.getNombre();
 	}
-	
+
 	protected MaximizarIndicador() {
-		
+
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {

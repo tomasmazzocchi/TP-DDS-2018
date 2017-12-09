@@ -1,4 +1,4 @@
-package ar.edu.utn.dds.grupo5;
+package DTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity(name = "usuario")
 @Table(name = "usuario")
-public class Usuario {
+public class UsuarioDTO {
 	@Column(name = "id_usuario")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,32 +19,22 @@ public class Usuario {
 	@Column(name = "pass")
 	private String password;
 
-	public Usuario(String nombre, String pass) {
-		this.setNombreUsuario(nombre);
-		this.setPassword(pass);
+	public UsuarioDTO(String nombreUsuario, String password) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.password = password;
 	}
 
-	public Usuario() {
+	public UsuarioDTO() {
 
-	}
-
-	public int getId() {
-		return this.id;
 	}
 
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

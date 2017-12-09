@@ -15,7 +15,7 @@ CREATE TABLE usuario (
     nombre varchar(50) NOT NULL,
     pass varchar(50) NOT NULL,
     PRIMARY KEY (id_usuario),
-	UNIQUE(nombre,pass)
+	UNIQUE(nombre)
     );
 
 CREATE TABLE metodologia (
@@ -27,13 +27,11 @@ CREATE TABLE metodologia (
 );
 
 CREATE TABLE empresa (
-	id_empresa int AUTO_INCREMENT,
-	anio_fundacion datetime,
-        nombre varchar(50),
- 	id_usuario int,
+	id_empresa	   int AUTO_INCREMENT,
+	 anio_fundacion datetime,
+    nombre    	   varchar(50),
 	id_metodologia int,
     PRIMARY KEY (id_empresa),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia)
 );
 

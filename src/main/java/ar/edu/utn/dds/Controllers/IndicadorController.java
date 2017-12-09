@@ -9,6 +9,7 @@ import DTO.IndicadorDTO;
 import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
@@ -106,9 +107,8 @@ public class IndicadorController {
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedEmp"))).findFirst().get();
 		IndicadorDTO indicadorSeleccionado = listaIndicadores.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedInd"))).findFirst().get();
-		//IndicadorDTO ind = new IndicadorDTO(indicadorSeleccionado.getNombre(), indicadorSeleccionado.getFormula(),
-			//	empresaSeleccionada.getId(), usuario);
-		calculo = 3000;
+		Indicador ind = new Indicador(indicadorSeleccionado.getNombre(), indicadorSeleccionado.getFormula());
+		calculo = ind.calcularIndicador(empresaSeleccionada);
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
 		map.put("empresas", empresas);

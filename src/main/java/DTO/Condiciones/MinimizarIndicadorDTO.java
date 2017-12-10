@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -16,6 +17,7 @@ import DTO.IndicadorDTO;
 @DiscriminatorValue(value = "min_indicador")
 public class MinimizarIndicadorDTO extends CondicionDTO {
 	@OneToOne
+	@JoinColumn(name = "id_indicador")
 	private IndicadorDTO indicador;
 	@Transient
 	private List<EmpresaDTO> listaEmpresas = new ArrayList<>();

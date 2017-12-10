@@ -25,6 +25,7 @@ public class MetodologiaDTO {
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_metodologia")
 	private List<CondicionDTO> condiciones;
 	@Transient
 	private Map<String, List<EmpresaDTO>> resultados = new LinkedHashMap<>();

@@ -15,6 +15,12 @@
     	 <class>ar.edu.utn.dds.grupo5.Indicador</class>  
     	 <class>ar.edu.utn.dds.grupo5.Condicion</class> 
     	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>
+    	 <class>DTO.UsuarioDTO</class>
+    	 <class>DTO.MetodologiaDTO</class>    	
+    	 <class>DTO.EmpresaDTO</class>  
+    	 <class>DTO.IndicadorDTO</class>  
+    	 <class>DTO.CondicionDTO</class> 
+    	 <class>DTO.CuentaDTO</class>
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>               

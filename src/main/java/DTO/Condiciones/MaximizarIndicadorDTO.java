@@ -15,7 +15,7 @@ import DTO.IndicadorDTO;
 @Entity
 @DiscriminatorValue(value = "max_indicador")
 public class MaximizarIndicadorDTO extends CondicionDTO {
-	@OneToOne()
+	@OneToOne
 	private IndicadorDTO indicador;
 	@Transient
 	private List<EmpresaDTO> listaEmpresas = new ArrayList<>();

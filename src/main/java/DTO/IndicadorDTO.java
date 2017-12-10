@@ -22,17 +22,18 @@ public class IndicadorDTO {
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToOne
-	@JoinColumn(name = "id_usuario")
+	//@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
-	@Column(name = "id_empresa")
-	private int idEmpresa;
+	@OneToOne
+	//@JoinColumn(name = "id_empresa")
+	private EmpresaDTO empresaAsociada;
 	@Transient
 	private int valor;
 
-	public IndicadorDTO(String nombre, String formula, int idEmpresa, UsuarioDTO us) {
+	public IndicadorDTO(String nombre, String formula, EmpresaDTO empresa, UsuarioDTO us) {
 		this.nombre = nombre;
 		this.formula = formula;
-		this.idEmpresa = idEmpresa;
+		this.empresaAsociada = empresa;
 		this.usuarioAsociado = us;
 	}
 
@@ -40,8 +41,8 @@ public class IndicadorDTO {
 
 	}
 
-	public int getIdEmpresa() {
-		return idEmpresa;
+	public EmpresaDTO getEmpresaAsociada() {
+		return empresaAsociada;
 	}
 
 	public int getValor() {

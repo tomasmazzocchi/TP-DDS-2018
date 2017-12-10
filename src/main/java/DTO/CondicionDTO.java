@@ -17,6 +17,7 @@ import javax.persistence.Table;
 public class CondicionDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_condicion")
 	private int id_condicion;
 	@Column(name = "nombre")
 	protected String nombre;

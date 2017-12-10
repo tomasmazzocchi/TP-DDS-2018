@@ -17,22 +17,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "empresa", schema = "dds2017")
 public class EmpresaDTO {
+	@Column(name = "id_empresa")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_empresa")
 	private int id_empresa;
 	@Column(name = "anio_fundacion")
 	private LocalDate anio_fundacion;
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToMany
-	@JoinColumn(name = "id_empresa")
+	//@JoinColumn(name = "id_empresa")
 	private List<CuentaDTO> listaCuentas = new ArrayList<>();
 	@OneToMany
-	@JoinColumn(name = "id_empresa")
+	//@JoinColumn(name = "id_empresa")
 	private List<IndicadorDTO> listaIndicadores = new ArrayList<>();
 	@OneToOne
-	@JoinColumn(name = "id_usuario")
+	//@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 
 	public EmpresaDTO(LocalDate anio_fundacion, String nombre, List<CuentaDTO> listaCuentas,

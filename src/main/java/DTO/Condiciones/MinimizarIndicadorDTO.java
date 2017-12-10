@@ -15,7 +15,7 @@ import DTO.IndicadorDTO;
 @Entity
 @DiscriminatorValue(value = "min_indicador")
 public class MinimizarIndicadorDTO extends CondicionDTO {
-	@OneToOne()
+	@OneToOne
 	private IndicadorDTO indicador;
 	@Transient
 	private List<EmpresaDTO> listaEmpresas = new ArrayList<>();

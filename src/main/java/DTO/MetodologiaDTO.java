@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,9 +18,9 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "metodologia", schema = "dds2017")
 public class MetodologiaDTO {
+	@Column(name = "id_metodologia")
 	@Id
 	@GeneratedValue
-	@Column(name = "id_metodologia")
 	private int idMetodologia;
 	@Column(name = "nombre")
 	private String nombre;
@@ -28,6 +29,7 @@ public class MetodologiaDTO {
 	@Transient
 	private Map<String, List<EmpresaDTO>> resultados = new LinkedHashMap<>();
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 
 	public MetodologiaDTO(String nombre, List<CondicionDTO> condiciones, UsuarioDTO usuarioAsociado) {

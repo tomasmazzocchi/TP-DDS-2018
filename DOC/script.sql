@@ -31,8 +31,10 @@ CREATE TABLE empresa (
 	 anio_fundacion datetime,
     nombre    	   varchar(50),
 	id_metodologia int,
+    id_usuario int,
     PRIMARY KEY (id_empresa),
-    FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia)
+    FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia),
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE indicador (

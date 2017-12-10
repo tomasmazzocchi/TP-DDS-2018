@@ -80,15 +80,15 @@ public class BDloader {
 		google = new EmpresaDTO(LocalDate.now().minusYears(50),"Google",listaCuentasGoogle,listaIndicadoresGoogle, usuario2);
 		twitter = new EmpresaDTO(LocalDate.now().minusYears(20),"Twitter",listaCuentasTwitter,listaIndicadoresTwitter, usuario2);
 		
-		indicadorROEFacebook = new IndicadorDTO("ROE", "cu.EBIDTA",facebook.getId_empresa(),usuario1);
-		indicadorROAFacebook = new IndicadorDTO("ROA", "cu.Margen",facebook.getId_empresa(),usuario1);
-		indicadorDeudaFacebook = new IndicadorDTO("DEUDA","300",facebook.getId_empresa(),usuario1);
-		indicadorROEGoogle = new IndicadorDTO("ROE", "cu.EBIDTA",google.getId_empresa(),usuario2);
-		indicadorROAGoogle = new IndicadorDTO("ROA", "cu.Margen",google.getId_empresa(),usuario2);
-		indicadorDeudaGoogle = new IndicadorDTO("DEUDA","400",google.getId_empresa(),usuario2);
-		indicadorROETwitter = new IndicadorDTO("ROE", "cu.EBIDTA",twitter.getId_empresa(),usuario2);
-		indicadorROATwitter= new IndicadorDTO("ROA", "cu.Margen",twitter.getId_empresa(),usuario2);
-		indicadorDeudaTwitter = new IndicadorDTO("DEUDA","1000",twitter.getId_empresa(),usuario2);
+		indicadorROEFacebook = new IndicadorDTO("ROE", "cu.EBIDTA",facebook,usuario1);
+		indicadorROAFacebook = new IndicadorDTO("ROA", "cu.Margen",facebook,usuario1);
+		indicadorDeudaFacebook = new IndicadorDTO("DEUDA","300",facebook,usuario1);
+		indicadorROEGoogle = new IndicadorDTO("ROE", "cu.EBIDTA",google,usuario2);
+		indicadorROAGoogle = new IndicadorDTO("ROA", "cu.Margen",google,usuario2);
+		indicadorDeudaGoogle = new IndicadorDTO("DEUDA","400",google,usuario2);
+		indicadorROETwitter = new IndicadorDTO("ROE", "cu.EBIDTA",twitter,usuario2);
+		indicadorROATwitter= new IndicadorDTO("ROA", "cu.Margen",twitter,usuario2);
+		indicadorDeudaTwitter = new IndicadorDTO("DEUDA","1000",twitter,usuario2);
 		
 		facebook.getListaIndicadores().add(indicadorROEFacebook);
 		facebook.getListaIndicadores().add(indicadorROAFacebook);
@@ -122,14 +122,18 @@ public class BDloader {
 
 		em.getTransaction().begin();
 		
+		//usuarios
+		em.persist(usuario1);
+		em.persist(usuario2);
+		em.persist(usuario3);
+		
 		//Metodologias
 		em.persist(metodologiaBuffetTwitter);
 		
-		//Condiciones
-		em.persist(unaLongevidad);
-		em.persist(maxIndicador); 
-		em.persist(margenCreciente); 
-		em.persist(minIndicador);
+		// empresas
+		em.persist(facebook);
+		em.persist(google);
+		em.persist(twitter);
 		
 		// indicadores
 		em.persist(indicadorROEFacebook);
@@ -141,25 +145,23 @@ public class BDloader {
 		em.persist(indicadorROETwitter);
 		em.persist(indicadorROATwitter);
 		em.persist(indicadorDeudaTwitter);
-		//* cuentas
+		
+		//Condiciones
+		em.persist(unaLongevidad);
+		em.persist(maxIndicador); 
+		em.persist(margenCreciente); 
+		em.persist(minIndicador);
+		
+		// cuentas
 		em.persist(cuentaEBIDTAFacebook);
 		em.persist(cuentaMargenFacebook);
 		em.persist(cuentaEBIDTAGoogle);
 		em.persist(cuentaMARGENGooge);
 		em.persist(cuentaEBIDTATwitter);
 		em.persist(cuentaMARGENTwitter);
-		// empresas
-		em.persist(facebook);
-		em.persist(google);
-		em.persist(twitter);
-		//usuarios
-		em.persist(usuario1);
-		em.persist(usuario2);
-		em.persist(usuario3);
-							
+		
 		em.getTransaction().commit();
 		em.clear();
-		
 			
 	}
 }

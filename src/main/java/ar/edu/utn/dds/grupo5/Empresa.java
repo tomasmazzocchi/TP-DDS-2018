@@ -132,6 +132,6 @@ public class Empresa {
 
 	public void agregarIndicadorAEmpresa(Indicador indicador) {
 		this.getListaIndicadores().add(indicador);
-
 	}
+	
 }

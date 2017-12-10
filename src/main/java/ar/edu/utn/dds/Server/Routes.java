@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.jknack.handlebars.Handlebars;
-
-import ar.edu.utn.dds.grupo5.Usuario;
+import DTO.UsuarioDTO;
 import ar.edu.utn.dds.spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -33,11 +31,11 @@ public class Routes {
 		
 	}
 	
-	public static Usuario getUsuarioDeSesion(String idSesion) {	  
+	public static UsuarioDTO getUsuarioDeSesion(String idSesion) {	  
 		return sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0).getUsuario();
 	}
 
-	public static void iniciarSesion(String idSesion, Usuario usuario) {
+	public static void iniciarSesion(String idSesion, UsuarioDTO usuario) {
 		if (sesiones.stream().anyMatch(sesion -> sesion.getId().equals(idSesion)))
 			sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0)
 					.setUsuario(usuario);

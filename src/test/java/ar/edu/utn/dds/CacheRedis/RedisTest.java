@@ -10,6 +10,7 @@ import ar.edu.utn.dds.HerramientasExternas.Cache;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
 
 public class RedisTest {
 
@@ -30,7 +31,8 @@ public class RedisTest {
 		listaIndicadoresFacebook.add(indicadorROE);
 
 		facebook = new Empresa("Facebook", listaCuentasFacebook, listaIndicadoresFacebook, LocalDate.now());
-
+		RepoEmpresas.getListaEmpresa().add(facebook);
+		
 	}
 
 	@Test
@@ -49,8 +51,8 @@ public class RedisTest {
 	@Test
 	public void funcionamientoCache() {
 		Cache.getInstancia().agregarIndicador(facebook.getListaIndicadores().get(0).getNombre(),
-				Integer.toString(indicadorROE.calcularIndicador(facebook)));
-		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook)),
+				Integer.toString(indicadorROE.calcularIndicador(facebook.getId())));
+		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook.getId())),
 				Cache.getInstancia().obtenerIndicador(facebook.getListaIndicadores().get(0).getNombre()));
 	}
 }

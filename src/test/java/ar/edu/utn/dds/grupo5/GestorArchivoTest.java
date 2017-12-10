@@ -4,6 +4,9 @@ import org.junit.*;
 import org.junit.rules.ExpectedException;
 import java.io.*;
 import java.net.URLDecoder;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.utn.dds.ExceptionHandler.ArchivoException;
 import ar.edu.utn.dds.grupo5.GestorArchivo;
@@ -22,6 +25,7 @@ public class GestorArchivoTest {
 
 	@Before
 	public void init() throws IOException {
+		RepoEmpresas.limpiarListaEmpresas();
 		repositorio = new RepoEmpresas("Bancos");
 		gestor = GestorArchivo.getInstance();
 		jsonValido = "ArchivoValido.json";
@@ -31,6 +35,7 @@ public class GestorArchivoTest {
 		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 		resource = classLoader.getResource(jsonInvalido);
 		archivojsonInvalido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
+		
 	}
 
 	@After
@@ -44,7 +49,7 @@ public class GestorArchivoTest {
 	@Test
 	public void siColocoUnArchivoConJsonValidoEntoncesSeCarganAlRepositorio() {
 		gestor.cargarArchivo(repositorio, archivojsonValido);
-		Assert.assertTrue(repositorio.getListaEmpresa().size() > 0);
+		Assert.assertTrue(RepoEmpresas.getListaEmpresa().size() > 0);
 	}
 
 	@Test

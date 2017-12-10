@@ -1,13 +1,13 @@
 package ar.edu.utn.dds.Controllers;
 
-import ar.edu.utn.dds.grupo5.Usuario;
+import DTO.UsuarioDTO;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class ManejadorDeUsuarios {
 
 	private static ManejadorDeUsuarios singleton = null;
 
-	public Usuario loginOK(String username, String password) throws Exception {
+	public UsuarioDTO loginOK(String username, String password) throws Exception {
 
 		if(username.isEmpty() || username==null || password.isEmpty() || password==null){
 			throw new Exception("Ingrese usuario y contraseña");
@@ -19,7 +19,7 @@ public class ManejadorDeUsuarios {
 		}
 
 		else {
-			Usuario usuario =  EMFactorySingleton.obtenerUsuario(username);
+			UsuarioDTO usuario =  EMFactorySingleton.obtenerUsuario(username);
 
 			if(!usuario.getPassword().equals(password))
 				throw new Exception("El usuario y contraseña ingresados son incorrectos");
@@ -35,7 +35,7 @@ public class ManejadorDeUsuarios {
 		return singleton;
 	}
 	
-	public Usuario getUsuario(String username) {
+	public UsuarioDTO getUsuario(String username) {
 		return EMFactorySingleton.obtenerUsuario(username);
 	}
 

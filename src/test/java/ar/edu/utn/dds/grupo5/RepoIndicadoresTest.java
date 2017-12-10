@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,6 +49,12 @@ public class RepoIndicadoresTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		empresaTest = new Empresa("HSBC",listaCuentas,listaIndicadores,LocalDate.now());
+		RepoEmpresas.getListaEmpresa().add(empresaTest);
+	}
+	
+	@After
+	public void after() {
+		RepoEmpresas.limpiarListaEmpresas();
 	}
 
 	@Rule

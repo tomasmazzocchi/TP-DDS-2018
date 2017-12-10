@@ -15,7 +15,6 @@ import DTO.Condiciones.LongevidadDTO;
 import DTO.Condiciones.MargenCrecienteDTO;
 import DTO.Condiciones.MaximizarIndicadorDTO;
 import DTO.Condiciones.MinimizarIndicadorDTO;
-import ar.edu.utn.dds.grupo5.RepoEmpresas;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
@@ -33,7 +32,6 @@ public class BDloader {
 	private static EmpresaDTO facebook;
 	private static EmpresaDTO google;
 	private static EmpresaDTO twitter;
-	private static RepoEmpresas repoEmpresas;
 	private static MetodologiaDTO metodologiaBuffetTwitter;
 	private static LongevidadDTO unaLongevidad;
 	private static IndicadorDTO indicadorROEFacebook;
@@ -107,10 +105,6 @@ public class BDloader {
 		margenCreciente = new MargenCrecienteDTO();
 		minIndicador = new MinimizarIndicadorDTO(indicadorROATwitter);
 		
-		//repoEmpresas = new RepoEmpresas("repoEmpresas");
-		//repoEmpresas.agregarEmpresa(facebook);
-		//repoEmpresas.agregarEmpresa(google);
-		//repoEmpresas.agregarEmpresa(twitter);
 		List<CondicionDTO> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);

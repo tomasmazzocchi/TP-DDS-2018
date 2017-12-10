@@ -93,10 +93,10 @@ public class CondicionesTest {
 		margenCreciente = new MargenCreciente();
 		minIndicador = new MinimizarIndicador(indicadorROA);
 		
-		repoEmpresas = new RepoEmpresas("repoEmpresas");
-		repoEmpresas.agregarEmpresa(facebook);
-		repoEmpresas.agregarEmpresa(google);
-		repoEmpresas.agregarEmpresa(twitter);
+		RepoEmpresas.getListaEmpresa().add(facebook);
+		RepoEmpresas.getListaEmpresa().add(google);
+		RepoEmpresas.getListaEmpresa().add(twitter);
+		
 		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
@@ -109,6 +109,7 @@ public class CondicionesTest {
 	public void after() {
 		metodologiaBuffet.getResultados().clear();
 		metodologiaBuffet.getCondiciones().clear();
+		RepoEmpresas.limpiarListaEmpresas();
 	}
 	
 	@Rule
@@ -116,35 +117,35 @@ public class CondicionesTest {
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorLongevidad() {
-		List<Empresa> resultado = unaLongevidad.aplicarCondicion(repoEmpresas.getListaEmpresa());
+		List<Empresa> resultado = unaLongevidad.aplicarCondicion(RepoEmpresas.getListaEmpresa());
  		Assert.assertEquals(resultado.get(0),google);
 	}
 	
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE(){
-		List<Empresa> resultado = maxIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), twitter);
+		List<Empresa> resultado = maxIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
+		Assert.assertEquals(resultado.get(0), facebook);
  	}	
 	
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA(){
-		List<Empresa> resultado = minIndicador.aplicarCondicion(repoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), facebook);
+		List<Empresa> resultado = minIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
+		Assert.assertEquals(resultado.get(0), twitter);
 	}	
 	
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMargenCreciente(){
-		List<Empresa> resultado = margenCreciente.aplicarCondicion(repoEmpresas.getListaEmpresa());
+		List<Empresa> resultado = margenCreciente.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(0), facebook);
 	}	
 
 	@Test
 	public void aplicarMetodologiaBuffet() {
-		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
+		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
 		
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0),google);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),twitter);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), facebook);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),facebook);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), twitter);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(margenCreciente.getNombre()).get(0), facebook);
 	}
 	

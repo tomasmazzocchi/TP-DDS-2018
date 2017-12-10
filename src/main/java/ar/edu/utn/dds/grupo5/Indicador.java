@@ -55,14 +55,14 @@ public class Indicador {
 		this.formula = formula;
 	}
 
-	public int calcularIndicador(Empresa unaEmpresa) {
+	public int calcularIndicador(int id_empresa) {
 
 		ExpressionParser parser;
 		parser = new ExpressionParser();
 
 		// Hay QUE VER QUE PASARIA SI LA EMPRESA NO TIENE ESE INDICADOR
 
-		setValor(parser.resolverFormula(this.formula, unaEmpresa));
+		setValor(parser.resolverFormula(this.formula, id_empresa));
 		return getValor();
 	}
 

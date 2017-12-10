@@ -36,4 +36,8 @@ public class UsuarioDTO {
 		return password;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 }

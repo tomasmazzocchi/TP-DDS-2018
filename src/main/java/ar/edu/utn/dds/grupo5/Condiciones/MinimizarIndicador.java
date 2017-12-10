@@ -36,7 +36,7 @@ public class MinimizarIndicador extends Condicion {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
+				if (indicador.calcularIndicador(empresa1.getId()) > (indicador.calcularIndicador(empresa2.getId()))) {
 					return 1;
 				} else {
 					return -1;

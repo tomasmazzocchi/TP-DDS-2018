@@ -10,8 +10,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import DTO.CuentaDTO;
+import DTO.EmpresaDTO;
 import DTO.IndicadorDTO;
-import ar.edu.utn.dds.grupo5.*;
+import DTO.UsuarioDTO;
 
 public class EMFactorySingleton {
 
@@ -96,20 +98,27 @@ public class EMFactorySingleton {
 
 	}
 
-	public static Usuario obtenerUsuario(String username) {
-		return (Usuario) entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
-				.getSingleResult();
+	public static UsuarioDTO obtenerUsuario(String username) {
+		CriteriaBuilder cb = entityManager().getCriteriaBuilder();
+		CriteriaQuery<UsuarioDTO> criteria = cb.createQuery(UsuarioDTO.class);
+		Root<UsuarioDTO> rootEntry = criteria.from(UsuarioDTO.class);
+		CriteriaQuery<UsuarioDTO> all = criteria.select(rootEntry).where(cb.equal(rootEntry.get("nombreUsuario"), username));
+		
+		List<UsuarioDTO> usuario = entityManager().createQuery(all).getResultList();
+		return usuario.get(0);
+		//return (UsuarioDTO) entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
+			//	.getSingleResult();
 	}
 	
-	public static List<Cuenta> obtenerCuentasDeUnUsuario(String username) {
+	public static List<CuentaDTO> obtenerCuentasDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
-		CriteriaQuery<Cuenta> criteria = criteriaBuilder.createQuery(Cuenta.class);
-		Root<Cuenta> rootEntry = criteria.from(Cuenta.class);
-		CriteriaQuery<Cuenta> all = criteria.select(rootEntry).where(
+		CriteriaQuery<CuentaDTO> criteria = criteriaBuilder.createQuery(CuentaDTO.class);
+		Root<CuentaDTO> rootEntry = criteria.from(CuentaDTO.class);
+		CriteriaQuery<CuentaDTO> all = criteria.select(rootEntry).where(
 				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
 		
-		List<Cuenta> listaCuenta = entityManager().createQuery(all).getResultList();
+		List<CuentaDTO> listaCuenta = entityManager().createQuery(all).getResultList();
 		return listaCuenta;		
 	}
 	
@@ -124,15 +133,15 @@ public class EMFactorySingleton {
 		List<IndicadorDTO> listaIndicadores = entityManager().createQuery(all).getResultList();
 		return listaIndicadores;		
 	}
-	public static List<Empresa> obtenerEmpresasDeUnUsuario(String username) {
+	public static List<EmpresaDTO> obtenerEmpresasDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
-		CriteriaQuery<Empresa> criteria = criteriaBuilder.createQuery(Empresa.class);
-		Root<Empresa> rootEntry = criteria.from(Empresa.class);
-		CriteriaQuery<Empresa> all = criteria.select(rootEntry).where(
+		CriteriaQuery<EmpresaDTO> criteria = criteriaBuilder.createQuery(EmpresaDTO.class);
+		Root<EmpresaDTO> rootEntry = criteria.from(EmpresaDTO.class);
+		CriteriaQuery<EmpresaDTO> all = criteria.select(rootEntry).where(
 				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
 		
-		List<Empresa> listaEmpresas = entityManager().createQuery(all).getResultList();
+		List<EmpresaDTO> listaEmpresas = entityManager().createQuery(all).getResultList();
 		return listaEmpresas;			
 	}
 }

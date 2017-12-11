@@ -41,6 +41,7 @@ public class GestorArchivoTest {
 	@After
 	public void limpiarRepo() {
 		repositorio.reset();
+		RepoEmpresas.limpiarListaEmpresas();
 	}
 
 	@Rule

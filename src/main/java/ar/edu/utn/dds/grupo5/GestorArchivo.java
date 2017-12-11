@@ -29,7 +29,7 @@ public class GestorArchivo {
 		return instance;
 	}
 
-	public void cargarArchivo(RepoEmpresas repoEmpresas, File archivo) {
+	public void cargarArchivo( File archivo) {
 
 		Gson gson = new Gson();
 		Empresa empresaJson;
@@ -40,8 +40,6 @@ public class GestorArchivo {
 			
 			listaEmpresasJson = gson.fromJson(reader, tipoListaEmpresas);
 
-			//RepoEmpresas repoEmpresasJson = gson.fromJson(reader, RepoEmpresas.class);
-			//listaEmpresasJson = repoEmpresasJson.getListaEmpresa();
 
 			Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
 

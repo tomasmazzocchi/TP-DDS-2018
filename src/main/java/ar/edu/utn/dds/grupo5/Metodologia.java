@@ -37,6 +37,9 @@ public class Metodologia {
 	}
 
 	// ----------------------GETTERS AND SETTERS-----------------------------------
+	public Metodologia(){
+		
+	}
 	public List<Condicion> getCondiciones() {
 		return condiciones;
 	}

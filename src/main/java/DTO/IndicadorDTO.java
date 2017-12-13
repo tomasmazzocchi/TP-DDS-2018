@@ -22,10 +22,10 @@ public class IndicadorDTO {
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToOne
-	//@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 	@OneToOne
-	//@JoinColumn(name = "id_empresa")
+	@JoinColumn(name = "id_empresa")
 	private EmpresaDTO empresaAsociada;
 	@Transient
 	private int valor;

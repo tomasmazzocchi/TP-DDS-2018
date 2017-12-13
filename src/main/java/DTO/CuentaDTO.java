@@ -27,7 +27,7 @@ public class CuentaDTO {
 	@Column(name = "valor")
 	private double valor;
 	@OneToOne
-	//@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 
 	public CuentaDTO(LocalDate fecDesde, LocalDate fecHasta, String nombre, double valor, UsuarioDTO us) {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -16,7 +18,7 @@ import ar.edu.utn.dds.grupo5.Indicador;
 @DiscriminatorValue(value = "min_indicador")
 public class MinimizarIndicador extends Condicion {
 
-	@OneToOne()
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Indicador indicador;
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();

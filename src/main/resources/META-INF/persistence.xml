@@ -9,17 +9,15 @@
     	<!---<provider>org.hibernate.ejb.HibernatePersistence</provider>  -->
     	<!---<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-    	
-    	 <class>ar.edu.utn.dds.grupo5.Metodologia</class>    	
-    	 <class>ar.edu.utn.dds.grupo5.Empresa</class>  
-    	 <class>ar.edu.utn.dds.grupo5.Indicador</class>  
-    	 <class>ar.edu.utn.dds.grupo5.Condicion</class> 
+    	   
     	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>
+    	 <class>ar.edu.utn.dds.grupo5.Indicador</class>  	
+    	 <class>ar.edu.utn.dds.grupo5.Empresa</class>  
+    	 <class>ar.edu.utn.dds.grupo5.Condicion</class> 
+    	 <class>ar.edu.utn.dds.grupo5.Metodologia</class> 
     	 <class>DTO.UsuarioDTO</class>
     	 <class>DTO.MetodologiaDTO</class>  
-    	 <class>DTO.IndicadorDTO</class>  
-    	 <class>DTO.CondicionDTO</class> 
-    	 
+    	 <class>DTO.IndicadorDTO</class>      	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>               
           

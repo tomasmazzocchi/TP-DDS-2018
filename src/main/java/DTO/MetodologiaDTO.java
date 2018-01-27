@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,7 +33,7 @@ public class MetodologiaDTO {
 	private List<Condicion> condiciones;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 

@@ -28,8 +28,7 @@ public class Metodologia {
 	private List<Condicion> condiciones;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Usuario usuarioAsociado;
+
 
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
@@ -52,14 +51,6 @@ public class Metodologia {
 		this.nombre = nombre;
 	}
 	
-	public void setUsuario(Usuario usuario) {
-		this.usuarioAsociado = usuario;
-	}
-	
-	public Usuario getUsuario() {
-		return usuarioAsociado;
-	}
-
 	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}

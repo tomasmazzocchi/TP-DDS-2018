@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -18,7 +19,7 @@ import ar.edu.utn.dds.grupo5.Indicador;
 @DiscriminatorValue(value = "max_indicador")
 public class MaximizarIndicador extends Condicion {
 
-	@OneToOne()
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Indicador indicador;
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();

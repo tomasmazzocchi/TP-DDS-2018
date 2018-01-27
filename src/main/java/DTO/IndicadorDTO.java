@@ -1,5 +1,6 @@
 package DTO;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,10 @@ public class IndicadorDTO {
 	private String formula;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresaAsociada;
 	@Transient

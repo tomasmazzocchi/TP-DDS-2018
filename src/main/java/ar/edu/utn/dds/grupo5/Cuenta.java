@@ -25,20 +25,9 @@ public class Cuenta {
 	private String nombre;
 	@Column(name = "valor")
 	private double valor;
-	@OneToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuarioAsociado;
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public void setUsuarioAsociado(Usuario user) {
-		this.usuarioAsociado = user;
-	}
-
-	public Usuario getUsuarioAsociado() {
-		return this.usuarioAsociado;
 	}
 
 	public void setNombre(String nombre) {

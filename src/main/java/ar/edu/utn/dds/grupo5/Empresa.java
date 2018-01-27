@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,26 +29,16 @@ public class Empresa {
 	private LocalDate anio_fundacion;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_empresa")
 	private List<Cuenta> listaCuentas = new ArrayList<>();
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_empresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
-	@OneToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuarioAsociado;
+
 	
 	public int getId(){
 		return this.id_empresa;
-	}
-
-	public Usuario getUsuarioAsociado() {
-		return usuarioAsociado;
-	}
-
-	public void setUsuarioAsociado(Usuario usuarioAsociado) {
-		this.usuarioAsociado = usuarioAsociado;
 	}
 
 	public Empresa(String nombre, List<Cuenta> listaCuentas, List<Indicador> listaIndicadores,

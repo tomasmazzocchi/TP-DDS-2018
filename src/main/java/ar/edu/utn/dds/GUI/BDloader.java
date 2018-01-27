@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import DTO.CondicionDTO;
-import DTO.CuentaDTO;
-import DTO.EmpresaDTO;
 import DTO.IndicadorDTO;
 import DTO.MetodologiaDTO;
 import DTO.UsuarioDTO;
-import DTO.Condiciones.LongevidadDTO;
-import DTO.Condiciones.MargenCrecienteDTO;
-import DTO.Condiciones.MaximizarIndicadorDTO;
-import DTO.Condiciones.MinimizarIndicadorDTO;
+import ar.edu.utn.dds.grupo5.Condicion;
+import ar.edu.utn.dds.grupo5.Cuenta;
+import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
+import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
+import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
+import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
@@ -23,17 +25,16 @@ public class BDloader {
 	private static UsuarioDTO usuario1;
 	private static UsuarioDTO usuario2;
 	private static UsuarioDTO usuario3;
-	private static List<CuentaDTO> listaCuentasFacebook = new ArrayList<>();
-	private static List<CuentaDTO> listaCuentasGoogle = new ArrayList<>();
-	private static List<CuentaDTO> listaCuentasTwitter = new ArrayList<>();
-	private static List<IndicadorDTO> listaIndicadoresFacebook = new ArrayList<>();
-	private static List<IndicadorDTO> listaIndicadoresGoogle = new ArrayList<>();
-	private static List<IndicadorDTO> listaIndicadoresTwitter = new ArrayList<>();
-	private static EmpresaDTO facebook;
-	private static EmpresaDTO google;
-	private static EmpresaDTO twitter;
+	private static List<Cuenta> listaCuentasFacebook = new ArrayList<>();
+	private static List<Cuenta> listaCuentasGoogle = new ArrayList<>();
+	private static List<Cuenta> listaCuentasTwitter = new ArrayList<>();
+	private static List<Indicador> listaIndicadoresFacebook = new ArrayList<>();
+	private static List<Indicador> listaIndicadoresGoogle = new ArrayList<>();
+	private static List<Indicador> listaIndicadoresTwitter = new ArrayList<>();
+	private static Empresa facebook;
+	private static Empresa google;
+	private static Empresa twitter;
 	private static MetodologiaDTO metodologiaBuffetTwitter;
-	private static LongevidadDTO unaLongevidad;
 	private static IndicadorDTO indicadorROEFacebook;
 	private static IndicadorDTO indicadorROAFacebook;
 	private static IndicadorDTO indicadorROEGoogle;
@@ -43,15 +44,16 @@ public class BDloader {
 	private static IndicadorDTO indicadorDeudaFacebook;
 	private static IndicadorDTO indicadorDeudaGoogle;
 	private static IndicadorDTO indicadorDeudaTwitter;
-	private static MaximizarIndicadorDTO maxIndicador;
-	private static MinimizarIndicadorDTO minIndicador;
-	private static MargenCrecienteDTO margenCreciente;
-	private static CuentaDTO cuentaEBIDTAFacebook;
-	private static CuentaDTO cuentaMargenFacebook;
-	private static CuentaDTO cuentaEBIDTAGoogle;
-	private static CuentaDTO cuentaMARGENGooge;
-	private static CuentaDTO cuentaEBIDTATwitter;
-	private static CuentaDTO cuentaMARGENTwitter;
+	private static Longevidad unaLongevidad;
+	private static MaximizarIndicador maxIndicador;
+	private static MinimizarIndicador minIndicador;
+	private static MargenCreciente margenCreciente;
+	private static Cuenta cuentaEBIDTAFacebook;
+	private static Cuenta cuentaMargenFacebook;
+	private static Cuenta cuentaEBIDTAGoogle;
+	private static Cuenta cuentaMARGENGooge;
+	private static Cuenta cuentaEBIDTATwitter;
+	private static Cuenta cuentaMARGENTwitter;
 
 	public static void main(String[] args) {
 			//Definiciones
@@ -60,12 +62,12 @@ public class BDloader {
 		usuario2 = new UsuarioDTO("juli","1234");
 		usuario3 = new UsuarioDTO("tomi","1234");
 		
-		cuentaEBIDTAFacebook = new CuentaDTO( LocalDate.now(), LocalDate.now(),"EBIDTA", 100,usuario1);
-		cuentaMargenFacebook = new CuentaDTO( LocalDate.now(), LocalDate.now(),"Margen", 200,usuario2);
-		cuentaEBIDTAGoogle = new CuentaDTO( LocalDate.now(), LocalDate.now(),"EBIDTA", 200,usuario1);
-		cuentaMARGENGooge = new CuentaDTO( LocalDate.now(), LocalDate.now(),"Margen", 300,usuario1);
-		cuentaEBIDTATwitter = new CuentaDTO(LocalDate.now(), LocalDate.now(),"EBIDTA", 300, usuario2);
-		cuentaMARGENTwitter = new CuentaDTO(LocalDate.now(), LocalDate.now(),"Margen", 400, usuario2);
+		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
+		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
+		cuentaEBIDTAGoogle = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
+		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
+		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300,LocalDate.now(), LocalDate.now());
+		cuentaMARGENTwitter = new Cuenta("Margen", 400,LocalDate.now(), LocalDate.now());
 		
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaCuentasFacebook.add(cuentaMargenFacebook);
@@ -73,11 +75,7 @@ public class BDloader {
 		listaCuentasGoogle.add(cuentaMARGENGooge);
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
-		
-		facebook = new EmpresaDTO(LocalDate.now(),"Facebook",listaCuentasFacebook,listaIndicadoresFacebook,usuario1);
-		google = new EmpresaDTO(LocalDate.now().minusYears(50),"Google",listaCuentasGoogle,listaIndicadoresGoogle, usuario2);
-		twitter = new EmpresaDTO(LocalDate.now().minusYears(20),"Twitter",listaCuentasTwitter,listaIndicadoresTwitter, usuario2);
-		
+
 		indicadorROEFacebook = new IndicadorDTO("ROE", "cu.EBIDTA",facebook,usuario1);
 		indicadorROAFacebook = new IndicadorDTO("ROA", "cu.Margen",facebook,usuario1);
 		indicadorDeudaFacebook = new IndicadorDTO("DEUDA","300",facebook,usuario1);
@@ -88,24 +86,28 @@ public class BDloader {
 		indicadorROATwitter= new IndicadorDTO("ROA", "cu.Margen",twitter,usuario2);
 		indicadorDeudaTwitter = new IndicadorDTO("DEUDA","1000",twitter,usuario2);
 		
-		facebook.getListaIndicadores().add(indicadorROEFacebook);
-		facebook.getListaIndicadores().add(indicadorROAFacebook);
-		facebook.getListaIndicadores().add(indicadorDeudaFacebook);
-		google.getListaIndicadores().add(indicadorROEGoogle);
-		google.getListaIndicadores().add(indicadorROAGoogle);
-		google.getListaIndicadores().add(indicadorDeudaGoogle);
-		twitter.getListaIndicadores().add(indicadorROETwitter);
-		twitter.getListaIndicadores().add(indicadorROATwitter);
-		twitter.getListaIndicadores().add(indicadorDeudaTwitter);
+		listaIndicadoresFacebook.add(AdapterIndicador.adaptar(indicadorROEFacebook));
+		listaIndicadoresFacebook.add(AdapterIndicador.adaptar(indicadorROAFacebook));
+		listaIndicadoresFacebook.add(AdapterIndicador.adaptar(indicadorDeudaFacebook));
+		listaIndicadoresTwitter.add(AdapterIndicador.adaptar(indicadorROETwitter));
+		listaIndicadoresTwitter.add(AdapterIndicador.adaptar(indicadorROATwitter));
+		listaIndicadoresTwitter.add(AdapterIndicador.adaptar(indicadorDeudaTwitter));
+		listaIndicadoresGoogle.add(AdapterIndicador.adaptar(indicadorROEGoogle));
+		listaIndicadoresGoogle.add(AdapterIndicador.adaptar(indicadorROAGoogle));
+		listaIndicadoresGoogle.add(AdapterIndicador.adaptar(indicadorDeudaGoogle));
 		
+		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook,LocalDate.now());
+		google = new Empresa("Google",listaCuentasGoogle,listaIndicadoresGoogle,LocalDate.now().minusYears(50));
+		twitter = new Empresa("Twitter",listaCuentasTwitter,listaIndicadoresTwitter,LocalDate.now().minusYears(20));
+				
 		
 		//Condiciones
-		unaLongevidad = new LongevidadDTO(10);
-		maxIndicador = new MaximizarIndicadorDTO(indicadorROETwitter);
-		margenCreciente = new MargenCrecienteDTO();
-		minIndicador = new MinimizarIndicadorDTO(indicadorROATwitter);
+		unaLongevidad = new Longevidad(10);
+		maxIndicador = new MaximizarIndicador(AdapterIndicador.adaptar(indicadorROETwitter));
+		margenCreciente = new MargenCreciente();
+		minIndicador = new MinimizarIndicador(AdapterIndicador.adaptar(indicadorROATwitter));
 		
-		List<CondicionDTO> condiciones = new ArrayList<>();
+		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
@@ -128,6 +130,19 @@ public class BDloader {
 		em.persist(facebook);
 		em.persist(google);
 		em.persist(twitter);
+		List<Empresa> empresas = new ArrayList<Empresa>();
+		empresas.add(facebook);
+		empresas.add(google);
+		empresas.add(twitter);
+		RepoEmpresas.agregarEmpresas(empresas);		
+
+		// cuentas
+		em.persist(cuentaEBIDTAFacebook);
+		em.persist(cuentaMargenFacebook);
+		em.persist(cuentaEBIDTAGoogle);
+		em.persist(cuentaMARGENGooge);
+		em.persist(cuentaEBIDTATwitter);
+		em.persist(cuentaMARGENTwitter);
 		
 		// indicadores
 		em.persist(indicadorROEFacebook);
@@ -146,13 +161,6 @@ public class BDloader {
 		em.persist(margenCreciente); 
 		em.persist(minIndicador);
 		
-		// cuentas
-		em.persist(cuentaEBIDTAFacebook);
-		em.persist(cuentaMargenFacebook);
-		em.persist(cuentaEBIDTAGoogle);
-		em.persist(cuentaMARGENGooge);
-		em.persist(cuentaEBIDTATwitter);
-		em.persist(cuentaMARGENTwitter);
 		
 		em.getTransaction().commit();
 		em.clear();

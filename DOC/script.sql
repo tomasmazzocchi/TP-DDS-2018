@@ -31,10 +31,8 @@ CREATE TABLE empresa (
 	 anio_fundacion datetime,
     nombre    	   varchar(50),
 	id_metodologia int,
-    id_usuario int,
     PRIMARY KEY (id_empresa),
-    FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia),
-	FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_metodologia) REFERENCES metodologia(id_metodologia)
 );
 
 CREATE TABLE indicador (
@@ -51,7 +49,7 @@ CREATE TABLE indicador (
 CREATE TABLE condicion (
 	id_condicion int AUTO_INCREMENT,
 	nombre       varchar(50),
-	id_metodologia int, 
+	id_metodologia int,
     id_indicador int,
     anio date,
     tipo_condicion varchar(50),
@@ -67,9 +65,6 @@ CREATE TABLE cuenta (
 	fecha_desde date,
 	fecha_hasta date,
     	id_empresa  int,
-	id_usuario  int,
     	PRIMARY KEY (id_cuenta),
-	FOREIGN KEY(id_empresa) REFERENCES empresa(id_empresa),
-	FOREIGN KEY(id_usuario) REFERENCES usuario(id_usuario)
+	FOREIGN KEY(id_empresa) REFERENCES empresa(id_empresa)
 );
-

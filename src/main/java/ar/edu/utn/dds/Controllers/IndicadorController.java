@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import DTO.EmpresaDTO;
 import DTO.IndicadorDTO;
 import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
+import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
@@ -18,7 +18,7 @@ import spark.Response;
 public class IndicadorController {
 	private static String mensaje = "";
 	private static String color = "";
-	private static List<EmpresaDTO> empresas = new ArrayList<EmpresaDTO>();
+	private static List<Empresa> empresas = new ArrayList<Empresa>();
 	private static List<IndicadorDTO> listaIndicadores = new ArrayList<IndicadorDTO>();
 	private static int calculo;
 
@@ -28,7 +28,7 @@ public class IndicadorController {
 
 	public static Void guardarIndicador(Request request, Response response) {
 		UsuarioDTO usuario = Routes.getUsuarioDeSesion(request.session().id());
-		EmpresaDTO empresaSeleccionada = empresas.stream()
+		Empresa empresaSeleccionada = empresas.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 		IndicadorDTO indicador = new IndicadorDTO(request.queryParams("nombre"), request.queryParams("formula"),
 				empresaSeleccionada, usuario);
@@ -48,7 +48,7 @@ public class IndicadorController {
 	public static ModelAndView creacionIndicador(Request req, Response res) {
 		try {
 			UsuarioDTO usuario = Routes.getUsuarioDeSesion(req.session().id());
-			empresas = EMFactorySingleton.obtenerEmpresasDeUnUsuario(usuario.getNombreUsuario());
+			empresas = EMFactorySingleton.obtenerEmpresas();
 
 			Map<String, Object> map = new HashMap<>();
 			map.put("titulo", "Dónde invierto - Creación de indicador");
@@ -76,7 +76,7 @@ public class IndicadorController {
 			response.redirect("/");
 			return null;
 		}
-		empresas = EMFactorySingleton.obtenerEmpresasDeUnUsuario(usuario.getNombreUsuario());
+		empresas = EMFactorySingleton.obtenerEmpresas();
 		listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
@@ -101,12 +101,12 @@ public class IndicadorController {
 			return null;
 		}
 
-		EmpresaDTO empresaSeleccionada = empresas.stream()
+		Empresa empresaSeleccionada = empresas.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedEmp"))).findFirst().get();
 		IndicadorDTO indicadorSeleccionado = listaIndicadores.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedInd"))).findFirst().get();
 		Indicador ind = new Indicador(indicadorSeleccionado.getNombre(), indicadorSeleccionado.getFormula());
-		calculo = ind.calcularIndicador(empresaSeleccionada.getId_empresa());
+		calculo = ind.calcularIndicador(empresaSeleccionada.getId());
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
 		map.put("empresas", empresas);

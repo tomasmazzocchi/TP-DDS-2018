@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import ar.edu.utn.dds.grupo5.Empresa;
+
 @Entity
 @Table(name = "indicador", schema = "dds2017")
 public class IndicadorDTO {
@@ -26,11 +28,11 @@ public class IndicadorDTO {
 	private UsuarioDTO usuarioAsociado;
 	@OneToOne
 	@JoinColumn(name = "id_empresa")
-	private EmpresaDTO empresaAsociada;
+	private Empresa empresaAsociada;
 	@Transient
 	private int valor;
 
-	public IndicadorDTO(String nombre, String formula, EmpresaDTO empresa, UsuarioDTO us) {
+	public IndicadorDTO(String nombre, String formula, Empresa empresa, UsuarioDTO us) {
 		this.nombre = nombre;
 		this.formula = formula;
 		this.empresaAsociada = empresa;
@@ -41,7 +43,7 @@ public class IndicadorDTO {
 
 	}
 
-	public EmpresaDTO getEmpresaAsociada() {
+	public Empresa getEmpresaAsociada() {
 		return empresaAsociada;
 	}
 

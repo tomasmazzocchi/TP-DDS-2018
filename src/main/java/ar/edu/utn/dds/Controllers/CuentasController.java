@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import DTO.CuentaDTO;
 import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
+import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
 import spark.Request;
@@ -20,7 +20,7 @@ public class CuentasController {
 	public static ModelAndView viewCuentas(Request request, Response response) {
 		try	{
 			UsuarioDTO usuario = Routes.getUsuarioDeSesion(request.session().id());
-			List<CuentaDTO> listaCuentas = EMFactorySingleton.obtenerCuentasDeUnUsuario(usuario.getNombreUsuario());
+			List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentas();
 			Map<String, Object> map = new HashMap<>();		
 			map.put("cuentas", listaCuentas);
 			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());

@@ -68,15 +68,15 @@ public class Cuenta {
 	public void setFechaHasta(LocalDate fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
+	
+	public Cuenta() {
+		
+	}
 
 	public Cuenta(String nombre, double valor, LocalDate fechaDesde, LocalDate fechaHasta) {
 		this.setNombre(nombre);
 		this.setValor(valor);
 		this.setFechaDesde(fechaDesde);
 		this.setFechaHasta(fechaHasta);
-	}
-
-	protected Cuenta() {
-
 	}
 }

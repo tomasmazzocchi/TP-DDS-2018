@@ -34,6 +34,9 @@ public class RepoEmpresas {
 	public void reset() {
 		listaEmpresas.clear();
 	}
+	public static void agregarEmpresas(List<Empresa> empresas) {
+		listaEmpresas.addAll(empresas);
+	}
 
 	public void agregarEmpresa(Empresa unaEmpresa) {
 		if (!listaEmpresas.contains(unaEmpresa)) {
@@ -50,7 +53,7 @@ public class RepoEmpresas {
 			throw new EmpresaInexistenteException("No existe la empresa");
 		}
 	}
-	
+
 	public static Empresa getEmpresaFromId(int id) {
 		return listaEmpresas.stream().filter(x->x.getId()==id).collect(Collectors.toList()).get(0);
 	}

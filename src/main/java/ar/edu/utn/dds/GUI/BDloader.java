@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-import DTO.CondicionDTO;
 import DTO.IndicadorDTO;
 import DTO.MetodologiaDTO;
 import DTO.UsuarioDTO;
-import DTO.Condiciones.LongevidadDTO;
-import DTO.Condiciones.MargenCrecienteDTO;
-import DTO.Condiciones.MaximizarIndicadorDTO;
-import DTO.Condiciones.MinimizarIndicadorDTO;
+import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
+import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
+import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
+import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 
@@ -35,7 +35,6 @@ public class BDloader {
 	private static Empresa google;
 	private static Empresa twitter;
 	private static MetodologiaDTO metodologiaBuffetTwitter;
-	private static LongevidadDTO unaLongevidad;
 	private static IndicadorDTO indicadorROEFacebook;
 	private static IndicadorDTO indicadorROAFacebook;
 	private static IndicadorDTO indicadorROEGoogle;
@@ -45,9 +44,10 @@ public class BDloader {
 	private static IndicadorDTO indicadorDeudaFacebook;
 	private static IndicadorDTO indicadorDeudaGoogle;
 	private static IndicadorDTO indicadorDeudaTwitter;
-	private static MaximizarIndicadorDTO maxIndicador;
-	private static MinimizarIndicadorDTO minIndicador;
-	private static MargenCrecienteDTO margenCreciente;
+	private static Longevidad unaLongevidad;
+	private static MaximizarIndicador maxIndicador;
+	private static MinimizarIndicador minIndicador;
+	private static MargenCreciente margenCreciente;
 	private static Cuenta cuentaEBIDTAFacebook;
 	private static Cuenta cuentaMargenFacebook;
 	private static Cuenta cuentaEBIDTAGoogle;
@@ -102,12 +102,12 @@ public class BDloader {
 				
 		
 		//Condiciones
-		unaLongevidad = new LongevidadDTO(10);
-		maxIndicador = new MaximizarIndicadorDTO(indicadorROETwitter);
-		margenCreciente = new MargenCrecienteDTO();
-		minIndicador = new MinimizarIndicadorDTO(indicadorROATwitter);
+		unaLongevidad = new Longevidad(10);
+		maxIndicador = new MaximizarIndicador(AdapterIndicador.adaptar(indicadorROETwitter));
+		margenCreciente = new MargenCreciente();
+		minIndicador = new MinimizarIndicador(AdapterIndicador.adaptar(indicadorROATwitter));
 		
-		List<CondicionDTO> condiciones = new ArrayList<>();
+		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);

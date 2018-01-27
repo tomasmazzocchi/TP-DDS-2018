@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
 @Entity
@@ -28,14 +29,14 @@ public class MetodologiaDTO {
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_metodologia")
-	private List<CondicionDTO> condiciones;
+	private List<Condicion> condiciones;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario")
 	private UsuarioDTO usuarioAsociado;
 
-	public MetodologiaDTO(String nombre, List<CondicionDTO> condiciones, UsuarioDTO usuarioAsociado) {
+	public MetodologiaDTO(String nombre, List<Condicion> condiciones, UsuarioDTO usuarioAsociado) {
 		this.nombre = nombre;
 		this.condiciones = condiciones;
 		this.usuarioAsociado = usuarioAsociado;
@@ -49,7 +50,7 @@ public class MetodologiaDTO {
 		return nombre;
 	}
 
-	public List<CondicionDTO> getCondiciones() {
+	public List<Condicion> getCondiciones() {
 		return condiciones;
 	}
 

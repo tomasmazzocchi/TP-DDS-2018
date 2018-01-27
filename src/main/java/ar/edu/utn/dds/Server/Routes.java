@@ -28,6 +28,10 @@ public class Routes {
 		Spark.post("/evaluacionIndicador/", IndicadorController::calcularIndicador,engine);
 		Spark.get("/creacionIndicador/", IndicadorController::creacionIndicador, engine);
 		Spark.post("/creacionIndicador/", IndicadorController::guardarIndicador);
+		Spark.get("/crearMetodologia/", MetodologiaCreacionController::crearMetodologia, engine);
+		Spark.post("/crearMetodologia/", MetodologiaCreacionController::guardarMetodologia);
+		Spark.get("/evaluacionMetodologia/", MetodologiaEvaluacionController::evaluacionMetodologia, engine);
+		Spark.get("/visualizarResultados/", MetodologiaEvaluacionController::visualizarResultados);
 		
 	}
 	

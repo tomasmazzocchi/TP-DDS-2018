@@ -17,7 +17,7 @@ public class UsuarioTest {
 
 	@Before
 	public void init() {
-		usuario = new Usuario("Tomi", "1234");
+		usuario = new Usuario("UsuarioTest", "1234");
 	}
 
 	@Test

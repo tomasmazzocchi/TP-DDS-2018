@@ -124,13 +124,13 @@ public class CondicionesTest {
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE(){
 		List<Empresa> resultado = maxIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), facebook);
+		Assert.assertEquals(resultado.get(0), twitter);
  	}	
 	
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA(){
 		List<Empresa> resultado = minIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), twitter);
+		Assert.assertEquals(resultado.get(0), facebook);
 	}	
 	
 	@Test
@@ -144,8 +144,8 @@ public class CondicionesTest {
 		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
 		
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0),google);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),facebook);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), twitter);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),twitter);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), facebook);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(margenCreciente.getNombre()).get(0), facebook);
 	}
 	

@@ -20,7 +20,7 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds2017" />
   <!---     <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-dds2017" />  -->
             <property name="hibernate.connection.username" value="root" /> 
-            <!-- <property name="hibernate.connection.password" value="1234"/>   -->      
+            <property name="hibernate.connection.password" value="1234"/>     
             <property name="hibernate.format_sql" value="true" />    
             <property name="use_sql_comments" value="true" /> 
             <property name="hibernate.hbm2ddl.auto" value="update" /> 

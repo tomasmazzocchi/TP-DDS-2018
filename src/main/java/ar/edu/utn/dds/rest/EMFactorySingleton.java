@@ -10,13 +10,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
-import DTO.IndicadorDTO;
-import DTO.MetodologiaDTO;
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
+import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.Metodologia;
+import ar.edu.utn.dds.grupo5.Usuario;
 
 public class EMFactorySingleton {
 
@@ -101,16 +100,14 @@ public class EMFactorySingleton {
 
 	}
 
-	public static UsuarioDTO obtenerUsuario(String username) {
+	public static Usuario obtenerUsuario(String username) {
 		CriteriaBuilder cb = entityManager().getCriteriaBuilder();
-		CriteriaQuery<UsuarioDTO> criteria = cb.createQuery(UsuarioDTO.class);
-		Root<UsuarioDTO> rootEntry = criteria.from(UsuarioDTO.class);
-		CriteriaQuery<UsuarioDTO> all = criteria.select(rootEntry).where(cb.equal(rootEntry.get("nombreUsuario"), username));
+		CriteriaQuery<Usuario> criteria = cb.createQuery(Usuario.class);
+		Root<Usuario> rootEntry = criteria.from(Usuario.class);
+		CriteriaQuery<Usuario> all = criteria.select(rootEntry).where(cb.equal(rootEntry.get("nombreUsuario"), username));
 		
-		List<UsuarioDTO> usuario = entityManager().createQuery(all).getResultList();
+		List<Usuario> usuario = entityManager().createQuery(all).getResultList();
 		return usuario.get(0);
-		//return (UsuarioDTO) entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
-			//	.getSingleResult();
 	}
 	
 	public static List<Cuenta> obtenerCuentas() {
@@ -129,27 +126,27 @@ public class EMFactorySingleton {
 		List<Condicion> listaCondicion = entityManager().createQuery(all).getResultList();
 		return listaCondicion;		
 	}
-	public static List<MetodologiaDTO> obtenerMetodologiasDeUnUsuario(String username) {
+	public static List<Metodologia> obtenerMetodologiasDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
-		CriteriaQuery<MetodologiaDTO> criteria = criteriaBuilder.createQuery(MetodologiaDTO.class);
-		Root<MetodologiaDTO> rootEntry = criteria.from(MetodologiaDTO.class);
-		CriteriaQuery<MetodologiaDTO> all = criteria.select(rootEntry).where(
+		CriteriaQuery<Metodologia> criteria = criteriaBuilder.createQuery(Metodologia.class);
+		Root<Metodologia> rootEntry = criteria.from(Metodologia.class);
+		CriteriaQuery<Metodologia> all = criteria.select(rootEntry).where(
 				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
 		
-		List<MetodologiaDTO> listaMetodologiaDTO = entityManager().createQuery(all).getResultList();
+		List<Metodologia> listaMetodologiaDTO = entityManager().createQuery(all).getResultList();
 		return listaMetodologiaDTO;		
 	}
 	
-	public static List<IndicadorDTO> obtenerIndicadoresDeUnUsuario(String username) {
+	public static List<Indicador> obtenerIndicadoresDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
-		CriteriaQuery<IndicadorDTO> criteria = criteriaBuilder.createQuery(IndicadorDTO.class);
-		Root<IndicadorDTO> rootEntry = criteria.from(IndicadorDTO.class);
-		CriteriaQuery<IndicadorDTO> all = criteria.select(rootEntry).where(
+		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
+		Root<Indicador> rootEntry = criteria.from(Indicador.class);
+		CriteriaQuery<Indicador> all = criteria.select(rootEntry).where(
 				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
 		
-		List<IndicadorDTO> listaIndicadores = entityManager().createQuery(all).getResultList();
+		List<Indicador> listaIndicadores = entityManager().createQuery(all).getResultList();
 		return listaIndicadores;		
 	}
 	public static List<Empresa> obtenerEmpresas() {

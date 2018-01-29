@@ -3,8 +3,8 @@ package ar.edu.utn.dds.Controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.*;
+import ar.edu.utn.dds.grupo5.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -40,7 +40,7 @@ public class LoginController {
 			password = params[1].split("=")[1];
 
 		try {
-			UsuarioDTO usuario = repoUsuarios.loginOK(username, password);
+			Usuario usuario = repoUsuarios.loginOK(username, password);
 			
 			Routes.iniciarSesion(req.session().id(), usuario);
 
@@ -61,7 +61,7 @@ public class LoginController {
 		Map<String, String> model = new HashMap<>();
 		
 		try {
-			UsuarioDTO usuario = Routes.getUsuarioDeSesion(req.session().id());
+			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 			
 			model.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 			model.put("titulo", "Dónde Invierto - Menú Principal");	

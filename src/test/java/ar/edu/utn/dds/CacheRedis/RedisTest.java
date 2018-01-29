@@ -51,8 +51,8 @@ public class RedisTest {
 	@Test
 	public void funcionamientoCache() {
 		Cache.getInstancia().agregarIndicador(facebook.getListaIndicadores().get(0).getNombre(),
-				Integer.toString(indicadorROE.calcularIndicador(facebook.getId())));
-		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook.getId())),
+				Integer.toString(indicadorROE.calcularIndicador(facebook)));
+		Assert.assertEquals(Integer.toString(indicadorROE.calcularIndicador(facebook)),
 				Cache.getInstancia().obtenerIndicador(facebook.getListaIndicadores().get(0).getNombre()));
 	}
 }

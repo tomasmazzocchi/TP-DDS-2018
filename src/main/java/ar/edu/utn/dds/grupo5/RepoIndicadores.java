@@ -73,7 +73,7 @@ public class RepoIndicadores {
 	}
 
 	public void guardarIndicadorEnEmpresa(Empresa empresa, String indicadorNombre, String indicadorFormula) {
-		parser.resolverFormula(indicadorFormula, empresa.getId());
+		parser.resolverFormula(indicadorFormula, empresa);
 		Indicador indicador = new Indicador(indicadorNombre, indicadorFormula);
 		empresa.agregarIndicadorAEmpresa(indicador);
 

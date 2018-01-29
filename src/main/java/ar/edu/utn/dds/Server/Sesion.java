@@ -1,14 +1,14 @@
 package ar.edu.utn.dds.Server;
 
-import DTO.UsuarioDTO;
+import ar.edu.utn.dds.grupo5.Usuario;
 
 public class Sesion {
 
 	private String id;
 
-	private UsuarioDTO usuario;
+	private Usuario usuario;
 
-	public Sesion(String string, UsuarioDTO usuario2) {
+	public Sesion(String string, Usuario usuario2) {
 		this.id = string;
 		this.usuario = usuario2;
 	}
@@ -17,11 +17,11 @@ public class Sesion {
 		return id;
 	}
 
-	public UsuarioDTO getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(UsuarioDTO usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	

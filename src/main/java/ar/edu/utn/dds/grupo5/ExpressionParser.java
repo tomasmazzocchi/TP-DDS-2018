@@ -19,7 +19,7 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 public class ExpressionParser {
 	private final ANTLRErrorListener _listener = createErrorListener();
 
-	public int resolverFormula(final String expression, int id_empresa) {
+	public int resolverFormula(final String expression,Empresa empresa) {
 
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 
@@ -33,17 +33,16 @@ public class ExpressionParser {
 
 		final ExprContext context = parser.expr();
 
-		return visit(context, id_empresa);
+		return visit(context, empresa);
 	}
 
-	private int visit(final ExprContext context, int id_empresa) {
+	private int visit(final ExprContext context, Empresa empresa) {
 		Cuenta cuenta;
 		Indicador indicador;
 		String id;
 		String nombre;
 		String cadena;
 		ExpressionParser parser;
-		Empresa empresa = RepoEmpresas.getEmpresaFromId(id_empresa);
 
 		if (context.number() != null) {
 			return Integer.parseInt(context.number().getText());
@@ -57,18 +56,18 @@ public class ExpressionParser {
 			} else {
 				parser = new ExpressionParser();
 				indicador = RepoIndicadores.buscarIndicador(nombre, empresa.getListaIndicadores());
-				return (parser.resolverFormula(indicador.getFormula(), empresa.getId()));
+				return (parser.resolverFormula(indicador.getFormula(), empresa));
 			}
 		} else if (context.BR_CLOSE() != null) {
-			return visit(context.expr(0), empresa.getId());
+			return visit(context.expr(0), empresa);
 		} else if (context.MULTIPLICAR() != null) {
-			return visit(context.expr(0), empresa.getId()) * visit(context.expr(1), empresa.getId());
+			return visit(context.expr(0), empresa) * visit(context.expr(1), empresa);
 		} else if (context.DIVIDIR() != null) {
-			return visit(context.expr(0), empresa.getId()) / visit(context.expr(1), empresa.getId());
+			return visit(context.expr(0), empresa) / visit(context.expr(1), empresa);
 		} else if (context.SUMAR() != null) {
-			return visit(context.expr(0), empresa.getId()) + visit(context.expr(1), empresa.getId());
+			return visit(context.expr(0), empresa) + visit(context.expr(1), empresa);
 		} else if (context.RESTAR() != null) {
-			return visit(context.expr(0), empresa.getId()) - visit(context.expr(1), empresa.getId());
+			return visit(context.expr(0), empresa) - visit(context.expr(1), empresa);
 		} else {
 			throw new ArgumentoIlegalException();
 		}

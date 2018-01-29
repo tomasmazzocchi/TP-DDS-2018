@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import DTO.MetodologiaDTO;
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Condicion;
+import ar.edu.utn.dds.grupo5.Metodologia;
+import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
 import spark.Request;
@@ -27,7 +27,7 @@ public class MetodologiaCreacionController {
 
 	public static ModelAndView crearMetodologia(Request req, Response res) {
 		try {
-			UsuarioDTO usuario = Routes.getUsuarioDeSesion(req.session().id());
+			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 			condiciones = EMFactorySingleton.obtenerCondiciones();
 
 			Map<String, Object> map = new HashMap<>();
@@ -48,11 +48,17 @@ public class MetodologiaCreacionController {
 	}
 
 	public static Void guardarMetodologia(Request request, Response response) {
-		UsuarioDTO usuario = Routes.getUsuarioDeSesion(request.session().id());
+		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 		List<Condicion> condicionesSeleccionadas = condiciones.stream()
 				.filter(x -> request.queryParams("selected").contains(x.getNombre())).collect(Collectors.toList());
 		
-		MetodologiaDTO metodologia = new MetodologiaDTO(request.queryParams("nombre"),condicionesSeleccionadas,usuario);
+		Metodologia metodologia = new Metodologia(request.queryParams("nombre"),condicionesSeleccionadas);
+		metodologia.setUs(usuario);
+		System.out.println(request.queryParams("selected"));
+		for(int i=0; i<condicionesSeleccionadas.size(); i++){
+			System.out.println(condicionesSeleccionadas.get(i).getNombre());
+			System.out.println(condicionesSeleccionadas.get(i));
+		}
 		if (metodologia.getNombre().isEmpty() || metodologia.getCondiciones().isEmpty() || metodologia.getNombre() == null
 				|| metodologia.getCondiciones() == null) {
 			mensaje = "Rellene todos los campos";

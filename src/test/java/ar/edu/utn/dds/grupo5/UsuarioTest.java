@@ -6,11 +6,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class UsuarioTest {
-	private static UsuarioDTO usuario;
+	private static Usuario usuario;
 
 	@BeforeClass
 	public static void setUpClass() {
@@ -18,7 +17,7 @@ public class UsuarioTest {
 
 	@Before
 	public void init() {
-		usuario = new UsuarioDTO("Tomi", "1234");
+		usuario = new Usuario("Tomi", "1234");
 	}
 
 	@Test
@@ -27,7 +26,7 @@ public class UsuarioTest {
 		if(!EMFactorySingleton.existeUsuario(usuario.getNombreUsuario())){
 			EMFactorySingleton.persistir(usuario);
 		}
-		UsuarioDTO user = EMFactorySingleton.obtenerUsuario(usuario.getNombreUsuario());
+		Usuario user = EMFactorySingleton.obtenerUsuario(usuario.getNombreUsuario());
 
 		Assert.assertTrue(user.getNombreUsuario().equals(usuario.getNombreUsuario()));
 		EMFactorySingleton.closeEntityManager();

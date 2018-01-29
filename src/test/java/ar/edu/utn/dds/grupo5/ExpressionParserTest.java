@@ -57,47 +57,47 @@ public class ExpressionParserTest {
 
 	@Test
 	public void ingresoUnaFormulaConUnaCuentaExistente() {
-		assertThat(_parser.resolverFormula("(cu.EBIDTA+1)*2", empresa.getId()), equalTo(402));
+		assertThat(_parser.resolverFormula("(cu.EBIDTA+1)*2", empresa), equalTo(402));
 	}
 
 	@Test
 	public void ingresoFormulaConDosCuentasExistentes() {
-		assertThat(_parser.resolverFormula("(cu.EBIDTA+cu.fds)", empresa.getId()), equalTo(400));
+		assertThat(_parser.resolverFormula("(cu.EBIDTA+cu.fds)", empresa), equalTo(400));
 	}
 
 	@Test
 	public void ingresoFormulaConCaracterInvalido() {
 		thrown.expect(ArgumentoIlegalException.class);
 		thrown.expectMessage(containsString("Formula no Valida"));
-		_parser.resolverFormula("(cu.EBIDTA # 2)", empresa.getId());
+		_parser.resolverFormula("(cu.EBIDTA # 2)", empresa);
 	}
 
 	@Test
 	public void ingresoUnaFormulaConUnIndicador() {
-		assertThat(_parser.resolverFormula("(in.ROE+1)*2", empresa.getId()), equalTo(42));
+		assertThat(_parser.resolverFormula("(in.ROE+1)*2", empresa), equalTo(42));
 	}
 
 	@Test
 	public void ingresoUnaFormulaConUnIndicadoryCuentas() {
-		assertThat(_parser.resolverFormula("(in.DIV+cu.EBIDTA)/2", empresa.getId()), equalTo(200));
+		assertThat(_parser.resolverFormula("(in.DIV+cu.EBIDTA)/2", empresa), equalTo(200));
 	}
 
 	@Test
 	public void ingresoUnaFormulaConCuentaInexistente() {
 		thrown.expect(ExpressionParserException.class);
 		thrown.expectMessage("No existe el nombre de Cuenta");
-		_parser.resolverFormula("cu.pepe/2", empresa.getId());
+		_parser.resolverFormula("cu.pepe/2", empresa);
 	}
 
 	@Test
 	public void ingresoUnaFormulaConIndicadorInexistente() {
 		thrown.expect(RepoIndicadoresException.class);
 		thrown.expectMessage("No existe el nombre del Indicador");
-		_parser.resolverFormula("in.pepe/2", empresa.getId());
+		_parser.resolverFormula("in.pepe/2", empresa);
 	}
 	@Test
 	public void ingresoUnaFormulaConIndicadorExistenteQueTieneComoFormulaOtroIndicador() {
-		assertThat(_parser.resolverFormula("in.POR*2", empresa.getId()), equalTo(400));
+		assertThat(_parser.resolverFormula("in.POR*2", empresa), equalTo(400));
 	}
 
 }

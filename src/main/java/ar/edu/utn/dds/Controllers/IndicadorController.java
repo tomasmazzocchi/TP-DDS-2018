@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import DTO.IndicadorDTO;
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
+import ar.edu.utn.dds.grupo5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
 import spark.Request;
@@ -19,7 +19,7 @@ public class IndicadorController {
 	private static String mensaje = "";
 	private static String color = "";
 	private static List<Empresa> empresas = new ArrayList<Empresa>();
-	private static List<IndicadorDTO> listaIndicadores = new ArrayList<IndicadorDTO>();
+	private static List<Indicador> listaIndicadores = new ArrayList<Indicador>();
 	private static int calculo;
 
 	public static ModelAndView view(Request req, Response res) {
@@ -27,11 +27,9 @@ public class IndicadorController {
 	}
 
 	public static Void guardarIndicador(Request request, Response response) {
-		UsuarioDTO usuario = Routes.getUsuarioDeSesion(request.session().id());
-		Empresa empresaSeleccionada = empresas.stream()
-				.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
-		IndicadorDTO indicador = new IndicadorDTO(request.queryParams("nombre"), request.queryParams("formula"),
-				empresaSeleccionada, usuario);
+		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
+		Indicador indicador = new Indicador(request.queryParams("nombre"), request.queryParams("formula"));
+		indicador.setUsuario(usuario);
 		if (indicador.getNombre().isEmpty() || indicador.getFormula().isEmpty() || indicador.getNombre() == null
 				|| indicador.getFormula() == null) {
 			mensaje = "Rellene todos los campos";
@@ -47,7 +45,7 @@ public class IndicadorController {
 
 	public static ModelAndView creacionIndicador(Request req, Response res) {
 		try {
-			UsuarioDTO usuario = Routes.getUsuarioDeSesion(req.session().id());
+			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 			empresas = EMFactorySingleton.obtenerEmpresas();
 
 			Map<String, Object> map = new HashMap<>();
@@ -68,7 +66,7 @@ public class IndicadorController {
 	}
 
 	public static ModelAndView viewIndicadores(Request request, Response response) {
-		UsuarioDTO usuario;
+		Usuario usuario;
 		try {
 			usuario = Routes.getUsuarioDeSesion(request.session().id());
 
@@ -77,6 +75,7 @@ public class IndicadorController {
 			return null;
 		}
 		empresas = EMFactorySingleton.obtenerEmpresas();
+		RepoEmpresas.agregarEmpresas(empresas);
 		listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
@@ -93,7 +92,7 @@ public class IndicadorController {
 	}
 
 	public static ModelAndView calcularIndicador(Request request, Response response) {
-		UsuarioDTO usuario;
+		Usuario usuario;
 		try {
 			usuario = Routes.getUsuarioDeSesion(request.session().id());
 		} catch (Exception e) {
@@ -103,10 +102,10 @@ public class IndicadorController {
 
 		Empresa empresaSeleccionada = empresas.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedEmp"))).findFirst().get();
-		IndicadorDTO indicadorSeleccionado = listaIndicadores.stream()
+		Indicador indicadorSeleccionado = listaIndicadores.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedInd"))).findFirst().get();
 		Indicador ind = new Indicador(indicadorSeleccionado.getNombre(), indicadorSeleccionado.getFormula());
-		calculo = ind.calcularIndicador(empresaSeleccionada.getId());
+		calculo = ind.calcularIndicador(empresaSeleccionada);
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
 		map.put("empresas", empresas);

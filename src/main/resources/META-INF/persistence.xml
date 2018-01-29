@@ -10,14 +10,9 @@
     	<!---<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	   
-    	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>
-    	 <class>ar.edu.utn.dds.grupo5.Indicador</class>  	
+    	 <class>ar.edu.utn.dds.grupo5.Cuenta</class>	
     	 <class>ar.edu.utn.dds.grupo5.Empresa</class>  
-    	 <class>ar.edu.utn.dds.grupo5.Condicion</class> 
-    	 <class>ar.edu.utn.dds.grupo5.Metodologia</class> 
-    	 <class>DTO.UsuarioDTO</class>
-    	 <class>DTO.MetodologiaDTO</class>  
-    	 <class>DTO.IndicadorDTO</class>      	 
+    	 <class>ar.edu.utn.dds.grupo5.Condicion</class>      	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>               
           
@@ -25,7 +20,7 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dds2017" />
   <!---     <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-dds2017" />  -->
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="1234"/>         
+            <!-- <property name="hibernate.connection.password" value="1234"/>   -->      
             <property name="hibernate.format_sql" value="true" />    
             <property name="use_sql_comments" value="true" /> 
             <property name="hibernate.hbm2ddl.auto" value="update" /> 

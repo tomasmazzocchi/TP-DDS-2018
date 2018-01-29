@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import DTO.UsuarioDTO;
 import ar.edu.utn.dds.spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import ar.edu.utn.dds.Controllers.*;
+import ar.edu.utn.dds.grupo5.Usuario;
 
 public class Routes {
 
@@ -31,15 +31,15 @@ public class Routes {
 		Spark.get("/crearMetodologia/", MetodologiaCreacionController::crearMetodologia, engine);
 		Spark.post("/crearMetodologia/", MetodologiaCreacionController::guardarMetodologia);
 		Spark.get("/evaluacionMetodologia/", MetodologiaEvaluacionController::evaluacionMetodologia, engine);
-		Spark.get("/visualizarResultados/", MetodologiaEvaluacionController::visualizarResultados);
+		Spark.post("/evaluacionMetodologia/", MetodologiaEvaluacionController::visualizarResultados, engine);
 		
 	}
 	
-	public static UsuarioDTO getUsuarioDeSesion(String idSesion) {	  
+	public static Usuario getUsuarioDeSesion(String idSesion) {	  
 		return sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0).getUsuario();
 	}
 
-	public static void iniciarSesion(String idSesion, UsuarioDTO usuario) {
+	public static void iniciarSesion(String idSesion, Usuario usuario) {
 		if (sesiones.stream().anyMatch(sesion -> sesion.getId().equals(idSesion)))
 			sesiones.stream().filter(sesion -> sesion.getId().equals(idSesion)).collect(Collectors.toList()).get(0)
 					.setUsuario(usuario);

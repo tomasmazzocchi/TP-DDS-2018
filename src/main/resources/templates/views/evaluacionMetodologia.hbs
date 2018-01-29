@@ -1,8 +1,8 @@
 {{#partial "contenido"}}
     <meta charset="UTF-8">
 
-    <div style="margin-top:2%" class="card col l4 m6 s12  offset-l4 offset-m3  visualizar-cuentas-styles" action="/evaluacionMetodologia/">
-      <form style="margin-bottom:20px;" action="/visualizarResultados/" class="col s12" method="get">
+    <div style="margin-top:2%" class="card col l4 m6 s12  offset-l4 offset-m3  visualizar-cuentas-styles">
+      <form style="margin-bottom:20px;" action="/evaluacionMetodologia/" class="col s12" method="post">
           <div style="margin-top:10px;" class="form-group">
               <select>
                  <option value="" disabled selected>Seleccione la metodología</option>
@@ -11,21 +11,18 @@
                  {{/each}}
               </select>
           </div>
-          <button type="submit" class="blue btn btn-default">Evaluar</button>
+          <button onclick="mostrarHashmap()" type="submit" class="blue btn btn-default">Evaluar</button>
       </form>
     </div>
-    <div class="hidden col s8 offset-s4">
-        <table>
+    <div style="padding:0" class="visualizar-cuentas-styles hidden col s8 offset-s2 card">
+        <table class="tabla table striped no-marg">
           <thead>
             <tr>
-              {{#each resultados}}
-                 <th></th>
+              {{#each headerTabla}}
+                 <th>{{this}}</th>
               {{/each}}
             </tr>
           </thead>
-          <tbody>
-
-          </tbody>
         </table>
     </div>
 
@@ -34,7 +31,47 @@
               $('select').material_select();
               $(".select-dropdown").attr("name","selected");
           });
-          Materialize.toast("{{mensaje}}",3000,"{{color}}");
+          $(".tabla").remove("tbody");
+          var emp = "{{#each resultados}}{{#each this}}{{this.nombre}}&{{/each}};{{/each}}".split(";").slice(0,-1);
+          var matrizRdos = [];
+          var maxLength = 0;
+          var filas = "<tbody>";
+          for(var i in emp) {
+              emp[i] = emp[i].split("&").slice(0,-1);
+              if(maxLength < emp[i].length){
+                maxLength = emp[i].length;
+              }
+          }
+          //completo con ""
+          for(var j in emp){
+              var length = emp[j].length;
+              var diff = maxLength - length;
+              for(var h = 0; h<diff; h++){
+                emp[j].push("");
+              }
+          }
+          //genero matriz transpuesta
+          for(var i = 0; i<maxLength; i++){
+              var aux = [];
+              for(var j = 0; j < emp.length; j++){
+                  aux.push(emp[j][i]);
+              }
+              matrizRdos.push(aux);
+          }
+          //pusheo html
+          for(var i in matrizRdos){
+              filas = filas + "<tr>";
+              for(var j in matrizRdos[i]){
+                  filas =filas +  "<td>" + matrizRdos[i][j] + "</td>";
+              }
+              filas = filas + "</tr>";
+          }
+          filas = filas + "</tbody>";
+          $(".tabla").append(filas);
+          if(matrizRdos.length){
+            $(".hidden").removeClass("hidden");
+          }
+          Materialize.toast("{{message}}",3000,"red");
     </script>
 {{/partial}}
 

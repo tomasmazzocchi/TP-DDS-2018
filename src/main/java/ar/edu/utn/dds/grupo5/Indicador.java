@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -19,6 +21,9 @@ public class Indicador {
 	private String formula;
 	@Column(name = "nombre")
 	private String nombre;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")	
+	private Usuario usuarioAsociado;
 	@Transient
 	private int valor;
 
@@ -34,7 +39,15 @@ public class Indicador {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-
+	
+	public void setUsuario(Usuario us){
+		this.usuarioAsociado = us;
+	}
+	
+	public Usuario getUsuario(){
+		return this.usuarioAsociado;
+	}
+	
 	public Indicador() {
 
 	}
@@ -55,14 +68,12 @@ public class Indicador {
 		this.formula = formula;
 	}
 
-	public int calcularIndicador(int id_empresa) {
+	public int calcularIndicador(Empresa empresa) {
 
 		ExpressionParser parser;
 		parser = new ExpressionParser();
 
-		// Hay QUE VER QUE PASARIA SI LA EMPRESA NO TIENE ESE INDICADOR
-
-		setValor(parser.resolverFormula(this.formula, id_empresa));
+		setValor(parser.resolverFormula(this.formula, empresa));
 		return getValor();
 	}
 

@@ -9,14 +9,6 @@
   				<div style="margin-top:10px;" class="form-group">
             <input type="text" class="form-control" name="formula" id="formula" placeholder="Formula"/>
   				</div>
-          <div style="margin-top:10px;" class="form-group">
-            <select>
-               <option value="" disabled selected>Seleccione una empresa</option>
-            	 {{#each empresas}}
-                  <option value = "{{this}}">{{this.nombre}}</option>
-               {{/each}}
-            </select>
-  				</div>
   					<button type="submit" class="blue btn btn-default">Crear Indicador</button>
 			</form>
 		</div>

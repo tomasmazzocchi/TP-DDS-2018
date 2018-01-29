@@ -110,10 +110,15 @@ footer {
 	width: 105px;
 }
 
+.hidden {
+	display:none;
+}
+.card{padding:0}
 .visualizar-cuentas-styles .tabla th {
 	background-color: #212121;
 	color: white;
 	text-align: center;
+	border-radius: 0!important;
 }
 
 .visualizar-cuentas-styles td {

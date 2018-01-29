@@ -5,11 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,8 +24,11 @@ public class Metodologia {
 	private int idMetodologia;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	private List<Condicion> condiciones;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")	
+	private Usuario usuarioAsociado;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
 
@@ -39,8 +42,17 @@ public class Metodologia {
 	public Metodologia(){
 		
 	}
+	
 	public List<Condicion> getCondiciones() {
 		return condiciones;
+	}
+	
+	public Usuario getUs() {
+		return usuarioAsociado;
+	}
+
+	public void setUs(Usuario us) {
+		this.usuarioAsociado = us;
 	}
 
 	public String getNombre() {
@@ -64,6 +76,7 @@ public class Metodologia {
 	}
 
 	public void aplicarCondiciones(List<Empresa> empresas) {
+		resultados.clear();
 		condiciones.stream().forEach(condicion -> {
 			List<Empresa> resultado = new ArrayList<>();
 			resultado = condicion.aplicarCondicion(empresas);

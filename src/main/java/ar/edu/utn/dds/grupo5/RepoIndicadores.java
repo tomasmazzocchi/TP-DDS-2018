@@ -13,7 +13,6 @@ import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
 import ar.edu.utn.dds.ExceptionHandler.IndicadorInexistenteException;
 import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 
-
 public class RepoIndicadores {
 	private String nombre;
 	private List<Indicador> listaIndicadores = new ArrayList<>();
@@ -94,7 +93,7 @@ public class RepoIndicadores {
 			this.guardarIndicadorEnRepo(nombres.get(i), formulas.get(i));
 		}
 	}
-	
+
 	public List<Indicador> obtenerIndicadores(EntityManager em) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
@@ -103,6 +102,7 @@ public class RepoIndicadores {
 		List<Indicador> resultList = em.createQuery(all).getResultList();
 		return resultList;
 	}
+
 	public List<Indicador> obtenerIndicadores(EntityManager em, String nombre) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
@@ -111,7 +111,8 @@ public class RepoIndicadores {
 		List<Indicador> resultList = em.createQuery(criteria).getResultList();
 		return resultList;
 	}
-	public Indicador obtenerIndicador(EntityManager em, int id) {		
+
+	public Indicador obtenerIndicador(EntityManager em, int id) {
 		return em.find(Indicador.class, id);
 	}
 }

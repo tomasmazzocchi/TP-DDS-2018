@@ -51,16 +51,16 @@ public class MetodologiaCreacionController {
 		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 		List<Condicion> condicionesSeleccionadas = condiciones.stream()
 				.filter(x -> request.queryParams("selected").contains(x.getNombre())).collect(Collectors.toList());
-		
-		Metodologia metodologia = new Metodologia(request.queryParams("nombre"),condicionesSeleccionadas);
+
+		Metodologia metodologia = new Metodologia(request.queryParams("nombre"), condicionesSeleccionadas);
 		metodologia.setUs(usuario);
 		System.out.println(request.queryParams("selected"));
-		for(int i=0; i<condicionesSeleccionadas.size(); i++){
+		for (int i = 0; i < condicionesSeleccionadas.size(); i++) {
 			System.out.println(condicionesSeleccionadas.get(i).getNombre());
 			System.out.println(condicionesSeleccionadas.get(i));
 		}
-		if (metodologia.getNombre().isEmpty() || metodologia.getCondiciones().isEmpty() || metodologia.getNombre() == null
-				|| metodologia.getCondiciones() == null) {
+		if (metodologia.getNombre().isEmpty() || metodologia.getCondiciones().isEmpty()
+				|| metodologia.getNombre() == null || metodologia.getCondiciones() == null) {
 			mensaje = "Rellene todos los campos";
 			color = "red";
 		} else {

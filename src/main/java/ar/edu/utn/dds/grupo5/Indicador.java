@@ -22,7 +22,7 @@ public class Indicador {
 	@Column(name = "nombre")
 	private String nombre;
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")	
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuarioAsociado;
 	@Transient
 	private int valor;
@@ -39,15 +39,15 @@ public class Indicador {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-	
-	public void setUsuario(Usuario us){
+
+	public void setUsuario(Usuario us) {
 		this.usuarioAsociado = us;
 	}
-	
-	public Usuario getUsuario(){
+
+	public Usuario getUsuario() {
 		return this.usuarioAsociado;
 	}
-	
+
 	public Indicador() {
 
 	}

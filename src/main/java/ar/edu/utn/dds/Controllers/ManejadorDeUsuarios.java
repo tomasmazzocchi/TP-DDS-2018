@@ -9,19 +9,18 @@ public class ManejadorDeUsuarios {
 
 	public Usuario loginOK(String username, String password) throws Exception {
 
-		if(username.isEmpty() || username==null || password.isEmpty() || password==null){
+		if (username.isEmpty() || username == null || password.isEmpty() || password == null) {
 			throw new Exception("Ingrese usuario y contraseña");
 		}
-		
 
 		else if (!EMFactorySingleton.existeUsuario(username)) {
 			throw new Exception("El usuario y contraseña ingresados son incorrectos");
 		}
 
 		else {
-			Usuario usuario =  EMFactorySingleton.obtenerUsuario(username);
+			Usuario usuario = EMFactorySingleton.obtenerUsuario(username);
 
-			if(!usuario.getPassword().equals(password))
+			if (!usuario.getPassword().equals(password))
 				throw new Exception("El usuario y contraseña ingresados son incorrectos");
 			else
 				return usuario;
@@ -29,12 +28,12 @@ public class ManejadorDeUsuarios {
 	}
 
 	public static ManejadorDeUsuarios getInstance() {
-		if(singleton==null){
-			singleton=new ManejadorDeUsuarios();
+		if (singleton == null) {
+			singleton = new ManejadorDeUsuarios();
 		}
 		return singleton;
 	}
-	
+
 	public Usuario getUsuario(String username) {
 		return EMFactorySingleton.obtenerUsuario(username);
 	}

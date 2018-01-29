@@ -18,7 +18,6 @@ import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
 import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 
-
 public class CondicionesTest {
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
@@ -29,7 +28,6 @@ public class CondicionesTest {
 	private Empresa facebook;
 	private Empresa google;
 	private Empresa twitter;
-	private RepoEmpresas repoEmpresas;
 	private Metodologia metodologiaBuffet;
 	private Longevidad unaLongevidad;
 	private Indicador indicadorROE;
@@ -55,24 +53,24 @@ public class CondicionesTest {
 		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300, LocalDate.now(), LocalDate.now());
 		cuentaMARGENTwitter = new Cuenta("Margen", 400, LocalDate.now(), LocalDate.now());
-		
+
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaCuentasFacebook.add(cuentaMargenFacebook);
 		listaCuentasGoogle.add(cuentaEBIDTAGoogle);
 		listaCuentasGoogle.add(cuentaMARGENGooge);
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
-		
+
 		listaIndicadoresFacebook = new ArrayList<>();
 		listaIndicadoresGoogle = new ArrayList<>();
 		listaIndicadoresTwitter = new ArrayList<>();
-		
+
 		indicadorROE = new Indicador("ROE", "cu.EBIDTA");
 		indicadorROA = new Indicador("ROA", "cu.Margen");
-		indicadorDeudaFacebook = new Indicador("DEUDA","300");
-		indicadorDeudaGoogle = new Indicador("DEUDA","400");
-		indicadorDeudaTwitter = new Indicador("DEUDA","1000");
-		
+		indicadorDeudaFacebook = new Indicador("DEUDA", "300");
+		indicadorDeudaGoogle = new Indicador("DEUDA", "400");
+		indicadorDeudaTwitter = new Indicador("DEUDA", "1000");
+
 		listaIndicadoresFacebook.add(indicadorROE);
 		listaIndicadoresFacebook.add(indicadorROA);
 		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
@@ -82,27 +80,27 @@ public class CondicionesTest {
 		listaIndicadoresTwitter.add(indicadorROE);
 		listaIndicadoresTwitter.add(indicadorROA);
 		listaIndicadoresTwitter.add(indicadorDeudaTwitter);
-		
-		facebook = new Empresa("Facebook",listaCuentasFacebook,listaIndicadoresFacebook, LocalDate.now());
-		google = new Empresa("Google",listaCuentasGoogle,listaIndicadoresGoogle, LocalDate.now().minusYears(50));
-		twitter = new Empresa("Twitter",listaCuentasTwitter,listaIndicadoresTwitter, LocalDate.now().minusYears(20));
-		
-		//Condiciones
+
+		facebook = new Empresa("Facebook", listaCuentasFacebook, listaIndicadoresFacebook, LocalDate.now());
+		google = new Empresa("Google", listaCuentasGoogle, listaIndicadoresGoogle, LocalDate.now().minusYears(50));
+		twitter = new Empresa("Twitter", listaCuentasTwitter, listaIndicadoresTwitter, LocalDate.now().minusYears(20));
+
+		// Condiciones
 		unaLongevidad = new Longevidad(10);
 		maxIndicador = new MaximizarIndicador(indicadorROE);
 		margenCreciente = new MargenCreciente();
 		minIndicador = new MinimizarIndicador(indicadorROA);
-		
+
 		RepoEmpresas.getListaEmpresa().add(facebook);
 		RepoEmpresas.getListaEmpresa().add(google);
 		RepoEmpresas.getListaEmpresa().add(twitter);
-		
+
 		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(unaLongevidad);
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
 		condiciones.add(margenCreciente);
-		metodologiaBuffet = new Metodologia("Metodologia Buffet",condiciones);
+		metodologiaBuffet = new Metodologia("Metodologia Buffet", condiciones);
 	}
 
 	@After
@@ -111,42 +109,42 @@ public class CondicionesTest {
 		metodologiaBuffet.getCondiciones().clear();
 		RepoEmpresas.limpiarListaEmpresas();
 	}
-	
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorLongevidad() {
 		List<Empresa> resultado = unaLongevidad.aplicarCondicion(RepoEmpresas.getListaEmpresa());
- 		Assert.assertEquals(resultado.get(0),google);
+		Assert.assertEquals(resultado.get(0), google);
 	}
-	
+
 	@Test
-	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE(){
+	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE() {
 		List<Empresa> resultado = maxIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(0), twitter);
- 	}	
-	
+	}
+
 	@Test
-	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA(){
+	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA() {
 		List<Empresa> resultado = minIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(0), facebook);
-	}	
-	
+	}
+
 	@Test
-	public void ingresaListadoDeEmpresasYDevuelvoLaDeMargenCreciente(){
+	public void ingresaListadoDeEmpresasYDevuelvoLaDeMargenCreciente() {
 		List<Empresa> resultado = margenCreciente.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(0), facebook);
-	}	
+	}
 
 	@Test
 	public void aplicarMetodologiaBuffet() {
 		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
-		
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0),google);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0),twitter);
+
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0), google);
+		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0), twitter);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), facebook);
 		Assert.assertEquals(metodologiaBuffet.getResultados().get(margenCreciente.getNombre()).get(0), facebook);
 	}
-	
+
 }

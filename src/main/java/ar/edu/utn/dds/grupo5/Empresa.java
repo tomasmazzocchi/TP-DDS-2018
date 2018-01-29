@@ -20,7 +20,8 @@ import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
 @Entity
 @Table(name = "empresa", schema = "dds2017")
 public class Empresa {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
 	private int id_empresa;
 	@Column(name = "anio_fundacion")
@@ -34,8 +35,7 @@ public class Empresa {
 	@JoinColumn(name = "id_empresa")
 	private List<Indicador> listaIndicadores = new ArrayList<>();
 
-	
-	public int getId(){
+	public int getId() {
 		return this.id_empresa;
 	}
 
@@ -122,5 +122,5 @@ public class Empresa {
 	public void agregarIndicadorAEmpresa(Indicador indicador) {
 		this.getListaIndicadores().add(indicador);
 	}
-	
+
 }

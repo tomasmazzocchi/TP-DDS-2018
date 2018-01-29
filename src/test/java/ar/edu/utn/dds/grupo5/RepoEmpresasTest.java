@@ -32,15 +32,15 @@ public class RepoEmpresasTest {
 	public void init() {
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentaFDS = new Cuenta("FDS", 500, LocalDate.now(), LocalDate.now());
-		indicadorMayorQue = new Indicador("MayorQue", "200"); 
+		indicadorMayorQue = new Indicador("MayorQue", "200");
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);
 		listaCuentas.add(cuentaFDS);
 		listaIndicadores.add(indicadorMayorQue);
-		empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores,LocalDate.now());
-		empresa2 = new Empresa("Google", listaCuentas, listaIndicadores,LocalDate.now());
-		empresa3 = new Empresa("Apple", listaCuentas, listaIndicadores,LocalDate.now());
+		empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores, LocalDate.now());
+		empresa2 = new Empresa("Google", listaCuentas, listaIndicadores, LocalDate.now());
+		empresa3 = new Empresa("Apple", listaCuentas, listaIndicadores, LocalDate.now());
 		repoEmpresas = new RepoEmpresas("repoG5");
 	}
 

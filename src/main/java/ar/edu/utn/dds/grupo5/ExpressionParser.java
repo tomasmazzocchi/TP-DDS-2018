@@ -19,7 +19,7 @@ import ar.edu.utn.dds.grupo5.SimpleParser.ExprContext;
 public class ExpressionParser {
 	private final ANTLRErrorListener _listener = createErrorListener();
 
-	public int resolverFormula(final String expression,Empresa empresa) {
+	public int resolverFormula(final String expression, Empresa empresa) {
 
 		final SimpleLexer lexer = new SimpleLexer(new ANTLRInputStream(expression));
 

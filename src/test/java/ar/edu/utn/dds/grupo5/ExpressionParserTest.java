@@ -46,7 +46,7 @@ public class ExpressionParserTest {
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
 		listaIndicadores.add(indicadorPOR);
-		empresa = new Empresa("Facebook",listaCuentas,listaIndicadores, LocalDate.now());
+		empresa = new Empresa("Facebook", listaCuentas, listaIndicadores, LocalDate.now());
 		RepoEmpresas.limpiarListaEmpresas();
 		RepoEmpresas.getListaEmpresa().add(empresa);
 
@@ -95,6 +95,7 @@ public class ExpressionParserTest {
 		thrown.expectMessage("No existe el nombre del Indicador");
 		_parser.resolverFormula("in.pepe/2", empresa);
 	}
+
 	@Test
 	public void ingresoUnaFormulaConIndicadorExistenteQueTieneComoFormulaOtroIndicador() {
 		assertThat(_parser.resolverFormula("in.POR*2", empresa), equalTo(400));

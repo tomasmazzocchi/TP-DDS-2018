@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,9 +15,6 @@ import ar.edu.utn.dds.ExceptionHandler.ArgumentoIlegalException;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.ExpressionParser;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.rest.EMFactorySingleton;
-
-
 
 public class RepoIndicadoresTest {
 	ExpressionParser parser;
@@ -40,18 +33,18 @@ public class RepoIndicadoresTest {
 		parser = new ExpressionParser();
 		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentafds = new Cuenta("fds", 200, LocalDate.now(), LocalDate.now());
-		indicadorROE = new Indicador("ROE", "20"); 
-		indicadorDIV = new Indicador("DIV", "cu.EBIDTA"); 
+		indicadorROE = new Indicador("ROE", "20");
+		indicadorDIV = new Indicador("DIV", "cu.EBIDTA");
 		listaCuentas = new ArrayList<>();
 		listaIndicadores = new ArrayList<>();
 		listaCuentas.add(cuentaEBIDTA);
 		listaCuentas.add(cuentafds);
 		listaIndicadores.add(indicadorROE);
 		listaIndicadores.add(indicadorDIV);
-		empresaTest = new Empresa("HSBC",listaCuentas,listaIndicadores,LocalDate.now());
+		empresaTest = new Empresa("HSBC", listaCuentas, listaIndicadores, LocalDate.now());
 		RepoEmpresas.getListaEmpresa().add(empresaTest);
 	}
-	
+
 	@After
 	public void after() {
 		RepoEmpresas.limpiarListaEmpresas();
@@ -72,13 +65,11 @@ public class RepoIndicadoresTest {
 		thrown.expectMessage("Formula no Valida");
 		repoIndicadores.guardarIndicadorEnRepo("indicador1", "(pepe+1)*2");
 	}
+
 	@Test
-	public void siGuardoIndicadorEnUnaEmpresaConFormulaCorrectaEntoncesSeGuarda(){
+	public void siGuardoIndicadorEnUnaEmpresaConFormulaCorrectaEntoncesSeGuarda() {
 		repoIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(cu.EBIDTA+1)*2");
 		Indicador ind = RepoIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
-		Assert.assertEquals(ind.getNombre(),"indicador1");
+		Assert.assertEquals(ind.getNombre(), "indicador1");
 	}
 }
-
-
-

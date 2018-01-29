@@ -30,7 +30,7 @@ public class MaximizarIndicador extends Condicion {
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
-		if(!listaEmpresas.isEmpty()){
+		if (!listaEmpresas.isEmpty()) {
 			listaEmpresas.clear();
 		}
 		listaEmpresas.addAll(empresas);

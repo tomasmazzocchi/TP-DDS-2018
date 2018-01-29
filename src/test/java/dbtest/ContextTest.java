@@ -15,7 +15,8 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
 
 	@Test
 	public void contextUpWithTransaction() throws Exception {
-		withTransaction(() -> {});
+		withTransaction(() -> {
+		});
 	}
 
 }

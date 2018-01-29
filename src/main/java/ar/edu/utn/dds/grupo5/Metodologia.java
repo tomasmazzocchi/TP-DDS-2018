@@ -27,11 +27,10 @@ public class Metodologia {
 	@OneToMany
 	private List<Condicion> condiciones;
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")	
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuarioAsociado;
 	@Transient
 	private Map<String, List<Empresa>> resultados = new LinkedHashMap<>();
-
 
 	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
@@ -39,14 +38,14 @@ public class Metodologia {
 	}
 
 	// ----------------------GETTERS AND SETTERS-----------------------------------
-	public Metodologia(){
-		
+	public Metodologia() {
+
 	}
-	
+
 	public List<Condicion> getCondiciones() {
 		return condiciones;
 	}
-	
+
 	public Usuario getUs() {
 		return usuarioAsociado;
 	}
@@ -62,7 +61,7 @@ public class Metodologia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}

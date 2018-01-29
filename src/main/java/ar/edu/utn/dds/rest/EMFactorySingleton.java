@@ -21,7 +21,7 @@ public class EMFactorySingleton {
 
 	private static EntityManagerFactory instance;
 	private static ThreadLocal<EntityManager> threadLocal;
-	
+
 	static {
 		try {
 			instance = Persistence.createEntityManagerFactory("db");
@@ -30,10 +30,11 @@ public class EMFactorySingleton {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static EntityManager entityManager() {
 		return getEntityManager();
 	}
+
 	public static EntityManager getEntityManager() {
 		EntityManager manager = threadLocal.get();
 		if (manager == null || !manager.isOpen()) {
@@ -42,7 +43,7 @@ public class EMFactorySingleton {
 		}
 		return manager;
 	}
-	
+
 	public static void beginTransaction() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -60,7 +61,7 @@ public class EMFactorySingleton {
 		}
 
 	}
-	
+
 	public static void rollback() {
 		EntityManager em = getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -68,35 +69,37 @@ public class EMFactorySingleton {
 			tx.rollback();
 		}
 	}
-	
+
 	public static void clear() {
 		entityManager().clear();
 	}
-	
+
 	public static void persistir(Object object) {
 		beginTransaction();
 		entityManager().persist(object);
 		commit();
 	}
-	
+
 	public static void remover(Object object) {
 		beginTransaction();
 		entityManager().remove(object);
 		commit();
 	}
+
 	public static void closeEntityManager() {
 		EntityManager em = threadLocal.get();
 		threadLocal.set(null);
 		em.close();
 	}
-	
+
 	public static Query createQuery(String query) {
 		return getEntityManager().createQuery(query);
 	}
-	
-	public static boolean existeUsuario(String username) {	
-		return !entityManager().createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre").setParameter("nombre", username)
-				.getResultList().isEmpty();
+
+	public static boolean existeUsuario(String username) {
+		return !entityManager()
+				.createQuery("SELECT DISTINCT OBJECT(k) " + "FROM usuario k WHERE k.nombreUsuario = :nombre")
+				.setParameter("nombre", username).getResultList().isEmpty();
 
 	}
 
@@ -104,58 +107,62 @@ public class EMFactorySingleton {
 		CriteriaBuilder cb = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Usuario> criteria = cb.createQuery(Usuario.class);
 		Root<Usuario> rootEntry = criteria.from(Usuario.class);
-		CriteriaQuery<Usuario> all = criteria.select(rootEntry).where(cb.equal(rootEntry.get("nombreUsuario"), username));
-		
+		CriteriaQuery<Usuario> all = criteria.select(rootEntry)
+				.where(cb.equal(rootEntry.get("nombreUsuario"), username));
+
 		List<Usuario> usuario = entityManager().createQuery(all).getResultList();
 		return usuario.get(0);
 	}
-	
+
 	public static List<Cuenta> obtenerCuentas() {
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Cuenta> criteria = criteriaBuilder.createQuery(Cuenta.class);
 		Root<Cuenta> rootEntry = criteria.from(Cuenta.class);
 		CriteriaQuery<Cuenta> all = criteria.select(rootEntry);
 		List<Cuenta> listaCuenta = entityManager().createQuery(all).getResultList();
-		return listaCuenta;		
+		return listaCuenta;
 	}
+
 	public static List<Condicion> obtenerCondiciones() {
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Condicion> criteria = criteriaBuilder.createQuery(Condicion.class);
 		Root<Condicion> rootEntry = criteria.from(Condicion.class);
 		CriteriaQuery<Condicion> all = criteria.select(rootEntry);
 		List<Condicion> listaCondicion = entityManager().createQuery(all).getResultList();
-		return listaCondicion;		
+		return listaCondicion;
 	}
+
 	public static List<Metodologia> obtenerMetodologiasDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Metodologia> criteria = criteriaBuilder.createQuery(Metodologia.class);
 		Root<Metodologia> rootEntry = criteria.from(Metodologia.class);
-		CriteriaQuery<Metodologia> all = criteria.select(rootEntry).where(
-				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
-		
+		CriteriaQuery<Metodologia> all = criteria.select(rootEntry)
+				.where(criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
+
 		List<Metodologia> listaMetodologiaDTO = entityManager().createQuery(all).getResultList();
-		return listaMetodologiaDTO;		
+		return listaMetodologiaDTO;
 	}
-	
+
 	public static List<Indicador> obtenerIndicadoresDeUnUsuario(String username) {
 		int pkUsuario = obtenerUsuario(username).getId();
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Indicador> criteria = criteriaBuilder.createQuery(Indicador.class);
 		Root<Indicador> rootEntry = criteria.from(Indicador.class);
-		CriteriaQuery<Indicador> all = criteria.select(rootEntry).where(
-				criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
-		
+		CriteriaQuery<Indicador> all = criteria.select(rootEntry)
+				.where(criteriaBuilder.equal(rootEntry.get("usuarioAsociado"), pkUsuario));
+
 		List<Indicador> listaIndicadores = entityManager().createQuery(all).getResultList();
-		return listaIndicadores;		
+		return listaIndicadores;
 	}
+
 	public static List<Empresa> obtenerEmpresas() {
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
 		CriteriaQuery<Empresa> criteria = criteriaBuilder.createQuery(Empresa.class);
 		Root<Empresa> rootEntry = criteria.from(Empresa.class);
 		CriteriaQuery<Empresa> all = criteria.select(rootEntry);
-		
+
 		List<Empresa> listaEmpresas = entityManager().createQuery(all).getResultList();
-		return listaEmpresas;			
+		return listaEmpresas;
 	}
 }

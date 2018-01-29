@@ -32,7 +32,7 @@ public class GestorArchivoTest {
 		archivojsonValido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
 		resource = classLoader.getResource(jsonInvalido);
 		archivojsonInvalido = new File(URLDecoder.decode(resource.getFile(), "UTF-8"));
-		
+
 	}
 
 	@After
@@ -46,7 +46,7 @@ public class GestorArchivoTest {
 
 	@Test
 	public void siColocoUnArchivoConJsonValidoEntoncesSeCarganAlRepositorio() {
-		gestor.cargarArchivo( archivojsonValido);
+		gestor.cargarArchivo(archivojsonValido);
 		Assert.assertTrue(RepoEmpresas.getListaEmpresa().size() > 0);
 	}
 
@@ -54,7 +54,7 @@ public class GestorArchivoTest {
 	public void siColocoUnArchivoConJsonInvalidoEntoncesNoSeCarganEmpresasAlRepositorio() {
 		thrown.expect(ArchivoException.class);
 		thrown.expectMessage("Archivo invalido");
-		gestor.cargarArchivo( archivojsonInvalido);
+		gestor.cargarArchivo(archivojsonInvalido);
 	}
 
 }

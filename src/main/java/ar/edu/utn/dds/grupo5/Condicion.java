@@ -25,7 +25,7 @@ public abstract class Condicion {
 	private int id_condicion;
 	@Column(name = "nombre")
 	protected String nombre;
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_indicador")
 	protected Indicador indicador;
 

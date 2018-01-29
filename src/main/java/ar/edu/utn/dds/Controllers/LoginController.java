@@ -11,9 +11,10 @@ import spark.Response;
 
 public class LoginController {
 	private static String mensaje = "";
+
 	public static ModelAndView login(Request req, Response res) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("titulo", "Ingreso a la aplicación");	
+		map.put("titulo", "Ingreso a la aplicación");
 		map.put("mensaje", mensaje);
 		mensaje = "";
 		Routes.cerrarSesion(req.session().id());
@@ -41,17 +42,16 @@ public class LoginController {
 
 		try {
 			Usuario usuario = repoUsuarios.loginOK(username, password);
-			
+
 			Routes.iniciarSesion(req.session().id(), usuario);
 
+			res.redirect("/menuPrincipal/");
 
-			res.redirect("/menuPrincipal/");				
-			
 		} catch (Exception e) {
 			mensaje = "Usuario/contraseña inválidos";
 			res.redirect("/");
 		}
-		
+
 		res.redirect("/menuPrincipal/");
 		return null;
 	}
@@ -59,32 +59,32 @@ public class LoginController {
 	public static ModelAndView homeView(Request req, Response res) {
 
 		Map<String, String> model = new HashMap<>();
-		
+
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
-			
+
 			model.put("usuario", "Usuario: " + usuario.getNombreUsuario());
-			model.put("titulo", "Dónde Invierto - Menú Principal");	
+			model.put("titulo", "Dónde Invierto - Menú Principal");
 			model.put("exit", "exit_to_app");
 			model.put("salirTitulo", "Salir");
-			
+
 			return new ModelAndView(model, "views/menuPrincipal.hbs");
-		} catch(Exception e){
+		} catch (Exception e) {
 			res.redirect("/");
 			return null;
 		}
-		
+
 	}
 
 	public static ModelAndView loginError(Request req, Response res) {
-		
+
 		String mensajeEnCodigo = req.params("mensaje");
-		
+
 		String mensaje = mensajeEnCodigo.replace("%20", " ");
-		
+
 		Map<String, String> model = new HashMap<>();
-		
-		model.put("excepcion",mensaje);
+
+		model.put("excepcion", mensaje);
 
 		return new ModelAndView(model, "views/loginerror.hbs");
 	}

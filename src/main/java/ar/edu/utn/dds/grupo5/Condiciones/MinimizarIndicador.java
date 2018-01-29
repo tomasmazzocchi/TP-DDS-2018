@@ -15,7 +15,7 @@ import ar.edu.utn.dds.grupo5.Indicador;
 @Entity
 @DiscriminatorValue(value = "min_indicador")
 public class MinimizarIndicador extends Condicion {
-	
+
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
@@ -23,13 +23,13 @@ public class MinimizarIndicador extends Condicion {
 		this.indicador = indicador;
 		this.nombre = "Minimizar " + indicador.getNombre();
 	}
-	
+
 	protected MinimizarIndicador() {
-		
+
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
-		if(!listaEmpresas.isEmpty()){
+		if (!listaEmpresas.isEmpty()) {
 			listaEmpresas.clear();
 		}
 		listaEmpresas.addAll(empresas);

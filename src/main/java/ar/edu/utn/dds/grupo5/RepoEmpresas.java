@@ -26,14 +26,15 @@ public class RepoEmpresas {
 	public static List<Empresa> getListaEmpresa() {
 		return listaEmpresas;
 	}
-	
-	public List<Empresa> obtenerEmpresas(){
+
+	public List<Empresa> obtenerEmpresas() {
 		return listaEmpresas;
 	}
 
 	public void reset() {
 		listaEmpresas.clear();
 	}
+
 	public static void agregarEmpresas(List<Empresa> empresas) {
 		listaEmpresas.addAll(empresas);
 	}
@@ -55,9 +56,9 @@ public class RepoEmpresas {
 	}
 
 	public static Empresa getEmpresaFromId(int id) {
-		return listaEmpresas.stream().filter(x->x.getId()==id).collect(Collectors.toList()).get(0);
+		return listaEmpresas.stream().filter(x -> x.getId() == id).collect(Collectors.toList()).get(0);
 	}
-	
+
 	public static void limpiarListaEmpresas() {
 		listaEmpresas.clear();
 	}

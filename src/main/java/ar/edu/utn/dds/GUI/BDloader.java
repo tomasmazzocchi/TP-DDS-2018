@@ -18,7 +18,6 @@ import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
-
 public class BDloader {
 	private static EntityManager em = EMFactorySingleton.entityManager();
 	private static Usuario usuario1;
@@ -55,19 +54,19 @@ public class BDloader {
 	private static Cuenta cuentaMARGENTwitter;
 
 	public static void main(String[] args) {
-			//Definiciones
-		
-		usuario1 = new Usuario("pablo","1234");
-		usuario2 = new Usuario("juli","1234");
-		usuario3 = new Usuario("tomi","1234");
-		
+		// Definiciones
+
+		usuario1 = new Usuario("pablo", "1234");
+		usuario2 = new Usuario("juli", "1234");
+		usuario3 = new Usuario("tomi", "1234");
+
 		cuentaEBIDTAFacebook = new Cuenta("EBIDTA", 100, LocalDate.now(), LocalDate.now());
 		cuentaMargenFacebook = new Cuenta("Margen", 200, LocalDate.now(), LocalDate.now());
 		cuentaEBIDTAGoogle = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
 		cuentaMARGENGooge = new Cuenta("Margen", 300, LocalDate.now(), LocalDate.now());
-		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300,LocalDate.now(), LocalDate.now());
-		cuentaMARGENTwitter = new Cuenta("Margen", 400,LocalDate.now(), LocalDate.now());
-		
+		cuentaEBIDTATwitter = new Cuenta("EBIDTA", 300, LocalDate.now(), LocalDate.now());
+		cuentaMARGENTwitter = new Cuenta("Margen", 400, LocalDate.now(), LocalDate.now());
+
 		listaCuentasFacebook.add(cuentaEBIDTAFacebook);
 		listaCuentasFacebook.add(cuentaMargenFacebook);
 		listaCuentasGoogle.add(cuentaEBIDTAGoogle);
@@ -77,14 +76,14 @@ public class BDloader {
 
 		indicadorROEFacebook = new Indicador("ROE", "cu.EBIDTA");
 		indicadorROAFacebook = new Indicador("ROA", "cu.Margen");
-		indicadorDeudaFacebook = new Indicador("DEUDA","300");
+		indicadorDeudaFacebook = new Indicador("DEUDA", "300");
 		indicadorROEGoogle = new Indicador("ROE", "cu.EBIDTA");
 		indicadorROAGoogle = new Indicador("ROA", "cu.Margen");
-		indicadorDeudaGoogle = new Indicador("DEUDA","400");
+		indicadorDeudaGoogle = new Indicador("DEUDA", "400");
 		indicadorROETwitter = new Indicador("ROE", "cu.EBIDTA");
-		indicadorROATwitter= new Indicador("ROA", "cu.Margen");
-		indicadorDeudaTwitter = new Indicador("DEUDA","1000");
-		
+		indicadorROATwitter = new Indicador("ROA", "cu.Margen");
+		indicadorDeudaTwitter = new Indicador("DEUDA", "1000");
+
 		indicadorROEFacebook.setUsuario(usuario1);
 		indicadorROAFacebook.setUsuario(usuario1);
 		indicadorDeudaFacebook.setUsuario(usuario1);
@@ -94,8 +93,7 @@ public class BDloader {
 		indicadorROETwitter.setUsuario(usuario1);
 		indicadorROATwitter.setUsuario(usuario1);
 		indicadorDeudaTwitter.setUsuario(usuario1);
-		
-		
+
 		listaIndicadoresFacebook.add(indicadorROEFacebook);
 		listaIndicadoresFacebook.add(indicadorROAFacebook);
 		listaIndicadoresFacebook.add(indicadorDeudaFacebook);
@@ -105,38 +103,36 @@ public class BDloader {
 		listaIndicadoresGoogle.add(indicadorROEGoogle);
 		listaIndicadoresGoogle.add(indicadorROAGoogle);
 		listaIndicadoresGoogle.add(indicadorDeudaGoogle);
-		
-		facebook = new Empresa("Facebook",listaCuentasFacebook,null,LocalDate.now());
-		google = new Empresa("Google",listaCuentasGoogle,null,LocalDate.now().minusYears(50));
-		twitter = new Empresa("Twitter",listaCuentasTwitter,null,LocalDate.now().minusYears(20));
-				
-		
-		//Condiciones
+
+		facebook = new Empresa("Facebook", listaCuentasFacebook, null, LocalDate.now());
+		google = new Empresa("Google", listaCuentasGoogle, null, LocalDate.now().minusYears(50));
+		twitter = new Empresa("Twitter", listaCuentasTwitter, null, LocalDate.now().minusYears(20));
+
+		// Condiciones
 		unaLongevidad = new Longevidad(10);
 		maxIndicador = new MaximizarIndicador(indicadorROETwitter);
 		margenCreciente = new MargenCreciente();
 		minIndicador = new MinimizarIndicador(indicadorROATwitter);
-		
+
 		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(maxIndicador);
 
-		metodologiaBuffetTwitter = new Metodologia("Metodologia Buffet Twitter",condiciones);
+		metodologiaBuffetTwitter = new Metodologia("Metodologia Buffet Twitter", condiciones);
 		metodologiaBuffetTwitter.setUs(usuario1);
 
 		em.getTransaction().begin();
 
-		
 		em.persist(usuario1);
 		em.persist(usuario2);
-		em.persist(usuario3); 
-		
+		em.persist(usuario3);
+
 		em.persist(cuentaEBIDTAFacebook);
 		em.persist(cuentaMargenFacebook);
 		em.persist(cuentaEBIDTAGoogle);
 		em.persist(cuentaMARGENGooge);
 		em.persist(cuentaEBIDTATwitter);
-		em.persist(cuentaMARGENTwitter);		
-		
+		em.persist(cuentaMARGENTwitter);
+
 		em.persist(facebook);
 		em.persist(google);
 		em.persist(twitter);
@@ -144,16 +140,15 @@ public class BDloader {
 		empresas.add(facebook);
 		empresas.add(google);
 		empresas.add(twitter);
-		RepoEmpresas.agregarEmpresas(empresas);	
-		
+		RepoEmpresas.agregarEmpresas(empresas);
+
 		em.persist(unaLongevidad);
-		em.persist(maxIndicador); 
-		em.persist(margenCreciente); 
-		em.persist(minIndicador);		
-		
+		em.persist(maxIndicador);
+		em.persist(margenCreciente);
+		em.persist(minIndicador);
+
 		em.getTransaction().commit();
 		em.clear();
-			
+
 	}
 }
-

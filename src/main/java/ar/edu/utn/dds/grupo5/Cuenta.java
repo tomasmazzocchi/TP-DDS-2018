@@ -55,9 +55,9 @@ public class Cuenta {
 	public void setFechaHasta(LocalDate fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
-	
+
 	public Cuenta() {
-		
+
 	}
 
 	public Cuenta(String nombre, double valor, LocalDate fechaDesde, LocalDate fechaHasta) {

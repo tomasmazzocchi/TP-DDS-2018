@@ -140,7 +140,7 @@ public class MetodologiaExistenteController implements Initializable {
 		condiciones.add(maxIndicador);
 		condiciones.add(minIndicador);
 		condiciones.add(margenCreciente);
-		metodologiaBuffet = new Metodologia("Metodologia Buffet",condiciones);
+		metodologiaBuffet = new Metodologia("Metodologia Buffet", condiciones);
 		metodologiaBuffet.aplicarCondiciones(repoEmpresas.getListaEmpresa());
 
 	}

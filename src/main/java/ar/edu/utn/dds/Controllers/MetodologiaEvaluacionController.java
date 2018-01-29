@@ -31,7 +31,7 @@ public class MetodologiaEvaluacionController {
 
 			Map<String, Object> map = new HashMap<>();
 			map.put("resultados", resultados);
-			map.put("message",message);
+			map.put("message", message);
 			map.put("titulo", "Dónde invierto - Evaluacion de metodologias");
 			map.put("metodologias", listaMetodologias);
 			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
@@ -56,17 +56,18 @@ public class MetodologiaEvaluacionController {
 		}
 		try {
 			resultados.clear();
-			Metodologia metodologiaSeleccionada = listaMetodologias.stream().filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
+			Metodologia metodologiaSeleccionada = listaMetodologias.stream()
+					.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 			metodologiaSeleccionada.aplicarCondiciones(empresas);
 			resultados = metodologiaSeleccionada.getResultados();
-		} catch (Exception e){
+		} catch (Exception e) {
 			message = "Seleccione una metodologia";
 		}
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("headerTabla", resultados.keySet());
-		map.put("resultados",resultados);
-		map.put("message",message);
+		map.put("resultados", resultados);
+		map.put("message", message);
 		map.put("metodologias", listaMetodologias);
 		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 		map.put("titulo", "Dónde Invierto - Evaluación de metodologias");

@@ -29,17 +29,17 @@ public class GestorArchivo {
 		return instance;
 	}
 
-	public void cargarArchivo( File archivo) {
+	public void cargarArchivo(File archivo) {
 
 		Gson gson = new Gson();
 		Empresa empresaJson;
 
 		try (Reader reader = new FileReader(archivo)) {
-			Type tipoListaEmpresas = new TypeToken<List<Empresa>>(){}.getType();
+			Type tipoListaEmpresas = new TypeToken<List<Empresa>>() {
+			}.getType();
 			List<Empresa> listaEmpresasJson = new ArrayList<Empresa>();
-			
-			listaEmpresasJson = gson.fromJson(reader, tipoListaEmpresas);
 
+			listaEmpresasJson = gson.fromJson(reader, tipoListaEmpresas);
 
 			Iterator<Empresa> iterador = listaEmpresasJson.listIterator();
 

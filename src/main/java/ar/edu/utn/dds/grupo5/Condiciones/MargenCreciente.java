@@ -25,7 +25,12 @@ public class MargenCreciente extends Condicion {
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
+		if (!listaEmpresas.isEmpty()) {
+			listaEmpresas.clear();
+		}
+		
 		listaEmpresas.addAll(empresas);
+		
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {

@@ -33,6 +33,7 @@ public class MaximizarIndicador extends Condicion {
 		if (!listaEmpresas.isEmpty()) {
 			listaEmpresas.clear();
 		}
+		
 		listaEmpresas.addAll(empresas);
 
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {

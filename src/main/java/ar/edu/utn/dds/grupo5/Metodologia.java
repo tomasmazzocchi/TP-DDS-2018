@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,7 +24,7 @@ public class Metodologia {
 	private int idMetodologia;
 	@Column(name = "nombre")
 	private String nombre;
-	@OneToMany
+	@ManyToMany
 	private List<Condicion> condiciones;
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")

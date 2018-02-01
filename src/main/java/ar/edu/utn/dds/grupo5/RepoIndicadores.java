@@ -12,10 +12,11 @@ import javax.persistence.criteria.Root;
 import ar.edu.utn.dds.ExceptionHandler.IndicadorExistenteException;
 import ar.edu.utn.dds.ExceptionHandler.IndicadorInexistenteException;
 import ar.edu.utn.dds.ExceptionHandler.RepoIndicadoresException;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class RepoIndicadores {
 	private String nombre;
-	private List<Indicador> listaIndicadores = new ArrayList<>();
+	private static List<Indicador> listaIndicadores = new ArrayList<>();
 	private ExpressionParser parser;
 
 	public RepoIndicadores(String nombre) {
@@ -28,7 +29,7 @@ public class RepoIndicadores {
 	}
 
 	public List<Indicador> getListaIndicadores() {
-		return this.listaIndicadores;
+		return listaIndicadores;
 	}
 
 	public void reset() {
@@ -60,8 +61,7 @@ public class RepoIndicadores {
 
 	}
 
-	public static Indicador buscarIndicador(String nombre, List<Indicador> listaIndicadores) {
-
+	public static Indicador buscarIndicador(String nombre) {
 		List<Indicador> lista = listaIndicadores.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {
@@ -114,5 +114,9 @@ public class RepoIndicadores {
 
 	public Indicador obtenerIndicador(EntityManager em, int id) {
 		return em.find(Indicador.class, id);
+	}
+
+	public static void setearIndicadores(List<Indicador> lista) {
+		listaIndicadores = lista;
 	}
 }

@@ -48,10 +48,5 @@ public class Cache {
 		return jedis.get(key);
 	}
 
-	/*
-	 * public void agregarListaIndicadoresAEmpresa(String empresa,List<Indicador>
-	 * lista) { if(jedis!=null && lista != null) { lista.stream().forEach(x ->
-	 * jedis.sadd(empresa, Integer.toString(x.getValor()))); } }
-	 */
 
 }

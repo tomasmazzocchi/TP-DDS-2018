@@ -132,6 +132,8 @@ public class BDloader {
 		em.persist(cuentaMARGENGooge);
 		em.persist(cuentaEBIDTATwitter);
 		em.persist(cuentaMARGENTwitter);
+		
+		em.persist(indicadorROEFacebook);
 
 		em.persist(facebook);
 		em.persist(google);

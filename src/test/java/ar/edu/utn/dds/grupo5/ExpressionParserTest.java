@@ -49,6 +49,7 @@ public class ExpressionParserTest {
 		empresa = new Empresa("Facebook", listaCuentas, listaIndicadores, LocalDate.now());
 		RepoEmpresas.limpiarListaEmpresas();
 		RepoEmpresas.getListaEmpresa().add(empresa);
+		RepoIndicadores.setearIndicadores(listaIndicadores);
 
 	}
 

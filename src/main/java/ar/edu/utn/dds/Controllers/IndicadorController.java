@@ -9,6 +9,7 @@ import ar.edu.utn.dds.Server.Routes;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.RepoIndicadores;
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
@@ -47,7 +48,6 @@ public class IndicadorController {
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 			empresas = EMFactorySingleton.obtenerEmpresas();
-
 			Map<String, Object> map = new HashMap<>();
 			map.put("titulo", "Dónde invierto - Creación de indicador");
 			map.put("mensaje", mensaje);
@@ -77,6 +77,7 @@ public class IndicadorController {
 		empresas = EMFactorySingleton.obtenerEmpresas();
 		RepoEmpresas.agregarEmpresas(empresas);
 		listaIndicadores = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
+		RepoIndicadores.setearIndicadores(EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario()));
 		Map<String, Object> map = new HashMap<>();
 		map.put("indicadores", listaIndicadores);
 		map.put("empresas", empresas);
@@ -99,7 +100,7 @@ public class IndicadorController {
 			response.redirect("/");
 			return null;
 		}
-
+		RepoIndicadores.setearIndicadores(EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario()));
 		Empresa empresaSeleccionada = empresas.stream()
 				.filter(x -> x.getNombre().equals(request.queryParams("selectedEmp"))).findFirst().get();
 		Indicador indicadorSeleccionado = listaIndicadores.stream()

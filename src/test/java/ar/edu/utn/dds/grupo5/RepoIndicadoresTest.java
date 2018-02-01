@@ -65,11 +65,4 @@ public class RepoIndicadoresTest {
 		thrown.expectMessage("Formula no Valida");
 		repoIndicadores.guardarIndicadorEnRepo("indicador1", "(pepe+1)*2");
 	}
-
-	@Test
-	public void siGuardoIndicadorEnUnaEmpresaConFormulaCorrectaEntoncesSeGuarda() {
-		repoIndicadores.guardarIndicadorEnEmpresa(empresaTest, "indicador1", "(cu.EBIDTA+1)*2");
-		Indicador ind = RepoIndicadores.buscarIndicador("indicador1", empresaTest.getListaIndicadores());
-		Assert.assertEquals(ind.getNombre(), "indicador1");
-	}
 }

@@ -55,7 +55,7 @@ public class ExpressionParser {
 				return (int) (cuenta.getValor());
 			} else {
 				parser = new ExpressionParser();
-				indicador = RepoIndicadores.buscarIndicador(nombre, empresa.getListaIndicadores());
+				indicador = RepoIndicadores.buscarIndicador(nombre);
 				return (parser.resolverFormula(indicador.getFormula(), empresa));
 			}
 		} else if (context.BR_CLOSE() != null) {

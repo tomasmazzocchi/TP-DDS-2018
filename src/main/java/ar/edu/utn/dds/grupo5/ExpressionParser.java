@@ -114,7 +114,7 @@ public class ExpressionParser {
 		return new ANTLRErrorListener() {
 			public void syntaxError(final Recognizer<?, ?> arg0, final Object obj, final int line, final int position,
 					final String message, final RecognitionException ex) {
-				throw new ArgumentoIlegalException("Formula no Valida");
+				throw new ArgumentoIlegalException("Formula no válida");
 			}
 
 			public void reportContextSensitivity(final Parser arg0, final DFA arg1, final int arg2, final int arg3,

@@ -12,11 +12,11 @@ import spark.Request;
 import spark.Response;
 
 public class CuentasController {
-	public static ModelAndView view(Request req, Response res) {
+	public ModelAndView view(Request req, Response res) {
 		return new ModelAndView(null, "views/visualizarCuentas.hbs");
 	}
 
-	public static ModelAndView viewCuentas(Request request, Response response) {
+	public ModelAndView viewCuentas(Request request, Response response) {
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
 			List<Cuenta> listaCuentas = EMFactorySingleton.obtenerCuentas();

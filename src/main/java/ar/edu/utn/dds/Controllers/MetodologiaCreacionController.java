@@ -1,6 +1,5 @@
 package ar.edu.utn.dds.Controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,29 +16,22 @@ import spark.Response;
 
 public class MetodologiaCreacionController {
 
-	private static String mensaje = "";
-	private static String color = "";
-	private static List<Condicion> condiciones = new ArrayList<Condicion>();
-
 	public static ModelAndView view(Request req, Response res) {
 		return new ModelAndView(null, "views/crearMetodologia.hbs");
 	}
 
-	public static ModelAndView crearMetodologia(Request req, Response res) {
+	public ModelAndView crearMetodologia(Request req, Response res) {
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
-			condiciones = EMFactorySingleton.obtenerCondiciones();
+			List<Condicion> condiciones = EMFactorySingleton.obtenerCondiciones();
 
 			Map<String, Object> map = new HashMap<>();
 			map.put("titulo", "Dónde invierto - Creación de metodologias");
-			map.put("mensaje", mensaje);
 			map.put("condiciones", condiciones);
-			map.put("color", color);
 			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 			map.put("exit", "exit_to_app");
 			map.put("salirTitulo", "Salir");
 			map.put("menu", "menu");
-			mensaje = "";
 			return new ModelAndView(map, "views/crearMetodologia.hbs");
 		} catch (Exception e) {
 			res.redirect("/");
@@ -47,8 +39,11 @@ public class MetodologiaCreacionController {
 		}
 	}
 
-	public static Void guardarMetodologia(Request request, Response response) {
+	public ModelAndView guardarMetodologia(Request request, Response response) {
 		Usuario usuario = Routes.getUsuarioDeSesion(request.session().id());
+		List<Condicion> condiciones = EMFactorySingleton.obtenerCondiciones();
+		String mensaje = "";
+		String color = "";
 		List<Condicion> condicionesSeleccionadas = condiciones.stream()
 				.filter(x -> request.queryParams("selected").contains(x.getNombre())).collect(Collectors.toList());
 

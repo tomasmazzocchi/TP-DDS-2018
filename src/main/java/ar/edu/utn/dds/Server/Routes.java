@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.github.jknack.handlebars.cache.TemplateCache;
+
 import ar.edu.utn.dds.spark.utils.HandlebarsTemplateEngineBuilder;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -17,21 +19,25 @@ public class Routes {
 	public static void configure() {
 		HandlebarsTemplateEngine engine = HandlebarsTemplateEngineBuilder.create().withDefaultHelpers().build();
 		Spark.staticFiles.location("/public");
-
+		
+		CuentasController cuentasController = new CuentasController();
+		MetodologiaCreacionController metodologiaCreacionController = new MetodologiaCreacionController();
+		MetodologiaEvaluacionController metodologiaEvaluacionController =  new MetodologiaEvaluacionController();
+		IndicadorController indicadorController = new IndicadorController();
 		// rutas
-
+		
 		Spark.get("/", LoginController::login, engine);
 		Spark.post("/login/", LoginController::loginUsuario);
 		Spark.get("/menuPrincipal/", LoginController::homeView, engine);
-		Spark.get("/visualizarCuentas/", CuentasController::viewCuentas, engine);
-		Spark.get("/evaluacionIndicador/", IndicadorController::viewIndicadores, engine);
-		Spark.post("/evaluacionIndicador/", IndicadorController::calcularIndicador, engine);
-		Spark.get("/creacionIndicador/", IndicadorController::creacionIndicador, engine);
-		Spark.post("/creacionIndicador/", IndicadorController::guardarIndicador);
-		Spark.get("/crearMetodologia/", MetodologiaCreacionController::crearMetodologia, engine);
-		Spark.post("/crearMetodologia/", MetodologiaCreacionController::guardarMetodologia);
-		Spark.get("/evaluacionMetodologia/", MetodologiaEvaluacionController::evaluacionMetodologia, engine);
-		Spark.post("/evaluacionMetodologia/", MetodologiaEvaluacionController::visualizarResultados, engine);
+		Spark.get("/visualizarCuentas/", cuentasController::viewCuentas, engine);
+		Spark.get("/evaluacionIndicador/", indicadorController::viewIndicadores, engine);
+		Spark.post("/evaluacionIndicador/", indicadorController::calcularIndicador, engine);
+		Spark.get("/creacionIndicador/", indicadorController::creacionIndicador, engine);
+		Spark.post("/creacionIndicador/", indicadorController::guardarIndicador,engine);
+		Spark.get("/crearMetodologia/", metodologiaCreacionController::crearMetodologia, engine);
+		Spark.post("/crearMetodologia/", metodologiaCreacionController::guardarMetodologia, engine);
+		Spark.get("/evaluacionMetodologia/", metodologiaEvaluacionController::evaluacionMetodologia, engine);
+		Spark.post("/evaluacionMetodologia/", metodologiaEvaluacionController::visualizarResultados, engine);
 
 	}
 

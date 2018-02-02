@@ -1,17 +1,55 @@
 {{#partial "contenido"}}
     <meta charset="UTF-8">
 
-	  <div style="margin-top:2%" class="card col l4 m6 s12  offset-l4 offset-m3  visualizar-cuentas-styles" action="/creacionIndicador/">
-    	 	<form style="margin-bottom:20px;" action="/creacionIndicador/" class="col s12" method="post">
-       		 <div style="margin-top:10px;" class="form-group">
-              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre"/>
-  				</div>
-  				<div style="margin-top:10px;" class="form-group">
-            <input type="text" class="form-control" name="formula" id="formula" placeholder="Formula"/>
-  				</div>
-  					<button type="submit" class="blue btn btn-default">Crear Indicador</button>
-			</form>
-		</div>
+    <div class="col l4 m4 s12 visualizar-cuentas-styles">
+        <div class="card" action="/creacionIndicador/" method="get">
+            <ul class="collection with-header">
+               <li style="background-color:#212121;color:#fff"class="collection-header"><h6 style="font-size:15px">Creación de nuevo indicador</h6></li>
+               <li style="font-size:12px; padding:0 0 0 15px" class="collection-item">
+                 	 	<form style="margin-bottom:20px;" action="/creacionIndicador/" class="col s12" method="post">
+                    		 <div style="margin-top:10px;" class="form-group">
+                           <input style="font-size:12px" type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre"/>
+               				</div>
+               				<div style="margin-top:10px;" class="form-group">
+                         <input style="font-size:12px" type="text" class="form-control" name="formula" id="formula" placeholder="Formula"/>
+               				</div>
+               					<button style="font-size:12px" type="submit" class="blue btn btn-default">Crear Indicador</button>
+             			</form>
+              </li>
+            </ul>
+    		</div>
+    </div>
+    <div class="col l4 m4 s12">
+        <div class="card">
+          <ul class="collection with-header">
+             <li style="background-color:#212121;color:#fff"class="collection-header"><h6 style="font-size:15px">Indicadores existentes</h6></li>
+             {{#each indicadoresExistentes}}
+                 <li style="padding:0 0 0 15px" class="collection-item"><div>
+                    <p style="margin:5px;font-size:13px"><b>Nombre: </b>{{this.nombre}} <br>
+                       <b>Formula: </b>{{this.formula}}
+                    </p>
+                </li>
+             {{/each}}
+         </ul>
+        </div>
+    </div>
+    <div class="col l4 m4 s12">
+        <div class="card">
+          <ul class="collection with-header">
+             <li style="background-color:#212121;color:#fff"class="collection-header"><h6 style="font-size:15px">Cuentas existentes</h6></li>
+             {{#each cuentasExistentes}}
+                 <li style="padding:0 0 0 15px" class="collection-item"><div>
+                    <p style="margin:5px;font-size:13px"><b>Nombre: </b>{{this.nombre}} <br>
+                       <b>Valor: </b>{{this.valor}}
+                    </p>
+                    <p style="margin:5px;font-size:13px"><b>Fecha de creación: </b>{{this.fechaDesde}} <br>
+                       <b>Fecha de caducidad: </b>{{this.fechaHasta}}
+                    </p>
+                </li>
+             {{/each}}
+         </ul>
+        </div>
+    </div>
 
     <script type="text/javascript">
           $(document).ready(function() {

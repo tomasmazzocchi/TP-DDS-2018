@@ -1,5 +1,6 @@
 package ar.edu.utn.dds.Controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,23 +16,16 @@ import spark.Response;
 
 public class MetodologiaEvaluacionController {
 
-	private static List<Metodologia> listaMetodologias;
-	private static Map<String, List<Empresa>> resultados = new HashMap<>();
-	private static List<Empresa> empresas = EMFactorySingleton.obtenerEmpresas();
-	private static String message;
-
-	public static ModelAndView view(Request req, Response res) {
+	public ModelAndView view(Request req, Response res) {
 		return new ModelAndView(null, "views/evaluacionMetodologia.hbs");
 	}
 
-	public static ModelAndView evaluacionMetodologia(Request req, Response res) {
+	public ModelAndView evaluacionMetodologia(Request req, Response res) {
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
-			listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
+			List<Metodologia> listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
 
 			Map<String, Object> map = new HashMap<>();
-			map.put("resultados", resultados);
-			map.put("message", message);
 			map.put("titulo", "Dónde invierto - Evaluacion de metodologias");
 			map.put("metodologias", listaMetodologias);
 			map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
@@ -45,9 +39,11 @@ public class MetodologiaEvaluacionController {
 		}
 	}
 
-	public static ModelAndView visualizarResultados(Request request, Response response) {
-		message = "";
+	public ModelAndView visualizarResultados(Request request, Response response) {
+		String message = "";
 		Usuario usuario;
+		Map<String, List<Empresa>> resultados = new HashMap<String, List<Empresa>>();
+		List<Metodologia> listaMetodologias =  new ArrayList<Metodologia>();
 		try {
 			usuario = Routes.getUsuarioDeSesion(request.session().id());
 		} catch (Exception e) {
@@ -55,7 +51,8 @@ public class MetodologiaEvaluacionController {
 			return null;
 		}
 		try {
-			resultados.clear();
+			List<Empresa> empresas = EMFactorySingleton.obtenerEmpresas();
+			listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
 			Metodologia metodologiaSeleccionada = listaMetodologias.stream()
 					.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 			metodologiaSeleccionada.aplicarCondiciones(empresas);

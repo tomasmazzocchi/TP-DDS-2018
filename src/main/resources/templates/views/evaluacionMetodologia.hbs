@@ -31,6 +31,7 @@
               $('select').material_select();
               $(".select-dropdown").attr("name","selected");
           });
+          Materialize.toast('{{mensaje}}',3000,'{{color}}');
           $(".tabla").remove("tbody");
           var emp = "{{#each resultados}}{{#each this}}{{this.nombre}}&{{/each}};{{/each}}".split(";").slice(0,-1);
           var matrizRdos = [];

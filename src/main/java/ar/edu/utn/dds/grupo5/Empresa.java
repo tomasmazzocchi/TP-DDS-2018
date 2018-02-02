@@ -113,7 +113,7 @@ public class Empresa {
 		List<Cuenta> lista = this.listaCuentas.stream().filter(p -> p.getNombre().equals(nombre))
 				.collect(Collectors.toList());
 		if (lista.isEmpty()) {
-			throw new ExpressionParserException("No existe el nombre de Cuenta");
+			throw new ExpressionParserException("No existe la cuenta " + nombre + " en la empresa " + this.getNombre());
 		} else {
 			return (lista.get(0));
 		}

@@ -69,7 +69,7 @@ public class ExpressionParserTest {
 	@Test
 	public void ingresoFormulaConCaracterInvalido() {
 		thrown.expect(ArgumentoIlegalException.class);
-		thrown.expectMessage(containsString("Formula no Valida"));
+		thrown.expectMessage(containsString("Formula no válida"));
 		_parser.resolverFormula("(cu.EBIDTA # 2)", empresa);
 	}
 
@@ -86,7 +86,7 @@ public class ExpressionParserTest {
 	@Test
 	public void ingresoUnaFormulaConCuentaInexistente() {
 		thrown.expect(ExpressionParserException.class);
-		thrown.expectMessage("No existe el nombre de Cuenta");
+		thrown.expectMessage("No existe la cuenta pepe en la empresa Facebook");
 		_parser.resolverFormula("cu.pepe/2", empresa);
 	}
 

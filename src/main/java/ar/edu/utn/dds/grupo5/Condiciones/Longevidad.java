@@ -24,9 +24,10 @@ public class Longevidad extends Condicion {
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	public Longevidad(int aniosAntiguedad) {
+	public Longevidad(int aniosAntiguedad, int p) {
 		this.aniosAntiguedad = aniosAntiguedad;
 		this.nombre = "Longevidad";
+		this.ponderacion = p;
 	}
 
 	protected Longevidad() {
@@ -42,7 +43,7 @@ public class Longevidad extends Condicion {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				return empresa1.getAnioFundacion().compareTo(empresa2.getAnioFundacion());
+				return empresa2.getAnioFundacion().compareTo(empresa1.getAnioFundacion());
 			}
 		});
 

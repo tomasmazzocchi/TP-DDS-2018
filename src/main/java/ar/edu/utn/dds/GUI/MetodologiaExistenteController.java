@@ -126,10 +126,10 @@ public class MetodologiaExistenteController implements Initializable {
 		twitter = new Empresa("Twitter", listaCuentasTwitter, listaIndicadoresTwitter, LocalDate.now().minusYears(20));
 
 		// Condiciones
-		unaLongevidad = new Longevidad(10);
-		maxIndicador = new MaximizarIndicador(indicadorROE);
-		margenCreciente = new MargenCreciente();
-		minIndicador = new MinimizarIndicador(indicadorROA);
+		unaLongevidad = new Longevidad(10,10);
+		maxIndicador = new MaximizarIndicador(indicadorROE,8);
+		margenCreciente = new MargenCreciente(4);
+		minIndicador = new MinimizarIndicador(indicadorROA,2);
 
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
 		repoEmpresas.agregarEmpresa(facebook);
@@ -149,20 +149,20 @@ public class MetodologiaExistenteController implements Initializable {
 	public void aplicarMetodologia(ActionEvent event) throws IOException {
 		if (event.getSource() == btnAplicar) {
 			tblLongevidad.setItems(FXCollections
-					.observableArrayList(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre())));
+					.observableArrayList(metodologiaBuffet.getHashMapResultados().get(unaLongevidad.getNombre())));
 			columnaLongevidad
 					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 
 			tblMaxROE.setItems(
-					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(maxIndicador.getNombre())));
+					FXCollections.observableArrayList(metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre())));
 			columnaMaxROE.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 
 			tblMinROA.setItems(
-					FXCollections.observableArrayList(metodologiaBuffet.getResultados().get(minIndicador.getNombre())));
+					FXCollections.observableArrayList(metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre())));
 			columnaMinROA.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 
 			tblMargenCreciente.setItems(FXCollections
-					.observableArrayList(metodologiaBuffet.getResultados().get(margenCreciente.getNombre())));
+					.observableArrayList(metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre())));
 			columnaMargenCreciente
 					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 		}

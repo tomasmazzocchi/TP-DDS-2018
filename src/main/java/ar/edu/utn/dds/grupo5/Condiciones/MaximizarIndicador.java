@@ -20,9 +20,10 @@ public class MaximizarIndicador extends Condicion {
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	public MaximizarIndicador(Indicador indicador) {
+	public MaximizarIndicador(Indicador indicador, int p) {
 		this.indicador = indicador;
 		this.nombre = "Maximizar " + indicador.getNombre();
+		this.ponderacion = p;
 	}
 
 	protected MaximizarIndicador() {
@@ -39,7 +40,7 @@ public class MaximizarIndicador extends Condicion {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
+				if (indicador.calcularIndicador(empresa1) < (indicador.calcularIndicador(empresa2))) {
 					return -1;
 				} else {
 					return 1;

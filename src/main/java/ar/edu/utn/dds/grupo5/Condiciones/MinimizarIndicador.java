@@ -19,9 +19,10 @@ public class MinimizarIndicador extends Condicion {
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	public MinimizarIndicador(Indicador indicador) {
+	public MinimizarIndicador(Indicador indicador, int p) {
 		this.indicador = indicador;
 		this.nombre = "Minimizar " + indicador.getNombre();
+		this.ponderacion = p;
 	}
 
 	protected MinimizarIndicador() {
@@ -37,7 +38,7 @@ public class MinimizarIndicador extends Condicion {
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
 			@Override
 			public int compare(Empresa empresa1, Empresa empresa2) {
-				if (indicador.calcularIndicador(empresa1) > (indicador.calcularIndicador(empresa2))) {
+				if (indicador.calcularIndicador(empresa1) < (indicador.calcularIndicador(empresa2))) {
 					return 1;
 				} else {
 					return -1;

@@ -56,7 +56,7 @@ public class MetodologiaEvaluacionController {
 			Metodologia metodologiaSeleccionada = listaMetodologias.stream()
 					.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 			metodologiaSeleccionada.aplicarCondiciones(empresas);
-			resultados = metodologiaSeleccionada.getResultados();
+			resultados = metodologiaSeleccionada.getHashMapResultados();
 		} catch (Exception e) {
 			message = "Seleccione una metodologia";
 		}

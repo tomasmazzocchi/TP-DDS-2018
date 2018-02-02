@@ -86,10 +86,10 @@ public class CondicionesTest {
 		twitter = new Empresa("Twitter", listaCuentasTwitter, listaIndicadoresTwitter, LocalDate.now().minusYears(20));
 
 		// Condiciones
-		unaLongevidad = new Longevidad(10);
-		maxIndicador = new MaximizarIndicador(indicadorROE);
-		margenCreciente = new MargenCreciente();
-		minIndicador = new MinimizarIndicador(indicadorROA);
+		unaLongevidad = new Longevidad(10,10);
+		maxIndicador = new MaximizarIndicador(indicadorROE,8);
+		margenCreciente = new MargenCreciente(6);
+		minIndicador = new MinimizarIndicador(indicadorROA,2);
 
 		RepoEmpresas.getListaEmpresa().add(facebook);
 		RepoEmpresas.getListaEmpresa().add(google);
@@ -105,7 +105,7 @@ public class CondicionesTest {
 
 	@After
 	public void after() {
-		metodologiaBuffet.getResultados().clear();
+		metodologiaBuffet.getHashMapResultados().clear();
 		metodologiaBuffet.getCondiciones().clear();
 		RepoEmpresas.limpiarListaEmpresas();
 	}
@@ -116,35 +116,49 @@ public class CondicionesTest {
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorLongevidad() {
 		List<Empresa> resultado = unaLongevidad.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), google);
+		Assert.assertEquals(resultado.get(resultado.size()-1), google);
 	}
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE() {
 		List<Empresa> resultado = maxIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), twitter);
+		Assert.assertEquals(resultado.get(resultado.size()-1), twitter);
 	}
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA() {
 		List<Empresa> resultado = minIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), facebook);
+		Assert.assertEquals(resultado.get(resultado.size()-1), facebook);
 	}
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMargenCreciente() {
 		List<Empresa> resultado = margenCreciente.aplicarCondicion(RepoEmpresas.getListaEmpresa());
-		Assert.assertEquals(resultado.get(0), facebook);
+		Assert.assertEquals(resultado.get(resultado.size()-1), facebook);
 	}
 
 	@Test
 	public void aplicarMetodologiaBuffet() {
 		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
 
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(unaLongevidad.getNombre()).get(0), google);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(maxIndicador.getNombre()).get(0), twitter);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(minIndicador.getNombre()).get(0), facebook);
-		Assert.assertEquals(metodologiaBuffet.getResultados().get(margenCreciente.getNombre()).get(0), facebook);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(unaLongevidad.getNombre()).get(
+					metodologiaBuffet.getHashMapResultados().get(unaLongevidad.getNombre()).size()-1), google);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre()).get(
+				metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre()).size()-1), twitter);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre()).get(
+				metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre()).size()-1), facebook);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre()).get(
+				metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre()).size()-1), facebook);
 	}
 
+	@Test
+	public void aplicarMetodologiaBuffetYCorroborarEmpresaGanadoraSegunPuntaje() {
+		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(0).getEmpresa(),google);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(0).getPuntuacion(),52);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getEmpresa(),twitter);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getPuntuacion(),42);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getEmpresa(),facebook);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getPuntuacion(),32);
+	}
 }

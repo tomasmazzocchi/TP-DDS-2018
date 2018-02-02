@@ -109,10 +109,10 @@ public class BDloader {
 		twitter = new Empresa("Twitter", listaCuentasTwitter, null, LocalDate.now().minusYears(20));
 
 		// Condiciones
-		unaLongevidad = new Longevidad(10);
-		maxIndicador = new MaximizarIndicador(indicadorROETwitter);
-		margenCreciente = new MargenCreciente();
-		minIndicador = new MinimizarIndicador(indicadorROATwitter);
+		unaLongevidad = new Longevidad(10,10);
+		maxIndicador = new MaximizarIndicador(indicadorROETwitter,8);
+		margenCreciente = new MargenCreciente(4);
+		minIndicador = new MinimizarIndicador(indicadorROATwitter,2);
 
 		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(maxIndicador);

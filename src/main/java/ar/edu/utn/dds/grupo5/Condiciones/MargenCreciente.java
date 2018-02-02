@@ -20,8 +20,9 @@ public class MargenCreciente extends Condicion {
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	public MargenCreciente() {
+	public MargenCreciente(int p) {
 		this.nombre = "Margen creciente";
+		this.ponderacion = p;
 	}
 
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
@@ -36,7 +37,7 @@ public class MargenCreciente extends Condicion {
 			public int compare(Empresa empresa1, Empresa empresa2) {
 				if (empresa1.getListaCuentas().stream().filter(cuenta -> cuenta.getNombre().equals("Margen"))
 						.collect(Collectors.toList()).get(0)
-						.getValor() > (empresa2.getListaCuentas().stream()
+						.getValor() < (empresa2.getListaCuentas().stream()
 								.filter(cuenta -> cuenta.getNombre().equals("Margen")).collect(Collectors.toList())
 								.get(0).getValor())) {
 					return 1;

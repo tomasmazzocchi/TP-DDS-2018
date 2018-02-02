@@ -28,6 +28,8 @@ public abstract class Condicion {
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_indicador")
 	protected Indicador indicador;
+	@Column(name = "ponderacion")
+	protected int ponderacion;
 
 	protected Condicion() {
 
@@ -41,5 +43,9 @@ public abstract class Condicion {
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public int getPonderacion() {
+		return ponderacion;
 	}
 }

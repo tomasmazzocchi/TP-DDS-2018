@@ -62,7 +62,7 @@ public class RepoIndicadoresTest {
 	@Test
 	public void siGuardoIndicadorEnRepoConFormulaIncorrecta() {
 		thrown.expect(ArgumentoIlegalException.class);
-		thrown.expectMessage("Formula no Valida");
+		thrown.expectMessage("Formula no válida");
 		repoIndicadores.guardarIndicadorEnRepo("indicador1", "(pepe+1)*2");
 	}
 }

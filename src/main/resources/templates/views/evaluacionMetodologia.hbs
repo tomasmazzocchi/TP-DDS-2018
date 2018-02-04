@@ -1,78 +1,101 @@
 {{#partial "contenido"}}
     <meta charset="UTF-8">
 
-    <div style="margin-top:2%" class="card col l4 m6 s12  offset-l4 offset-m3  visualizar-cuentas-styles">
-      <form style="margin-bottom:20px;" action="/evaluacionMetodologia/" class="col s12" method="post">
-          <div style="margin-top:10px;" class="form-group">
-              <select>
-                 <option value="" disabled selected>Seleccione la metodología</option>
-                 {{#each metodologias}}
-                    <option value = "{{this}}">{{this.nombre}}</option>
-                 {{/each}}
-              </select>
-          </div>
-          <button onclick="mostrarHashmap()" type="submit" style="margin-left:31%" class="blue btn btn-default">Evaluar</button>
-      </form>
+    <div class="col l4 m6 s12 visualizar-cuentas-styles">
+        <div class="card">
+          <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Creación metodología</h6>
+            <form style="margin-top: 0;height: 125px;" action="/evaluacionMetodologia/" class="col s12 card" method="post">
+                <div style="margin-top:10px;" class="form-group">
+                    <select onchange="cambiarMetodologia()" style="z-index:200">
+                       <option value="" disabled selected>Seleccione la metodología</option>
+                       {{#each metodologias}}
+                          <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                       {{/each}}
+                    </select>
+                </div>
+                <button type="submit" class="blue btn btn-default">Evaluar</button>
+            </form>
+        </div>
     </div>
-    <div style="padding:0" class="visualizar-cuentas-styles hidden col s8 offset-s2 card">
-        <table class="tabla table striped no-marg">
-          <thead>
-            <tr>
-              {{#each headerTabla}}
-                 <th>{{this}}</th>
-              {{/each}}
-            </tr>
-          </thead>
-        </table>
+    <div class="visualizar-cuentas-styles col l4 m6 s12">
+        <div class="card">
+            <ul style="margin:0" class="collection with-header condicionesElegidas">
+               <li style="background-color:#212121;color:#fff"class="collection-header"><h6 style="font-size:15px">Condiciones de la metodología elegida</h6></li>
+            </ul>
+        </div>
+    </div>
+    <div class="visualizar-cuentas-styles col l4 m12 s12">
+        <div class="card">
+            <ul style="margin:0" class="collection with-header">
+               <li style="background-color:#212121;color:#fff"class="collection-header"><h6 style="font-size:15px">Resultados
+                 <a class="float-right waves-effect waves-light modal-trigger" href="#modal1"><img title="Información" src="/img/info.png" alt=""></a></h6>
+               </li>
+               {{#each resultados}}
+                   <li style="padding:0 0 0 15px" class="collection-item"><div>
+                      <p style="margin:5px;font-size:13px"><b>Empresa: </b>{{this.empresa.nombre}} <br>
+                         <b>Puntuación: </b>{{this.puntuacion}}
+                      </p>
+                   </li>
+               {{/each}}
+            </ul>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Cálculo del puntaje</h4>
+          <p>El puntaje final de cada empresa se calcula en base a la ponderación que posea la condición y el puesto que obtenga luego de calcular el mismo</p>
+          <p>El cálculo se resuelve multiplicando el puesto más 1 por la ponderación.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><button style="margin:0" class="blue btn btn-default">De acuerdo</button></a>
+        </div>
     </div>
 
     <script type="text/javascript">
+          var metodologias = [];
+          var metodologiasObjectList = [];
           $(document).ready(function() {
+              $('.modal').modal();
+              $('select').val('{{metodologiaSeleccionada.nombre}}');
               $('select').material_select();
               $(".select-dropdown").attr("name","selected");
+              var metodologias = '{{#each metodologias}}{{this.nombre}}&{{#each this.condiciones}}{{this.nombre}};;{{this.ponderacion}}*/{{/each}}||{{/each}}'.split("||");
+              metodologias.pop();
+
+              for(var i in metodologias){
+                  var metodologiasObject = {nombre:"",condiciones:[]};
+                  var condicionesAux = metodologias[i].split("&")[1].split("*/");
+                  condicionesAux.pop();
+                  metodologiasObject.nombre = metodologias[i].split("&")[0];
+                  for(var j in condicionesAux){
+                      var condicionObject = {nombre:"", ponderacion:0};
+                      condicionObject.nombre = condicionesAux[j].split(";;")[0];
+                      condicionObject.ponderacion = condicionesAux[j].split(";;")[1];
+                      metodologiasObject.condiciones.push(condicionObject);
+                  }
+                  metodologiasObjectList.push(metodologiasObject);
+              }
+              cambiarMetodologia();
           });
+          function cambiarMetodologia(){
+              $('.condicionElegida').remove();
+              console.log($("select").val());
+              var elegida = $("select").val();
+              for(var i in metodologiasObjectList){
+                  if(metodologiasObjectList[i].nombre == elegida){
+                      for(var j in metodologiasObjectList[i].condiciones){
+                          var newLi = '<li style="padding:0 0 0 15px" class="condicionElegida collection-item">'+
+                                      '<p style="margin:5px;font-size:13px">' +
+                                      '<b>Condición: </b>'+metodologiasObjectList[i].condiciones[j].nombre+'<br>' +
+                                      '<b>Ponderación: </b>'+ metodologiasObjectList[i].condiciones[j].ponderacion +
+                                      '</p></li>';
+                          $(".condicionesElegidas").append(newLi);
+                      }
+                  }
+              }
+          }
           Materialize.toast('{{mensaje}}',3000,'{{color}}');
-          $(".tabla").remove("tbody");
-          var emp = "{{#each resultados}}{{#each this}}{{this.nombre}}&{{/each}};{{/each}}".split(";").slice(0,-1);
-          var matrizRdos = [];
-          var maxLength = 0;
-          var filas = "<tbody>";
-          for(var i in emp) {
-              emp[i] = emp[i].split("&").slice(0,-1);
-              if(maxLength < emp[i].length){
-                maxLength = emp[i].length;
-              }
-          }
-          //completo con ""
-          for(var j in emp){
-              var length = emp[j].length;
-              var diff = maxLength - length;
-              for(var h = 0; h<diff; h++){
-                emp[j].push("");
-              }
-          }
-          //genero matriz transpuesta
-          for(var i = 0; i<maxLength; i++){
-              var aux = [];
-              for(var j = 0; j < emp.length; j++){
-                  aux.push(emp[j][i]);
-              }
-              matrizRdos.push(aux);
-          }
-          //pusheo html
-          for(var i in matrizRdos){
-              filas = filas + "<tr>";
-              for(var j in matrizRdos[i]){
-                  filas =filas +  "<td>" + matrizRdos[i][j] + "</td>";
-              }
-              filas = filas + "</tr>";
-          }
-          filas = filas + "</tbody>";
-          $(".tabla").append(filas);
-          if(matrizRdos.length){
-            $(".hidden").removeClass("hidden");
-          }
-          Materialize.toast("{{message}}",3000,"red");
     </script>
 {{/partial}}
 

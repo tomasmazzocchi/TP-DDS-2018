@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import ar.edu.utn.dds.Server.Routes;
+import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Metodologia;
+import ar.edu.utn.dds.grupo5.ResultadoMetodologia;
 import ar.edu.utn.dds.grupo5.Usuario;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 import spark.ModelAndView;
@@ -24,7 +26,6 @@ public class MetodologiaEvaluacionController {
 		try {
 			Usuario usuario = Routes.getUsuarioDeSesion(req.session().id());
 			List<Metodologia> listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
-
 			Map<String, Object> map = new HashMap<>();
 			map.put("titulo", "Dónde invierto - Evaluacion de metodologias");
 			map.put("metodologias", listaMetodologias);
@@ -42,7 +43,9 @@ public class MetodologiaEvaluacionController {
 	public ModelAndView visualizarResultados(Request request, Response response) {
 		String message = "";
 		Usuario usuario;
-		Map<String, List<Empresa>> resultados = new HashMap<String, List<Empresa>>();
+		String color = "";
+		Metodologia metodologiaSeleccionada = null;
+		List<ResultadoMetodologia> resultados =  new ArrayList<ResultadoMetodologia>();
 		List<Metodologia> listaMetodologias =  new ArrayList<Metodologia>();
 		try {
 			usuario = Routes.getUsuarioDeSesion(request.session().id());
@@ -53,18 +56,20 @@ public class MetodologiaEvaluacionController {
 		try {
 			List<Empresa> empresas = EMFactorySingleton.obtenerEmpresas();
 			listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
-			Metodologia metodologiaSeleccionada = listaMetodologias.stream()
+			metodologiaSeleccionada = listaMetodologias.stream()
 					.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
 			metodologiaSeleccionada.aplicarCondiciones(empresas);
-			resultados = metodologiaSeleccionada.getHashMapResultados();
+			resultados = metodologiaSeleccionada.getListaResultado();
 		} catch (Exception e) {
 			message = "Seleccione una metodologia";
+			color = "red";
 		}
 
 		Map<String, Object> map = new HashMap<>();
-		map.put("headerTabla", resultados.keySet());
 		map.put("resultados", resultados);
-		map.put("message", message);
+		map.put("mensaje", message);
+		map.put("metodologiaSeleccionada", metodologiaSeleccionada);
+		map.put("color", color);
 		map.put("metodologias", listaMetodologias);
 		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 		map.put("titulo", "Dónde Invierto - Evaluación de metodologias");

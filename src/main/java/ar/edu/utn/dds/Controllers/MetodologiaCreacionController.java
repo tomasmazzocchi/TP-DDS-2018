@@ -49,7 +49,7 @@ public class MetodologiaCreacionController {
 
 		Metodologia metodologia = new Metodologia(request.queryParams("nombre"), condicionesSeleccionadas);
 		metodologia.setUs(usuario);
-		System.out.println(request.queryParams("selected"));
+		
 		for (int i = 0; i < condicionesSeleccionadas.size(); i++) {
 			System.out.println(condicionesSeleccionadas.get(i).getNombre());
 			System.out.println(condicionesSeleccionadas.get(i));
@@ -63,8 +63,17 @@ public class MetodologiaCreacionController {
 			mensaje = "Metodologia creada correctamente";
 			color = "green";
 		}
-		response.redirect("/crearMetodologia/");
-		return null;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("titulo", "Dónde invierto - Creación de metodologias");
+		map.put("condiciones", condiciones);
+		map.put("mensaje", mensaje);
+		map.put("color", color);
+		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
+		map.put("exit", "exit_to_app");
+		map.put("salirTitulo", "Salir");
+		map.put("menu", "menu");
+		return new ModelAndView(map, "views/crearMetodologia.hbs");
 	}
 
 }

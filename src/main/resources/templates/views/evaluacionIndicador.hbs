@@ -4,7 +4,7 @@
     <div action="/evaluacionIndicador/" method="get" style="height:20%; padding:15px; height:auto" class="card evaluacionIndicador col l4  m6 s12 offset-l4 offset-m3">
         <form class="" action="/evaluacionIndicador/" method="post">
             <div id="selectIndicadores" style="text-align:center;height:46px" class="input-field col l6 m6 s12">
-              <select>
+              <select id="selectIndicadoresOpt">
                 <option value="nada" disabled selected>Seleccione un indicador</option>
                  {{#each indicadores}}
                   <option value = "{{this.nombre}}">{{this.nombre}}</option>
@@ -41,11 +41,13 @@
       var indicadores = [];
       var empresas = [];
       $(document).ready(function() {
+        $("#selectIndicadoresOpt").val("{{indicadorSeleccionado.nombre}}");
+        $("#selectEmpresas").val("{{empresaSeleccionada.nombre}}");
+        $("#selectIndicadores").find('input').val("{{placeholderIndicador}}");
+        $("#selectEmpresasContainer").find('input').val("{{placeholderEmpresa}}");
         $('select').material_select();
         $("#selectIndicadores").find('input').attr("name","selectedInd");
         $("#selectEmpresasContainer").find('input').attr("name","selectedEmp");
-        $("#selectIndicadores").find('input').val("{{placeholderIndicador}}");
-        $("#selectEmpresasContainer").find('input').val("{{placeholderEmpresa}}");
         Materialize.toast('{{mensaje}}',3000,'{{color}}');
         var emp = "{{#each empresas}}{{this.nombre}}&{{this.id}};;{{/each}}".split(";;").slice(0,-1);
         var ind = "{{#each empresas}}{{#each this.listaIndicadores}}{{this.nombre}}&{{../this.id}}&{{this.formula}};;{{/each}}{{/each}}".split(";;").slice(0,-1);

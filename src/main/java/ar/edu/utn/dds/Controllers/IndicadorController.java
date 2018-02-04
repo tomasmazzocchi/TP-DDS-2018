@@ -31,6 +31,7 @@ public class IndicadorController {
 		Indicador indicador = new Indicador(request.queryParams("nombre"), request.queryParams("formula"));
 		indicador.setUsuario(usuario);
 		List<Indicador> indicadoresExistentes = EMFactorySingleton.obtenerIndicadoresDeUnUsuario(usuario.getNombreUsuario());
+		List<Cuenta> cuentasExistentes = EMFactorySingleton.obtenerCuentas();
 		
 		if (indicador.getNombre().isEmpty() || indicador.getFormula().isEmpty() || indicador.getNombre() == null
 				|| indicador.getFormula() == null) {
@@ -41,6 +42,7 @@ public class IndicadorController {
 				ExpressionParser parser = new ExpressionParser();
 				parser.validarFormula(indicador.getFormula());
 				EMFactorySingleton.persistir(indicador);
+				indicadoresExistentes.add(indicador);
 				mensaje = "Indicador creado correctamente";
 				color = "green";
 			} catch(Exception e){
@@ -52,6 +54,7 @@ public class IndicadorController {
 		map.put("titulo", "Dónde invierto - Creación de indicador");
 		map.put("mensaje", mensaje);
 		map.put("indicadoresExistentes",indicadoresExistentes);
+		map.put("cuentasExistentes",cuentasExistentes);
 		map.put("color", color);
 		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 		map.put("exit", "exit_to_app");
@@ -153,6 +156,8 @@ public class IndicadorController {
 		
 		map.put("indicadores", listaIndicadores);
 		map.put("empresas", empresas);
+		map.put("indicadorSeleccionado", indicadorSeleccionado);
+		map.put("empresaSeleccionada", empresaSeleccionada);		
 		map.put("usuario", "Usuario: " + usuario.getNombreUsuario());
 		map.put("titulo", "Dónde Invierto - Evaluación de Indicadores");
 		map.put("exit", "exit_to_app");

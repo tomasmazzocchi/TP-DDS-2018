@@ -78,6 +78,7 @@ public class EMFactorySingleton {
 		beginTransaction();
 		entityManager().persist(object);
 		commit();
+		clear();
 	}
 
 	public static void remover(Object object) {

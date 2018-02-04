@@ -1,7 +1,9 @@
 .nav-bar {
 	background-color: #42a5f5;
 }
-
+button {
+	font-size:12px!important;
+}
 .app-body {
 	margin: 0;
 	width: 100%;

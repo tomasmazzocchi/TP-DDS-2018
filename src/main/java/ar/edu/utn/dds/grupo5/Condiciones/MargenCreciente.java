@@ -19,7 +19,11 @@ public class MargenCreciente extends Condicion {
 
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
-
+	
+	public MargenCreciente(){
+		
+	}
+	
 	public MargenCreciente(int p) {
 		this.nombre = "Margen creciente";
 		this.ponderacion = p;

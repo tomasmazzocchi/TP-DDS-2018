@@ -3,7 +3,7 @@
 
     <div class="col l4 m6 s12 visualizar-cuentas-styles">
         <div class="card">
-          <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Creación metodología</h6>
+          <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Selección de metodología</h6>
             <form style="margin-top: 0;height: 125px;" action="/evaluacionMetodologia/" class="col s12 card" method="post">
                 <div style="margin-top:10px;" class="form-group">
                     <select onchange="cambiarMetodologia()" style="z-index:200">
@@ -13,7 +13,7 @@
                        {{/each}}
                     </select>
                 </div>
-                <button type="submit" class="blue btn btn-default">Evaluar</button>
+                <button type="submit"  class="blue btn btn-default">Evaluar</button>
             </form>
         </div>
     </div>
@@ -43,9 +43,10 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
         <div class="modal-content">
-          <h4>Cálculo del puntaje</h4>
-          <p>El puntaje final de cada empresa se calcula en base a la ponderación que posee la condición y el puesto que obtenga luego de calcular el mismo, donde la posición n es la más relevante y la posición 0 es la menos relevante.</p>
-          <p>El cálculo se resuelve multiplicando el puesto más 1 por la ponderación de la condición aplicada.</p>
+          <h4>Cálculo del puntaje:</h4>
+          <p>El puntaje final de cada empresa se calcula en base a la ponderación que posee la condición y el puesto que obtiene luego de aplicar dicha condición, donde la posición 'n' es la más relevante y la posición '0' es la menos relevante.</p>
+          <p>La fórmula utilizada para la obtencion del puntaje final de cada empresa es la siguiente:</p>
+          <p>     puntos = (posicion[i] + 1) * ponderación</p>
         </div>
         <div class="modal-footer">
           <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><button style="margin:0" class="blue btn btn-default">De acuerdo</button></a>

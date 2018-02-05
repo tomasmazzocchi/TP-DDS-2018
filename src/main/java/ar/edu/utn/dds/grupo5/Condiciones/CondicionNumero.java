@@ -1,7 +1,6 @@
 package ar.edu.utn.dds.grupo5.Condiciones;
 
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,26 +17,28 @@ import ar.edu.utn.dds.grupo5.Empresa;
 
 @Entity
 @DiscriminatorValue(value = "longevidad")
-public class Longevidad extends Condicion {
-	@Column(name = "aniosAntiguedad")
-	private int aniosAntiguedad;
+public class CondicionNumero extends Condicion {
+	@Column(name = "anios")
+	private int anios;
 	@Transient
 	private List<Empresa> listaEmpresas = new ArrayList<>();
 
-	public Longevidad(int aniosAntiguedad, int p) {
-		this.aniosAntiguedad = aniosAntiguedad;
-		this.nombre = "Longevidad";
-		this.ponderacion = p;
+	public CondicionNumero(String nombre, int anios, int pond, char restr) {
+		this.anios = anios;
+		this.nombre = nombre;
+		this.ponderacion = pond;
+		this.restriccion = restr;
 	}
 
-	protected Longevidad() {
-
+	protected CondicionNumero() {
 	}
 
+	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		LocalDate fechaDesde;
-		fechaDesde = LocalDate.now().minusYears(aniosAntiguedad);
+		fechaDesde = LocalDate.now().minusYears(anios);
 
+		if(this.restriccion=='<') {
 		listaEmpresas = empresas.stream().filter(empresa -> empresa.esMenorA(fechaDesde)).collect(Collectors.toList());
 
 		Collections.sort(listaEmpresas, new Comparator<Empresa>() {
@@ -48,5 +49,20 @@ public class Longevidad extends Condicion {
 		});
 
 		return listaEmpresas;
+		}
+		else {
+			listaEmpresas = empresas.stream().filter(empresa -> empresa.esMayorA(fechaDesde)).collect(Collectors.toList());
+
+			Collections.sort(listaEmpresas, new Comparator<Empresa>() {
+				@Override
+				public int compare(Empresa empresa1, Empresa empresa2) {
+					return empresa1.getAnioFundacion().compareTo(empresa2.getAnioFundacion());
+				}
+			});
+
+			return listaEmpresas;
+		}
+			
 	}
+
 }

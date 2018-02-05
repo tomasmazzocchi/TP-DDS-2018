@@ -30,6 +30,8 @@ public abstract class Condicion {
 	protected Indicador indicador;
 	@Column(name = "ponderacion")
 	protected int ponderacion;
+	@Column(name = "restriccion")
+	protected char restriccion;
 
 	protected Condicion() {
 

@@ -79,20 +79,24 @@ public class Empresa {
 		this.listaCuentas.add(unaCuenta);
 	}
 
-	public boolean esLongeva(LocalDate fechaDesde) {
+	public boolean esMenorA(LocalDate fechaDesde) {
 		return this.anio_fundacion.compareTo(fechaDesde) <= 0;
 	}
 
+	public boolean esMayorA(LocalDate fechaDesde) {
+		return this.anio_fundacion.compareTo(fechaDesde) >= 0;
+	}
+	
 	public static List<Cuenta> listaDeCuentasValidas(Empresa empresa, LocalDate fechaDesde, LocalDate fechaHasta) {
 
 		List<Cuenta> listaCuentas = empresa.getListaCuentas();
 
-		List<Cuenta> listaCuentasValidas = listaCuentas.stream() // convert list to stream
+		List<Cuenta> listaCuentasValidas = listaCuentas.stream() 
 				.filter(cuenta -> fechaDesde.equals(cuenta.getFechaDesde())
 						&& fechaHasta.equals(cuenta.getFechaHasta()))
-				.collect(Collectors.toList()); // collect the output and convert streams to a List
+				.collect(Collectors.toList()); 
 
-		listaCuentasValidas.forEach(System.out::println); // output : spring, node
+		listaCuentasValidas.forEach(System.out::println); 
 
 		return listaCuentasValidas;
 	}
@@ -122,5 +126,6 @@ public class Empresa {
 	public void agregarIndicadorAEmpresa(Indicador indicador) {
 		this.getListaIndicadores().add(indicador);
 	}
+
 
 }

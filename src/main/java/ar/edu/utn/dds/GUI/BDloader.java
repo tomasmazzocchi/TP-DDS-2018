@@ -12,10 +12,9 @@ import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
 import ar.edu.utn.dds.grupo5.Usuario;
-import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
-import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
-import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
-import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
+import ar.edu.utn.dds.grupo5.Condiciones.CondicionCuenta;
+import ar.edu.utn.dds.grupo5.Condiciones.CondicionIndicador;
+import ar.edu.utn.dds.grupo5.Condiciones.CondicionNumero;
 import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class BDloader {
@@ -42,10 +41,10 @@ public class BDloader {
 	private static Indicador indicadorDeudaFacebook;
 	private static Indicador indicadorDeudaGoogle;
 	private static Indicador indicadorDeudaTwitter;
-	private static Longevidad unaLongevidad;
-	private static MaximizarIndicador maxIndicador;
-	private static MinimizarIndicador minIndicador;
-	private static MargenCreciente margenCreciente;
+	private static CondicionNumero longevidad;
+	private static CondicionIndicador maximizarROE;
+	private static CondicionIndicador minimizarROA;
+	private static CondicionCuenta margenCreciente;
 	private static Cuenta cuentaEBIDTAFacebook;
 	private static Cuenta cuentaMargenFacebook;
 	private static Cuenta cuentaEBIDTAGoogle;
@@ -109,13 +108,13 @@ public class BDloader {
 		twitter = new Empresa("Twitter", listaCuentasTwitter, null, LocalDate.now().minusYears(20));
 
 		// Condiciones
-		unaLongevidad = new Longevidad(10,10);
-		maxIndicador = new MaximizarIndicador(indicadorROETwitter,8);
-		margenCreciente = new MargenCreciente(4);
-		minIndicador = new MinimizarIndicador(indicadorROATwitter,2);
+		longevidad = new CondicionNumero("longevidad",10,10,'<');
+		maximizarROE = new CondicionIndicador("Maximizar ROE", indicadorROEFacebook, 8, '>');
+		minimizarROA = new CondicionIndicador("Minimizar ROA", indicadorROAFacebook, 2, '<');
+		margenCreciente = new CondicionCuenta("Margen Creciente", cuentaMARGENGooge, 6, '>');
 
 		List<Condicion> condiciones = new ArrayList<>();
-		condiciones.add(maxIndicador);
+		condiciones.add(maximizarROE);
 
 		metodologiaBuffetTwitter = new Metodologia("Metodologia Buffet Twitter", condiciones);
 		metodologiaBuffetTwitter.setUs(usuario1);
@@ -144,10 +143,10 @@ public class BDloader {
 		empresas.add(twitter);
 		RepoEmpresas.agregarEmpresas(empresas);
 
-		em.persist(unaLongevidad);
-		em.persist(maxIndicador);
+		em.persist(longevidad);
+		em.persist(maximizarROE);
 		em.persist(margenCreciente);
-		em.persist(minIndicador);
+		em.persist(minimizarROA);
 
 		em.getTransaction().commit();
 		em.clear();

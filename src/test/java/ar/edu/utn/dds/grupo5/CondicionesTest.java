@@ -13,11 +13,9 @@ import org.junit.rules.ExpectedException;
 
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Indicador;
-import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
+import ar.edu.utn.dds.grupo5.Condiciones.CondicionCuenta;
+import ar.edu.utn.dds.grupo5.Condiciones.CondicionIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.CondicionNumero;
-import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
-import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
-import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
 
 public class CondicionesTest {
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
@@ -30,11 +28,10 @@ public class CondicionesTest {
 	private Empresa google;
 	private Empresa twitter;
 	private Metodologia metodologiaBuffet;
-	private Longevidad unaLongevidad;
-	private MaximizarIndicador maxIndicador;
-	private MinimizarIndicador minIndicador;
-	private MargenCreciente margenCreciente;
 	private CondicionNumero longevidad;
+	private CondicionIndicador maximizarROE;
+	private CondicionIndicador minimizarROA;
+	private CondicionCuenta margenCreciente;
 	private Indicador indicadorROE;
 	private Indicador indicadorROA;
 	private Indicador indicadorDeudaFacebook;
@@ -88,11 +85,10 @@ public class CondicionesTest {
 		twitter = new Empresa("Twitter", listaCuentasTwitter, listaIndicadoresTwitter, LocalDate.now().minusYears(20));
 
 		// Condiciones
-		unaLongevidad = new Longevidad(10,10);
-		maxIndicador = new MaximizarIndicador(indicadorROE,8);
-		margenCreciente = new MargenCreciente(6);
-		minIndicador = new MinimizarIndicador(indicadorROA,2);
 		longevidad = new CondicionNumero("longevidad",10,10,'<');
+		maximizarROE = new CondicionIndicador("Maximizar ROE", indicadorROE, 8, '>');
+		minimizarROA = new CondicionIndicador("Minimizar ROA", indicadorROA, 2, '<');
+		margenCreciente = new CondicionCuenta("Margen Creciente", cuentaMARGENGooge, 6, '>');
 
 		RepoEmpresas.getListaEmpresa().add(facebook);
 		RepoEmpresas.getListaEmpresa().add(google);
@@ -100,8 +96,8 @@ public class CondicionesTest {
 
 		List<Condicion> condiciones = new ArrayList<>();
 		condiciones.add(longevidad);
-		condiciones.add(maxIndicador);
-		condiciones.add(minIndicador);
+		condiciones.add(maximizarROE);
+		condiciones.add(minimizarROA);
 		condiciones.add(margenCreciente);
 		metodologiaBuffet = new Metodologia("Metodologia Buffet", condiciones);
 	}
@@ -118,19 +114,19 @@ public class CondicionesTest {
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorLongevidad() {
-		List<Empresa> resultado = unaLongevidad.aplicarCondicion(RepoEmpresas.getListaEmpresa());
+		List<Empresa> resultado = longevidad.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(resultado.size()-1), google);
 	}
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMayorROE() {
-		List<Empresa> resultado = maxIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
+		List<Empresa> resultado = maximizarROE.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(resultado.size()-1), twitter);
 	}
 
 	@Test
 	public void ingresaListadoDeEmpresasYDevuelvoLaDeMenorROA() {
-		List<Empresa> resultado = minIndicador.aplicarCondicion(RepoEmpresas.getListaEmpresa());
+		List<Empresa> resultado = minimizarROA.aplicarCondicion(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(resultado.get(resultado.size()-1), facebook);
 	}
 
@@ -146,10 +142,10 @@ public class CondicionesTest {
 
 		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(longevidad.getNombre()).get(
 					metodologiaBuffet.getHashMapResultados().get(longevidad.getNombre()).size()-1), google);
-		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre()).get(
-				metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre()).size()-1), twitter);
-		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre()).get(
-				metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre()).size()-1), facebook);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(maximizarROE.getNombre()).get(
+				metodologiaBuffet.getHashMapResultados().get(maximizarROE.getNombre()).size()-1), twitter);
+		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(minimizarROA.getNombre()).get(
+				metodologiaBuffet.getHashMapResultados().get(minimizarROA.getNombre()).size()-1), facebook);
 		Assert.assertEquals(metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre()).get(
 				metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre()).size()-1), facebook);
 	}
@@ -159,9 +155,9 @@ public class CondicionesTest {
 		metodologiaBuffet.aplicarCondiciones(RepoEmpresas.getListaEmpresa());
 		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(0).getEmpresa(),google);
 		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(0).getPuntuacion(),52);
-		//Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getEmpresa(),twitter);
-		//Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getPuntuacion(),42);
-		//Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getEmpresa(),facebook);
-		//Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getPuntuacion(),32);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getEmpresa(),twitter);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(1).getPuntuacion(),42);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getEmpresa(),facebook);
+		Assert.assertEquals(metodologiaBuffet.getListaResultado().get(2).getPuntuacion(),32);
 	}
 }

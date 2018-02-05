@@ -16,7 +16,7 @@ import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 
 @Entity
-@DiscriminatorValue(value = "longevidad")
+@DiscriminatorValue(value = "condicionNumero")
 public class CondicionNumero extends Condicion {
 	@Column(name = "anios")
 	private int anios;
@@ -35,6 +35,10 @@ public class CondicionNumero extends Condicion {
 
 	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
+		if (!listaEmpresas.isEmpty()) {
+			listaEmpresas.clear();
+		}
+		
 		LocalDate fechaDesde;
 		fechaDesde = LocalDate.now().minusYears(anios);
 

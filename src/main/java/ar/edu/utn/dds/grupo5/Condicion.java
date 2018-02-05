@@ -28,6 +28,9 @@ public abstract class Condicion {
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_indicador")
 	protected Indicador indicador;
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_cuenta")
+	protected Cuenta cuenta;
 	@Column(name = "ponderacion")
 	protected int ponderacion;
 	@Column(name = "restriccion")

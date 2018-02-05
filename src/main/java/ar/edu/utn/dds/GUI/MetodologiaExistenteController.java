@@ -13,10 +13,12 @@ import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.RepoEmpresas;
+import ar.edu.utn.dds.grupo5.ResultadoMetodologia;
 import ar.edu.utn.dds.grupo5.Condiciones.Longevidad;
 import ar.edu.utn.dds.grupo5.Condiciones.MargenCreciente;
 import ar.edu.utn.dds.grupo5.Condiciones.MaximizarIndicador;
 import ar.edu.utn.dds.grupo5.Condiciones.MinimizarIndicador;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -38,21 +40,17 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML
 	private ComboBox<String> comboBox;
 	@FXML
-	private TableView<Empresa> tblLongevidad;
+	private TableView<ResultadoMetodologia> tblEMpresa;
 	@FXML
-	private TableView<Empresa> tblMaxROE;
+	private TableView<ResultadoMetodologia> tblPuntaje;
 	@FXML
 	private TableView<Empresa> tblMinROA;
 	@FXML
 	private TableView<Empresa> tblMargenCreciente;
 	@FXML
-	private TableColumn<Empresa, String> columnaLongevidad = new TableColumn<Empresa, String>();
+	private TableColumn<ResultadoMetodologia, String> columnaEmpresa = new TableColumn<ResultadoMetodologia, String>();
 	@FXML
-	private TableColumn<Empresa, String> columnaMaxROE = new TableColumn<Empresa, String>();
-	@FXML
-	private TableColumn<Empresa, String> columnaMinROA = new TableColumn<Empresa, String>();
-	@FXML
-	private TableColumn<Empresa, String> columnaMargenCreciente = new TableColumn<Empresa, String>();
+	private TableColumn<ResultadoMetodologia, Number> columnaPuntaje = new TableColumn<ResultadoMetodologia, Number>();
 
 	private List<Cuenta> listaCuentasFacebook = new ArrayList<>();
 	private List<Cuenta> listaCuentasGoogle = new ArrayList<>();
@@ -128,7 +126,7 @@ public class MetodologiaExistenteController implements Initializable {
 		// Condiciones
 		unaLongevidad = new Longevidad(10,10);
 		maxIndicador = new MaximizarIndicador(indicadorROE,8);
-		margenCreciente = new MargenCreciente(4);
+		margenCreciente = new MargenCreciente(6);
 		minIndicador = new MinimizarIndicador(indicadorROA,2);
 
 		repoEmpresas = new RepoEmpresas("repoEmpresas");
@@ -148,23 +146,14 @@ public class MetodologiaExistenteController implements Initializable {
 	@FXML
 	public void aplicarMetodologia(ActionEvent event) throws IOException {
 		if (event.getSource() == btnAplicar) {
-			tblLongevidad.setItems(FXCollections
-					.observableArrayList(metodologiaBuffet.getHashMapResultados().get(unaLongevidad.getNombre())));
-			columnaLongevidad
-					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+			tblEMpresa.setItems(FXCollections
+					.observableArrayList(metodologiaBuffet.getListaResultado()));
+			columnaEmpresa
+					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmpresa().getNombre()));
 
-			tblMaxROE.setItems(
-					FXCollections.observableArrayList(metodologiaBuffet.getHashMapResultados().get(maxIndicador.getNombre())));
-			columnaMaxROE.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-
-			tblMinROA.setItems(
-					FXCollections.observableArrayList(metodologiaBuffet.getHashMapResultados().get(minIndicador.getNombre())));
-			columnaMinROA.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-
-			tblMargenCreciente.setItems(FXCollections
-					.observableArrayList(metodologiaBuffet.getHashMapResultados().get(margenCreciente.getNombre())));
-			columnaMargenCreciente
-					.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+			tblPuntaje.setItems(
+					FXCollections.observableArrayList(metodologiaBuffet.getListaResultado()));
+			columnaPuntaje.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPuntuacion()));
 		}
 	}
 

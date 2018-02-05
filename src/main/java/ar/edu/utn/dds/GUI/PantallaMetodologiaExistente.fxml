@@ -17,26 +17,16 @@
       </Label>
       <Button fx:id="btnVolver" layoutX="253.0" layoutY="342.0" mnemonicParsing="false" onAction="#volver" prefHeight="38.0" prefWidth="95.0" text="Volver" />
       <ComboBox fx:id="comboBox" layoutX="187.0" layoutY="78.0" prefWidth="150.0" />  
-      <TableView fx:id="tblLongevidad" layoutX="51.0" layoutY="124.0" prefHeight="198.0" prefWidth="116.0">
+      <TableView fx:id="tblEMpresa" layoutX="185.0" layoutY="124.0" prefHeight="198.0" prefWidth="116.0">
          <columns>
-            <TableColumn fx:id="columnaLongevidad" prefWidth="113.66668701171875" text="Longevidad" />
+            <TableColumn fx:id="columnaEmpresa" prefWidth="113.66668701171875" text="Empresas" />
          </columns>
       </TableView>   
       <Button fx:id="btnAplicar" layoutX="354.0" layoutY="78.0" mnemonicParsing="false" onAction="#aplicarMetodologia" text="Aplicar" />
-      <TableView fx:id="tblMaxROE" layoutX="168.0" layoutY="124.0" prefHeight="198.0" prefWidth="125.0">
+      <TableView fx:id="tblPuntaje" layoutX="302.0" layoutY="124.0" prefHeight="198.0" prefWidth="125.0">
         <columns>
-            <TableColumn fx:id="columnaMaxROE" prefWidth="122.0" text="Maximizar ROE" />
+            <TableColumn fx:id="columnaPuntaje" prefWidth="122.0" text="Puntuacion" />
         </columns>
-      </TableView>
-      <TableView fx:id="tblMinROA" layoutX="294.0" layoutY="124.0" prefHeight="198.0" prefWidth="125.0">
-         <columns>
-            <TableColumn fx:id="columnaMinROA" minWidth="8.33331298828125" prefWidth="121.3333740234375" text="Minimizar ROA" />
-         </columns>
-      </TableView>
-      <TableView fx:id="tblMargenCreciente" layoutX="419.0" layoutY="124.0" prefHeight="198.0" prefWidth="132.0">
-         <columns>
-            <TableColumn fx:id="columnaMargenCreciente" prefWidth="126.6666259765625" text="Margen Creciente" />
-         </columns>
       </TableView>
    </children>
 </Pane>

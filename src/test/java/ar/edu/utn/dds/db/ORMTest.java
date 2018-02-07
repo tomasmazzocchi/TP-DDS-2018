@@ -1,26 +1,28 @@
 package ar.edu.utn.dds.db;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Indicador;
-
-
+import ar.edu.utn.dds.grupo5.Usuario;
+import ar.edu.utn.dds.rest.EMFactorySingleton;
 
 public class ORMTest {
-	
+
+	static EntityManager em = EMFactorySingleton.entityManager();
+	private Usuario usuario1;
 	private Empresa empresa1;
 	private Cuenta cuentaEBIDTA;
 	private Cuenta cuentaFDS;
@@ -28,65 +30,50 @@ public class ORMTest {
 	private List<Cuenta> listaCuentas;
 	private List<Indicador> listaIndicadores;
 
-	private static EntityManagerFactory entityManagerFactory;
-	private static EntityManager entityManager = null;
-
-	@BeforeClass
-	public static void setUpClass() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("db");
-
-	}
-		
-	private  <T> void borrarObjetosDeClase(Class<T> class1) {
-	        this.entityManager = entityManagerFactory.createEntityManager();
-                EntityTransaction transaction = this.entityManager.getTransaction();
-                transaction.begin();
-                CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();              
-                CriteriaDelete<T> query = builder.createCriteriaDelete(class1);
-                query.from(class1);
-                this.entityManager.createQuery(query).executeUpdate();
-                transaction.commit();
-        }
-
-
 	@Before
 	public void setUp() {
-	        borrarObjetosDeClase(Empresa.class);
-			cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
-			cuentaFDS = new Cuenta("FDS", 500, LocalDate.now(), LocalDate.now());
-			indicadorMayorQue = new Indicador("MayorQue", "200"); 
-			listaCuentas = new ArrayList<>();
-			listaIndicadores = new ArrayList<>();
-			listaCuentas.add(cuentaEBIDTA);
-			listaCuentas.add(cuentaFDS);
-			listaIndicadores.add(indicadorMayorQue);
-			empresa1 = new Empresa("Facebook", listaCuentas, listaIndicadores,LocalDate.now().minusYears(10));
+		usuario1 = new Usuario("clio", "1234");
+		cuentaEBIDTA = new Cuenta("EBIDTA", 200, LocalDate.now(), LocalDate.now());
+		cuentaFDS = new Cuenta("FDS", 500, LocalDate.now(), LocalDate.now());
+		indicadorMayorQue = new Indicador("MayorQue", "200");
+		indicadorMayorQue.setUsuario(usuario1);
+		listaCuentas = new ArrayList<>();
+		listaIndicadores = new ArrayList<>();
+		listaCuentas.add(cuentaEBIDTA);
+		listaCuentas.add(cuentaFDS);
+		listaIndicadores.add(indicadorMayorQue);
+		empresa1 = new Empresa("Renault", listaCuentas, null, LocalDate.now().minusYears(10));
 	}
 
 	@Test
 	public void test() {
-		borrarObjetosDeClase(Empresa.class);
-		this.entityManager = entityManagerFactory.createEntityManager();
 		// Guardo la Empresa
-		EntityTransaction tx = this.entityManager.getTransaction();
-		tx.begin();
-			this.entityManager.persist(cuentaEBIDTA);
-		tx.commit();
+		em.getTransaction().begin();
+		em.persist(usuario1);
+		
+		em.persist(cuentaEBIDTA);
+		em.persist(cuentaFDS);
+		
+		em.persist(indicadorMayorQue);
 
-		this.entityManager.close();
-		/*this.entityManager = entityManagerFactory.createEntityManager();
+		em.persist(empresa1);
 
-		CriteriaBuilder qb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Empresa> criteriaQuery = qb.createQuery(Empresa.class);
-		Root<Empresa> unaEmpresa = criteriaQuery.from(Empresa.class);
-		Predicate condition = qb.equal(unaEmpresa.get("nombre"), "Facebook");
-		criteriaQuery.where(condition);
-		TypedQuery<Empresa> q = entityManager.createQuery(criteriaQuery);
-		Empresa empresaGuardada = q.getSingleResult();
+		em.getTransaction().commit();
 
-		assertNotNull(empresaGuardada);
-		assertEquals(2, empresaGuardada.getListaCuentas().size());
-		*/
+		em.clear();
+
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Empresa> criteria = criteriaBuilder.createQuery(Empresa.class);
+		Root<Empresa> rootEntry = criteria.from(Empresa.class);
+		CriteriaQuery<Empresa> all = criteria.select(rootEntry);
+
+		List<Empresa> listaEmpresas = em.createQuery(all).getResultList();
+		Empresa empresaGuardada = listaEmpresas.stream().filter(x -> x.getNombre().equals(empresa1.getNombre())).collect(Collectors.toList())
+				.get(0);
+
+		Assert.assertNotNull(empresaGuardada);
+		Assert.assertEquals(empresa1.getNombre(), empresaGuardada.getNombre());
+
 	}
 
 }

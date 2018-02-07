@@ -10,7 +10,9 @@ button {
 	height: 95%;
 	margin-top: 2%;
 }
-
+.webkit-center {
+	text-align: -webkit-center;
+}
 body {
 	background: #eeeeee;
 	height: calc(100vh - 64px);

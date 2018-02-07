@@ -25,7 +25,9 @@ public class CondicionIndicador extends Condicion {
 			this.ponderacion = pond;
 			this.restriccion = restr;
 		}
-	
+	public CondicionIndicador(){
+		
+	}
 	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		if (!listaEmpresas.isEmpty()) {

@@ -26,7 +26,11 @@ public class CondicionCuenta extends Condicion {
 				this.ponderacion = pond;
 				this.restriccion = restr;
 			}
-
+			
+	public CondicionCuenta(){
+		
+	}
+			
 	@Override
 	public List<Empresa> aplicarCondicion(List<Empresa> empresas) {
 		if (!listaEmpresas.isEmpty()) {

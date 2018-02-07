@@ -24,6 +24,7 @@ public class Routes {
 		MetodologiaCreacionController metodologiaCreacionController = new MetodologiaCreacionController();
 		MetodologiaEvaluacionController metodologiaEvaluacionController =  new MetodologiaEvaluacionController();
 		IndicadorController indicadorController = new IndicadorController();
+		CondicionesController condicionesController = new CondicionesController();
 		// rutas
 		
 		Spark.get("/", LoginController::login, engine);
@@ -38,6 +39,8 @@ public class Routes {
 		Spark.post("/crearMetodologia/", metodologiaCreacionController::guardarMetodologia, engine);
 		Spark.get("/evaluacionMetodologia/", metodologiaEvaluacionController::evaluacionMetodologia, engine);
 		Spark.post("/evaluacionMetodologia/", metodologiaEvaluacionController::visualizarResultados, engine);
+		Spark.get("/creacionCondicion/", condicionesController::creacionCondicion, engine);
+		Spark.post("/conCuenta/", condicionesController::creacionCondicion, engine);
 
 	}
 

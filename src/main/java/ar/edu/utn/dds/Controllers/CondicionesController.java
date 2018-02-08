@@ -3,10 +3,8 @@ package ar.edu.utn.dds.Controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import ar.edu.utn.dds.Server.Routes;
-import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Cuenta;
 import ar.edu.utn.dds.grupo5.Indicador;
 import ar.edu.utn.dds.grupo5.Usuario;

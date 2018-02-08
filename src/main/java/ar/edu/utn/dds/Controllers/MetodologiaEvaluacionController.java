@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import ar.edu.utn.dds.Server.Routes;
-import ar.edu.utn.dds.grupo5.Condicion;
 import ar.edu.utn.dds.grupo5.Empresa;
 import ar.edu.utn.dds.grupo5.Metodologia;
 import ar.edu.utn.dds.grupo5.ResultadoMetodologia;

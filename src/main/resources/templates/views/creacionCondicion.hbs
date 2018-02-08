@@ -33,15 +33,15 @@
                           <select id="selectCuentas" name="selectCuentas" required>
                             <option value="" disabled selected>Seleccione una cuenta</option>
                              {{#each cuentas}}
-                                <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                                <option value = "{{this.nombre}}">Nombre: {{this.nombre}} <span style="margin-left:20px">Valor: {{this.valor}}</span> </option>
                              {{/each}}
                           </select>
                       </div>
                       <div style="margin-top:10px;" class="form-group">
                           <select id="selectRestriccionesConCuenta" name="selectRestriccionesConCuenta" required>
                               <option value="" disabled selected>Seleccione restricción</option>
-                              <option value = ">">Creciente</option>
-                              <option value = "<">Decreciente</option>
+                              <option value = ">">Mayor a menor</option>
+                              <option value = "<">Menor a mayor</option>
                           </select>
                       </div>
                       <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
@@ -67,8 +67,8 @@
                       <div style="margin-top:10px;" class="form-group">
                           <select name="selectRestriccionesConIndicador" id="selectRestriccionesConIndicador" required>
                               <option value="" disabled selected>Seleccione restricción</option>
-                              <option value = ">">Creciente</option>
-                              <option value = "<">Decreciente</option>
+                              <option value = ">">Mayor a menor</option>
+                              <option value = "<">Menor a mayor</option>
                           </select>
                       </div>
                       <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
@@ -89,8 +89,8 @@
                        <div style="margin-top:10px;" class="form-group">
                            <select name="selectRestriccionesConNumero" id="selectRestriccionesConNumero" required>
                                <option value="" disabled selected>Seleccione restricción</option>
-                               <option value = ">">Creciente</option>
-                               <option value = "<">Decreciente</option>
+                               <option value = ">">Mayor a menor</option>
+                               <option value = "<">Menor a mayor</option>
                            </select>
                        </div>
                        <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>

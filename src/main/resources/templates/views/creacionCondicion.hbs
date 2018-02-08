@@ -2,10 +2,10 @@
 
   <div action="/creacionCondicion/" style="padding:15px; height:auto" method="get">
       <div class="col s12 no-pad">
-          <div class="col l4 m4 s12 offset-l4 offset-m0 offset-s0 visualizar-cuentas-styles">
+          <div class="col l4 m6 s12 offset-l4 offset-m3 offset-s0 visualizar-cuentas-styles">
               <div class="card">
                   <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Creación de condición</h6>
-                  <form style="margin-top: 0;height: 125px;" action="/evaluacionMetodologia/" class="col s12 card" method="post">
+                  <form style="margin-top: 0;height: 125px;" action="/creacionCondicion/" class="col s12 card" method="post">
                       <div style="margin-top:10px;" class="form-group">
                           <select id="selectFormulario" onchange="cambiarFormulario()">
                               <option value="" disabled selected>Tipo de condición</option>
@@ -19,53 +19,59 @@
           </div>
       </div>
       <div class="col s12 no-pad">
-          <div class="col l4 m4 s12 offset-l4 offset-m0 offset-s0 visualizar-cuentas-styles">
+          <div class="col l4 m6 s12 offset-l4 offset-m3 offset-s0 visualizar-cuentas-styles">
               <div id="conCuenta" class="card hidden">
                   <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Nueva condición</h6>
                   <form style="margin:0;padding:20px;" action="/conCuenta/" class="card col s12" method="post">
-                       <div class="form-group">
-                         <input required style="font-size:12px;margin-bottom:10px" type="text" class="form-control" name="nombreConCuenta" id="nombre" placeholder="Nombre"/>
-                    </div>
-                    <div style="margin-top:10px;" class="form-group">
-                        <select id="selectCuentas" required>
-                          <option value="" disabled selected>Seleccione una cuenta</option>
-                           {{#each cuentas}}
-                              <option value = "{{this.nombre}}">{{this.nombre}}</option>
-                           {{/each}}
-                        </select>
-                    </div>
-                    <div style="margin-top:10px;" class="form-group">
-                        <select id="selectRestriccionesConCuenta" required>
-                            <option value="" disabled selected>Seleccione restricción</option>
-                            <option value = ">">Creciente</option>
-                            <option value = "<">Decreciente</option>
-                        </select>
-                    </div>
-                    <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
+                      <div class="form-group">
+                          <input required style="font-size:12px;margin-bottom:10px" type="text" class="form-control" name="nombreConCuenta" id="nombre" placeholder="Nombre"/>
+                      </div>
+                      <div class="form-group">
+                          <input required style="font-size:12px;margin-bottom:10px" type="number" class="form-control" name="ponderacionConCuenta" id="ponderación" placeholder="Ponderacion (Escriba un número)"/>
+                      </div>
+                      <div style="margin-top:10px;" class="form-group">
+                          <select id="selectCuentas" name="selectCuentas" required>
+                            <option value="" disabled selected>Seleccione una cuenta</option>
+                             {{#each cuentas}}
+                                <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                             {{/each}}
+                          </select>
+                      </div>
+                      <div style="margin-top:10px;" class="form-group">
+                          <select id="selectRestriccionesConCuenta" name="selectRestriccionesConCuenta" required>
+                              <option value="" disabled selected>Seleccione restricción</option>
+                              <option value = ">">Creciente</option>
+                              <option value = "<">Decreciente</option>
+                          </select>
+                      </div>
+                      <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
                 </form>
             </div>
             <div id="conIndicador" class="card hidden">
                   <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Nueva condición</h6>
                   <form style="margin:0;padding:20px;" action="/conIndicador/" class="card col s12" method="post">
-                       <div class="form-group">
-                         <input required style="font-size:12px;margin-bottom:10px" type="text" class="form-control" name="nombreConIndicador" id="nombre" placeholder="Nombre"/>
-                    </div>
-                    <div style="margin-top:10px;" class="form-group">
-                        <select id="selectIndicadores" required>
-                          <option value="" disabled selected>Seleccione un indicador</option>
-                           {{#each indicadores}}
-                              <option value = "{{this.nombre}}">{{this.nombre}}</option>
-                           {{/each}}
-                        </select>
-                    </div>
-                    <div style="margin-top:10px;" class="form-group">
-                        <select id="selectRestriccionesConIndicador" required>
-                            <option value="" disabled selected>Seleccione restricción</option>
-                            <option value = ">">Creciente</option>
-                            <option value = "<">Decreciente</option>
-                        </select>
-                    </div>
-                    <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
+                      <div class="form-group">
+                        <input required style="font-size:12px;margin-bottom:10px" type="text" class="form-control" name="nombreConIndicador" id="nombre" placeholder="Nombre"/>
+                      </div>
+                      <div class="form-group">
+                          <input required style="font-size:12px;margin-bottom:10px" type="number" class="form-control" name="ponderacionConIndicador" id="ponderacion" placeholder="Ponderación (Escriba un número)"/>
+                      </div>
+                      <div style="margin-top:10px;" class="form-group">
+                          <select id="selectIndicadores" name="selectIndicadores" required>
+                            <option value="" disabled selected>Seleccione un indicador</option>
+                             {{#each indicadores}}
+                                <option value = "{{this.nombre}}">{{this.nombre}}</option>
+                             {{/each}}
+                          </select>
+                      </div>
+                      <div style="margin-top:10px;" class="form-group">
+                          <select name="selectRestriccionesConIndicador" id="selectRestriccionesConIndicador" required>
+                              <option value="" disabled selected>Seleccione restricción</option>
+                              <option value = ">">Creciente</option>
+                              <option value = "<">Decreciente</option>
+                          </select>
+                      </div>
+                      <button style="font-size:12px" type="submit" class="blue btn btn-default">Guardar</button>
                 </form>
             </div>
             <div id="conNumero" class="card hidden">
@@ -75,10 +81,13 @@
                            <input required style="font-size:12px;margin-bottom:10px" type="text" class="form-control" name="nombreConNumero" id="nombreConNumero" placeholder="Nombre"/>
                        </div>
                        <div class="form-group">
-                           <input required style="font-size:12px;margin-bottom:10px" type="number" class="form-control" name="numeroConNumero" id="numero" placeholder="Ingrese número"/>
+                           <input required style="font-size:12px;margin-bottom:10px" type="number" class="form-control" name="ponderacionConNumero" id="ponderacion" placeholder="Ponderación (Escriba un número)"/>
+                       </div>
+                       <div class="form-group">
+                           <input required style="font-size:12px;margin-bottom:10px" type="number" class="form-control" name="numeroElegido" id="numero" placeholder="Ingrese número"/>
                        </div>
                        <div style="margin-top:10px;" class="form-group">
-                           <select id="selectRestriccionesConNumero" required>
+                           <select name="selectRestriccionesConNumero" id="selectRestriccionesConNumero" required>
                                <option value="" disabled selected>Seleccione restricción</option>
                                <option value = ">">Creciente</option>
                                <option value = "<">Decreciente</option>
@@ -94,6 +103,7 @@
   <script type="text/javascript">
       $(document).ready(function() {
           $('select').material_select();
+          Materialize.toast('{{message}}',3000,'{{color}}');
       });
       var cambiarFormulario = function(){
          var formulario = $("#selectFormulario").val();

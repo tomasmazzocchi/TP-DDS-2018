@@ -40,7 +40,9 @@ public class Routes {
 		Spark.get("/evaluacionMetodologia/", metodologiaEvaluacionController::evaluacionMetodologia, engine);
 		Spark.post("/evaluacionMetodologia/", metodologiaEvaluacionController::visualizarResultados, engine);
 		Spark.get("/creacionCondicion/", condicionesController::creacionCondicion, engine);
-		Spark.post("/conCuenta/", condicionesController::creacionCondicion, engine);
+		Spark.post("/conCuenta/", condicionesController::creacionConCuenta, engine);
+		Spark.post("/conIndicador/", condicionesController::creacionConIndicador, engine);
+		Spark.post("/conNumero/", condicionesController::creacionConNumero, engine);
 
 	}
 

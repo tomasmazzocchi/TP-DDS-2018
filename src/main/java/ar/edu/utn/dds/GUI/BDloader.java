@@ -41,6 +41,7 @@ public class BDloader {
 	private static Indicador indicadorROAGoogle;
 	private static Indicador indicadorROETwitter;
 	private static Indicador indicadorROATwitter;
+	private static Indicador indicadorROERenault;
 	private static Indicador indicadorROARenault;
 	private static Indicador indicadorDeudaRenault;
 	private static Indicador indicadorDeudaFacebook;
@@ -81,7 +82,7 @@ public class BDloader {
 		listaCuentasGoogle.add(cuentaMARGENGooge);
 		listaCuentasTwitter.add(cuentaEBIDTATwitter);
 		listaCuentasTwitter.add(cuentaMARGENTwitter);
-		listaCuentasRenault.add(cuentaMARGENRenault);
+		listaCuentasRenault.add(cuentaEBIDTARenault);
 		listaCuentasRenault.add(cuentaMARGENRenault);
 		
 		indicadorROEFacebook = new Indicador("ROE", "cu.EBIDTA");
@@ -95,6 +96,7 @@ public class BDloader {
 		indicadorDeudaTwitter = new Indicador("DEUDA", "1000");
 		indicadorROARenault = new Indicador("ROA","cu.Margen");
 		indicadorDeudaRenault = new Indicador("DEUDA","2500");
+		indicadorROERenault = new Indicador("ROE", "cu.EBIDTA");
 		
 		indicadorROEFacebook.setUsuario(usuario1);
 		indicadorROAFacebook.setUsuario(usuario1);
@@ -107,6 +109,7 @@ public class BDloader {
 		indicadorDeudaTwitter.setUsuario(usuario1);
 		indicadorDeudaRenault.setUsuario(usuario1);
 		indicadorROARenault.setUsuario(usuario1);
+		indicadorROERenault.setUsuario(usuario1);
 
 		listaIndicadoresFacebook.add(indicadorROEFacebook);
 		listaIndicadoresFacebook.add(indicadorROAFacebook);
@@ -119,6 +122,7 @@ public class BDloader {
 		listaIndicadoresGoogle.add(indicadorDeudaGoogle);
 		listaIndicadoresRenault.add(indicadorDeudaRenault);
 		listaIndicadoresRenault.add(indicadorROARenault);
+		listaIndicadoresRenault.add(indicadorROERenault);
 
 		facebook = new Empresa("Facebook", listaCuentasFacebook, null, LocalDate.now());
 		google = new Empresa("Google", listaCuentasGoogle, null, LocalDate.now().minusYears(50));
@@ -153,7 +157,7 @@ public class BDloader {
 		em.persist(cuentaMARGENRenault);
 		
 		em.persist(indicadorROEFacebook);
-		em.persist(indicadorDeudaTwitter);
+	//	em.persist(indicadorDeudaTwitter);
 
 		em.persist(facebook);
 		em.persist(google);

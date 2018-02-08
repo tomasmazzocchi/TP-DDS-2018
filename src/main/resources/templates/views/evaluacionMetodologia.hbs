@@ -6,7 +6,7 @@
             <h6 style="font-size:15px;height: 50px;background-color: #212121;padding: 18px;margin-bottom: 0;">Selección de metodología</h6>
             <form style="margin-top: 0;height: 125px;" action="/evaluacionMetodologia/" class="col s12 card" method="post">
                 <div style="margin-top:10px;" class="form-group">
-                    <select onchange="cambiarMetodologia()" style="z-index:200">
+                    <select onchange="cambiarMetodologia()" name="selectMetodologia" style="z-index:200">
                        <option value="" disabled selected>Seleccione la metodología</option>
                        {{#each metodologias}}
                           <option value = "{{this.nombre}}">{{this.nombre}}</option>

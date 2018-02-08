@@ -56,7 +56,7 @@ public class MetodologiaEvaluacionController {
 			List<Empresa> empresas = EMFactorySingleton.obtenerEmpresas();
 			listaMetodologias = EMFactorySingleton.obtenerMetodologiasDeUnUsuario(usuario.getNombreUsuario());
 			metodologiaSeleccionada = listaMetodologias.stream()
-					.filter(x -> x.getNombre().equals(request.queryParams("selected"))).findFirst().get();
+					.filter(x -> x.getNombre().equals(request.queryParams("selectMetodologia"))).findFirst().get();
 			metodologiaSeleccionada.aplicarCondiciones(empresas);
 			resultados = metodologiaSeleccionada.getListaResultado();
 		} catch (Exception e) {
